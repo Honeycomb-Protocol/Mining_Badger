@@ -1,0 +1,21 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-await-in-loop": "error",
+    "no-console": "warn",
+    "no-constant-condition": "warn",
+    "no-duplicate-imports": "error",
+    "no-empty": "warn",
+    "no-extra-boolean-cast": "warn",
+    "no-extra-semi": "warn",
+    "no-func-assign": "error",
+    "no-irregular-whitespace": "error",
+    "no-unused-vars": "warn",
+    "valid-typeof": "error",
+    "max-lines": ["warn", 450],
+    "eqeqeq": "error",
+    "no-var": "error",
+    "prefer-arrow-callback": "warn",
+    "prefer-destructuring": "warn"
+  }
+}
