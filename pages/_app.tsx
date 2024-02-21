@@ -10,13 +10,13 @@ const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={k2d.className}>
-      <WalletContextProvider>
+    <WalletContextProvider>
+      <main className={k2d.className}>
         <NextUIProvider>
           <Header />
           <Component {...pageProps} />
         </NextUIProvider>
-      </WalletContextProvider>
-    </main>
+      </main>
+    </WalletContextProvider>
   );
 }

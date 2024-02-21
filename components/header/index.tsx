@@ -1,16 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import Footer from "../footer";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
   return (
     <div
       className={`flex flex-row ${
-        window.location.pathname !== "/" ? "justify-between" : "justify-center"
-      } items-center  w-full`}
+        router.pathname !== "/" ? "justify-between" : "justify-center"
+      } items-center w-full`}
     >
-      {window.location.pathname !== "/" && (
+      {router.pathname !== "/" && (
         <WalletMultiButton
           style={{
             height: "40px",
@@ -26,7 +27,7 @@ const Header = () => {
         />
       )}
       <Image src="/assets/images/logo.png" alt="logo" width={350} height={0} />
-      {window.location.pathname !== "/" && (
+      {router.pathname !== "/" && (
         <div className="flex flex-row gap-3">
           <Image
             width={30}
