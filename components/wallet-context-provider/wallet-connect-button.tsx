@@ -1,9 +1,11 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useRouter } from "next/router";
 
 import Button from "@/components/common/button";
 
 const WalletConnectButton = () => {
+  const router = useRouter();
   const { publicKey } = useWallet();
   return (
     <div>
@@ -33,7 +35,9 @@ const WalletConnectButton = () => {
             styles="w-96"
             btnText="Let's Create an Account"
             loading={false}
-            onClick={() => {}}
+            onClick={() => {
+              router.push("/create-profile");
+            }}
           />
         ) : (
           <WalletMultiButton
