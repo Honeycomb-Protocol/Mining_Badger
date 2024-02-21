@@ -1,10 +1,19 @@
 import * as web3 from "@solana/web3.js";
 import * as walletAdapterWallets from "@solana/wallet-adapter-wallets";
 import { FC, useMemo } from "react";
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from "@solana/wallet-adapter-react";
+import dynamic from "next/dynamic";
+
+const WalletProvider = dynamic(
+  () =>
+    import("@solana/wallet-adapter-react").then((module) => ({
+      default: module.WalletProvider,
+    })),
+  {
+    ssr: false,
+  }
+);
+
+import { ConnectionProvider } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 
 import { WalletContextProviderProps } from "@/interfaces";
