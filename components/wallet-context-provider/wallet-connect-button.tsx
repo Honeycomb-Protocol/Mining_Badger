@@ -12,14 +12,15 @@ const WalletConnectButton = () => {
           {publicKey ? (
             <WalletMultiButton
               style={{
-                padding: "8px 16px",
+                height: "40px",
                 borderRadius: "15px",
                 backgroundColor: "transparent",
                 color: "#ffffff",
-                width: "184px",
+                width: "174px",
                 display: "flex",
                 justifyContent: "center",
                 border: "2px solid #8E8B77",
+                fontSize: "12px",
               }}
             />
           ) : (
