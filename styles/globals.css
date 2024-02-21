@@ -20,3 +20,22 @@ button {
   background-color: #da821a;
   color: #ffffff;
 }
+
+input {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #535353;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: small;
+}
+
+textarea {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #535353;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: small;
+}
+

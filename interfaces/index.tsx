@@ -10,3 +10,20 @@ export interface ButtonProps {
 export interface WalletContextProviderProps {
   children: ReactNode;
 }
+
+export interface CustomTextAreaProps {
+  styles: string;
+  value: string;
+  placeholder: string;
+  name: string;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+export interface CustomInputProps {
+  styles: string;
+  value: string;
+  placeholder: string;
+  type: string;
+  name: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
