@@ -1,13 +1,4 @@
-import Footer from "@/components/footer";
-import WalletContextProvider from "@/components/wallet-context-provider";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import {
-  WalletConnectButton,
-  WalletDisconnectButton,
-  WalletModalButton,
-  WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
-import { useEffect } from "react";
+import Button from "@/components/common/button";
 
 export default function Home() {
   //console connection every time it gets connected
@@ -26,14 +17,20 @@ export default function Home() {
   }, [connection, publicKey]);
 
   return (
-    <main className={``}>
-      <h1 className="font-bold text-[80px]">WELCOME TO THE GAME</h1>
-
-      <WalletMultiButton />
-      <WalletModalButton />
-      <WalletDisconnectButton />
-
-      <Footer />
+    <main className="flex flex-col justify-between items-center w-full min-h-[78vh]">
+      <div />
+      <div className="flex flex-col items-center">
+        <h1 className="font-bold text-[50px]">WELCOME TO THE GAME</h1>
+        <Button
+          styles="w-96 mt-12"
+          btnText="Connect Wallet"
+          loading={false}
+          onClick={() => {
+            console.log("hello");
+          }}
+        />
+      </div>
+      <div />
     </main>
   );
 }
