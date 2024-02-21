@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-  /* Will declare it later */
+  padding: 16px;
+  background-image: url("/assets/images/main-bg.jpg");
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
