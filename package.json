@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.26",
+    "@solana/web3.js": "^1.90.0",
     "@nextui-org/react": "^2.2.9",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.0.5",
