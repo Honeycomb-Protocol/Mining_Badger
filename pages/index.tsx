@@ -1,9 +1,7 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
     <main className={``}>
-      <p>Hello Hi</p>
+      <h1 className="font-bold text-[80px]">WELCOME TO THE GAME</h1>
     </main>
   );
 }
