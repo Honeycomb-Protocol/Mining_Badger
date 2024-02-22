@@ -14,7 +14,11 @@ const NftCard: React.FC<CardProps> = ({
   width,
 }) => {
   return (
-    <div className={`flex flex-col justify-center items-center w-44`}>
+    <div
+      className={`flex flex-col justify-center items-center ${
+        width ? width : "w-40"
+      }`}
+    >
       <div
         className={`relative ${width ? width : "w-40"} ${
           imageHeight ? imageHeight : "h-44"
@@ -28,7 +32,7 @@ const NftCard: React.FC<CardProps> = ({
         )}
       </div>
       <div className="flex justify-between items-center w-full">
-        <p className="break">{name}</p>
+        <p className="whitespace-nowrap">{name}</p>
         {level && (
           <p className="flex items-center justify-center text-sm text-gray-300 ml-1">
             Lvl {level}

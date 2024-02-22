@@ -4,87 +4,12 @@ import { Accordion, AccordionItem } from "@nextui-org/react";
 
 import CustomTabs from "../common/custom-tabs";
 import NftCard from "../common/nft-card";
-
-const tabData = [
-  {
-    name: "Shop",
-    notifications: 0,
-    tabComponent: (
-      <NftCard
-        picture="/assets/images/bronze-Pickaxe.png"
-        buttonText="Claimed"
-        level="1"
-        name="Bronze Pickaxe"
-      />
-    ),
-  },
-  { name: "Mine", notifications: 0, tabComponent: <div>General Store 2</div> },
-  {
-    name: "Refine",
-    notifications: 0,
-    tabComponent: <div>General Store 3</div>,
-  },
-  { name: "Craft", notifications: 0, tabComponent: <div>General Store 4</div> },
-  {
-    name: "General Store",
-    notifications: 4,
-    tabComponent: <div>General Store</div>,
-  },
-];
-
-const tabsData = [
-  {
-    name: "All",
-    notifications: 0,
-    tabComponent: (
-      <div>
-        <p className="py-2 font-thin "> Recently Added</p>
-        <NftCard
-          buttonText="Claimed"
-          level="01"
-          picture="/assets/images/bronze-Pickaxe.png"
-          name="Bronze Pickaxe"
-        />
-
-        <div className="flex justify-start items-start  mt-4 ">
-          <NftCard
-            buttonText="Claimed"
-            level="01"
-            picture="/assets/images/bronze-Pickaxe.png"
-            name="Bronze Pickaxe"
-          />
-          <NftCard
-            buttonText="Claimed"
-            level="01"
-            picture="/assets/images/bronze-Pickaxe.png"
-            name="Bronze Pickaxe"
-          />
-        </div>
-      </div>
-    ),
-  },
-  { name: "Ores", notifications: 0, tabComponent: <div>General Store 2</div> },
-  {
-    name: "Bar",
-    notifications: 0,
-    tabComponent: <div>General Store 3</div>,
-  },
-  {
-    name: "Weapons",
-    notifications: 0,
-    tabComponent: <div>General Store 4</div>,
-  },
-  {
-    name: "Armours",
-    notifications: 0,
-    tabComponent: <div>General Store</div>,
-  },
-];
+import { inventoryData, tabData } from "@/lib/utils/constants";
 
 const HomePage = () => {
   return (
     <main className="w-full flex justify-center items-start mt-12 gap-2">
-      <div className="w-[22%]">
+      <div className="w-[27%]">
         <div className="w-full flex justify-between items-center bg-black rounded-lg  p-3 rounded-bl-none rounded-br-none">
           <div className="flex justify-center items-center">
             <Image
@@ -124,9 +49,10 @@ const HomePage = () => {
         </div>
         {/* dropdown show inventory */}
 
-        <div className="w-full bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none">
-          <Accordion className="w-full flex justify-center items-center ">
+        <div className=" bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none">
+          <Accordion className="w-full flex justify-center items-center  ">
             <AccordionItem
+              className="w-full flex-col items-center justify-center"
               key="1"
               aria-label="Accordion 1"
               title="Show Inventory"
@@ -134,13 +60,13 @@ const HomePage = () => {
               <CustomTabs
                 styles="min-w-max "
                 initialActiveTab="All"
-                tabData={tabsData}
+                tabData={inventoryData}
               />
             </AccordionItem>
           </Accordion>
         </div>
       </div>
-      <div className="w-[50%]">
+      <div className="w-[60%]">
         <CustomTabs initialActiveTab="Shop" tabData={tabData} />
       </div>
     </main>

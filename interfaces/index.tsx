@@ -39,7 +39,7 @@ export interface CustomTabsProps {
 }
 
 export interface CardProps {
-  buttonText: string;
+  buttonText?: string;
   level?: string;
   picture: string;
   name: string;
