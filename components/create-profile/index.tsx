@@ -102,7 +102,7 @@ const CreateProfilePage = () => {
             styles="h-12 bg-gradient-to-r from-[#E7CB5F] to-[#CD6448] text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={() => {
-              router.push("/home");
+              router.push("home");
             }}
           />
         </div>
