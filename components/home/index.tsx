@@ -1,23 +1,21 @@
-import { Accordion, AccordionItem } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
+import { Accordion, AccordionItem } from "@nextui-org/react";
+
 import CustomTabs from "../common/custom-tabs";
+import NftCard from "../common/nft-card";
 
 const tabData = [
   {
     name: "Shop",
     notifications: 0,
     tabComponent: (
-      <div>
-        <Card
-          hasButton={true}
-          hasLevels={true}
-          buttonText="Claimed"
-          level="01"
-          picture="/assets/images/bronze-Pickaxe.png"
-          name="Bronze Pickaxe"
-        />
-      </div>
+      <NftCard
+        picture="/assets/images/bronze-Pickaxe.png"
+        buttonText="Claimed"
+        level="1"
+        name="Bronze Pickaxe"
+      />
     ),
   },
   { name: "Mine", notifications: 0, tabComponent: <div>General Store 2</div> },
@@ -41,9 +39,7 @@ const tabsData = [
     tabComponent: (
       <div>
         <p className="py-2 font-thin "> Recently Added</p>
-        <Card
-          hasButton={true}
-          hasLevels={true}
+        <NftCard
           buttonText="Claimed"
           level="01"
           picture="/assets/images/bronze-Pickaxe.png"
@@ -51,17 +47,13 @@ const tabsData = [
         />
 
         <div className="flex justify-start items-start  mt-4 ">
-          <Card
-            hasButton={true}
-            hasLevels={true}
+          <NftCard
             buttonText="Claimed"
             level="01"
             picture="/assets/images/bronze-Pickaxe.png"
             name="Bronze Pickaxe"
           />
-          <Card
-            hasButton={true}
-            hasLevels={true}
+          <NftCard
             buttonText="Claimed"
             level="01"
             picture="/assets/images/bronze-Pickaxe.png"
@@ -88,7 +80,6 @@ const tabsData = [
     tabComponent: <div>General Store</div>,
   },
 ];
-import Card from "../common/card";
 
 const HomePage = () => {
   return (

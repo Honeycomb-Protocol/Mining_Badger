@@ -37,3 +37,13 @@ export interface CustomTabsProps {
   styles?: string;
   initialActiveTab: string;
 }
+
+export interface CardProps {
+  buttonText: string;
+  level?: string;
+  picture: string;
+  name: string;
+  notification?: number;
+  imageHeight?: string;
+  width?: string;
+}

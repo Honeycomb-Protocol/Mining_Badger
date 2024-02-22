@@ -6,7 +6,7 @@ body {
   min-height: 100vh;
   height: 100%;
   padding: 20px 50px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("/assets/images/main-bg.jpg");
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
