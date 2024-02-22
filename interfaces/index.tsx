@@ -35,4 +35,5 @@ export interface CustomTabsProps {
     tabComponent: React.ReactNode;
   }[];
   styles?: string;
+  initialActiveTab: string;
 }

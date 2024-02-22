@@ -38,3 +38,7 @@ textarea {
   color: #ffffff;
   font-size: small;
 }
+
+.text-foreground {
+  color: white;
+}
