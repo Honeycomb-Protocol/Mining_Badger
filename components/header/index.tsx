@@ -26,7 +26,7 @@ const Header = () => {
           }}
         />
       )}
-      <Image src="/assets/images/logo.png" alt="logo" width={350} height={0} />
+      <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
       {router.pathname !== "/" && (
         <div className="flex flex-row gap-3">
           <Image

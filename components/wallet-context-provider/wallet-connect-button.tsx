@@ -10,7 +10,7 @@ const WalletConnectButton = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="mb-6 mt-4">
-        {publicKey ? (
+        {publicKey && (
           <WalletMultiButton
             style={{
               height: "40px",
@@ -24,14 +24,12 @@ const WalletConnectButton = () => {
               fontSize: "12px",
             }}
           />
-        ) : (
-          <p className="text-lg">TO BEGIN THE MINING ADVENTURE </p>
         )}
       </div>
 
       {publicKey ? (
         <Button
-          styles="w-96"
+          styles="w-96 text-lg"
           btnText="Let's Create an Account"
           loading={false}
           onClick={() => {
@@ -42,8 +40,8 @@ const WalletConnectButton = () => {
         <WalletMultiButton
           style={{
             padding: "8px 16px",
-            borderRadius: "8px",
-            backgroundColor: "#da821a",
+            borderRadius: "12px",
+            backgroundImage: "linear-gradient(to right, #E7CB5F -80%, #CD6448 150%)",
             color: "#ffffff",
             width: "384px",
             display: "flex",

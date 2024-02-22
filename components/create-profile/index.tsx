@@ -32,8 +32,8 @@ const CreateProfilePage = () => {
         CREATE YOUR PROFILE
       </h1>
 
-      <div className="mt-16 flex justify-center items-start w-full gap-28">
-        <div className="w-[30%]">
+      <div className="mt-16 flex justify-center items-center w-full gap-28">
+        <div className="w-[40%] px-5 md:px-10 lg:px-14 xl:px-20">
           <div className="flex flex-col justify-center items-center">
             <Image
               width={250}
@@ -65,15 +65,15 @@ const CreateProfilePage = () => {
               height={100}
             />
           </div>
-          <p className="text-sm italic opacity-70 px-3">
+          <p className="text-sm italic opacity-70">
             As you get experience and level up, new skins/weapons get unlock
             which you can trade with extra resources and cNFTs
           </p>
         </div>
-        <div className="w-[50%] flex flex-col justify-center gap-6 ">
+        <div className="w-[40%] flex flex-col justify-center gap-6 px-3">
           <CustomInput
             name="name"
-            styles="w-96 h-12 placeholder-white"
+            styles="h-12 placeholder-white"
             value={profile.name}
             placeholder="Enter Name"
             type="text"
@@ -82,7 +82,7 @@ const CreateProfilePage = () => {
 
           <CustomInput
             name="email"
-            styles="w-96 h-12 placeholder-white"
+            styles="h-12 placeholder-white"
             value={profile.email}
             placeholder="Enter Email Address"
             type="text"
@@ -91,7 +91,7 @@ const CreateProfilePage = () => {
 
           <CustomTextArea
             name="bio"
-            styles="w-96 h-32 placeholder-white"
+            styles="h-32 placeholder-white"
             value={profile.bio}
             placeholder="Enter Bio"
             onChange={onInputChange}
@@ -99,7 +99,7 @@ const CreateProfilePage = () => {
 
           <Button
             loading={false}
-            styles="w-96 h-12 bg-gradient-to-r from-[#E7CB5F] to-[#CD6448] text-white mt-5 rounded-2xl"
+            styles="h-12 bg-gradient-to-r from-[#E7CB5F] to-[#CD6448] text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={() => {
               router.push("/home");
