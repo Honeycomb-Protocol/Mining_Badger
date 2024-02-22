@@ -7,7 +7,7 @@ export const tabData = [
     tabComponent: (
       <NftCard
         picture="/assets/images/bronze-Pickaxe.png"
-        buttonText="Claimed"
+        buttonText="Claim"
         level="1"
         name="Bronze Pickaxe"
       />
@@ -33,35 +33,35 @@ export const inventoryData = [
     notifications: 0,
     tabComponent: (
       <div className="my-5">
-        <p className="py-2 font-thin "> Recently Added</p>
+        <p className="py-2 font-thin">Recently Added</p>
         <NftCard
           picture="/assets/images/bronze-Pickaxe.png"
           name="Bronze Pickaxe"
-          width="w-32"
-          imageHeight="h-32"
+          width={128}
+          imageHeight={128}
         />
 
-        <div className="flex justify-start gap-10 items-start mt-10">
+        <div className="flex justify-start gap-10 items-end mt-10">
           <NftCard
             picture="/assets/images/bronze-alloy-cube.png"
             name="Bronze Bar"
             notification={34}
-            width="w-16"
-            imageHeight="h-16"
-          />
-          <NftCard
-            picture="/assets/images/copper-stone-noline.png"
-            name="Ore 1"
-            notification={34}
-            width="w-16"
-            imageHeight="h-16"
+            width={60}
+            imageHeight={50}
           />
           <NftCard
             picture="/assets/images/Adamnite-stone-noline.png"
             name="Ore 1"
             notification={34}
-            width="w-16"
-            imageHeight="h-16"
+            width={45}
+            imageHeight={60}
+          />
+          <NftCard
+            picture="/assets/images/copper-stone-noline.png"
+            name="Ore 1"
+            notification={Number("03")}
+            width={45}
+            imageHeight={60}
           />
         </div>
       </div>

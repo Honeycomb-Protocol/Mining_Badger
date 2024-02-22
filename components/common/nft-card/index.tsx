@@ -13,20 +13,20 @@ const NftCard: React.FC<CardProps> = ({
   imageHeight,
   width,
 }) => {
+  const cardStyle = {
+    width: width ? `${width}px` : "165px",
+    height: imageHeight ? `${imageHeight}px` : "176px",
+  };
+
   return (
     <div
-      className={`flex flex-col justify-center items-center ${
-        width ? width : "w-40"
-      }`}
+      className={`flex flex-col justify-center items-center`}
+      style={{ width: cardStyle.width }}
     >
-      <div
-        className={`relative ${width ? width : "w-40"} ${
-          imageHeight ? imageHeight : "h-44"
-        }`}
-      >
+      <div className={`relative`} style={cardStyle}>
         <Image src={picture} alt={name} fill />
         {notification && (
-          <div className="absolute top-3 right-2 bg-red-700 rounded-full text-xs p-1">
+          <div className="absolute top-0 right-0 bg-red-700 rounded-full text-xs p-1">
             {notification}
           </div>
         )}
@@ -34,7 +34,7 @@ const NftCard: React.FC<CardProps> = ({
       <div className="flex justify-between items-center w-full">
         <p className="whitespace-nowrap">{name}</p>
         {level && (
-          <p className="flex items-center justify-center text-sm text-gray-300 ml-1">
+          <p className="flex items-center justify-center text-sm text-gray-300 ml-2 whitespace-nowrap">
             Lvl {level}
             <Image
               src="/assets/svgs/info-icon.svg"

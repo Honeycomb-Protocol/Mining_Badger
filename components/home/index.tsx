@@ -3,14 +3,13 @@ import React from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
 import CustomTabs from "../common/custom-tabs";
-import NftCard from "../common/nft-card";
 import { inventoryData, tabData } from "@/lib/utils/constants";
 
 const HomePage = () => {
   return (
-    <main className="w-full flex justify-center items-start mt-12 gap-2">
+    <main className="w-full flex justify-center items-start mt-12 gap-10">
       <div className="w-[27%]">
-        <div className="w-full flex justify-between items-center bg-black rounded-lg  p-3 rounded-bl-none rounded-br-none">
+        <div className="w-full flex justify-between items-center bg-black rounded-lg p-3 rounded-bl-none rounded-br-none">
           <div className="flex justify-center items-center">
             <Image
               className="m-4"
@@ -47,12 +46,11 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        {/* dropdown show inventory */}
 
-        <div className=" bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none">
-          <Accordion className="w-full flex justify-center items-center  ">
+        <div className="bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none">
+          <Accordion className="w-full">
             <AccordionItem
-              className="w-full flex-col items-center justify-center"
+              className="w-full"
               key="1"
               aria-label="Accordion 1"
               title="Show Inventory"
@@ -66,7 +64,7 @@ const HomePage = () => {
           </Accordion>
         </div>
       </div>
-      <div className="w-[60%]">
+      <div className="w-[50%]">
         <CustomTabs initialActiveTab="Shop" tabData={tabData} />
       </div>
     </main>

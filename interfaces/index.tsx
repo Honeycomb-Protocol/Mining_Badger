@@ -44,6 +44,6 @@ export interface CardProps {
   picture: string;
   name: string;
   notification?: number;
-  imageHeight?: string;
-  width?: string;
+  imageHeight?: number;
+  width?: number;
 }
