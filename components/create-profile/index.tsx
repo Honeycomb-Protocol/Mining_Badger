@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import CustomInput from "../common/input";
 import CustomTextArea from "../common/textarea";
 import Button from "../common/button";
+import { useRouter } from "next/router";
 
 const CreateProfilePage = () => {
   const [profile, setProfile] = useState({
@@ -11,6 +12,8 @@ const CreateProfilePage = () => {
     email: "",
     bio: "",
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     document.body.style.backgroundImage =
@@ -99,7 +102,7 @@ const CreateProfilePage = () => {
             styles="w-96 h-12 bg-gradient-to-r from-[#E7CB5F] to-[#CD6448] text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={() => {
-              console.log(profile);
+              router.push("/home");
             }}
           />
         </div>
