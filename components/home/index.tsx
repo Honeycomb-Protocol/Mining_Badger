@@ -97,15 +97,15 @@ const HomePage = () => {
         <div className="w-full flex justify-between items-center bg-black rounded-lg  p-3 rounded-bl-none rounded-br-none">
           <div className="flex justify-center items-center">
             <Image
-              className=" flex flex-col justify-center items-center m-4"
+              className="m-4"
               src="/assets/images/nftprofile.png"
               alt="profile"
               width={50}
               height={0}
             />
             <div className="flex flex-col justify-center items-start">
-              <p className="text-white font-bold flex text-xl">Max</p>
-              <p className="text-white flex ">{"Profile >"}</p>
+              <p className="text-white font-bold  text-xl">Max</p>
+              <p className="text-white ">{"Profile >"}</p>
             </div>
           </div>
 
