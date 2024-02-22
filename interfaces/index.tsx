@@ -27,3 +27,12 @@ export interface CustomInputProps {
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface CustomTabsProps {
+  tabData: {
+    name: string;
+    notifications?: number;
+    tabComponent: React.ReactNode;
+  }[];
+  styles?: string;
+}
