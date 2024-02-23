@@ -48,6 +48,7 @@ export interface CardProps {
   name: string;
   notification?: number;
   imageHeight?: number;
+  imageWidth?: number;
   width?: number;
   nftNameStyle?: string;
   btnStyle?: string;
