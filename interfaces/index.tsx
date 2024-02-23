@@ -28,12 +28,14 @@ export interface CustomInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface TabDataProps {
+  name: string;
+  notifications?: number;
+  tabComponent: React.ReactNode;
+}
+
 export interface CustomTabsProps {
-  tabData: {
-    name: string;
-    notifications?: number;
-    tabComponent: React.ReactNode;
-  }[];
+  tabData: TabDataProps[];
   styles?: string;
   initialActiveTab: string;
 }
@@ -46,4 +48,8 @@ export interface CardProps {
   notification?: number;
   imageHeight?: number;
   width?: number;
+  nftNameStyle?: string;
+  btnStyle?: string;
+  btnDisabled?: boolean;
+  lock?: boolean;
 }

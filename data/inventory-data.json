@@ -1,0 +1,27 @@
+[
+  {
+    "name": "All",
+    "notifications": 0,
+    "tabComponent": "lsjdslk"
+  },
+  {
+    "name": "Ores",
+    "notifications": 0,
+    "tabComponent": "<div>General Store 2</div>"
+  },
+  {
+    "name": "Bar",
+    "notifications": 0,
+    "tabComponent": "<div>General Store 3</div>"
+  },
+  {
+    "name": "Weapons",
+    "notifications": 0,
+    "tabComponent": "<div>General Store 4</div>"
+  },
+  {
+    "name": "Armours",
+    "notifications": 0,
+    "tabComponent": "<div>General Store</div>"
+  }
+]

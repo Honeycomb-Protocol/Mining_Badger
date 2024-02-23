@@ -14,7 +14,7 @@ const CustomTabs = ({ tabData, styles, initialActiveTab }: CustomTabsProps) => {
               activeTab === tab.name &&
               "bg-gradient-to-r from-[#E7CB5F] to-[#CD6448]"
             }  h-12 px-4 rounded-xl flex-1 flex justify-center items-center font-bold cursor-pointer
-          transition-all hover:scale-105 hover:bg-opacity-10 hover:bg-black ${styles}`}
+          transition-all hover:scale-105 hover:bg-opacity-10 hover:bg-black ${styles} whitespace-nowrap`}
             key={tab.name}
             onClick={() => setActiveTab(tab.name)}
           >

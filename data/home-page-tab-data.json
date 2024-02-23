@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Shop",
+    "notifications": 0,
+    "tabComponent": "NftCard"
+  },
+  {
+    "name": "Mine",
+    "notifications": 0,
+    "tabComponent": "NftCard"
+  },
+  {
+    "name": "Refine",
+    "notifications": 0,
+    "tabComponent": "NftCard"
+  },
+  {
+    "name": "Craft",
+    "notifications": 0,
+    "tabComponent": "NftCard"
+  },
+  {
+    "name": "General Store",
+    "notifications": 4,
+    "tabComponent": "NftCard"
+  }
+]

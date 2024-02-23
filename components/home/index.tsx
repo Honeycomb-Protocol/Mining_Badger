@@ -1,11 +1,27 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
+import tabData from "@/data/home-page-tab-data.json";
+import inventoryData from "@/data/inventory-data.json";
 import CustomTabs from "../common/custom-tabs";
-import { inventoryData, tabData } from "@/lib/utils/constants";
+import { TabDataProps } from "@/interfaces";
+import {
+  renderHomeTabComponents,
+  renderInventoryTabComponents,
+} from "@/lib/utils";
 
 const HomePage = () => {
+  useEffect(() => {
+    tabData.forEach((tab: TabDataProps) => {
+      tab.tabComponent = renderHomeTabComponents(tab.name);
+    });
+
+    inventoryData.forEach((tab: TabDataProps) => {
+      tab.tabComponent = renderInventoryTabComponents(tab.name);
+    });
+  }, []);
+
   return (
     <main className="w-full flex justify-center items-start mt-12 gap-10">
       <div className="w-[27%]">
