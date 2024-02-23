@@ -12,8 +12,8 @@ const RefineTab = () => {
           level={refinement.level.toString()}
           buttonText="Refine"
           width={150}
-          imageWidth={100}
-          imageHeight={100}
+          imageWidth={90}
+          imageHeight={80}
           nftNameStyle="text-[15px] pr-1"
           btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
         />
