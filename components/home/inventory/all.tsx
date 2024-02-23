@@ -9,6 +9,7 @@ const AllTab = () => {
         picture="/assets/images/pickaxe.png"
         buttonText="Equip"
         width={90}
+        imageWidth={90}
         imageHeight={90}
         nftNameStyle="text-[10px]"
         btnStyle="bg-opacity-70 text-xs h-6"

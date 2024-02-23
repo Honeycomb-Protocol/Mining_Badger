@@ -9,6 +9,7 @@ const BronzeTab = () => {
         picture="/assets/images/bronze-Pickaxe.png"
         buttonText="Equip"
         width={90}
+        imageWidth={90}
         imageHeight={90}
         nftNameStyle="text-[10px]"
         btnStyle="bg-opacity-70 text-xs h-6"

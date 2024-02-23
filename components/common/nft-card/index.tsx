@@ -12,6 +12,7 @@ const NftCard: React.FC<CardProps> = ({
   notification,
   imageHeight,
   width,
+  imageWidth,
   nftNameStyle,
   btnStyle,
   btnDisabled,
@@ -19,14 +20,14 @@ const NftCard: React.FC<CardProps> = ({
   lockStyle,
 }) => {
   const cardStyle = {
-    width: width ? `${width}px` : "165px",
+    width: imageWidth ? `${imageWidth}px` : "165px",
     height: imageHeight ? `${imageHeight}px` : "176px",
   };
 
   return (
     <div
       className={`flex flex-col justify-center items-center`}
-      style={{ width: cardStyle.width }}
+      style={{ width: width ? width : "max-content" }}
     >
       <div className={`relative`} style={cardStyle}>
         <Image src={picture} alt={name} fill />
@@ -46,9 +47,7 @@ const NftCard: React.FC<CardProps> = ({
         )}
       </div>
       <div
-        className={`flex ${
-          level ? "justify-between" : "justify-center"
-        } items-center w-full`}
+        className={`flex flex-wrap-reverse justify-center max-w-${width} items-center w-full`}
       >
         <p className={`whitespace-nowrap ${nftNameStyle}`}>{name}</p>
         {level && (
@@ -65,7 +64,7 @@ const NftCard: React.FC<CardProps> = ({
         )}
       </div>
 
-      {buttonText && (
+      {buttonText && !lock && (
         <Button
           disabled={btnDisabled}
           className={`h-7 w-[70%] bg-[#5CA16B] rounded-md text-sm tracking-wider text-white mt-2 ${btnStyle}`}
