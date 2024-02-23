@@ -2,26 +2,26 @@
   {
     "name": "All",
     "notifications": 0,
-    "tabComponent": "lsjdslk"
+    "tabComponent": ""
   },
   {
     "name": "Ores",
     "notifications": 0,
-    "tabComponent": "<div>General Store 2</div>"
+    "tabComponent": ""
   },
   {
     "name": "Bar",
     "notifications": 0,
-    "tabComponent": "<div>General Store 3</div>"
+    "tabComponent": ""
   },
   {
     "name": "Weapons",
     "notifications": 0,
-    "tabComponent": "<div>General Store 4</div>"
+    "tabComponent": ""
   },
   {
     "name": "Armours",
     "notifications": 0,
-    "tabComponent": "<div>General Store</div>"
+    "tabComponent": ""
   }
 ]

@@ -20,7 +20,7 @@ export const renderInventoryTabComponents = (component: string) => {
       return (
         <NftCard
           name="Picaxe"
-          picture="/assets/images/bronze-Pickaxe.png"
+          picture="/assets/images/pickaxe.png"
           buttonText="Equip"
           width={90}
           imageHeight={90}

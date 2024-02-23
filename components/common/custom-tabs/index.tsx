@@ -7,7 +7,7 @@ const CustomTabs = ({ tabData, styles, initialActiveTab }: CustomTabsProps) => {
 
   return (
     <div className="w-full">
-      <div className="w-full  flex bg-gray-500 bg-opacity-20 rounded-xl">
+      <div className="w-full flex bg-gray-500 bg-opacity-20 rounded-xl overflow-x-auto overflow-y-hidden">
         {tabData?.map((tab) => (
           <div
             className={`${

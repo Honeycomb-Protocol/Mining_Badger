@@ -72,7 +72,7 @@ const HomePage = () => {
               title="Show Inventory"
             >
               <CustomTabs
-                styles="min-w-max "
+                styles="min-w-max !h-10"
                 initialActiveTab="All"
                 tabData={inventoryData}
               />
