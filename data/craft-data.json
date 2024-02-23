@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Bronze",
+    "notifications": 0,
+    "tabComponent": ""
+  },
+  {
+    "name": "Iron",
+    "notifications": 0,
+    "tabComponent": ""
+  },
+  {
+    "name": "Steel",
+    "notifications": 0,
+    "tabComponent": ""
+  },
+  {
+    "name": "Mithril",
+    "notifications": 0,
+    "tabComponent": ""
+  },
+  {
+    "name": "Adamantine",
+    "notifications": 0,
+    "tabComponent": ""
+  },
+  {
+    "name": "Runite",
+    "notifications": 0,
+    "tabComponent": ""
+  }
+]

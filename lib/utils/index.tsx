@@ -1,4 +1,22 @@
+import CustomTabs from "@/components/common/custom-tabs";
 import NftCard from "@/components/common/nft-card";
+import AllTab from "@/components/home/inventory/all";
+import CraftTab from "@/components/home/tabs/craft";
+import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
+import MineTab from "@/components/home/tabs/mine";
+import craftData from "@/data/craft-data.json";
+import { useEffect } from "react";
+
+export const renderCraftTabComponents = (component: string) => {
+  switch (component) {
+    case "Bronze":
+      return (
+        <>
+          <BronzeTab />
+        </>
+      );
+  }
+};
 
 export const renderHomeTabComponents = (component: string) => {
   switch (component) {
@@ -11,23 +29,18 @@ export const renderHomeTabComponents = (component: string) => {
           level="1"
         />
       );
+
+    case "Craft":
+      return <CraftTab />;
+
+    case "Mine":
+      return <MineTab />;
   }
 };
 
 export const renderInventoryTabComponents = (component: string) => {
   switch (component) {
     case "All":
-      return (
-        <NftCard
-          name="Picaxe"
-          picture="/assets/images/pickaxe.png"
-          buttonText="Equip"
-          width={90}
-          imageHeight={90}
-          nftNameStyle="text-[10px]"
-          btnStyle="bg-opacity-70 text-xs h-6"
-          btnDisabled
-        />
-      );
+      return <AllTab />;
   }
 };

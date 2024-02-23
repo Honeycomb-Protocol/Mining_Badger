@@ -38,6 +38,7 @@ export interface CustomTabsProps {
   tabData: TabDataProps[];
   styles?: string;
   initialActiveTab: string;
+  isVertical?: boolean;
 }
 
 export interface CardProps {

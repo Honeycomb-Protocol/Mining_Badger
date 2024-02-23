@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Copper Ore",
+        "level": 1,
+        "btnText": "Mine",
+        "image": "/assets/images/copper-stone-noline.png"
+    },
+    {
+        "name": "Tin Ore",
+        "level": 1,
+        "btnText": "Mine",
+        "image": "/assets/images/silver-stone-noline.png"
+    },
+    {
+        "name": "Iron Ore",
+        "level": 15,
+        "btnText": "Mine",
+        "image": "/assets/images/tin-stone-noline.png"
+    },
+    {
+        "name": "Coal",
+        "level": 30,
+        "btnText": "Mine",
+        "image": "/assets/images/coal-stone-noline.png"
+    },
+    {
+        "name": "Mithril Ore",
+        "level": 55,
+        "btnText": "Mine",
+        "image": "/assets/images/mithril-stone-noline.png"
+    },
+    {
+        "name": "Adamantite Ore",
+        "level": 70,
+        "btnText": "Mine",
+        "image": "/assets/images/adamnite-stone-noline.png"
+    },
+    {
+        "name": "Runite Ore",
+        "level": 85,
+        "btnText": "Mine",
+        "image": "/assets/images/runite-stone-noline.png"
+    },
+    {
+        "name": "Gold Ore",
+        "level": 92,
+        "btnText": "Mine",
+        "image": "/assets/images/gold-stone-noline.png"
+    }
+]
