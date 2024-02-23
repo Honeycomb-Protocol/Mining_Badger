@@ -1,13 +1,9 @@
-import CustomTabs from "@/components/common/custom-tabs";
-import NftCard from "@/components/common/nft-card";
 import AllTab from "@/components/home/inventory/all";
 import CraftTab from "@/components/home/tabs/craft";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
-import craftData from "@/data/craft-data.json";
-import { useEffect } from "react";
 
 export const renderCraftTabComponents = (component: string) => {
   switch (component) {
