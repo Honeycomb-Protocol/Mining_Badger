@@ -9,6 +9,7 @@ export const renderHomeTabComponents = (component: string) => {
           picture="/assets/images/bronze-Pickaxe.png"
           buttonText="Claim"
           level="1"
+          lock
         />
       );
   }

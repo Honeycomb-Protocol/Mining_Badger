@@ -16,6 +16,7 @@ const NftCard: React.FC<CardProps> = ({
   btnStyle,
   btnDisabled,
   lock,
+  lockStyle,
 }) => {
   const cardStyle = {
     width: width ? `${width}px` : "165px",
@@ -32,6 +33,15 @@ const NftCard: React.FC<CardProps> = ({
         {notification && (
           <div className="absolute top-0 right-0 bg-red-700 rounded-full text-xs p-1">
             {notification}
+          </div>
+        )}
+        {lock && (
+          <div
+            className={`absolute flex justify-center items-center backdrop-blur-sm w-full h-full ${lockStyle}`}
+          >
+            <div className="bg-[#464646] text-[#6e6e6e] font-bold px-4 py-1 rounded-md">
+              Lock
+            </div>
           </div>
         )}
       </div>

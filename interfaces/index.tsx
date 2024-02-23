@@ -52,4 +52,5 @@ export interface CardProps {
   btnStyle?: string;
   btnDisabled?: boolean;
   lock?: boolean;
+  lockStyle?: string;
 }
