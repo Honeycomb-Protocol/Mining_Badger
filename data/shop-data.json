@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Bronze Pickaxe",
+        "picture": "/assets/images/bronze-Pickaxe.png",
+        "level": "1",
+        "lock": false
+    },
+    {
+        "name": "Iron Pickaxe",
+        "picture": "/assets/images/bronze-Pickaxe.png",
+        "level": "2",
+        "lock": true
+    },
+    {
+        "name": "Steel Pickaxe",
+        "picture": "/assets/images/bronze-Pickaxe.png",
+        "level": "3",
+        "lock": true
+    },
+    {
+        "name": "Mithril Pickaxe",
+        "picture": "/assets/images/bronze-Pickaxe.png",
+        "level": "4",
+        "lock": true
+    },
+    {
+        "name": "Adamant Pickaxe",
+        "picture": "/assets/images/bronze-Pickaxe.png",
+        "level": "5",
+        "lock": true
+    },
+    {
+        "name": "Rune Pickaxe",
+        "picture": "/assets/images/bronze-Pickaxe.png",
+        "level": "6",
+        "lock": true
+    }
+]
