@@ -9,6 +9,8 @@ const CustomTabs = ({
   isVertical,
 }: CustomTabsProps) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab);
+  const currentData = tabData?.filter((tab) => tab?.name === activeTab)[0]
+    ?.tabComponent;
 
   return (
     <div
@@ -44,9 +46,7 @@ const CustomTabs = ({
           </div>
         ))}
       </div>
-      <div className="w-full">
-        {tabData?.filter((tab) => tab.name === activeTab)[0].tabComponent}
-      </div>
+      <div className="w-full">{currentData}</div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+
 import ShopData from "@/data/shop-data.json";
 import NftCard from "@/components/common/nft-card";
 

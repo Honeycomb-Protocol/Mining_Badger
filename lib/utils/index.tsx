@@ -5,7 +5,7 @@ import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
 
-export const renderCraftTabComponents = (component: string) => {
+export const renderCraftTabComponents = async (component: string) => {
   switch (component) {
     case "Bronze":
       return (
@@ -16,7 +16,7 @@ export const renderCraftTabComponents = (component: string) => {
   }
 };
 
-export const renderHomeTabComponents = (component: string) => {
+export const renderHomeTabComponents = async (component: string) => {
   switch (component) {
     case "Shop":
       return <ShopTab />;
@@ -32,7 +32,7 @@ export const renderHomeTabComponents = (component: string) => {
   }
 };
 
-export const renderInventoryTabComponents = (component: string) => {
+export const renderInventoryTabComponents = async (component: string) => {
   switch (component) {
     case "All":
       return <AllTab />;
