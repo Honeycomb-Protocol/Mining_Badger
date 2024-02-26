@@ -56,3 +56,8 @@ export interface CardProps {
   lock?: boolean;
   lockStyle?: string;
 }
+
+export interface ModalProps {
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+}
