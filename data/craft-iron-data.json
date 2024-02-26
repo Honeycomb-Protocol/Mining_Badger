@@ -1,0 +1,200 @@
+[
+    {
+        "name": "Mafia Hat",
+        "picture": "/assets/images/mafia-hat.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Ranger Hat",
+        "picture": "/assets/images/ranger-hat.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Flat Brim Cap",
+        "picture": "/assets/images/flat-brim.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Tactical Knife",
+        "picture": "/assets/images/tactical-knife.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Crow Bar",
+        "picture": "/assets/images/crow-bar.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Iron Dagger",
+        "picture": "/assets/images/iron-dagger.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Kevlar Tactical",
+        "picture": "/assets/images/kevlar-tactical.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Future Gang",
+        "picture": "/assets/images/future-gang.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "PowerSuite Cyan",
+        "picture": "/assets/images/powersuit-cyan.png",
+        "experience": 60,
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    }
+]

@@ -1,0 +1,200 @@
+[
+    {
+        "name": "White Headband",
+        "experience": 45,
+        "picture": "/assets/images/white-headband.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Red Aviator",
+        "experience": 45,
+        "picture": "/assets/images/red-aviator.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Bullet Mohawk",
+        "experience": 45,
+        "picture": "/assets/images/bullet-mohawk.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Pickaxe",
+        "experience": 45,
+        "picture": "/assets/images/pickaxe-bronze.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Bone Saw",
+        "experience": 45,
+        "picture": "/assets/images/bone-saw-bronze.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Copper Dagger",
+        "experience": 45,
+        "picture": "/assets/images/copper-dagger-bronze.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Pirat Gang",
+        "experience": 45,
+        "picture": "/assets/images/pirate-gang-bronze.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Bandit",
+        "experience": 45,
+        "picture": "/assets/images/bandit-bronze.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Dessert Rags",
+        "experience": 45,
+        "picture": "/assets/images/desser-rag-bronze.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    }
+]

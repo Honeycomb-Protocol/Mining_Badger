@@ -1,8 +1,8 @@
 import React from "react";
-import CraftData from "@/data/craft-bronze-data.json";
+import CraftData from "@/data/craft-runite-data.json";
 import NftCard from "@/components/common/nft-card";
 
-const BronzeTab = () => {
+const RuniteTab = () => {
   return (
     <div className="py-10 flex justify-start items-start flex-wrap gap-8">
       {CraftData.map((craftment, index) => (
@@ -22,4 +22,4 @@ const BronzeTab = () => {
   );
 };
 
-export default BronzeTab;
+export default RuniteTab;
