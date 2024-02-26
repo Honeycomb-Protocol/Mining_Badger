@@ -7,12 +7,12 @@
     {
         "name": "Tin Ore",
         "level": 1,
-        "picture": "/assets/images/silver-stone-noline.png"
+        "picture": "/assets/images/tin-stone-noline.png"
     },
     {
         "name": "Iron Ore",
         "level": 15,
-        "picture": "/assets/images/tin-stone-noline.png"
+        "picture": "/assets/images/iron-stone-noline.png"
     },
     {
         "name": "Coal Ore",
@@ -27,7 +27,7 @@
     {
         "name": "Adamantite Ore",
         "level": 70,
-        "picture": "/assets/images/adamnite-stone-noline.png"
+        "picture": "/assets/images/adamantite-stone-noline.png"
     },
     {
         "name": "Runite Ore",

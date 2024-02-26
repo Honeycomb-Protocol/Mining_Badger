@@ -82,7 +82,7 @@
             {
                 "name": "Adamantite Ore",
                 "quantity": "1",
-                "picture": "/assets/images/adamnite-stone-noline.png"
+                "picture": "/assets/images/adamantite-stone-noline.png"
             },
             {
                 "name": "Coal Ore",
@@ -94,7 +94,7 @@
     {
         "name": "Runite",
         "level": "90",
-        "picture": "/assets/images/runeite-alloy-cube.png",
+        "picture": "/assets/images/runite-alloy-cube.png",
         "creation": [
             {
                 "name": "Runite Ore",
