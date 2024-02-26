@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
 import tabData from "@/data/home-page-tab-data.json";
@@ -12,14 +12,34 @@ import {
 } from "@/lib/utils";
 
 const HomePage = () => {
-  useEffect(() => {
-    tabData.forEach((tab: TabDataProps) => {
-      tab.tabComponent = renderHomeTabComponents(tab.name);
-    });
+  const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
+  const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
 
-    inventoryData.forEach((tab: TabDataProps) => {
-      tab.tabComponent = renderInventoryTabComponents(tab.name);
-    });
+  useEffect(() => {
+    const addHomeTabComponents = async () => {
+      setHomeTabData(
+        await Promise.all(
+          tabData.map(async (tab: TabDataProps) => {
+            tab.tabComponent = await renderHomeTabComponents(tab.name);
+            return tab;
+          })
+        )
+      );
+    };
+
+    const addInventoryTabComponents = async () => {
+      setInventoryTabData(
+        await Promise.all(
+          inventoryData.map(async (tab: TabDataProps) => {
+            tab.tabComponent = await renderInventoryTabComponents(tab.name);
+            return tab;
+          })
+        )
+      );
+    };
+
+    addHomeTabComponents();
+    addInventoryTabComponents();
   }, []);
 
   return (
@@ -74,14 +94,14 @@ const HomePage = () => {
               <CustomTabs
                 styles="min-w-max !h-10"
                 initialActiveTab="All"
-                tabData={inventoryData}
+                tabData={inventoryTabData}
               />
             </AccordionItem>
           </Accordion>
         </div>
       </div>
       <div className="w-[50%]">
-        <CustomTabs initialActiveTab="Shop" tabData={tabData} />
+        <CustomTabs initialActiveTab="Shop" tabData={homeTabData} />
       </div>
     </main>
   );
