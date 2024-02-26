@@ -41,6 +41,11 @@ export interface CustomTabsProps {
   isVertical?: boolean;
 }
 
+export interface materials {
+  name: string;
+  quantity: number;
+}
+
 export interface CardProps {
   buttonText?: string;
   level?: string;
@@ -55,6 +60,9 @@ export interface CardProps {
   btnDisabled?: boolean;
   lock?: boolean;
   lockStyle?: string;
+  creationFrom?: string;
+  materials?: materials[];
+  experience?: number;
 }
 
 export interface ModalProps {
