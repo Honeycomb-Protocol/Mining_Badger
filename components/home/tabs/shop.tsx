@@ -5,8 +5,9 @@ import NftCard from "@/components/common/nft-card";
 const ShopTab = () => {
   return (
     <div className="py-10 grid grid-cols-3 gap-8 items-start">
-      {ShopData.map((item) => (
+      {ShopData.map((item, index) => (
         <NftCard
+          key={index}
           name={item.name}
           picture={item.picture}
           level={item.level.toString()}
