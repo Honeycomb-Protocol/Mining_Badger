@@ -84,7 +84,7 @@
   {
     "name": "Runite",
     "level": "90",
-    "picture": "/assets/images/runeite-alloy-cube.png",
+    "picture": "/assets/images/runite-alloy-cube.png",
     "materials": [
       {
         "name": "Runite Ore",
