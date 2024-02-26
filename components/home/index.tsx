@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 
 import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
@@ -10,10 +10,13 @@ import {
   renderHomeTabComponents,
   renderInventoryTabComponents,
 } from "@/lib/utils";
+import LevelsRequiredModal from "../common/modal";
 
 const HomePage = () => {
   const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
   const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
+
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const addHomeTabComponents = async () => {
@@ -61,7 +64,10 @@ const HomePage = () => {
           </div>
 
           <div className="flex flex-col justify-center items-start pr-2">
-            <div className="flex justify-center underline gap-2">
+            <div
+              onClick={() => setVisible(true)}
+              className="flex justify-center underline gap-2 "
+            >
               <Image
                 src="/assets/svgs/rubiks.svg"
                 alt="rubiks"
@@ -103,6 +109,7 @@ const HomePage = () => {
       <div className="w-[50%]">
         <CustomTabs initialActiveTab="Shop" tabData={homeTabData} />
       </div>
+      <LevelsRequiredModal visible={visible} setVisible={setVisible} />
     </main>
   );
 };

@@ -1,22 +1,33 @@
 import CustomTabs from "@/components/common/custom-tabs";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import craftData from "@/data/craft-data.json";
 import { renderCraftTabComponents } from "@/lib/utils";
 import { TabDataProps } from "@/interfaces";
 
 const CraftTab = () => {
+  const [craftTabData, setCraftTabData] = useState<TabDataProps[]>([]);
+
   useEffect(() => {
-    craftData.forEach((tab: TabDataProps) => {
-      tab.tabComponent = renderCraftTabComponents(tab.name);
-    });
+    const addCraftTabComponents = async () => {
+      setCraftTabData(
+        await Promise.all(
+          craftData.map(async (tab: TabDataProps) => {
+            tab.tabComponent = await renderCraftTabComponents(tab.name);
+            return tab;
+          })
+        )
+      );
+    };
+
+    addCraftTabComponents();
   }, []);
 
   return (
     <div className="mt-5">
       <CustomTabs
         isVertical={true}
-        tabData={craftData}
+        tabData={craftTabData}
         initialActiveTab="Bronze"
       />
     </div>
