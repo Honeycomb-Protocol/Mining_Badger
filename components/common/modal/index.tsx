@@ -13,12 +13,12 @@ import {
 } from "@nextui-org/react";
 
 import { ModalProps } from "../../../interfaces";
-import { tableData } from "@/lib/utils/constants";
+import { modalData } from "@/data/modal-data";
 
 const LevelsRequiredModal: React.FC<ModalProps> = ({ visible, setVisible }) => {
   return (
     <Modal
-      className="!max-w-[70%] !max-h-[85%] !w-[90%] !h-[90%] bg-[#1D1D1D] "
+      className="!max-w-[70%]  !w-[90%] !h-[90%] bg-[#1D1D1D] "
       isOpen={visible}
       onOpenChange={setVisible}
     >
@@ -37,7 +37,7 @@ const LevelsRequiredModal: React.FC<ModalProps> = ({ visible, setVisible }) => {
                   <TableColumn className=" text-2xl bg-transparent text-[#CC634E] capitalize">
                     Pickaxe
                   </TableColumn>
-                  <TableColumn className="px-32 text-2xl bg-transparent text-[#CC634E] capitalize">
+                  <TableColumn className="px-12 text-2xl bg-transparent text-[#CC634E] capitalize">
                     Level
                   </TableColumn>
                   <TableColumn className=" text-2xl bg-transparent text-[#CC634E] capitalize">
@@ -45,12 +45,12 @@ const LevelsRequiredModal: React.FC<ModalProps> = ({ visible, setVisible }) => {
                   </TableColumn>
                 </TableHeader>
                 <TableBody>
-                  {tableData.map((data, index) => (
+                  {modalData.map((data, index) => (
                     <TableRow
                       key={index}
-                      className="gap-10 text-center border-b-2  border-gray-700 h-24"
+                      className="text-center border-b-2  border-gray-700 !h-24"
                     >
-                      <TableCell className="w-36  px-10">
+                      <TableCell className="w-[15%]  px-10">
                         <Image
                           src={data.image}
                           alt={data.pickaxe}
@@ -58,13 +58,13 @@ const LevelsRequiredModal: React.FC<ModalProps> = ({ visible, setVisible }) => {
                           height={150}
                         />
                       </TableCell>
-                      <TableCell className="whitespace-nowrap text-start text-xl font-bold w-32">
+                      <TableCell className="w-[10%] whitespace-nowrap text-start text-xl font-bold ">
                         {data.pickaxe}
                       </TableCell>
-                      <TableCell className=" whitespace-nowrap px-32 text-start  text-xl font-bold ">
+                      <TableCell className="w-[10%] whitespace-nowrap px-12 text-start  text-xl font-bold ">
                         Level {data.level}
                       </TableCell>
-                      <TableCell className="text-start text-sm  font-extralight">
+                      <TableCell className="text-start text-sm  font-extralight w-[40%]">
                         {data.strength}
                       </TableCell>
                     </TableRow>
