@@ -1,0 +1,200 @@
+[
+    {
+        "name": "Evil Halo",
+        "experience": 90,
+        "picture": "/assets/images/evil-halo.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Rick Hair",
+        "experience": 90,
+        "picture": "/assets/images/rick-hair.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Tusk Top Hat",
+        "experience": 90,
+        "picture": "/assets/images/tusk-top-hat.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Mithril Gun",
+        "experience": 90,
+        "picture": "/assets/images/mithril-gun.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Mithril Sword",
+        "experience": 90,
+        "picture": "/assets/images/mithril-sword.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Holy Sword",
+        "experience": 90,
+        "picture": "/assets/images/holy-sword.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Raider Gang",
+        "experience": 90,
+        "picture": "/assets/images/raider-gang.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Riot Gang",
+        "experience": 90,
+        "picture": "/assets/images/riot-gang.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    },
+    {
+        "name": "Trench Coat",
+        "experience": 90,
+        "picture": "/assets/images/trench-coat.png",
+        "materials": [
+            {
+                "name:": "Bronze",
+                "quantity": 1,
+                "picture": "/assets/images/bronze-alloy-cube.png"
+            },
+            {
+                "name:": "Gold",
+                "quantity": 1,
+                "picture": "/assets/images/gold-alloy-cube.png"
+            },
+            {
+                "name:": "Silver",
+                "quantity": 1,
+                "picture": "/assets/images/silver-alloy-cube.png"
+            }
+        ]
+    }
+]
