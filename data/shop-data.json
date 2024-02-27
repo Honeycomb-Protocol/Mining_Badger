@@ -7,9 +7,9 @@
     },
     {
         "name": "Iron Pickaxe",
-        "picture": "/assets/images/bronze-Pickaxe.png",
+        "picture": "/assets/images/iron-pickaxe.png",
         "level": "2",
-        "lock": true
+        "lock": false
     },
     {
         "name": "Steel Pickaxe",

@@ -5,9 +5,10 @@ import NftCard from "@/components/common/nft-card";
 
 const SteelTab = () => {
   return (
-    <div className="flex justify-start items-start flex-wrap gap-10 px-3 2xl:px-5">
+    <div className="grid grid-cols-3 gap-12">
       {CraftData.map((craftment, index) => (
         <NftCard
+          divStyle="bg-black shadow-black shadow-xl  rounded-xl p-2"
           key={index}
           name={craftment.name}
           picture={craftment.picture}

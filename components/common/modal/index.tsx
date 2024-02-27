@@ -42,7 +42,7 @@ const LevelsRequiredModal: React.FC<ModalProps> = ({ visible, setVisible }) => {
               </TableColumn>
             </TableHeader>
             <TableBody>
-              {modalData.map((data, index) => (
+              {ModalData.map((data, index) => (
                 <TableRow
                   key={index}
                   className="text-center border-b-2 border-gray-700 !h-24"
