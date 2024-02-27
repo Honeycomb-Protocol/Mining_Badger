@@ -15,7 +15,6 @@ import LevelsRequiredModal from "../common/modal";
 const HomePage = () => {
   const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
   const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
-
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -66,7 +65,7 @@ const HomePage = () => {
           <div className="flex flex-col justify-center items-start pr-2">
             <div
               onClick={() => setVisible(true)}
-              className="flex justify-center underline gap-2 "
+              className="flex justify-center underline gap-2 cursor-pointer"
             >
               <Image
                 src="/assets/svgs/rubiks.svg"

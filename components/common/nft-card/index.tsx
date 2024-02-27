@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@nextui-org/react";
 
 import { CardProps } from "@/interfaces";
+import { getCubeImage, getStoneImage } from "@/lib/utils";
 
 const NftCard: React.FC<CardProps> = ({
   buttonText,
@@ -18,17 +19,49 @@ const NftCard: React.FC<CardProps> = ({
   btnDisabled,
   lock,
   lockStyle,
+  creationFrom,
+  materials,
+  experience,
 }) => {
   const cardStyle = {
     width: imageWidth ? `${imageWidth}px` : "165px",
     height: imageHeight ? `${imageHeight}px` : "176px",
   };
 
+  const materialsList = materials?.map((material, index) => (
+    <div key={index} className="flex items-center justify-center mr-2">
+      <Image
+        src={
+          creationFrom === "stone"
+            ? getStoneImage(material.name.split(" ")[0].toLocaleLowerCase()) ||
+              ""
+            : getCubeImage(material.name.split(" ")[0].toLocaleLowerCase()) ||
+              ""
+        }
+        alt={material.name}
+        width={20}
+        height={20}
+      />
+      <p className="text-xs text-gray-300 ml-1">x{material.quantity}</p>
+    </div>
+  ));
+
   return (
     <div
       className={`flex flex-col justify-center items-center`}
       style={{ width: width ? width : "max-content" }}
     >
+      {experience && (
+        <div className="flex justify-end text-xs text-white w-full pr-2 pt-2 items-start bg-black">
+          <Image
+            src="/assets/svgs/lightning.svg"
+            alt="lightning"
+            width={18}
+            height={18}
+          />
+          {experience}
+        </div>
+      )}
       <div className={`relative`} style={cardStyle}>
         <Image src={picture} alt={name} fill />
         {notification && (
@@ -47,7 +80,7 @@ const NftCard: React.FC<CardProps> = ({
         )}
       </div>
       <div
-        className={`flex flex-wrap-reverse justify-center max-w-${width} items-center w-full`}
+        className={`flex flex-wrap-reverse justify-center max-w-${width} items-center w-full my-2`}
       >
         <p className={`whitespace-nowrap ${nftNameStyle}`}>{name}</p>
         {level && (
@@ -63,6 +96,14 @@ const NftCard: React.FC<CardProps> = ({
           </p>
         )}
       </div>
+
+      {materials && (
+        <div
+          className={`flex flex-wrap justify-center max-w-${width} items-center w-full my-1`}
+        >
+          {materialsList}
+        </div>
+      )}
 
       {buttonText && !lock && (
         <Button

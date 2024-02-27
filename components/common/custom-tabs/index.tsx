@@ -46,7 +46,7 @@ const CustomTabs = ({
           </div>
         ))}
       </div>
-      <div className="w-full">{currentData}</div>
+      <div className="w-full p-3 2xl:p-5">{currentData}</div>
     </div>
   );
 };

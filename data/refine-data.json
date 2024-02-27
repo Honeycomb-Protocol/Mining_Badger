@@ -1,18 +1,16 @@
 [
     {
         "name": "Bronze",
-        "level": "1",
+        "level": 1,
         "picture": "/assets/images/bronze-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Tin Ore",
-                "quantity": "1",
-                "picture": "/assets/images/tin-stone-noline.png"
+                "quantity": 1
             },
             {
                 "name": "Copper Ore",
-                "quantity": "1",
-                "picture": "/assets/images/copper-stone-noline.png"
+                "quantity": 1
             }
         ]
     },
@@ -20,11 +18,10 @@
         "name": "Iron",
         "level": "15",
         "picture": "/assets/images/iron-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Copper Ore",
-                "quantity": "1",
-                "picture": "/assets/images/copper-stone-noline.png"
+                "quantity": 1
             }
         ]
     },
@@ -32,16 +29,14 @@
         "name": "Steel",
         "level": "30",
         "picture": "/assets/images/steel-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Copper Ore",
-                "quantity": "1",
-                "picture": "/assets/images/copper-stone-noline.png"
+                "quantity": 1
             },
             {
                 "name": "Coal Ore",
-                "quantity": "1",
-                "picture": "/assets/images/coal-stone-noline.png"
+                "quantity": 1
             }
         ]
     },
@@ -49,11 +44,10 @@
         "name": "Gold",
         "level": "45",
         "picture": "/assets/images/gold-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Gold Ore",
-                "quantity": "1",
-                "picture": "/assets/images/gold-stone-noline.png"
+                "quantity": 1
             }
         ]
     },
@@ -61,16 +55,14 @@
         "name": "Mithril",
         "level": "60",
         "picture": "/assets/images/mithril-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Mithril Ore",
-                "quantity": "1",
-                "picture": "/assets/images/mithril-stone-noline.png"
+                "quantity": 1
             },
             {
                 "name": "Coal Ore",
-                "quantity": "4",
-                "picture": "/assets/images/coal-stone-noline.png"
+                "quantity": 4
             }
         ]
     },
@@ -78,16 +70,14 @@
         "name": "Adamantite",
         "level": "75",
         "picture": "/assets/images/adamantite-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Adamantite Ore",
-                "quantity": "1",
-                "picture": "/assets/images/adamantite-stone-noline.png"
+                "quantity": 1
             },
             {
                 "name": "Coal Ore",
-                "quantity": "6",
-                "picture": "/assets/images/coal-stone-noline.png"
+                "quantity": 6
             }
         ]
     },
@@ -95,16 +85,14 @@
         "name": "Runite",
         "level": "90",
         "picture": "/assets/images/runite-alloy-cube.png",
-        "creation": [
+        "materials": [
             {
                 "name": "Runite Ore",
-                "quantity": "1",
-                "picture": "/assets/images/runite-stone-noline.png"
+                "quantity": 1
             },
             {
                 "name": "Coal Ore",
-                "quantity": "8",
-                "picture": "/assets/images/coal-stone-noline.png"
+                "quantity": 8
             }
         ]
     }

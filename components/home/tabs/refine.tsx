@@ -17,6 +17,8 @@ const RefineTab = () => {
           imageHeight={80}
           nftNameStyle="text-[15px] pr-1"
           btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
+          creationFrom="stone"
+          materials={refinement.materials}
         />
       ))}
     </div>
