@@ -14,7 +14,7 @@ const SteelTab = () => {
           picture={craftment.picture}
           buttonText="Craft"
           width={165}
-          imageWidth={165}
+          imageWidth={155}
           imageHeight={140}
           nftNameStyle="text-[15px] pr-1"
           btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"

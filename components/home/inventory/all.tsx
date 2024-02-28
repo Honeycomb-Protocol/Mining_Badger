@@ -6,8 +6,7 @@ const AllTab = () => {
     <div className="grid-col-3 p-3">
       <NftCard
         name="Picaxe"
-        picture="/assets/images/pickaxe.png"
-        buttonText="Equip"
+        picture="/assets/images/bronze-Pickaxe.png"
         width={90}
         imageWidth={90}
         imageHeight={90}
