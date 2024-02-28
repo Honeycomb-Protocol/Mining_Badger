@@ -22,6 +22,7 @@ const NftCard: React.FC<CardProps> = ({
   creationFrom,
   materials,
   experience,
+  divStyle,
 }) => {
   const cardStyle = {
     width: imageWidth ? `${imageWidth}px` : "165px",
@@ -29,7 +30,15 @@ const NftCard: React.FC<CardProps> = ({
   };
 
   const materialsList = materials?.map((material, index) => (
-    <div key={index} className="flex items-center justify-center mr-2">
+    <div
+      key={index}
+      className="flex items-center justify-center mr-2 
+
+  
+    
+
+    "
+    >
       <Image
         src={
           creationFrom === "stone"
@@ -48,7 +57,8 @@ const NftCard: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`flex flex-col justify-center items-center`}
+      onClick={() => console.log("clicked")}
+      className={`flex flex-col justify-center items-center cursor-pointer  ${divStyle}`}
       style={{ width: width ? width : "max-content" }}
     >
       {experience && (

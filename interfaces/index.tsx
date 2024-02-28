@@ -63,6 +63,7 @@ export interface CardProps {
   creationFrom?: string;
   materials?: materials[];
   experience?: number;
+  divStyle?: string;
 }
 
 export interface ModalProps {

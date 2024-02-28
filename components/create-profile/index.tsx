@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 const CreateProfilePage = () => {
   const [profile, setProfile] = useState({
-    name: "",
+    userName: "",
     email: "",
     bio: "",
   });
@@ -34,14 +34,13 @@ const CreateProfilePage = () => {
 
       <div className="mt-16 flex justify-center items-center w-full gap-28">
         <div className="w-[40%] px-5 md:px-10 lg:px-14 xl:px-20">
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center mb-8">
             <Image
               width={250}
               height={0}
               src="/assets/images/nftprofile.png"
               alt="profile"
             />
-            <p className=" my-6">Your NFT Profile Picture</p>
           </div>
 
           <div className="flex justify-evenly items-center">
@@ -74,17 +73,8 @@ const CreateProfilePage = () => {
           <CustomInput
             name="name"
             styles="h-12 placeholder-white"
-            value={profile.name}
-            placeholder="Enter Name"
-            type="text"
-            onChange={onInputChange}
-          />
-
-          <CustomInput
-            name="email"
-            styles="h-12 placeholder-white"
-            value={profile.email}
-            placeholder="Enter Email Address"
+            value={profile.userName}
+            placeholder="Enter Username"
             type="text"
             onChange={onInputChange}
           />
