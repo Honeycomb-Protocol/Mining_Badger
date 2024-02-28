@@ -28,24 +28,29 @@ const Header = () => {
       )}
       <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
       {router.pathname !== "/" && (
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-row gap-5">
+          <Image
+            onClick={() => {
+              router.push("/home");
+            }}
+            className="cursor-pointer"
+            width={35}
+            height={35}
+            src="/assets/svgs/home-icon.svg"
+            alt="github"
+          />
+
           <Image
             width={30}
             height={30}
-            src="/assets/svgs/github-icon.svg"
-            alt="github"
+            src="/assets/svgs/twitter-x-icon.svg"
+            alt="twitter"
           />
           <Image
             width={30}
             height={30}
             src="/assets/svgs/discord-icon.svg"
             alt="discord"
-          />
-          <Image
-            width={30}
-            height={30}
-            src="/assets/svgs/twitter-icon.svg"
-            alt="twitter"
           />
         </div>
       )}
