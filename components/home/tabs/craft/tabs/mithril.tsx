@@ -5,7 +5,7 @@ import NftCard from "@/components/common/nft-card";
 
 const MithrilTab = () => {
   return (
-    <div className="grid grid-cols-3 gap-12">
+    <div className="grid grid-cols-3 gap-x-24 gap-y-8">
       {CraftData.map((craftment, index) => (
         <NftCard
           divStyle="bg-black shadow-black shadow-xl  rounded-xl p-2"

@@ -4,7 +4,7 @@ import NftCard from "@/components/common/nft-card";
 
 const MineTab = () => {
   return (
-    <div className="py-10 flex justify-start items-start flex-wrap gap-8">
+    <div className="py-10 grid grid-cols-4 gap-8">
       {MineData.map((mine, index) => (
         <NftCard
           key={index}

@@ -4,7 +4,7 @@ import NftCard from "@/components/common/nft-card";
 
 const RefineTab = () => {
   return (
-    <div className="py-10 flex justify-start items-start flex-wrap gap-8">
+    <div className="py-10 grid grid-cols-4 gap-8">
       {RefineData.map((refinement, index) => (
         <NftCard
           key={index}
