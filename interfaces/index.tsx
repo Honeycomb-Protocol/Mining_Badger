@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
 
+export interface AuthenticationState {
+  user: string | null;
+  isLoading: boolean;
+}
+
 export interface ButtonProps {
   styles?: string;
   onClick: () => void;
