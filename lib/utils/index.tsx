@@ -29,6 +29,8 @@ const mithrilAlloyCube = "/assets/images/mithril-alloy-cube.png";
 const adamantiteAlloyCube = "/assets/images/adamantite-alloy-cube.png";
 const runiteAlloyCube = "/assets/images/runite-alloy-cube.png";
 
+import LevelsData from "../../data/level-data.json";
+
 export const renderCraftTabComponents = async (component: string) => {
   switch (component) {
     case "Bronze":
@@ -107,4 +109,13 @@ export const getCubeImage = (name: string) => {
     case "runite":
       return runiteAlloyCube;
   }
+};
+
+export const getLevelsFromExp = (exp: number) => {
+  for (let i = 0; i < LevelsData.length; i++) {
+    if (exp < LevelsData[i].minExp) {
+      return i === 0 ? 1 : LevelsData[i - 1].level;
+    }
+  }
+  return LevelsData[LevelsData.length - 1].level;
 };
