@@ -7,6 +7,7 @@ const CustomTabs = ({
   styles,
   initialActiveTab,
   isVertical,
+
 }: CustomTabsProps) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab);
   const currentData = tabData?.filter((tab) => tab?.name === activeTab)[0]

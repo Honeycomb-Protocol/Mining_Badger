@@ -1,99 +1,99 @@
 [
-    {
-        "name": "Bronze",
-        "level": 1,
-        "picture": "/assets/images/bronze-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Tin Ore",
-                "quantity": 1
-            },
-            {
-                "name": "Copper Ore",
-                "quantity": 1
-            }
-        ]
-    },
-    {
-        "name": "Iron",
-        "level": "15",
-        "picture": "/assets/images/iron-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Copper Ore",
-                "quantity": 1
-            }
-        ]
-    },
-    {
-        "name": "Steel",
-        "level": "30",
-        "picture": "/assets/images/steel-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Copper Ore",
-                "quantity": 1
-            },
-            {
-                "name": "Coal Ore",
-                "quantity": 1
-            }
-        ]
-    },
-    {
-        "name": "Gold",
-        "level": "45",
-        "picture": "/assets/images/gold-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Gold Ore",
-                "quantity": 1
-            }
-        ]
-    },
-    {
-        "name": "Mithril",
-        "level": "60",
-        "picture": "/assets/images/mithril-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Mithril Ore",
-                "quantity": 1
-            },
-            {
-                "name": "Coal Ore",
-                "quantity": 4
-            }
-        ]
-    },
-    {
-        "name": "Adamantite",
-        "level": "75",
-        "picture": "/assets/images/adamantite-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Adamantite Ore",
-                "quantity": 1
-            },
-            {
-                "name": "Coal Ore",
-                "quantity": 6
-            }
-        ]
-    },
-    {
-        "name": "Runite",
-        "level": "90",
-        "picture": "/assets/images/runite-alloy-cube.png",
-        "materials": [
-            {
-                "name": "Runite Ore",
-                "quantity": 1
-            },
-            {
-                "name": "Coal Ore",
-                "quantity": 8
-            }
-        ]
-    }
+  {
+    "name": "Bronze",
+    "level": 1,
+    "picture": "/assets/images/bronze-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Tin Ore",
+        "amount": 1
+      },
+      {
+        "name": "Copper Ore",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Iron",
+    "level": "15",
+    "picture": "/assets/images/iron-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Copper Ore",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Steel",
+    "level": "30",
+    "picture": "/assets/images/steel-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Copper Ore",
+        "amount": 1
+      },
+      {
+        "name": "Coal Ore",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Gold",
+    "level": "45",
+    "picture": "/assets/images/gold-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Gold Ore",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Mithril",
+    "level": "60",
+    "picture": "/assets/images/mithril-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Mithril Ore",
+        "amount": 1
+      },
+      {
+        "name": "Coal Ore",
+        "amount": 4
+      }
+    ]
+  },
+  {
+    "name": "Adamantite",
+    "level": "75",
+    "picture": "/assets/images/adamantite-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Adamantite Ore",
+        "amount": 1
+      },
+      {
+        "name": "Coal Ore",
+        "amount": 6
+      }
+    ]
+  },
+  {
+    "name": "Runite",
+    "level": "90",
+    "picture": "/assets/images/runite-alloy-cube.png",
+    "materials": [
+      {
+        "name": "Runite Ore",
+        "amount": 1
+      },
+      {
+        "name": "Coal Ore",
+        "amount": 8
+      }
+    ]
+  }
 ]

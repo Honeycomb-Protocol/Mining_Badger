@@ -108,3 +108,21 @@ export const getCubeImage = (name: string) => {
       return runiteAlloyCube;
   }
 };
+
+export const formatTime = (timeLeft: number) => {
+  // Convert milliseconds to seconds
+  const seconds = Math.floor(timeLeft / 1000);
+  // Calculate the number of days
+  // const days = Math.floor(seconds / 86400);
+  // Calculate the number of hours
+  const hours = Math.floor((seconds % 86400) / 3600);
+  // Calculate the remaining minutes
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  // Format the string to have two digits for hours and minutes
+  return `${hours.toString().padStart(2, "0")} : ${minutes
+    .toString()
+    .padStart(2, "0")} : ${Math.floor(seconds % 60)
+    .toString()
+    .padStart(2, "0")}`;
+};

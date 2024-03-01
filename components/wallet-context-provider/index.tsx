@@ -15,9 +15,27 @@ const WalletProvider = dynamic(
 
 import { ConnectionProvider } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { Sdk } from "@honeycomb-protocol/edge-client";
+import createEdgeClient from "@honeycomb-protocol/edge-client/client";
+import { Client, cacheExchange, fetchExchange } from "@urql/core";
+import dotenv from "dotenv";
+dotenv.config();
 
 import { WalletContextProviderProps } from "@/interfaces";
 require("@solana/wallet-adapter-react-ui/styles.css");
+
+/**
+ * Get the client for the edge server
+ * @param {string} process.env.NEXT_PUBLIC_EDGE_CLIENT - The url of the rpc server
+ * @returns {Client} - The client for the edge server
+ */
+export const getEdgeClient = (url = process.env.NEXT_PUBLIC_EDGE_CLIENT!): Sdk =>
+  createEdgeClient(
+    new Client({
+      url: url,
+      exchanges: [cacheExchange, fetchExchange],
+    })
+  );
 
 const WalletContextProvider: FC<WalletContextProviderProps> = ({
   children,

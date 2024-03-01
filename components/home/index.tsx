@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionItem, Button } from "@nextui-org/react";
+import { Accordion, AccordionItem } from "@nextui-org/react";
 
 import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
@@ -42,6 +42,13 @@ const HomePage = () => {
 
     addHomeTabComponents();
     addInventoryTabComponents();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/main-bg.jpg')";
+    document.body.style.backgroundSize = "100vw 100vh";
+    document.body.style.backgroundRepeat = "no-repeat";
   }, []);
 
   return (

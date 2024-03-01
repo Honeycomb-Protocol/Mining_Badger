@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { Button } from "@nextui-org/react";
+import { Button, Tooltip } from "@nextui-org/react";
 
 import { CardProps } from "@/interfaces";
 import { getCubeImage, getStoneImage } from "@/lib/utils";
+import MineExpiry from "./mine-expiry";
 
 const NftCard: React.FC<CardProps> = ({
   buttonText,
@@ -23,22 +24,18 @@ const NftCard: React.FC<CardProps> = ({
   materials,
   experience,
   divStyle,
+  expIn,
+  btnClick,
 }) => {
+  const [timeLeft, setTimeLeft] = useState(expIn ? expIn - Date.now() : 0);
+
   const cardStyle = {
     width: imageWidth ? `${imageWidth}px` : "165px",
     height: imageHeight ? `${imageHeight}px` : "176px",
   };
 
   const materialsList = materials?.map((material, index) => (
-    <div
-      key={index}
-      className="flex items-center justify-center mr-2 
-
-  
-    
-
-    "
-    >
+    <div key={index} className="flex items-center justify-center mr-2">
       <Image
         src={
           creationFrom === "stone"
@@ -51,16 +48,18 @@ const NftCard: React.FC<CardProps> = ({
         width={20}
         height={20}
       />
-      <p className="text-xs text-gray-300 ml-1">x{material.quantity}</p>
+      <p className="text-xs text-gray-300 ml-1">x{material.amount}</p>
     </div>
   ));
 
   return (
     <div
-      onClick={() => console.log("clicked")}
-      className={`flex flex-col justify-center items-center cursor-pointer  ${divStyle}`}
+      className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}
       style={{ width: width ? width : "max-content" }}
     >
+      {expIn && (timeLeft > 0 || btnDisabled) && (
+        <MineExpiry exp={expIn} setTimeLeft={setTimeLeft} timeLeft={timeLeft} />
+      )}
       {experience && (
         <div className="flex justify-end text-xs text-white w-full pr-2 pt-2 items-start bg-black">
           <Image
@@ -116,12 +115,18 @@ const NftCard: React.FC<CardProps> = ({
       )}
 
       {buttonText && !lock && (
-        <Button
-          disabled={btnDisabled}
-          className={`h-7 w-[70%] bg-[#5CA16B] rounded-md text-sm tracking-wider text-white mt-2 ${btnStyle}`}
+        <Tooltip
+          content={expIn && timeLeft > 0 && "Freezing time is not over yet!"}
+          className={`bg-black`}
         >
-          {buttonText}
-        </Button>
+          <Button
+            disabled={timeLeft > 0 || btnDisabled}
+            className={`h-7 w-[70%] bg-[#5CA16B] rounded-md text-sm tracking-wider text-white mt-2 ${btnStyle}`}
+            onClick={btnClick}
+          >
+            {buttonText}
+          </Button>
+        </Tooltip>
       )}
     </div>
   );

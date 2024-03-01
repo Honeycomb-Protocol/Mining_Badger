@@ -15,6 +15,8 @@ const CheckConnection: React.FC<AuthenticationWrapperProps> = ({
   useEffect(() => {
     if (!connected) {
       router.push("/");
+    } else {
+      router.push("/home");
     }
   }, [connected, router]);
   return <>{children}</>;

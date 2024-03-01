@@ -44,11 +44,12 @@ export interface CustomTabsProps {
   styles?: string;
   initialActiveTab: string;
   isVertical?: boolean;
+  data?: any;
 }
 
 export interface materials {
   name: string;
-  quantity: number;
+  amount: number;
 }
 
 export interface CardProps {
@@ -69,6 +70,8 @@ export interface CardProps {
   materials?: materials[];
   experience?: number;
   divStyle?: string;
+  expIn?: number;
+  btnClick?: () => void;
 }
 
 export interface ModalProps {
