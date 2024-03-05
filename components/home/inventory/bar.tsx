@@ -3,9 +3,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useEffect, useState } from "react";
 
 import NftCard from "@/components/common/nft-card";
+import { API_URL } from "@/config/config";
 import Utils from "@/lib/utils";
 
-const AllTab = () => {
+const BarTab = () => {
   const { publicKey } = useWallet();
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,7 @@ const AllTab = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetchInventoryData("all", setLoading);
+      const res = await fetchInventoryData("bar", setLoading);
       setInventoryData(res);
     };
 
@@ -59,4 +60,4 @@ const AllTab = () => {
   );
 };
 
-export default AllTab;
+export default BarTab;

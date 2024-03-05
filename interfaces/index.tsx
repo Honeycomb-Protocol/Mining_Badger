@@ -98,3 +98,32 @@ export interface MineDataType {
     uri: string;
   };
 }
+
+export type CraftSymbols = {
+  [key: string]: string[];
+};
+
+export type Resource = {
+  addresses: Record<string, string>;
+  amount: number;
+  material: Array<{
+    name: string;
+    symbol: string;
+    uri: string;
+    amount: number;
+  }>;
+  level_req: number;
+  sell_price: number;
+  metadata: {
+    name: string;
+    symbol: string;
+    uri: string;
+  };
+};
+
+export type Dataset = {
+  success: boolean;
+  code: number;
+  message: string;
+  result: Resource[];
+};

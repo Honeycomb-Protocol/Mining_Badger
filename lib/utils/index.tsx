@@ -1,4 +1,5 @@
 import { useWallet } from "@solana/wallet-adapter-react";
+
 import { toast } from "react-toastify";
 
 import AllTab from "@/components/home/inventory/all";
@@ -14,8 +15,26 @@ import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
 import LevelsData from "../../data/level-data.json";
 import { useHoneycomb } from "@/hooks";
-import { LUT_ADDRESS } from "@/config/config";
+import { API_URL, LUT_ADDRESS } from "@/config/config";
+import { craftSymbols, inventorySymbols } from "./constants";
+import { Dataset, Resource } from "@/interfaces";
+import axios from "axios";
+import { useCallback } from "react";
+import OresTab from "@/components/home/inventory/ores";
+import BarTab from "@/components/home/inventory/bar";
 
+let cache = {
+  craftData: {},
+  inventoryData: {},
+};
+
+const setCache = (name: string, data: any) => {
+  cache[name] = data;
+};
+
+const getCache = (name: string) => {
+  return cache[name] || [];
+};
 const Utils = () => {
   const { publicKey } = useWallet();
   const { edgeClient, user, authToken } = useHoneycomb();
@@ -57,6 +76,11 @@ const Utils = () => {
     switch (component) {
       case "All":
         return <AllTab />;
+
+      case "Ores":
+        return <OresTab />;
+      case "Bar":
+        return <BarTab />;
     }
   };
 
@@ -85,6 +109,42 @@ const Utils = () => {
       }
     }
     return LevelsData[LevelsData.length - 1].level;
+  };
+
+  const organizeResourcesByCategories = (
+    resources: Dataset
+  ): Record<string, Resource[]> => {
+    const categorizedResources: Record<string, Resource[]> = {};
+
+    Object.keys(craftSymbols).forEach((categoryName) => {
+      const categorySymbols = craftSymbols[categoryName];
+
+      const matchedResources = resources.result.filter((resource) =>
+        categorySymbols.includes(resource.metadata.symbol)
+      );
+
+      categorizedResources[categoryName] = matchedResources;
+    });
+
+    return categorizedResources;
+  };
+
+  const organizeInventoryByCategories = (
+    resources: Dataset
+  ): Record<string, Resource[]> => {
+    const categorizedResources: Record<string, Resource[]> = {};
+
+    Object.keys(inventorySymbols).forEach((categoryName) => {
+      const categorySymbols = inventorySymbols[categoryName];
+
+      const matchedResources = resources.result.filter((resource) =>
+        categorySymbols.includes(resource.metadata.symbol)
+      );
+
+      categorizedResources[categoryName] = matchedResources;
+    });
+
+    return categorizedResources;
   };
 
   const createRecipe = async (
@@ -131,9 +191,74 @@ const Utils = () => {
       toast.success("Resource crafted successfully");
       setLoading({ name: "", status: false });
     } catch (error) {
-      console.log("error", error);
       toast.error(error.message || "Something went wrong");
       setLoading({ name: "", status: false });
+    }
+  };
+
+  //fetchCraftData that takes name and refetch boolean
+  const fetchCraftData = async (
+    name: string,
+    setDataLoading: (status: boolean) => void,
+    refetch = false
+  ) => {
+    try {
+      setDataLoading(true);
+
+      let data = getCache("craftData");
+
+      if (data?.result?.length > 0 && !refetch) {
+        setDataLoading(false);
+        return organizeResourcesByCategories(data)?.[name];
+      }
+
+      data = (await axios.get(`${API_URL}resources/craft`)).data;
+      setCache("craftData", data);
+      setDataLoading(false);
+      return organizeResourcesByCategories(data)?.[name];
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+      setDataLoading(false);
+    }
+  };
+
+  const fetchInventoryData = async (
+    name: string,
+    setDataLoading: (status: boolean) => void,
+    refetch = false
+  ) => {
+    try {
+      setDataLoading(true);
+
+      let data = getCache("inventoryData");
+
+      if (data?.result?.length > 0 && !refetch) {
+        setDataLoading(false);
+        if (name === "all") {
+          return data?.result;
+        }
+        return organizeInventoryByCategories(data)?.[name];
+      }
+
+      data = (await axios.get(`${API_URL}resources/inventory/${publicKey}`))
+        .data;
+      setCache("inventoryData", data);
+      setDataLoading(false);
+      if (name === "all") {
+        return data?.result;
+      }
+      return organizeInventoryByCategories(data)?.[name];
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+      setDataLoading(false);
     }
   };
 
@@ -144,6 +269,8 @@ const Utils = () => {
     formatTime,
     getLevelsFromExp,
     createRecipe,
+    fetchCraftData,
+    fetchInventoryData,
   };
 };
 
