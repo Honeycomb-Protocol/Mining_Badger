@@ -12,10 +12,11 @@
     "no-irregular-whitespace": "error",
     "no-unused-vars": "warn",
     "valid-typeof": "error",
-    "max-lines": ["warn", 450],
+    "max-lines": ["warn", 1050],
     "eqeqeq": "error",
     "no-var": "error",
     "prefer-arrow-callback": "warn",
-    "prefer-destructuring": "warn"
+    "prefer-destructuring": "warn",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

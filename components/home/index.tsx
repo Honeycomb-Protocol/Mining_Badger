@@ -6,13 +6,11 @@ import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
 import CustomTabs from "../common/custom-tabs";
 import { TabDataProps } from "@/interfaces";
-import {
-  renderHomeTabComponents,
-  renderInventoryTabComponents,
-} from "@/lib/utils";
+import Utils from "@/lib/utils";
 import LevelsRequiredModal from "../common/modal";
 
 const HomePage = () => {
+  const { renderHomeTabComponents, renderInventoryTabComponents } = Utils();
   const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
   const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
   const [visible, setVisible] = useState(false);

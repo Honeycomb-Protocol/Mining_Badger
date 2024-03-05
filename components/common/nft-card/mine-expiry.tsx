@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { formatTime } from "@/lib/utils";
+import Utils from "@/lib/utils";
 
 const MineExpiry = ({
   exp,
@@ -11,6 +11,7 @@ const MineExpiry = ({
   setTimeLeft: (time: number) => void;
   timeLeft: number;
 }) => {
+  const { formatTime } = Utils();
   const [time, setTime] = useState<number>(timeLeft);
   useEffect(() => {
     const interval = setInterval(() => {

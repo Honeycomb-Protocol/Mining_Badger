@@ -50,14 +50,17 @@ export interface CustomTabsProps {
 export interface materials {
   name: string;
   amount: number;
+  uri: string;
+  id: string;
+  symbol: string;
 }
 
 export interface CardProps {
   buttonText?: string;
-  level?: string;
+  level?: number;
   picture: string;
   name: string;
-  notification?: number;
+  amount?: number;
   imageHeight?: number;
   imageWidth?: number;
   width?: number;
@@ -66,15 +69,32 @@ export interface CardProps {
   btnDisabled?: boolean;
   lock?: boolean;
   lockStyle?: string;
-  creationFrom?: string;
   materials?: materials[];
   experience?: number;
   divStyle?: string;
   expIn?: number;
   btnClick?: () => void;
+  loading?: { name: string; status: boolean };
 }
 
 export interface ModalProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
+}
+
+export interface MineDataType {
+  addresses: {
+    mint: string;
+    recipe: string | null;
+    resource: string;
+    tree: string;
+  };
+  amount: number | null;
+  expire?: number;
+  level_req: number;
+  metadata: {
+    name: string;
+    symbol: string;
+    uri: string;
+  };
 }

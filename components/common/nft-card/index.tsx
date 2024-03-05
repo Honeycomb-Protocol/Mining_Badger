@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Button, Tooltip } from "@nextui-org/react";
+import { Button, Spinner, Tooltip } from "@nextui-org/react";
 
 import { CardProps } from "@/interfaces";
-import { getCubeImage, getStoneImage } from "@/lib/utils";
 import MineExpiry from "./mine-expiry";
 
 const NftCard: React.FC<CardProps> = ({
@@ -11,7 +10,7 @@ const NftCard: React.FC<CardProps> = ({
   level,
   picture,
   name,
-  notification,
+  amount,
   imageHeight,
   width,
   imageWidth,
@@ -20,12 +19,12 @@ const NftCard: React.FC<CardProps> = ({
   btnDisabled,
   lock,
   lockStyle,
-  creationFrom,
   materials,
   experience,
   divStyle,
   expIn,
   btnClick,
+  loading,
 }) => {
   const [timeLeft, setTimeLeft] = useState(expIn ? expIn - Date.now() : 0);
 
@@ -36,19 +35,8 @@ const NftCard: React.FC<CardProps> = ({
 
   const materialsList = materials?.map((material, index) => (
     <div key={index} className="flex items-center justify-center mr-2">
-      <Image
-        src={
-          creationFrom === "stone"
-            ? getStoneImage(material.name.split(" ")[0].toLocaleLowerCase()) ||
-              ""
-            : getCubeImage(material.name.split(" ")[0].toLocaleLowerCase()) ||
-              ""
-        }
-        alt={material.name}
-        width={20}
-        height={20}
-      />
-      <p className="text-xs text-gray-300 ml-1">x{material.amount}</p>
+      <Image src={material?.uri} alt={material?.name} width={20} height={20} />
+      <p className="text-xs text-gray-300 ml-1">x{material?.amount}</p>
     </div>
   ));
 
@@ -73,9 +61,9 @@ const NftCard: React.FC<CardProps> = ({
       )}
       <div className={`relative`} style={cardStyle}>
         <Image src={picture} alt={name} fill />
-        {notification && (
+        {amount && (
           <div className="absolute top-0 right-0 bg-red-700 rounded-full text-xs p-1">
-            {notification}
+            {amount}
           </div>
         )}
         {lock && (
@@ -106,7 +94,7 @@ const NftCard: React.FC<CardProps> = ({
         )}
       </div>
 
-      {materials && (
+      {materials && materials.length > 0 && (
         <div
           className={`flex flex-wrap justify-center max-w-${width} items-center w-full my-1`}
         >
@@ -124,7 +112,11 @@ const NftCard: React.FC<CardProps> = ({
             className={`h-7 w-[70%] bg-[#5CA16B] rounded-md text-sm tracking-wider text-white mt-2 ${btnStyle}`}
             onClick={btnClick}
           >
-            {buttonText}
+            {loading?.status && loading?.name === name ? (
+              <Spinner size="sm" color="white" />
+            ) : (
+              buttonText
+            )}
           </Button>
         </Tooltip>
       )}

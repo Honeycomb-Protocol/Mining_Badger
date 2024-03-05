@@ -1,19 +1,21 @@
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import CustomInput from "../common/input";
 import CustomTextArea from "../common/textarea";
 import Button from "../common/button";
-import { useRouter } from "next/router";
+import { useHoneycomb } from "@/hooks";
 
 const CreateProfilePage = () => {
-  const [profile, setProfile] = useState({
-    userName: "",
-    email: "",
-    bio: "",
-  });
-
   const router = useRouter();
+  const { createUserAndProfile } = useHoneycomb();
+  const [profile, setProfile] = useState({
+    username: "",
+    bio: "",
+    pfp: "https://www.arweave.net/qR_n1QvCaHqVTYFaTdnZoAXR6JBwWspDLtDNcLj2a5w?ext=png",
+  });
 
   useEffect(() => {
     document.body.style.backgroundImage =
@@ -71,9 +73,9 @@ const CreateProfilePage = () => {
         </div>
         <div className="w-[40%] flex flex-col justify-center gap-6 px-3">
           <CustomInput
-            name="name"
+            name="username"
             styles="h-12 placeholder-white"
-            value={profile.userName}
+            value={profile.username}
             placeholder="Enter Username"
             type="text"
             onChange={onInputChange}
@@ -92,7 +94,14 @@ const CreateProfilePage = () => {
             styles="h-12 text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={() => {
-              router.push("home");
+              createUserAndProfile(profile)
+                .then(() => {
+                  toast.success("Profile Created Successfully");
+                  router.push("/home");
+                })
+                .catch((err) => {
+                  toast.error(err.data?.message || "Something went wrong");
+                });
             }}
           />
         </div>
