@@ -26,6 +26,8 @@ import BarTab from "@/components/home/inventory/bar";
 let cache = {
   craftData: {},
   inventoryData: {},
+  refineData: {},
+  mindeData: {},
 };
 
 const setCache = (name: string, data: any) => {
@@ -245,6 +247,60 @@ const Utils = () => {
     }
   };
 
+  const fetchRefinedResoucesData = async (
+    setDataLoading: (status: boolean) => void,
+    refetch = false
+  ) => {
+    try {
+      setDataLoading(true);
+
+      let data = getCache("refineData");
+
+      if (data?.result?.length > 0 && !refetch) {
+        setDataLoading(false);
+        return data?.result;
+      }
+      data = (await axios.get(`${API_URL}resources/refine`)).data;
+      setCache("refineData", data);
+      setDataLoading(false);
+      return data?.result;
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+      setDataLoading(false);
+    }
+  };
+
+  const fetchMineResourcesData = async (
+    setDataLoading: (status: boolean) => void,
+    refetch = false
+  ) => {
+    try {
+      setDataLoading(true);
+
+      let data = getCache("mineData");
+
+      if (data?.result?.length > 0 && !refetch) {
+        setDataLoading(false);
+        return data?.result;
+      }
+      data = (await axios.get(`${API_URL}resources/ores/${publicKey}`)).data;
+      setCache("mineData", data);
+      setDataLoading(false);
+      return data?.result;
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+      setDataLoading(false);
+    }
+  };
+
   return {
     renderCraftTabComponents,
     renderHomeTabComponents,
@@ -254,6 +310,8 @@ const Utils = () => {
     createRecipe,
     fetchCraftData,
     fetchInventoryData,
+    fetchRefinedResoucesData,
+    fetchMineResourcesData,
   };
 };
 

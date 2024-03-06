@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { toast } from "react-toastify";
 import { Spinner } from "@nextui-org/react";
@@ -11,7 +11,7 @@ import Utils from "@/lib/utils";
 import { API_URL } from "@/config/config";
 
 const MineTab = () => {
-  const { getLevelsFromExp } = Utils();
+  const { getLevelsFromExp, fetchMineResourcesData } = Utils();
   const { publicKey } = useWallet();
   const [mineData, setMineData] = useState([]);
   const { user } = useHoneycomb();
@@ -21,40 +21,25 @@ const MineTab = () => {
     status: false,
   });
 
-  const FetchResources = useCallback(async () => {
-    setDataLoader(true);
-    await axios
-      .get(`${API_URL}resources/ores/${publicKey}`)
-      .then((result) => {
-        setDataLoader(false);
-        setMineData(result?.data?.result);
-      })
-      .catch((err) => {
-        setDataLoader(false);
-        toast.error(err.data?.message || "Something went wrong");
-      });
-  }, [publicKey]);
-
   useEffect(() => {
-    if (!publicKey) return;
-    FetchResources();
-  }, [FetchResources, publicKey]);
+    const fetchData = async () => {
+      const res = await fetchMineResourcesData(setDataLoader);
+      setMineData(res);
+    };
+    fetchData();
+  }, []);
 
   const mineResource = async (resourceId: string, name: string) => {
     try {
       setLoading({ name: name, status: true });
-      const result = await axios.post(
-        `${API_URL}faucet/mine`,
-        {
-          user: {
-            id: user.id,
-            wallet: publicKey?.toString(),
-          },
-          resource: resourceId,
-        }
-      );
-
-      await FetchResources();
+      const result = await axios.post(`${API_URL}faucet/mine`, {
+        user: {
+          id: user.id,
+          wallet: publicKey?.toString(),
+        },
+        resource: resourceId,
+      });
+      await fetchMineResourcesData(setDataLoader, true);
       setLoading({ name: "", status: false });
       toast.success(result.data.message || "Resource mined successfully");
     } catch (err: any) {
