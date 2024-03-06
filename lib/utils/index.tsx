@@ -19,7 +19,7 @@ import { API_URL, LUT_ADDRESS } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
 import { Dataset, Resource } from "@/interfaces";
 import axios from "axios";
-import { useCallback } from "react";
+
 import OresTab from "@/components/home/inventory/ores";
 import BarTab from "@/components/home/inventory/bar";
 
@@ -111,31 +111,14 @@ const Utils = () => {
     return LevelsData[LevelsData.length - 1].level;
   };
 
-  const organizeResourcesByCategories = (
-    resources: Dataset
+  const organizeDataByCategories = (
+    resources: Dataset,
+    symbols: Record<string, string[]>
   ): Record<string, Resource[]> => {
     const categorizedResources: Record<string, Resource[]> = {};
 
-    Object.keys(craftSymbols).forEach((categoryName) => {
-      const categorySymbols = craftSymbols[categoryName];
-
-      const matchedResources = resources.result.filter((resource) =>
-        categorySymbols.includes(resource.metadata.symbol)
-      );
-
-      categorizedResources[categoryName] = matchedResources;
-    });
-
-    return categorizedResources;
-  };
-
-  const organizeInventoryByCategories = (
-    resources: Dataset
-  ): Record<string, Resource[]> => {
-    const categorizedResources: Record<string, Resource[]> = {};
-
-    Object.keys(inventorySymbols).forEach((categoryName) => {
-      const categorySymbols = inventorySymbols[categoryName];
+    Object.keys(symbols).forEach((categoryName) => {
+      const categorySymbols = symbols[categoryName];
 
       const matchedResources = resources.result.filter((resource) =>
         categorySymbols.includes(resource.metadata.symbol)
@@ -209,13 +192,13 @@ const Utils = () => {
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
-        return organizeResourcesByCategories(data)?.[name];
+        return organizeDataByCategories(data, craftSymbols)?.[name];
       }
 
       data = (await axios.get(`${API_URL}resources/craft`)).data;
       setCache("craftData", data);
       setDataLoading(false);
-      return organizeResourcesByCategories(data)?.[name];
+      return organizeDataByCategories(data, craftSymbols)?.[name];
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
@@ -241,7 +224,7 @@ const Utils = () => {
         if (name === "all") {
           return data?.result;
         }
-        return organizeInventoryByCategories(data)?.[name];
+        return organizeDataByCategories(data, inventorySymbols)?.[name];
       }
 
       data = (await axios.get(`${API_URL}resources/inventory/${publicKey}`))
@@ -251,7 +234,7 @@ const Utils = () => {
       if (name === "all") {
         return data?.result;
       }
-      return organizeInventoryByCategories(data)?.[name];
+      return organizeDataByCategories(data, inventorySymbols)?.[name];
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
