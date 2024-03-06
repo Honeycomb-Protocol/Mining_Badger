@@ -20,6 +20,7 @@ const RefineTab = () => {
   });
 
   useEffect(() => {
+    if (!publicKey) return;
     const fetchData = async () => {
       const res = await fetchRefinedResoucesData(setDataLoading);
       setRefineData(res);

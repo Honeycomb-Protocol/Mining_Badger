@@ -22,6 +22,7 @@ const MineTab = () => {
   });
 
   useEffect(() => {
+    if (!publicKey) return;
     const fetchData = async () => {
       const res = await fetchMineResourcesData(setDataLoader);
       setMineData(res);
