@@ -9,7 +9,7 @@ import Utils from "@/lib/utils";
 import { API_URL } from "@/config/config";
 
 const RefineTab = () => {
-  const { getLevelsFromExp } = Utils();
+  const { getLevelsFromExp, fetchRefinedResoucesData } = Utils();
   const { publicKey } = useWallet();
   const { createRecipe } = Utils();
   const [refineData, setRefineData] = useState([]);
@@ -19,24 +19,13 @@ const RefineTab = () => {
     status: false,
   });
 
-  const FetchInventory = useCallback(async () => {
-    setDataLoading(true);
-    await axios
-      .get(`${API_URL}resources/refine`)
-      .then((result) => {
-        setRefineData(result?.data?.result);
-        setDataLoading(false);
-      })
-      .catch((err) => {
-        setDataLoading(false);
-        toast.error(err.data?.message || "Something went wrong");
-      });
-  }, [publicKey]);
-
   useEffect(() => {
-    if (!publicKey) return;
-    FetchInventory();
-  }, [FetchInventory, publicKey]);
+    const fetchData = async () => {
+      const res = await fetchRefinedResoucesData(setDataLoading);
+      setRefineData(res);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="py-10 grid grid-cols-4 gap-8">
@@ -64,7 +53,9 @@ const RefineTab = () => {
               )
             }
             loading={loading}
-            btnDisabled={loading.status && loading.name === refinement?.metadata?.name}
+            btnDisabled={
+              loading.status && loading.name === refinement?.metadata?.name
+            }
           />
         ))
       )}

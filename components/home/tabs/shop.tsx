@@ -11,7 +11,7 @@ const ShopTab = () => {
           key={index}
           name={item.name}
           picture={item.picture}
-          level={item.level.toString()}
+          level={Number(item.level)}
           lock={item.lock}
           buttonText={item.name?.includes("Iron Pickaxe") ? "Buy" : "Claimed"}
           imageWidth={150}
