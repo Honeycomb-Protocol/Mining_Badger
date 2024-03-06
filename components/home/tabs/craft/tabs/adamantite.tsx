@@ -20,6 +20,7 @@ const BronzeTab = () => {
   });
 
   useEffect(() => {
+    if (!publicKey) return;
     const fetchData = async () => {
       const res = await fetchCraftData("adamantite", setDataLoading);
       setCraftData(res);
@@ -49,11 +50,11 @@ const BronzeTab = () => {
               materials={craftment?.material}
               experience={45}
               btnClick={async () => {
-                // await createRecipe(
-                //   craftment?.addresses?.recipe,
-                //   craftment?.metadata?.name,
-                //   setLoading
-                // );
+                await createRecipe(
+                  craftment?.addresses?.recipe,
+                  craftment?.metadata?.name,
+                  setLoading
+                );
                 fetchCraftData("bronze", setDataLoading, true);
               }}
               loading={loading}
