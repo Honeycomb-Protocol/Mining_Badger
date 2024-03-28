@@ -1,4 +1,3 @@
-import { Honeycomb } from "@honeycomb-protocol/hive-control";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Client, cacheExchange, fetchExchange } from "@urql/core";
 import createEdgeClient, { User } from "@honeycomb-protocol/edge-client/client";
@@ -6,33 +5,27 @@ import createEdgeClient, { User } from "@honeycomb-protocol/edge-client/client";
 import { EDGE_CLIENT, connection } from "../../config/config.js";
 import * as actions from "../actions";
 import { HoneycombState } from "../types.js";
+import { WalletContextState } from "@solana/wallet-adapter-react";
 
 const initialState: HoneycombState = {
-  honeycomb: new Honeycomb(connection, {
-    env: process.env.NEXT_PUBLIC_HPL_ENV || "main",
-    confirmOptions: {
-      commitment: "processed",
-      preflightCommitment: "processed",
-    },
-  }),
+  wallet: null,
   edgeClient: createEdgeClient(
     new Client({
       url: EDGE_CLIENT,
-      exchanges: [cacheExchange, fetchExchange],
+      exchanges: [fetchExchange],
     })
   ),
-  projects: {},
-  openWallet: false,
-  loadingModal: false,
-  isWalletUserFound: false,
   user: null,
+  profile: null,
   loaders: {
-    honeycomb: true,
-    identity: false,
-    projects: false,
+    wallet: false,
     fetchUser: false,
+    fetchProfile: false,
     createUser: false,
+    createProfile: false,
+    updateProfile: false,
     loadIdentityDeps: false,
+    fetchUserNfts: false,
   },
 };
 
@@ -40,56 +33,28 @@ export const slice = createSlice({
   name: "honeycomb",
   initialState,
   reducers: {
-    setWallet: (
-      state,
-      action: PayloadAction<{
-        openWallet: boolean;
-        isWalletUserFound?: boolean;
-      }>
-    ) => {
-      state.openWallet = action.payload.openWallet;
-      state.isWalletUserFound = action.payload.isWalletUserFound || false;
-    },
-    setLoadingModal: (state, action: PayloadAction<boolean>) => {
-      state.loadingModal = action.payload;
-    },
     setUser: (state, action: PayloadAction<User | null>) => {
       state.user = action.payload;
     },
     clearUser: (state) => {
       state.user = null;
     },
+    resetStates: (state) => {
+      state.user = null;
+      state.profile = null;
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(actions.honeycomb.initHoneycomb.pending, (state) => {
-      state.loaders = { ...state.loaders, honeycomb: true };
-      state.loaders = { ...state.loaders, projects: true };
+    builder.addCase(actions.honeycomb.setWallet.pending, (state) => {
+      state.loaders = { ...state.loaders, wallet: true };
     });
-    builder.addCase(
-      actions.honeycomb.initHoneycomb.fulfilled,
-      (state, action) => {
-        state.honeycomb = action.payload;
-        state.projects = action.payload._projects;
-        state.loaders = { ...state.loaders, honeycomb: false };
-        state.loaders = { ...state.loaders, projects: false };
-      }
-    );
-    builder.addCase(actions.honeycomb.initHoneycomb.rejected, (state) => {
-      state.loaders = { ...state.loaders, honeycomb: false };
-      state.loaders = { ...state.loaders, projects: false };
+    builder.addCase(actions.honeycomb.setWallet.fulfilled, (state, action) => {
+      state.loaders = { ...state.loaders, wallet: false };
+      // @ts-ignore
+      state.wallet = action.payload;
     });
-
-    builder.addCase(actions.honeycomb.setIdentity.pending, (state) => {
-      state.loaders = { ...state.loaders, identity: true };
-    });
-    builder.addCase(
-      actions.honeycomb.setIdentity.fulfilled,
-      (state, action) => {
-        state.loaders = { ...state.loaders, identity: false };
-      }
-    );
-    builder.addCase(actions.honeycomb.setIdentity.rejected, (state) => {
-      state.loaders = { ...state.loaders, identity: false };
+    builder.addCase(actions.honeycomb.setWallet.rejected, (state) => {
+      state.loaders = { ...state.loaders, wallet: false };
     });
 
     builder.addCase(actions.honeycomb.loadIdentityDeps.pending, (state) => {
@@ -109,11 +74,27 @@ export const slice = createSlice({
       state.loaders = { ...state.loaders, fetchUser: true };
     });
     builder.addCase(actions.honeycomb.fetchUser.fulfilled, (state, action) => {
+      console.log("irun", action.payload);
       state.user = action.payload;
       state.loaders = { ...state.loaders, fetchUser: false };
     });
-    builder.addCase(actions.honeycomb.fetchUser.rejected, (state) => {
+    builder.addCase(actions.honeycomb.fetchUser.rejected, (state, action) => {
+      state.user = null;
       state.loaders = { ...state.loaders, fetchUser: false };
+    });
+    builder.addCase(actions.honeycomb.fetchProfile.pending, (state) => {
+      state.loaders = { ...state.loaders, fetchProfile: true };
+    });
+    builder.addCase(
+      actions.honeycomb.fetchProfile.fulfilled,
+      (state, action) => {
+        state.profile = action.payload;
+        state.loaders = { ...state.loaders, fetchProfile: false };
+      }
+    );
+    builder.addCase(actions.honeycomb.fetchProfile.rejected, (state) => {
+      state.profile = null;
+      state.loaders = { ...state.loaders, fetchProfile: false };
     });
 
     builder.addCase(actions.honeycomb.createUserAndProfile.pending, (state) => {
@@ -131,6 +112,40 @@ export const slice = createSlice({
         state.loaders = { ...state.loaders, createUser: false };
       }
     );
+
+    builder.addCase(actions.honeycomb.createUser.pending, (state) => {
+      state.loaders = { ...state.loaders, createUser: true };
+    });
+    builder.addCase(actions.honeycomb.createUser.fulfilled, (state, action) => {
+      state.loaders = { ...state.loaders, createUser: false };
+    });
+    builder.addCase(actions.honeycomb.createUser.rejected, (state) => {
+      state.loaders = { ...state.loaders, createUser: false };
+    });
+    builder.addCase(actions.honeycomb.createProfile.pending, (state) => {
+      state.loaders = { ...state.loaders, createProfile: true };
+    });
+    builder.addCase(
+      actions.honeycomb.createProfile.fulfilled,
+      (state, action) => {
+        state.loaders = { ...state.loaders, createProfile: false };
+      }
+    );
+    builder.addCase(actions.honeycomb.createProfile.rejected, (state) => {
+      state.loaders = { ...state.loaders, createProfile: false };
+    });
+    builder.addCase(actions.honeycomb.updateProfile.pending, (state) => {
+      state.loaders = { ...state.loaders, updateProfile: true };
+    });
+    builder.addCase(
+      actions.honeycomb.updateProfile.fulfilled,
+      (state, action) => {
+        state.loaders = { ...state.loaders, updateProfile: false };
+      }
+    );
+    builder.addCase(actions.honeycomb.updateProfile.rejected, (state) => {
+      state.loaders = { ...state.loaders, updateProfile: false };
+    });
   },
 });
 

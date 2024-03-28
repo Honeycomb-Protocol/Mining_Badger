@@ -10,7 +10,7 @@ import { useHoneycomb } from "@/hooks";
 
 const CreateProfilePage = () => {
   const router = useRouter();
-  const { createUserAndProfile } = useHoneycomb();
+  const { createUserAndProfile, user, createProfile } = useHoneycomb();
   const [profile, setProfile] = useState({
     username: "",
     bio: "",
@@ -93,15 +93,16 @@ const CreateProfilePage = () => {
             loading={false}
             styles="h-12 text-white mt-5 rounded-2xl"
             btnText="Create Account"
-            onClick={() => {
-              createUserAndProfile(profile)
-                .then(() => {
-                  toast.success("Profile Created Successfully");
-                  router.push("/home");
-                })
-                .catch((err) => {
-                  toast.error(err.data?.message || "Something went wrong");
+            onClick={async () => {
+              if (user) {
+                await createProfile({
+                  name: profile.username,
+                  bio: profile.bio,
+                  pfp: profile.pfp,
                 });
+                return;
+              }
+              await createUserAndProfile(profile);
             }}
           />
         </div>

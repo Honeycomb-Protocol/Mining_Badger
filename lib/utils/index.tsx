@@ -135,44 +135,58 @@ const Utils = () => {
   const createRecipe = async (
     recipe: string,
     name: string,
-    setLoading: ({ name, status }) => void
+    // eslint-disable-next-line no-unused-vars
+    setLoading: (_) => void
   ) => {
     try {
+      if (!edgeClient || !user || !authToken)
+        throw new Error("Unable to find edgeClient or user or authToken");
+
       setLoading({ name: name, status: true });
 
       const { createCraftRecipeTransaction: txResponse } =
         await edgeClient.CreateCraftRecipeTransaction({
           recipe: recipe,
           wallet: publicKey.toString(),
-          authority: user.shadow.toString(),
+          authority: user.wallets.shadow,
           lutAddress: LUT_ADDRESS,
         });
 
-      const {
-        signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
-      } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
-        {
-          txs: [txResponse.transaction],
-          blockhash: txResponse!.blockhash,
-          lastValidBlockHeight: txResponse!.lastValidBlockHeight,
-        },
-        {
-          fetchOptions: {
-            headers: {
-              authorization: `Bearer ${authToken}`,
+      for (const tx of txResponse.transactions) {
+        const {
+          signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
+          // eslint-disable-next-line no-await-in-loop
+        } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
+          {
+            txs: tx,
+            blockhash: txResponse!.blockhash,
+            lastValidBlockHeight: txResponse!.lastValidBlockHeight,
+            options: {
+              commitment: "confirmed",
+              skipPreflight: true,
             },
           },
-        }
-      );
-      await sendBulkTransactions.forEach((txResponse) => {
-        if (txResponse.status !== "Success") {
-          // console.log(
-          //   "createMintResourceTransaction",
-          //   txResponse.status,
-          //   txResponse.error
-          // );
-        }
-      });
+          {
+            fetchOptions: {
+              headers: {
+                authorization: `Bearer ${authToken}`,
+              },
+            },
+          }
+        );
+
+        sendBulkTransactions.forEach((txResponse) => {
+          if (txResponse.status !== "Success") {
+            console.log(
+              "createMintResourceTransaction",
+              txResponse.status,
+              txResponse.error
+            );
+          }
+
+          console.log("createMintResourceTransaction", txResponse.signature);
+        });
+      }
       toast.success("Resource crafted successfully");
       setLoading({ name: "", status: false });
     } catch (error) {

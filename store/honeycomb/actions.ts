@@ -1,107 +1,25 @@
-import {
-  Honeycomb,
-  HoneycombFile,
-  HoneycombProject,
-  IdentityClient,
-  IdentityModule,
-  HoneycombUser,
-  guestIdentity,
-  toHoneycombFile,
-  walletIdentity,
-  isWallet,
-  ForceScenario,
-} from "@honeycomb-protocol/hive-control";
-import base58 from "bs58";
+import { auth } from "./../actions/index";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { PublicKey } from "@solana/web3.js";
 import { toast } from "react-toastify";
 import { WalletContextState } from "@solana/wallet-adapter-react";
-import { User } from "@honeycomb-protocol/edge-client";
-
+import {
+  User,
+  Profile,
+  SendBulkTransactionsQuery,
+} from "@honeycomb-protocol/edge-client";
 import type { AsyncActions } from "../actions/types.js";
-import type { HoneycombState } from "../types.js";
+import type { AuthState, HoneycombState } from "../types.js";
 import { HPL_PROJECT } from "../../config/config.js";
+import base58 from "bs58";
+
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 const actionFactory = (actions: AsyncActions) => {
-  const initHoneycomb = createAsyncThunk<Honeycomb, void>(
-    "honeycomb/init",
-    async (_, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
-      try {
-        const { honeycomb } = (getState() as { honeycomb: HoneycombState })
-          .honeycomb;
-
-        // @ts-ignore
-        window.honeycomb = honeycomb;
-        // @ts-ignore
-        honeycomb.use(
-          await HoneycombProject.fromAddress(honeycomb, HPL_PROJECT)
-        );
-
-        await dispatch(loadIdentityDeps("init"));
-
-        return fulfillWithValue(honeycomb);
-      } catch (error) {
-        // Handle any errors if necessary
-        console.error("Error initializing honeycomb:", error);
-        throw rejectWithValue(error);
-      }
-    }
-  );
-  const loadIdentityDeps = createAsyncThunk<boolean, "init" | "switch">(
-    "honeycomb/loadIdentityDeps",
-    async (calledFrom, { getState, dispatch }) => {
-      const { honeycomb, loaders } = (
-        getState() as { honeycomb: HoneycombState }
-      ).honeycomb;
-
-      let identity = honeycomb.identity() as IdentityClient;
-      if ((loaders.honeycomb && calledFrom !== "init") || identity.isGuest) {
-        return false;
-      }
-
-      await dispatch(authenticate(honeycomb.identity()));
-      return true;
-    }
-  );
-
-  const setIdentity = createAsyncThunk<IdentityClient, WalletContextState>(
+  const setWallet = createAsyncThunk<WalletContextState, WalletContextState>(
     "honeycomb/identity",
-    async (
-      wallet,
-      { rejectWithValue, fulfillWithValue, getState, dispatch }
-    ) => {
-      const isGuest = !isWallet(wallet);
-      const { honeycomb, loaders } = (
-        getState() as { honeycomb: HoneycombState }
-      ).honeycomb;
-      if (
-        (isGuest && honeycomb.identity().isGuest) ||
-        loaders.loadIdentityDeps
-      ) {
-        return fulfillWithValue(honeycomb.identity() as IdentityClient);
-      }
-      if (honeycomb.identity().address.equals(wallet.publicKey)) {
-        return fulfillWithValue(honeycomb.identity() as IdentityClient);
-      }
+    async (wallet, { rejectWithValue, fulfillWithValue, getState }) => {
       try {
-        const identityConfig: any = !isGuest && {
-          publicKey: wallet.publicKey,
-          signMessage: (msg) => {
-            return wallet.signMessage(msg);
-          },
-          signTransaction: wallet.signTransaction as any,
-          signAllTransactions: wallet.signAllTransactions as any,
-        };
-        const identity = !isGuest
-          ? walletIdentity(identityConfig)
-          : guestIdentity();
-        honeycomb.use(identity);
-
-        if (!isGuest) {
-          await dispatch(loadIdentityDeps("switch"));
-        }
-
-        return fulfillWithValue(identity);
+        return fulfillWithValue(wallet);
       } catch (error) {
         // Handle any errors that may occur during wallet connection
         console.error("Error injecting wallet to honeycomb:", error);
@@ -110,59 +28,111 @@ const actionFactory = (actions: AsyncActions) => {
     }
   );
 
+  const loadIdentityDeps = createAsyncThunk<boolean>(
+    "honeycomb/loadIdentityDeps",
+    async (_, { getState, dispatch }) => {
+      console.log("this");
+      const { wallet } = (getState() as { honeycomb: HoneycombState })
+        .honeycomb;
+      console.log("loadIdentityDeps", wallet.publicKey);
+
+      if (!wallet.publicKey) return false;
+
+      //todo: add fetching functions here
+      await dispatch(fetchUser());
+      await dispatch(fetchProfile());
+      await dispatch(authenticate());
+      return true;
+    }
+  );
+
   const fetchUser = createAsyncThunk<User>(
     "honeycomb/fetchUser",
     async (_, { fulfillWithValue, rejectWithValue, dispatch, getState }) => {
-      const { honeycomb, edgeClient } = (
+      const { wallet, edgeClient } = (
         getState() as { honeycomb: HoneycombState }
       ).honeycomb;
-      const identity = honeycomb.identity() as IdentityClient;
       try {
+        console.log("fetchUser", wallet.publicKey.toString());
         const user = await edgeClient
-          .fetchUsers({
-            wallets: [identity.address.toString()],
+          .findUsers({
+            wallets: [wallet.publicKey.toString()],
           })
           .then((data) => {
             if (!data || !data.user.length) {
-              dispatch(actions.auth.logout(true));
-              return rejectWithValue("User not found");
+              throw new Error("User not Found");
             }
             return data.user[0];
           })
           .catch((e) => {
             console.error("Error fetching user:", e);
-            throw rejectWithValue(e);
+            throw new Error("User not Found");
           });
 
-        return fulfillWithValue(user);
+        return fulfillWithValue(user) as User;
       } catch (error) {
         console.error("Error fetching user:", error);
+        return rejectWithValue(error);
+      }
+    }
+  );
+
+  const fetchProfile = createAsyncThunk<Profile>(
+    "honeycomb/fetchProfile",
+    async (_, { fulfillWithValue, rejectWithValue, dispatch, getState }) => {
+      const { wallet, edgeClient, user } = (
+        getState() as { honeycomb: HoneycombState }
+      ).honeycomb;
+      if (!user) return rejectWithValue("User not found");
+      try {
+        const profile = await edgeClient
+          .findProfiles({
+            userIds: [user.id],
+          })
+          .then((data) => {
+            if (!data || !data.profile.length) {
+              throw new Error("Profile not Found");
+            }
+            return data.profile[0];
+          })
+          .catch((e) => {
+            console.error("Error fetching Profile:", e);
+            throw new Error("Profile not Found");
+          });
+
+        return fulfillWithValue(profile) as Profile;
+      } catch (error) {
+        console.error("Error fetching Profile:", error);
         throw rejectWithValue(error);
       }
     }
   );
 
   const createUserAndProfile = createAsyncThunk<
-    HoneycombUser,
+    SendBulkTransactionsQuery,
     { username: string; bio: string; pfp: string | File }
   >(
     "honeycomb/createUserAndProfile",
-    async (args, { rejectWithValue, fulfillWithValue, getState }) => {
-      const { honeycomb, edgeClient } = (
+    async (args, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
+      console.log("createUserAndProfile", args);
+
+      const { wallet, edgeClient } = (
         getState() as { honeycomb: HoneycombState }
       ).honeycomb;
-      const identity = honeycomb.identity() as IdentityClient;
+
       try {
-        if (!identity) {
+        if (!wallet.publicKey) {
           return rejectWithValue("No identity found");
         }
 
-        let pfp: string | HoneycombFile = args.pfp as any;
+        let pfp: string = args.pfp as any;
+
+        // let pfp: string | HoneycombFile = args.pfp as any;
         let uploading = false;
-        if (pfp && pfp instanceof File) {
-          pfp = toHoneycombFile(await pfp.arrayBuffer(), "pfp.png");
-          uploading = true;
-        }
+        // if (pfp && pfp instanceof File) {
+        //   pfp = toHoneycombFile(await pfp.arrayBuffer(), "pfp.png");
+        //   uploading = true;
+        // }
 
         const toastId = toast.loading(
           uploading
@@ -171,19 +141,204 @@ const actionFactory = (actions: AsyncActions) => {
           { progress: 0 }
         );
 
-        const [userAddress] = honeycomb.pda().hiveControl().user(args.username);
-
-        const { shadowSignerKey } = await edgeClient.getShadowSignerKey({
-          user: userAddress.toString(),
+        const data = await edgeClient.createNewUserWithProfileTransaction({
+          wallet: wallet.publicKey.toString(),
+          userInfo: {
+            bio: args.bio,
+            username: args.username,
+            pfp,
+            name: args.username,
+          },
+          project: HPL_PROJECT.toString(),
+          profileInfo: {
+            bio: args.bio,
+            pfp,
+            name: args.username,
+          },
         });
 
-        const profilePromise = honeycomb.profiles().newUser({
-          shadowSigner: new PublicKey(shadowSignerKey),
-          username: args.username,
-          name: args.username,
-          bio: args.bio,
-          pfp,
-          createProfileFor: honeycomb.project(),
+        const transaction = data.createNewUserWithProfileTransaction;
+
+        const user = await edgeClient
+          .sendBulkTransactions({
+            txs: [transaction.transaction],
+            blockhash: transaction.blockhash,
+            lastValidBlockHeight: transaction.lastValidBlockHeight,
+            options: {
+              commitment: "confirmed",
+              skipPreflight: true,
+            },
+          })
+          .then((res) => {
+            toast.update(toastId, {
+              autoClose: 5000,
+              type: "success",
+              render: "Profile Creation Successful!!",
+              progress: 1,
+            });
+            return res;
+          })
+          .catch((e) => {
+            console.error(
+              "an unexpected error occured while creating User Profile",
+              e
+            );
+            toast.update(toastId, {
+              autoClose: 5000,
+              type: "error",
+              render: "an unexpected error occured while creating User Profile",
+              progress: 1,
+            });
+            throw rejectWithValue(e);
+          });
+
+        await wait(1000);
+        await dispatch(fetchUser());
+        await dispatch(fetchProfile());
+        await dispatch(authenticate());
+
+        return fulfillWithValue(user);
+      } catch (error) {
+        console.error("Error Uploading file during Profile Creation:", error);
+        throw rejectWithValue(error);
+      }
+    }
+  );
+
+  const updateProfile = createAsyncThunk<
+    SendBulkTransactionsQuery,
+    { username?: string; bio?: string; pfp?: string | File }
+  >(
+    "honeycomb/updateProfile",
+    async (args, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
+      let toastId;
+
+      const { wallet, edgeClient, profile } = (
+        getState() as { honeycomb: HoneycombState }
+      ).honeycomb;
+
+      try {
+        if (!profile) throw rejectWithValue("No profile found");
+        let profileInfo = {};
+
+        let pfp: string = args.pfp as any;
+
+        // let pfp: string | HoneycombFile = args.pfp as any;
+        let uploading = false;
+        // if (pfp && pfp instanceof File) {
+        //   pfp = toHoneycombFile(await pfp.arrayBuffer(), "pfp.png");
+        //   uploading = true;
+        // }
+
+        profileInfo = {
+          bio: args.bio || profile.info.bio,
+          name: args.username || profile.info.name,
+          pfp: pfp || profile.info.pfp,
+        };
+
+        toastId = toast.loading(
+          uploading
+            ? "Uploading Pfp & Updating User Profile..."
+            : "Updating User Profile...",
+          { progress: 0 }
+        );
+
+        const data = await edgeClient.createUpdateProfileTransaction({
+          profileId: profile.id,
+          info: profileInfo,
+        });
+
+        const transaction = data.createUpdateProfileTransaction;
+
+        const profileRes = await edgeClient
+          .sendBulkTransactions({
+            txs: [transaction.transaction],
+            blockhash: transaction.blockhash,
+            lastValidBlockHeight: transaction.lastValidBlockHeight,
+            options: {
+              commitment: "confirmed",
+              skipPreflight: true,
+            },
+          })
+          .then(async (res) => {
+            toast.update(toastId, {
+              autoClose: 5000,
+              type: "success",
+              render: "Profile Creation Successful!!",
+              progress: 1,
+            });
+            return res;
+          })
+          .catch((e) => {
+            console.error(
+              "an unexpected error occured while creating User Profile",
+              e
+            );
+            toast.update(toastId, {
+              autoClose: 5000,
+              type: "error",
+              render: "an unexpected error occured while creating User Profile",
+              progress: 1,
+            });
+            throw rejectWithValue(e);
+          });
+        await wait(500);
+        await dispatch(fetchProfile());
+        return fulfillWithValue(profileRes);
+      } catch (error) {
+        console.error("Error Uploading file during Profile Creation:", error);
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "error",
+          render: "an unexpected error occured while creating User Profile",
+          progress: 1,
+        });
+        return rejectWithValue(error);
+      }
+    }
+  );
+
+  const createUser = createAsyncThunk<
+    User,
+    { username: string; bio: string; pfp: string | File }
+  >(
+    "honeycomb/createUser",
+    async (args, { rejectWithValue, fulfillWithValue, getState }) => {
+      console.log("createUser", args);
+
+      const { wallet, edgeClient } = (
+        getState() as { honeycomb: HoneycombState }
+      ).honeycomb;
+
+      try {
+        if (!wallet.publicKey) {
+          return rejectWithValue("No identity found");
+        }
+
+        let pfp: string = args.pfp as any;
+
+        // let pfp: string | HoneycombFile = args.pfp as any;
+        let uploading = false;
+        // if (pfp && pfp instanceof File) {
+        //   pfp = toHoneycombFile(await pfp.arrayBuffer(), "pfp.png");
+        //   uploading = true;
+        // }
+
+        const toastId = toast.loading(
+          uploading
+            ? "Uploading Pfp & Creating User Profile..."
+            : "Creating User Profile...",
+          { progress: 0 }
+        );
+
+        const profilePromise = edgeClient.createNewUserTransaction({
+          wallet: wallet.publicKey.toString(),
+          info: {
+            bio: args.bio,
+            username: args.username,
+            pfp,
+            name: args.username,
+          },
         });
 
         const user = await profilePromise
@@ -210,7 +365,7 @@ const actionFactory = (actions: AsyncActions) => {
             throw rejectWithValue(e);
           });
 
-        return fulfillWithValue(user);
+        return fulfillWithValue(user as any as User);
       } catch (error) {
         console.error("Error Uploading file during Profile Creation:", error);
         throw rejectWithValue(error);
@@ -218,79 +373,132 @@ const actionFactory = (actions: AsyncActions) => {
     }
   );
 
-  const authenticate = createAsyncThunk<
-    { token: string; user: User },
-    IdentityModule | void
+  const createProfile = createAsyncThunk<
+    SendBulkTransactionsQuery,
+    { name: string; bio: string; pfp: string | File }
   >(
-    "honeycomb/authenticate",
-    async (
-      ident,
-      { rejectWithValue, fulfillWithValue, getState, dispatch }
-    ) => {
-      // alert("honeycomb/authenticate")
-      const { honeycomb, edgeClient } = (
+    "honeycomb/createProfile",
+    async (args, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
+      const { wallet, edgeClient } = (
         getState() as { honeycomb: HoneycombState }
       ).honeycomb;
-      const identity = ident || (honeycomb.identity() as IdentityModule);
-
-      //todo : need to verify the token expiry here
-
-      // const {
-      //   auth: { authToken },
-      //   honeycomb: { user },
-      // } = getState() as { auth: AuthState; honeycomb: HoneycombState };
-
-      // if (authToken) {
-      //   let fetchedUser: any = user;
-      //   if (!fetchedUser) {
-      //     fetchedUser = await dispatch(fetchUser());
-      //   }
-
-      //   return fulfillWithValue({
-      //     token: authToken,
-      //     user: fetchedUser,
-      //   });
-      // }
+      // const { authToken } = (getState() as { auth: AuthState }).auth;
 
       try {
-        const userExists = await identity
-          .walletResolver(ForceScenario.Force)
-          .then((user) => {
-            if (!user) return false;
-            return true;
+        if (!wallet.publicKey) {
+          return rejectWithValue("No identity found");
+        }
+
+        const { token: authToken } = (await dispatch(authenticate()))
+          .payload as { token: string };
+
+        let pfp: string = args.pfp as any;
+
+        // let pfp: string | HoneycombFile = args.pfp as any;
+        let uploading = false;
+        // if (pfp && pfp instanceof File) {
+        //   pfp = toHoneycombFile(await pfp.arrayBuffer(), "pfp.png");
+        //   uploading = true;
+        // }
+
+        const toastId = toast.loading(
+          uploading
+            ? "Uploading Pfp & Creating User Profile..."
+            : "Creating User Profile...",
+          { progress: 0 }
+        );
+
+        const data = await edgeClient.createNewProfileTransaction(
+          {
+            project: HPL_PROJECT.toString(),
+            identity: wallet.publicKey.toString(),
+            info: {
+              bio: args.bio,
+              pfp,
+              name: args.name,
+            },
+          },
+          {
+            fetchOptions: {
+              headers: {
+                authorization: `Bearer ${authToken}`,
+              },
+            },
+          }
+        );
+
+        const transaction = data.createNewProfileTransaction;
+
+        const profile = await edgeClient
+          .sendBulkTransactions({
+            txs: [transaction.transaction],
+            blockhash: transaction.blockhash,
+            lastValidBlockHeight: transaction.lastValidBlockHeight,
+            options: {
+              commitment: "confirmed",
+              skipPreflight: true,
+            },
           })
           .catch((e) => {
-            console.log("Error resolving wallet:", e);
-            return false;
-            // console.error("Error resolving wallet:", e);
+            console.error(
+              "an unexpected error occured while creating User Profile",
+              e
+            );
+            toast.update(toastId, {
+              autoClose: 5000,
+              type: "error",
+              render: "an unexpected error occured while creating User Profile",
+              progress: 1,
+            });
+            throw rejectWithValue(e);
           });
-        dispatch({
-          type: "auth/setUserExists",
-          payload: userExists,
-        });
 
-        if (!userExists) {
-          return rejectWithValue("User does not exist");
+        await wait(100);
+        await fetchProfile();
+        await dispatch(authenticate());
+        return fulfillWithValue(profile);
+      } catch (error) {
+        console.error("Error Uploading file during Profile Creation:", error);
+        throw rejectWithValue(error);
+      }
+    }
+  );
+
+  const authenticate = createAsyncThunk<{
+    token: string;
+    user: User;
+    profile: Profile;
+  }>(
+    "honeycomb/authenticate",
+    async (_, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
+      // alert("honeycomb/authenticate")
+      const { wallet, edgeClient, user, profile } = (
+        getState() as { honeycomb: HoneycombState }
+      ).honeycomb;
+
+      try {
+        if (!user || !profile) {
+          throw new Error("User or Profile not found");
         }
 
         const res = await edgeClient.authRequest({
-          wallet: identity.address.toString(),
+          wallet: wallet.publicKey.toString(),
         });
 
         const message = new TextEncoder().encode(res.authRequest);
-        const sig = await identity.signMessage(message);
+        const sig = await wallet.signMessage(message);
         const signature = base58.encode(sig);
 
         const {
-          authConfirm: { accessToken: token, user },
+          authConfirm: { accessToken: token },
         } = await edgeClient.authConfirm({
           signature: signature,
-          wallet: identity.address.toString(),
+          wallet: wallet.publicKey.toString(),
         });
 
-        await dispatch(fetchUser());
+        console.log("Authenticated", token, user, profile);
 
-        return fulfillWithValue({ token, user });
+        return fulfillWithValue({ token: token, user, profile });
       } catch (error) {
         console.error("Error authenticating", error);
         return rejectWithValue(error);
@@ -299,12 +507,15 @@ const actionFactory = (actions: AsyncActions) => {
   );
 
   return {
-    initHoneycomb,
-    setIdentity,
+    setWallet,
+    createUser,
+    createProfile,
     fetchUser,
-    authenticate,
+    fetchProfile,
     loadIdentityDeps,
     createUserAndProfile,
+    authenticate,
+    updateProfile,
   };
 };
 export default actionFactory;

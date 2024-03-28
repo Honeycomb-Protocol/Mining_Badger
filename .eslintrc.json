@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "no-await-in-loop": "error",
-    "no-console": "warn",
+    "no-console": "off",
     "no-constant-condition": "warn",
     "no-duplicate-imports": "error",
     "no-empty": "warn",

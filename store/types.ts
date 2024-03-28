@@ -1,28 +1,20 @@
-import type {
-  Honeycomb,
-} from '@honeycomb-protocol/hive-control';
-import { Sdk, User } from "@honeycomb-protocol/edge-client";
+import { Profile, Sdk, User } from "@honeycomb-protocol/edge-client";
+import { WalletContextState } from "@solana/wallet-adapter-react";
 
 export interface HoneycombState {
-  honeycomb: Honeycomb;
-  projects: Honeycomb['_projects'];
+  wallet: WalletContextState | null;
   edgeClient: Sdk;
   user: User | null;
+  profile: Profile | null;
   loaders: {
     [key: string]: boolean;
   };
-  openWallet: boolean;
-  isWalletUserFound: boolean;
-  loadingModal: boolean;
 }
 
 export interface AuthState {
-  authStatus: 'pending' | 'success' | 'failed' | 'loggedOut' | null;
+  authStatus: "pending" | "success" | "failed" | "loggedOut" | null;
   authLoader: boolean;
-  userExists: boolean;
-  profileExists: boolean;
   authToken: string | null | undefined;
-  isAdmin: boolean;
 }
 
 export type SignUpUserData = {

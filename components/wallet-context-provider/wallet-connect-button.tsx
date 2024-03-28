@@ -1,12 +1,14 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useRouter } from "next/router";
+import { useHoneycomb } from "@/hooks";
 
 import Button from "@/components/common/button";
 
 const WalletConnectButton = () => {
   const router = useRouter();
   const { publicKey } = useWallet();
+  const { user, profile } = useHoneycomb();
   return (
     <div className="flex flex-col items-center">
       <div className="mb-6 mt-4">
@@ -41,7 +43,8 @@ const WalletConnectButton = () => {
           style={{
             padding: "8px 16px",
             borderRadius: "12px",
-            backgroundImage: "linear-gradient(to right, #E7CB5F -80%, #CD6448 150%)",
+            backgroundImage:
+              "linear-gradient(to right, #E7CB5F -80%, #CD6448 150%)",
             color: "#ffffff",
             width: "384px",
             display: "flex",

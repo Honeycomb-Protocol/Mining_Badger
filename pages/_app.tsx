@@ -16,15 +16,15 @@ import Effects from "@/effects";
 const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log("App");
   return (
     <WalletContextProvider>
       <Provider store={store}>
         <Effects />
-        <CheckConnection>
-          <main className={k2d.className}>
-            <NextUIProvider>
-              <Header />
-
+        <main className={k2d.className}>
+          <NextUIProvider>
+            <Header />
+            <CheckConnection>
               <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -37,10 +37,10 @@ export default function App({ Component, pageProps }: AppProps) {
                 pauseOnHover
                 theme="light"
               />
-              <Component {...pageProps} />
-            </NextUIProvider>
-          </main>
-        </CheckConnection>
+            </CheckConnection>
+            <Component {...pageProps} />
+          </NextUIProvider>
+        </main>
       </Provider>
     </WalletContextProvider>
   );
