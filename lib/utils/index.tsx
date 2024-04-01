@@ -1,30 +1,32 @@
-import AllTab from "@/components/home/inventory/all";
-import BarTab from "@/components/home/inventory/bar";
-import OresTab from "@/components/home/inventory/ores";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useWallet } from "@solana/wallet-adapter-react";
+
 import CraftTab from "@/components/home/tabs/craft";
-import AdamantiteTab from "@/components/home/tabs/craft/tabs/adamantite";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
 import IronTab from "@/components/home/tabs/craft/tabs/iron";
+import AdamantiteTab from "@/components/home/tabs/craft/tabs/adamantite";
 import MithrilTab from "@/components/home/tabs/craft/tabs/mithril";
 import RuniteTab from "@/components/home/tabs/craft/tabs/runite";
 import SteelTab from "@/components/home/tabs/craft/tabs/steel";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
-import { API_URL, LUT_ADDRESSES } from "@/config/config";
+import OresTab from "@/components/home/inventory/ores";
+import AllTab from "@/components/home/inventory/all";
+import BarTab from "@/components/home/inventory/bar";
+
 import { useHoneycomb } from "@/hooks";
 import { Dataset, Resource } from "@/interfaces";
-import { useWallet } from "@solana/wallet-adapter-react";
-import axios from "axios";
-import { toast } from "react-toastify";
 import LevelsData from "../../data/level-data.json";
+import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
 
 let cache = {
   craftData: {},
   inventoryData: {},
   refineData: {},
-  mindeData: {},
+  mineData: {},
 };
 
 const setCache = (name: string, data: any) => {

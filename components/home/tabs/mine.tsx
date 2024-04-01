@@ -40,7 +40,8 @@ const MineTab = () => {
         },
         resource: resourceId,
       });
-      await fetchMineResourcesData(setDataLoader, true);
+      const data = await fetchMineResourcesData(setDataLoader, true);
+      setMineData(data);
       setLoading({ name: "", status: false });
       toast.success(result.data.message || "Resource mined successfully");
     } catch (err: any) {
@@ -71,8 +72,8 @@ const MineTab = () => {
               data?.expire - Date.now() > 0 ||
               loading.name === data.metadata?.name
             }
-            btnClick={() =>
-              mineResource(data?.addresses?.resource, data.metadata?.name)
+            btnClick={async () =>
+              await mineResource(data?.addresses?.resource, data.metadata?.name)
             }
             loading={loading}
           />

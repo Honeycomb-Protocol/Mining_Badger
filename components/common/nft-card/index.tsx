@@ -26,7 +26,9 @@ const NftCard: React.FC<CardProps> = ({
   btnClick,
   loading,
 }) => {
-  const [timeLeft, setTimeLeft] = useState(expIn ? expIn - Date.now() : 0);
+  const [timeLeft, setTimeLeft] = useState(
+    expIn > Date.now() ? expIn - Date.now() : 0
+  );
 
   const cardStyle = {
     width: imageWidth ? `${imageWidth}px` : "165px",
@@ -45,7 +47,7 @@ const NftCard: React.FC<CardProps> = ({
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}
       style={{ width: width ? width : "max-content" }}
     >
-      {expIn && (timeLeft > 0 || btnDisabled) && (
+      {expIn && timeLeft > 0 && btnDisabled && (
         <MineExpiry exp={expIn} setTimeLeft={setTimeLeft} timeLeft={timeLeft} />
       )}
       {experience && (

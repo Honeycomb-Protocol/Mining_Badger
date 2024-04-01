@@ -1,6 +1,7 @@
-import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+
 import { useHoneycomb } from "@/hooks";
 
 interface AuthenticationWrapperProps {
