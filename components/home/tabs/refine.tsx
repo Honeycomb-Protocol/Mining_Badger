@@ -1,12 +1,9 @@
-import axios from "axios";
-import { toast } from "react-toastify";
 import { Spinner } from "@nextui-org/react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
-import { API_URL } from "@/config/config";
 
 const RefineTab = () => {
   const { getLevelsFromExp, fetchRefinedResoucesData } = Utils();

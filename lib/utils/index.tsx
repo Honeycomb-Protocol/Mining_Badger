@@ -1,8 +1,6 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-
-import { toast } from "react-toastify";
-
 import AllTab from "@/components/home/inventory/all";
+import BarTab from "@/components/home/inventory/bar";
+import OresTab from "@/components/home/inventory/ores";
 import CraftTab from "@/components/home/tabs/craft";
 import AdamantiteTab from "@/components/home/tabs/craft/tabs/adamantite";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
@@ -13,15 +11,14 @@ import SteelTab from "@/components/home/tabs/craft/tabs/steel";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
-import LevelsData from "../../data/level-data.json";
+import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { useHoneycomb } from "@/hooks";
-import { API_URL, LUT_ADDRESS } from "@/config/config";
-import { craftSymbols, inventorySymbols } from "./constants";
 import { Dataset, Resource } from "@/interfaces";
+import { useWallet } from "@solana/wallet-adapter-react";
 import axios from "axios";
-
-import OresTab from "@/components/home/inventory/ores";
-import BarTab from "@/components/home/inventory/bar";
+import { toast } from "react-toastify";
+import LevelsData from "../../data/level-data.json";
+import { craftSymbols, inventorySymbols } from "./constants";
 
 let cache = {
   craftData: {},
@@ -142,51 +139,59 @@ const Utils = () => {
       if (!edgeClient || !user || !authToken)
         throw new Error("Unable to find edgeClient or user or authToken");
 
+      console.log(
+        "fund this wallet if it doesn't work or you're doing it for the first time",
+        user.wallets.shadow
+      );
       setLoading({ name: name, status: true });
+
+      console.log("createCraftRecipeTransaction", recipe);
 
       const { createCraftRecipeTransaction: txResponse } =
         await edgeClient.CreateCraftRecipeTransaction({
           recipe: recipe,
           wallet: publicKey.toString(),
           authority: user.wallets.shadow,
-          lutAddress: LUT_ADDRESS,
+          lutAddress: LUT_ADDRESSES[0],
         });
 
-      for (const tx of txResponse.transactions) {
-        const {
-          signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
-          // eslint-disable-next-line no-await-in-loop
-        } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
-          {
-            txs: tx,
-            blockhash: txResponse!.blockhash,
-            lastValidBlockHeight: txResponse!.lastValidBlockHeight,
-            options: {
-              commitment: "confirmed",
-              skipPreflight: true,
+      // for (const tx of txResponse.transactions) {
+      const {
+        signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
+        // eslint-disable-next-line no-await-in-loop
+      } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
+        {
+          txs: txResponse.transactions[2],
+          blockhash: txResponse!.blockhash,
+          lastValidBlockHeight: txResponse!.lastValidBlockHeight,
+          options: {
+            commitment: "confirmed",
+            skipPreflight: true,
+          },
+        },
+        {
+          fetchOptions: {
+            headers: {
+              authorization: `Bearer ${authToken}`,
             },
           },
-          {
-            fetchOptions: {
-              headers: {
-                authorization: `Bearer ${authToken}`,
-              },
-            },
-          }
-        );
+        }
+      );
+      console.log("hey");
 
-        sendBulkTransactions.forEach((txResponse) => {
-          if (txResponse.status !== "Success") {
-            console.log(
-              "createMintResourceTransaction",
-              txResponse.status,
-              txResponse.error
-            );
-          }
+      console.log("createMintResourceTransaction", sendBulkTransactions);
+      sendBulkTransactions.forEach((txResponse) => {
+        if (txResponse.status !== "Success") {
+          console.log(
+            "createMintResourceTransaction",
+            txResponse.status,
+            txResponse.error
+          );
+        }
 
-          console.log("createMintResourceTransaction", txResponse.signature);
-        });
-      }
+        console.log("createMintResourceTransaction", txResponse.signature);
+      });
+      // }
       toast.success("Resource crafted successfully");
       setLoading({ name: "", status: false });
     } catch (error) {
