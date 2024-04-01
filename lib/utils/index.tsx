@@ -152,7 +152,7 @@ const Utils = () => {
           recipe: recipe,
           wallet: publicKey.toString(),
           authority: user.wallets.shadow,
-          lutAddress: LUT_ADDRESSES[0],
+          lutAddresses: LUT_ADDRESSES,
         });
 
       // for (const tx of txResponse.transactions) {
