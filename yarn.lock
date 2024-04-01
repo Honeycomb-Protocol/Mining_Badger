@@ -582,10 +582,10 @@
     "@metaplex-foundation/mpl-token-auth-rules" "^1.2.0"
     "@msgpack/msgpack" "^3.0.0-beta2"
 
-"@honeycomb-protocol/edge-client@^0.0.6-beta.17":
-  version "0.0.6-beta.17"
-  resolved "https://registry.yarnpkg.com/@honeycomb-protocol/edge-client/-/edge-client-0.0.6-beta.17.tgz#2c9cb637dc86af4b25cd35831e16fb796418096e"
-  integrity sha512-SCSYNcdxBLZltHgNhMVqwp36DuSrf7Rh+iBLvuhv7D2x3gPC2PDJiI4dZYpDy8Fnch0ibnKhzeOgj1C1TEcbnw==
+"@honeycomb-protocol/edge-client@^0.0.6-beta.21":
+  version "0.0.6-beta.21"
+  resolved "https://registry.yarnpkg.com/@honeycomb-protocol/edge-client/-/edge-client-0.0.6-beta.21.tgz#d86c377abebc21373be28f6542889fb5844084fb"
+  integrity sha512-Tb29oUOQp4l4xkqfpMnP6LOmOSFwraqTymqZn5Ef7UnknNebTZhFsMW4DQKUbdYkXEnA8/kvnbhaPtDODtBHig==
   dependencies:
     "@honeycomb-protocol/character-manager" "^0.0.2-beta.4"
     "@urql/core" "^4.2.3"
