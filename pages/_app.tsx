@@ -16,7 +16,6 @@ import Effects from "@/effects";
 const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log("App");
   return (
     <WalletContextProvider>
       <Provider store={store}>
@@ -37,8 +36,8 @@ export default function App({ Component, pageProps }: AppProps) {
                 pauseOnHover
                 theme="light"
               />
+              <Component {...pageProps} />
             </CheckConnection>
-            <Component {...pageProps} />
           </NextUIProvider>
         </main>
       </Provider>

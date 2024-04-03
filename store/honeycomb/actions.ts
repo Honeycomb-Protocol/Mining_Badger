@@ -1,4 +1,3 @@
-import { auth } from "./../actions/index";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { WalletContextState } from "@solana/wallet-adapter-react";
@@ -8,7 +7,7 @@ import {
   SendBulkTransactionsQuery,
 } from "@honeycomb-protocol/edge-client";
 import type { AsyncActions } from "../actions/types.js";
-import type { AuthState, HoneycombState } from "../types.js";
+import type { HoneycombState } from "../types.js";
 import { HPL_PROJECT } from "../../config/config.js";
 import base58 from "bs58";
 
