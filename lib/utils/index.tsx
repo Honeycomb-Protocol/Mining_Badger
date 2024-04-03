@@ -145,9 +145,9 @@ const Utils = () => {
         "fund this wallet if it doesn't work or you're doing it for the first time",
         user.wallets.shadow
       );
-      setLoading({ name: name, status: true });
 
-      console.log("createCraftRecipeTransaction", recipe);
+      console.log("Recipe", recipe);
+      setLoading({ name: name, status: true });
 
       const { createCraftRecipeTransaction: txResponse } =
         await edgeClient.CreateCraftRecipeTransaction({
@@ -157,43 +157,43 @@ const Utils = () => {
           lutAddresses: LUT_ADDRESSES,
         });
 
-      // for (const tx of txResponse.transactions) {
-      const {
-        signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
-        // eslint-disable-next-line no-await-in-loop
-      } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
-        {
-          txs: txResponse.transactions[2],
-          blockhash: txResponse!.blockhash,
-          lastValidBlockHeight: txResponse!.lastValidBlockHeight,
-          options: {
-            commitment: "confirmed",
-            skipPreflight: true,
-          },
-        },
-        {
-          fetchOptions: {
-            headers: {
-              authorization: `Bearer ${authToken}`,
+      for (let i = 0; i < txResponse.transactions.length; i++) {
+        const tx = txResponse.transactions[i];
+        const {
+          signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
+          // eslint-disable-next-line no-await-in-loop
+        } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
+          {
+            txs: tx,
+            blockhash: txResponse!.blockhash,
+            lastValidBlockHeight: txResponse!.lastValidBlockHeight,
+            options: {
+              commitment: "confirmed",
+              skipPreflight: true,
             },
           },
-        }
-      );
-      console.log("hey");
+          {
+            fetchOptions: {
+              headers: {
+                authorization: `Bearer ${authToken}`,
+              },
+            },
+          }
+        );
 
-      console.log("createMintResourceTransaction", sendBulkTransactions);
-      sendBulkTransactions.forEach((txResponse) => {
-        if (txResponse.status !== "Success") {
-          console.log(
-            "createMintResourceTransaction",
-            txResponse.status,
-            txResponse.error
-          );
-        }
+        sendBulkTransactions.forEach((txResponse) => {
+          if (txResponse.status !== "Success") {
+            console.log(
+              "Transaction",
+              txResponse.status,
+              txResponse.error,
+              txResponse.signature
+            );
+          }
 
-        console.log("createMintResourceTransaction", txResponse.signature);
-      });
-      // }
+          console.log("Transaction", txResponse.signature);
+        });
+      }
       toast.success("Resource crafted successfully");
       setLoading({ name: "", status: false });
     } catch (error) {
