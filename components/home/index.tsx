@@ -93,7 +93,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none">
+        <div className="bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none max-h-[63vh] overflow-y-scroll">
           <Accordion className="w-full">
             <AccordionItem
               className="w-full"

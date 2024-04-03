@@ -1,14 +1,16 @@
 import { Spinner } from "@nextui-org/react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
+import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const RefineTab = () => {
-  const { getLevelsFromExp, fetchRefinedResoucesData } = Utils();
+  const { getLevelsFromExp, fetchRefinedResoucesData, createRecipe } = Utils();
   const { publicKey } = useWallet();
-  const { createRecipe } = Utils();
+  const dispatch = useDispatch();
   const [refineData, setRefineData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
@@ -48,7 +50,9 @@ const RefineTab = () => {
                 refinement?.addresses?.recipe,
                 refinement?.metadata?.name,
                 setLoading
-              )
+              ).then(() => {
+                dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+              })
             }
             loading={loading}
             btnDisabled={

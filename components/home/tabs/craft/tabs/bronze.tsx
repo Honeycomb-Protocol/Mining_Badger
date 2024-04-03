@@ -1,17 +1,18 @@
-import axios from "axios";
-import { toast } from "react-toastify";
 import { Spinner } from "@nextui-org/react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
+import { AuthActionsWithoutThunk } from "@/store/auth";
 
 //import filterResourcesByMetadataSymbols
 
 const BronzeTab = () => {
   const { publicKey } = useWallet();
   const { createRecipe, fetchCraftData } = Utils();
+  const dispatch = useDispatch();
   const [craftData, setCraftData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
@@ -55,8 +56,10 @@ const BronzeTab = () => {
                   craftment?.addresses?.recipe,
                   craftment?.metadata?.name,
                   setLoading
-                );
-                fetchCraftData("bronze", setDataLoading, true);
+                ).then(() => {
+                  dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+                  // fetchCraftData("bronze", setDataLoading, true);
+                });
               }}
               loading={loading}
               btnDisabled={
