@@ -1,39 +1,29 @@
 import { Spinner } from "@nextui-org/react";
-import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useEffect, useState } from "react";
+import { RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthActionsWithoutThunk } from "@/store/auth";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
 
 const AllTab = () => {
-  const { publicKey } = useWallet();
+  const dispatch = useDispatch();
+  const { refreshInventory } = useSelector((state: RootState) => state.auth);
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { fetchInventoryData } = Utils();
 
-  // const FetchInventory = useCallback(async () => {
-  //   setLoading(true);
-  //   await axios
-  //     .get(`${API_URL}resources/inventory/${publicKey}`)
-  //     .then((result) => {
-  //       setInventoryData(result?.data?.result);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       setLoading(false);
-  //       toast.error(err.data?.message || "Something went wrong");
-  //     });
-  // }, [publicKey]);
-
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetchInventoryData("all", setLoading);
+      const res = await fetchInventoryData("all", setLoading, refreshInventory);
       setInventoryData(res);
     };
 
     fetchData();
-  }, []);
+    dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
+  }, [refreshInventory]);
 
   return (
     <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 p-3">

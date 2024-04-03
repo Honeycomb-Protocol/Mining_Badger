@@ -6,6 +6,7 @@ const initialState: AuthState = {
   authStatus: null,
   authLoader: false,
   authToken: null,
+  refreshInventory: false,
 };
 
 export const slice = createSlice({
@@ -16,6 +17,10 @@ export const slice = createSlice({
       state.authStatus = initialState.authStatus;
       state.authLoader = initialState.authLoader;
       state.authToken = initialState.authToken;
+      state.refreshInventory = initialState.refreshInventory;
+    },
+    setRefreshInventory: (state, action) => {
+      state.refreshInventory = action.payload;
     },
   },
   extraReducers: (builder) => {

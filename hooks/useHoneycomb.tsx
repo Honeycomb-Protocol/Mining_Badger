@@ -18,7 +18,7 @@ export function useHoneycomb() {
     honeycomb: honeycombLoading,
     fetchUserNfts: fetchingNfts,
   } = useSelector((state: RootState) => state.honeycomb.loaders);
-  const { authToken, authLoader } = useSelector(
+  const { authToken, authLoader, refreshInventory } = useSelector(
     (state: RootState) => state.auth
   );
 
@@ -113,5 +113,6 @@ export function useHoneycomb() {
     createUserAndProfile,
     authLoader,
     authToken,
+    refreshInventory,
   };
 }

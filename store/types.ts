@@ -14,6 +14,7 @@ export interface HoneycombState {
 export interface AuthState {
   authStatus: "pending" | "success" | "failed" | "loggedOut" | null;
   authLoader: boolean;
+  refreshInventory: boolean;
   authToken: string | null | undefined;
 }
 

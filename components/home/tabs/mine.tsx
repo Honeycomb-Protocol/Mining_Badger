@@ -3,14 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { toast } from "react-toastify";
 import { Spinner } from "@nextui-org/react";
+import { useDispatch } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import { MineDataType } from "@/interfaces";
 import { useHoneycomb } from "@/hooks";
 import Utils from "@/lib/utils";
 import { API_URL } from "@/config/config";
+import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const MineTab = () => {
+  const dispatch = useDispatch();
   const { getLevelsFromExp, fetchMineResourcesData } = Utils();
   const { publicKey } = useWallet();
   const [mineData, setMineData] = useState([]);
@@ -43,6 +46,7 @@ const MineTab = () => {
       const data = await fetchMineResourcesData(setDataLoader, true);
       setMineData(data);
       setLoading({ name: "", status: false });
+      dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
       toast.success(result.data.message || "Resource mined successfully");
     } catch (err: any) {
       setLoading({ name: "", status: false });
