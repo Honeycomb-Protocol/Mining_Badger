@@ -25,6 +25,8 @@ const NftCard: React.FC<CardProps> = ({
   expIn,
   btnClick,
   loading,
+  miningTimeReduction,
+  resourceInfo,
 }) => {
   const [timeLeft, setTimeLeft] = useState(
     expIn > Date.now() ? expIn - Date.now() : 0
@@ -63,8 +65,13 @@ const NftCard: React.FC<CardProps> = ({
       )}
       <div className={`relative`} style={cardStyle}>
         <Image src={picture} alt={name} fill />
+        {miningTimeReduction && (
+          <div className="absolute top-2 -right-8 z-50 bg-gradient-to-r from-[#2d2f31,#747474] to-[#2d2f31] text-sm px-2 rounded">
+            {miningTimeReduction}
+          </div>
+        )}
         {amount && (
-          <div className="absolute top-0 right-0 bg-red-700 rounded-full text-xs p-1">
+          <div className="absolute top-0 right-0 bg-red-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
             {amount}
           </div>
         )}
@@ -85,13 +92,15 @@ const NftCard: React.FC<CardProps> = ({
         {level && (
           <p className="flex items-center justify-center text-sm text-gray-300 ml-2 whitespace-nowrap">
             Lvl {level}
-            <Image
-              src="/assets/svgs/info-icon.svg"
-              alt="info"
-              className="ml-2"
-              width={16}
-              height={16}
-            />
+            <Tooltip content={resourceInfo} className="bg-[#1D1D1D]">
+              <Image
+                src="/assets/svgs/info-icon.svg"
+                alt="info"
+                className="ml-2"
+                width={16}
+                height={16}
+              />
+            </Tooltip>
           </p>
         )}
       </div>

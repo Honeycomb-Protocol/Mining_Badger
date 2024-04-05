@@ -75,6 +75,8 @@ export interface CardProps {
   expIn?: number;
   btnClick?: () => void;
   loading?: { name: string; status: boolean };
+  miningTimeReduction?: string;
+  resourceInfo?: string;
 }
 
 export interface ModalProps {

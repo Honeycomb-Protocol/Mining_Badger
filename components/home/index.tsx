@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { useSelector } from "react-redux";
+import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 
 import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
@@ -8,12 +9,25 @@ import CustomTabs from "../common/custom-tabs";
 import { TabDataProps } from "@/interfaces";
 import Utils from "@/lib/utils";
 import LevelsRequiredModal from "../common/modal";
+import { useHoneycomb } from "@/hooks";
+import { RootState } from "@/store";
 
 const HomePage = () => {
-  const { renderHomeTabComponents, renderInventoryTabComponents } = Utils();
+  const { user, profile } = useHoneycomb();
+  const {
+    renderHomeTabComponents,
+    renderInventoryTabComponents,
+    getUserLevelInfo,
+  } = Utils();
+  const { refreshInventory } = useSelector((state: RootState) => state.auth);
   const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
   const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
   const [visible, setVisible] = useState(false);
+  const [userLevelInfo, setUserLevelInfo] = useState<{
+    level?: number;
+    exp_req?: number;
+    current_exp?: number;
+  }>({});
 
   useEffect(() => {
     const addHomeTabComponents = async () => {
@@ -43,6 +57,14 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    if (profile?.platformData?.xp) {
+      getUserLevelInfo(profile?.platformData?.xp).then((res) =>
+        setUserLevelInfo(res)
+      );
+    }
+  }, [refreshInventory]);
+
+  useEffect(() => {
     document.body.style.backgroundImage =
       "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/main-bg.jpg')";
     document.body.style.backgroundSize = "100vw 100vh";
@@ -52,48 +74,59 @@ const HomePage = () => {
   return (
     <main className="w-full flex justify-center items-start mt-12 gap-10">
       <div className="w-[27%]">
-        <div className="w-full flex justify-between items-center bg-black rounded-lg p-3 rounded-bl-none rounded-br-none">
-          <div className="flex justify-center items-center">
-            <Image
-              className="m-4"
-              src="/assets/images/nftprofile.png"
-              alt="profile"
-              width={50}
-              height={0}
-            />
-            <div className="flex flex-col justify-center items-start">
-              <p className="text-white font-bold  text-xl">Max</p>
-              <p className="text-white ">{"Profile >"}</p>
+        <div className="w-full bg-black rounded-lg p-3 rounded-bl-none rounded-br-none">
+          <div className="flex justify-between items-center w-full">
+            <div className="flex justify-center items-center">
+              <Image
+                className="m-4"
+                src="/assets/images/nftprofile.png"
+                alt="profile"
+                width={60}
+                height={0}
+              />
+              <div className="flex flex-col justify-center items-start">
+                <p className="text-white font-semibold text-lg">
+                  {user?.info?.username || "Max"}
+                </p>
+                <p className="text-gray-500">Bronze Pickaxe</p>
+              </div>
             </div>
+            <p className="text-gray-500 font-bold cursor-pointer underline">
+              EDIT
+            </p>
+          </div>
+          <div className="flex justify-between px-2 mt-4">
+            <p>Level</p>
+            <p className="cursor-pointer" onClick={() => setVisible(true)}>
+              <span>{userLevelInfo?.level || 1}</span>{" "}
+              <span className="text-[#61BCEF] text-lg">Lv</span>
+            </p>
           </div>
 
-          <div className="flex flex-col justify-center items-start pr-2">
-            <div
-              onClick={() => setVisible(true)}
-              className="flex justify-center underline gap-2 cursor-pointer"
-            >
-              <Image
-                src="/assets/svgs/rubiks.svg"
-                alt="rubiks"
-                width={28}
-                height={0}
-              />
-              Level : 01
+          <div className="px-2 mt-3 mb-2">
+            <div className="flex justify-between items-center mb-1">
+              <p>Experience</p>
+              <p>
+                {userLevelInfo?.current_exp || 0} /{" "}
+                {userLevelInfo?.exp_req || 0}{" "}
+                <span className="text-[#FCC85D] text-lg">XP</span>
+              </p>
             </div>
-
-            <div className="flex justify-center gap-2">
-              <Image
-                src="/assets/svgs/lightning.svg"
-                alt="rubiks"
-                width={30}
-                height={0}
-              />
-              Exp : 0
-            </div>
+            <Progress
+              size="md"
+              value={userLevelInfo?.current_exp}
+              maxValue={userLevelInfo?.exp_req}
+              color="warning"
+              showValueLabel={false}
+              classNames={{
+                base: "max-w-md",
+                indicator: "bg-gradient-to-r from-[#FCC85D,94%] to-[#FFEAC0]",
+              }}
+            />
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none max-h-[63vh] overflow-y-scroll">
+        <div className="bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none max-h-[60vh] overflow-y-scroll">
           <Accordion className="w-full">
             <AccordionItem
               className="w-full"

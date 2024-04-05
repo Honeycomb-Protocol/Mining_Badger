@@ -3,26 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
-
 import Utils from "@/lib/utils";
 import { AuthActionsWithoutThunk } from "@/store/auth";
 import { RootState } from "@/store";
 
-const OresTab = () => {
-  const { fetchInventoryData } = Utils();
-  const { refreshInventory } = useSelector((state: RootState) => state.auth);
+const PickaxeTab = () => {
   const dispatch = useDispatch();
-  const [inventoryData, setInventoryData] = useState([]);
+  const { refreshInventory } = useSelector((state: RootState) => state.auth);
+  const { fetchInventoryData } = Utils();
+  const [pickaxeData, setPickaxeData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetchInventoryData(
-        "ores",
-        setLoading,
-        refreshInventory
-      );
-      setInventoryData(res);
+      const res = await fetchInventoryData("pickaxe", setLoading, refreshInventory);
+      setPickaxeData(res);
     };
     fetchData();
     dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
@@ -33,7 +28,7 @@ const OresTab = () => {
       {loading ? (
         <Spinner color="white" />
       ) : (
-        inventoryData?.map((item, index) => (
+        pickaxeData?.map((item, index) => (
           <NftCard
             key={index}
             name={item.metadata.name}
@@ -52,4 +47,4 @@ const OresTab = () => {
   );
 };
 
-export default OresTab;
+export default PickaxeTab;

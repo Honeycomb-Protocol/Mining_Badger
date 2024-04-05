@@ -18,10 +18,5 @@
     "name": "Craft",
     "notifications": 0,
     "tabComponent": ""
-  },
-  {
-    "name": "General Store",
-    "notifications": 4,
-    "tabComponent": ""
   }
 ]

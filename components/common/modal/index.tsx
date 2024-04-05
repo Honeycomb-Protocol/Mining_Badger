@@ -38,7 +38,7 @@ const LevelsRequiredModal: React.FC<ModalProps> = ({ visible, setVisible }) => {
                 Level
               </TableColumn>
               <TableColumn className=" text-xl font-bold bg-transparent text-[#CC634E] capitalize">
-                Strength
+                Information
               </TableColumn>
             </TableHeader>
             <TableBody>

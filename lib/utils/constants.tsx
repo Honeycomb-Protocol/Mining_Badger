@@ -12,4 +12,5 @@ export const craftSymbols: CraftSymbols = {
 export const inventorySymbols = {
   ores: ["AO", "COO", "CO", "GOO", "IO", "MO", "RO", "TO"],
   bar: ["AD", "BR", "GO", "IR", "MI", "RU", "ST"],
+  pickaxe: ["BRPX", "IRPX", "STPX", "ADPX", "MTPX", "RUPX"],
 };

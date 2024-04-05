@@ -1,38 +1,43 @@
 [
-    {
-        "name": "Bronze Pickaxe",
-        "picture": "/assets/images/bronze-Pickaxe.png",
-        "level": "1",
-        "lock": false
-    },
-    {
-        "name": "Iron Pickaxe",
-        "picture": "/assets/images/iron-pickaxe.png",
-        "level": "2",
-        "lock": false
-    },
-    {
-        "name": "Steel Pickaxe",
-        "picture": "/assets/images/bronze-Pickaxe.png",
-        "level": "3",
-        "lock": true
-    },
-    {
-        "name": "Mithril Pickaxe",
-        "picture": "/assets/images/bronze-Pickaxe.png",
-        "level": "4",
-        "lock": true
-    },
-    {
-        "name": "Adamant Pickaxe",
-        "picture": "/assets/images/bronze-Pickaxe.png",
-        "level": "5",
-        "lock": true
-    },
-    {
-        "name": "Rune Pickaxe",
-        "picture": "/assets/images/bronze-Pickaxe.png",
-        "level": "6",
-        "lock": true
-    }
+  {
+    "name": "Bronze Pickaxe",
+    "picture": "/assets/images/bronze-Pickaxe.png",
+    "level": "1",
+    "lock": false
+  },
+  {
+    "name": "Iron Pickaxe",
+    "picture": "/assets/images/iron-pickaxe.png",
+    "level": "2",
+    "lock": true,
+    "miningTimeReduction": "-10%"
+  },
+  {
+    "name": "Steel Pickaxe",
+    "picture": "/assets/images/bronze-Pickaxe.png",
+    "level": "3",
+    "lock": true,
+    "miningTimeReduction": "-20%"
+  },
+  {
+    "name": "Mithril Pickaxe",
+    "picture": "/assets/images/bronze-Pickaxe.png",
+    "level": "4",
+    "lock": true,
+    "miningTimeReduction": "-30%"
+  },
+  {
+    "name": "Adamant Pickaxe",
+    "picture": "/assets/images/bronze-Pickaxe.png",
+    "level": "5",
+    "lock": true,
+    "miningTimeReduction": "-40%"
+  },
+  {
+    "name": "Rune Pickaxe",
+    "picture": "/assets/images/bronze-Pickaxe.png",
+    "level": "6",
+    "lock": true,
+    "miningTimeReduction": "-50%"
+  }
 ]

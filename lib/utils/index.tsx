@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { useSelector } from "react-redux";
 
 import CraftTab from "@/components/home/tabs/craft";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
@@ -15,18 +16,22 @@ import ShopTab from "@/components/home/tabs/shop";
 import OresTab from "@/components/home/inventory/ores";
 import AllTab from "@/components/home/inventory/all";
 import BarTab from "@/components/home/inventory/bar";
+import PickaxeTab from "@/components/home/inventory/pickaxe";
 
 import { useHoneycomb } from "@/hooks";
 import { Dataset, Resource } from "@/interfaces";
 import LevelsData from "../../data/level-data.json";
 import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
+import { RootState } from "@/store";
 
 let cache = {
   craftData: {},
   inventoryData: {},
   refineData: {},
   mineData: {},
+  shopData: {},
+  userInfo: null,
 };
 
 const setCache = (name: string, data: any) => {
@@ -34,11 +39,12 @@ const setCache = (name: string, data: any) => {
 };
 
 const getCache = (name: string) => {
-  return cache[name] || [];
+  return cache[name];
 };
 const Utils = () => {
   const { publicKey } = useWallet();
   const { edgeClient, user, authToken } = useHoneycomb();
+  const { refreshInventory } = useSelector((state: RootState) => state.auth);
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
@@ -77,11 +83,12 @@ const Utils = () => {
     switch (component) {
       case "All":
         return <AllTab />;
-
       case "Ores":
         return <OresTab />;
       case "Bar":
         return <BarTab />;
+      case "Pickaxes":
+        return <PickaxeTab />;
     }
   };
 
@@ -103,6 +110,23 @@ const Utils = () => {
       .padStart(2, "0")}`;
   };
 
+  const MiningDiscount = (name: string) => {
+    switch (name) {
+      case "Bronze":
+        return 0;
+      case "Iron":
+        return "10%";
+      case "Steel":
+        return "20%";
+      case "Mithril":
+        return "30%";
+      case "Adament":
+        return "40%";
+      case "Rune":
+        return "50%";
+    }
+  };
+
   const getLevelsFromExp = (exp: number) => {
     for (let i = 0; i < LevelsData.length; i++) {
       if (exp < LevelsData[i].minExp) {
@@ -110,6 +134,27 @@ const Utils = () => {
       }
     }
     return LevelsData[LevelsData.length - 1].level;
+  };
+
+  const getUserLevelInfo = async (xp: number) => {
+    try {
+      let data = getCache("userInfo");
+
+      if (data !== null && !refreshInventory) {
+        return data?.result;
+      }
+      data = (await axios.get(`${API_URL}resources/level/${xp}`)).data;
+      setCache("userInfo", data);
+
+      return data?.result;
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+      return null;
+    }
   };
 
   const organizeDataByCategories = (
@@ -322,6 +367,32 @@ const Utils = () => {
     }
   };
 
+  const fetchShopResourcesData = async (
+    setDataLoading: (status: boolean) => void,
+    refetch = false
+  ) => {
+    try {
+      setDataLoading(true);
+      let data = getCache("shopData");
+      if (data?.result?.length > 0 && !refetch) {
+        setDataLoading(false);
+        return data?.result;
+      }
+      data = (await axios.get(`${API_URL}resources/pickaxes/${publicKey}`))
+        .data;
+      setCache("shopData", data);
+      setDataLoading(false);
+      return data?.result;
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+      setDataLoading(false);
+    }
+  };
+
   return {
     renderCraftTabComponents,
     renderHomeTabComponents,
@@ -333,6 +404,9 @@ const Utils = () => {
     fetchInventoryData,
     fetchRefinedResoucesData,
     fetchMineResourcesData,
+    fetchShopResourcesData,
+    MiningDiscount,
+    getUserLevelInfo,
   };
 };
 

@@ -14,7 +14,7 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const MineTab = () => {
   const dispatch = useDispatch();
-  const { getLevelsFromExp, fetchMineResourcesData } = Utils();
+  const { fetchMineResourcesData } = Utils();
   const { publicKey } = useWallet();
   const [mineData, setMineData] = useState([]);
   const { user } = useHoneycomb();
@@ -64,7 +64,7 @@ const MineTab = () => {
             key={index}
             name={data?.metadata?.name}
             picture={data?.metadata?.uri}
-            level={getLevelsFromExp(data?.level_req)}
+            level={data?.level_req}
             buttonText="Mine"
             width={150}
             imageWidth={80}

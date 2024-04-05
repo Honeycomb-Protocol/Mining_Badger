@@ -30,11 +30,11 @@ const AllTab = () => {
       {loading ? (
         <Spinner color="white" />
       ) : (
-        inventoryData.map((item, index) => (
+        inventoryData?.map((item, index) => (
           <NftCard
             key={index}
-            name={item.metadata.name}
-            picture={item.metadata.uri}
+            name={item?.metadata?.name}
+            picture={item?.metadata?.uri}
             width={90}
             imageWidth={70}
             imageHeight={70}
