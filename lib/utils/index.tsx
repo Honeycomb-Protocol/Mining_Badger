@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CraftTab from "@/components/home/tabs/craft";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
@@ -24,6 +25,7 @@ import LevelsData from "../../data/level-data.json";
 import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
 import { RootState } from "@/store";
+import { AuthActionsWithoutThunk } from "@/store/auth";
 
 let cache = {
   craftData: {},
@@ -43,8 +45,21 @@ const getCache = (name: string) => {
 };
 const Utils = () => {
   const { publicKey } = useWallet();
-  const { edgeClient, user, authToken } = useHoneycomb();
+  const dispatch = useDispatch();
+  const { edgeClient, user, authToken, profile } = useHoneycomb();
   const { refreshInventory } = useSelector((state: RootState) => state.auth);
+  const [userLevelInfo, setUserLevelInfo] = useState<{
+    level?: number;
+    exp_req?: number;
+    current_exp?: number;
+  }>({});
+
+  useEffect(() => {
+    if (profile?.platformData?.xp) {
+      getUserLevelInfo();
+      dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
+    }
+  }, [refreshInventory]);
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
@@ -136,16 +151,21 @@ const Utils = () => {
     return LevelsData[LevelsData.length - 1].level;
   };
 
-  const getUserLevelInfo = async (xp: number) => {
+  const getUserLevelInfo = async () => {
     try {
       let data = getCache("userInfo");
 
       if (data !== null && !refreshInventory) {
+        setUserLevelInfo(data?.result);
         return data?.result;
       }
-      data = (await axios.get(`${API_URL}resources/level/${xp}`)).data;
+      data = (
+        await axios.get(
+          `${API_URL}resources/level/${profile?.platformData?.xp}`
+        )
+      ).data;
       setCache("userInfo", data);
-
+      setUserLevelInfo(data?.result);
       return data?.result;
     } catch (error) {
       toast.error(
@@ -407,6 +427,7 @@ const Utils = () => {
     fetchShopResourcesData,
     MiningDiscount,
     getUserLevelInfo,
+    userLevelInfo,
   };
 };
 

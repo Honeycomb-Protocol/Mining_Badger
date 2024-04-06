@@ -61,6 +61,15 @@ const NftCard: React.FC<CardProps> = ({
             height={18}
           />
           {experience}
+          <Tooltip content={resourceInfo} className="bg-[#1D1D1D]">
+            <Image
+              src="/assets/svgs/info-icon.svg"
+              alt="info"
+              className="ml-2"
+              width={16}
+              height={16}
+            />
+          </Tooltip>
         </div>
       )}
       <div className={`relative`} style={cardStyle}>

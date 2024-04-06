@@ -12,13 +12,12 @@ import { useHoneycomb } from "@/hooks";
 import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const ShopTab = () => {
-  const { MiningDiscount, getUserLevelInfo, fetchShopResourcesData } = Utils();
+  const { MiningDiscount, userLevelInfo, fetchShopResourcesData } = Utils();
   const { publicKey } = useWallet();
-  const { user, profile } = useHoneycomb();
+  const { user } = useHoneycomb();
   const dispatch = useDispatch();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
-  const [userLevel, setUserLevel] = useState(0);
   const [loading, setLoading] = useState({
     name: "",
     status: false,
@@ -29,7 +28,6 @@ const ShopTab = () => {
     const fetchData = async () => {
       const res = await fetchShopResourcesData(setDataLoader);
       setShopData(res);
-      setUserLevel((await getUserLevelInfo(profile?.platformData?.xp))?.level);
     };
     fetchData();
   }, []);
@@ -66,7 +64,7 @@ const ShopTab = () => {
             name={item?.metadata?.name}
             picture={item?.metadata?.uri}
             level={item?.level_req}
-            lock={userLevel < item?.level_req}
+            lock={userLevelInfo.level < item?.level_req}
             buttonText={item?.holding ? "Claimed" : "Claim Axe"}
             imageWidth={150}
             imageHeight={150}

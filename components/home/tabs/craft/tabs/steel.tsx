@@ -11,7 +11,7 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const BronzeTab = () => {
   const { publicKey } = useWallet();
-  const { createRecipe, fetchCraftData } = Utils();
+  const { createRecipe, fetchCraftData, userLevelInfo } = Utils();
   const dispatch = useDispatch();
   const [craftData, setCraftData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
@@ -49,20 +49,28 @@ const BronzeTab = () => {
               nftNameStyle="text-[15px]"
               btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
               materials={craftment?.material}
-              experience={45}
+              experience={craftment?.level_req}
+              resourceInfo={
+                craftment?.level_req > userLevelInfo?.level
+                  ? `User level ${craftment?.level_req} is required to craft this resource.`
+                  : ""
+              }
               btnClick={async () => {
-                await createRecipe(
-                  craftment?.addresses?.recipe,
-                  craftment?.metadata?.name,
-                  setLoading
-                ).then(() => {
-                  dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                  // fetchCraftData("steel", setDataLoading, true);
-                });
+                userLevelInfo?.level >= craftment?.level_req &&
+                  (await createRecipe(
+                    craftment?.addresses?.recipe,
+                    craftment?.metadata?.name,
+                    setLoading
+                  ).then(() => {
+                    dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+                    // fetchCraftData("steel", setDataLoading, true);
+                  }));
               }}
               loading={loading}
               btnDisabled={
-                loading.status && loading.name === craftment?.metadata?.name
+                (loading.status &&
+                  loading.name === craftment?.metadata?.name) ||
+                craftment?.level_req > userLevelInfo?.level
               }
             />
           </>

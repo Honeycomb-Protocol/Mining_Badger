@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 
 import tabData from "@/data/home-page-tab-data.json";
@@ -10,24 +9,17 @@ import { TabDataProps } from "@/interfaces";
 import Utils from "@/lib/utils";
 import LevelsRequiredModal from "../common/modal";
 import { useHoneycomb } from "@/hooks";
-import { RootState } from "@/store";
 
 const HomePage = () => {
-  const { user, profile } = useHoneycomb();
+  const { user } = useHoneycomb();
   const {
     renderHomeTabComponents,
     renderInventoryTabComponents,
-    getUserLevelInfo,
+    userLevelInfo,
   } = Utils();
-  const { refreshInventory } = useSelector((state: RootState) => state.auth);
   const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
   const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
   const [visible, setVisible] = useState(false);
-  const [userLevelInfo, setUserLevelInfo] = useState<{
-    level?: number;
-    exp_req?: number;
-    current_exp?: number;
-  }>({});
 
   useEffect(() => {
     const addHomeTabComponents = async () => {
@@ -57,19 +49,15 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (profile?.platformData?.xp) {
-      getUserLevelInfo(profile?.platformData?.xp).then((res) =>
-        setUserLevelInfo(res)
-      );
-    }
-  }, [refreshInventory]);
-
-  useEffect(() => {
     document.body.style.backgroundImage =
       "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/main-bg.jpg')";
     document.body.style.backgroundSize = "100vw 100vh";
     document.body.style.backgroundRepeat = "no-repeat";
   }, []);
+
+  const itemClasses = {
+    trigger: "bg-gradient-to-b from-[#2e2727,5%] to-[#1b1414] mb-2",
+  };
 
   return (
     <main className="w-full flex justify-center items-start mt-12 gap-10">
@@ -91,7 +79,7 @@ const HomePage = () => {
                 <p className="text-gray-500">Bronze Pickaxe</p>
               </div>
             </div>
-            <p className="text-gray-500 font-bold cursor-pointer underline">
+            <p className="text-gray-500 font-bold text-sm cursor-pointer bg-gray-900 px-2 py-1 rounded-md">
               EDIT
             </p>
           </div>
@@ -126,8 +114,8 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-[#000000] to-[#30302E] rounded-lg rounded-tl-none rounded-tr-none max-h-[60vh] overflow-y-scroll">
-          <Accordion className="w-full">
+        <div className="bg-gradient-to-b from-[#140a04] to-[#120701] max-h-[60vh] overflow-y-scroll">
+          <Accordion className="w-full" itemClasses={itemClasses}>
             <AccordionItem
               className="w-full"
               key="1"

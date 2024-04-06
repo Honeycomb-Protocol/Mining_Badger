@@ -26,7 +26,7 @@ const AllTab = () => {
   }, [refreshInventory]);
 
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 p-3">
+    <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 py-3">
       {loading ? (
         <Spinner color="white" />
       ) : (
