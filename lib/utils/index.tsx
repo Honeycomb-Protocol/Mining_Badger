@@ -125,23 +125,6 @@ const Utils = () => {
       .padStart(2, "0")}`;
   };
 
-  const MiningDiscount = (name: string) => {
-    switch (name) {
-      case "Bronze":
-        return 0;
-      case "Iron":
-        return "10%";
-      case "Steel":
-        return "20%";
-      case "Mithril":
-        return "30%";
-      case "Adament":
-        return "40%";
-      case "Rune":
-        return "50%";
-    }
-  };
-
   const getLevelsFromExp = (exp: number) => {
     for (let i = 0; i < LevelsData.length; i++) {
       if (exp < LevelsData[i].minExp) {
@@ -425,7 +408,6 @@ const Utils = () => {
     fetchRefinedResoucesData,
     fetchMineResourcesData,
     fetchShopResourcesData,
-    MiningDiscount,
     getUserLevelInfo,
     userLevelInfo,
   };
