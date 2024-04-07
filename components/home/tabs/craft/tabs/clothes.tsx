@@ -22,9 +22,8 @@ const BronzeTab = () => {
 
   useEffect(() => {
     if (!publicKey) return;
-
     const fetchData = async () => {
-      const res = await fetchCraftData("bronze", setDataLoading);
+      const res = await fetchCraftData("clothes", setDataLoading);
       setCraftData(res);
     };
 
@@ -64,7 +63,7 @@ const BronzeTab = () => {
                     setLoading
                   ).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                    // fetchCraftData("bronze", setDataLoading, true);
+                    // fetchCraftData("clothes", setDataLoading, true);
                   }));
               }}
               loading={loading}

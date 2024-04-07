@@ -12,19 +12,24 @@ const Header = () => {
       } items-center w-full`}
     >
       {router.pathname !== "/" && (
-        <WalletMultiButton
-          style={{
-            height: "40px",
-            borderRadius: "15px",
-            backgroundColor: "transparent",
-            color: "#ffffff",
-            width: "174px",
-            display: "flex",
-            justifyContent: "center",
-            border: "2px solid #8E8B77",
-            fontSize: "12px",
-          }}
-        />
+        <div className="flex justify-center items-center">
+          <WalletMultiButton
+            style={{
+              height: "40px",
+              borderRadius: "15px",
+              backgroundColor: "transparent",
+              color: "#ffffff",
+              width: "174px",
+              display: "flex",
+              justifyContent: "center",
+              border: "2px solid #8E8B77",
+              fontSize: "12px",
+            }}
+          />
+          <div>
+            
+          </div>
+        </div>
       )}
       <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
       {router.pathname !== "/" && (

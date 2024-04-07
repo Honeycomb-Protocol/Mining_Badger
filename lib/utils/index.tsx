@@ -5,12 +5,11 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CraftTab from "@/components/home/tabs/craft";
-import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
-import IronTab from "@/components/home/tabs/craft/tabs/iron";
-import AdamantiteTab from "@/components/home/tabs/craft/tabs/adamantite";
-import MithrilTab from "@/components/home/tabs/craft/tabs/mithril";
-import RuniteTab from "@/components/home/tabs/craft/tabs/runite";
-import SteelTab from "@/components/home/tabs/craft/tabs/steel";
+import WeaponsTab from "@/components/home/tabs/craft/tabs/weapons";
+import ShoulderTab from "@/components/home/tabs/craft/tabs/shoulder";
+import GauntletsTab from "@/components/home/tabs/craft/tabs/gauntlets";
+import ClothesTab from "@/components/home/tabs/craft/tabs/clothes";
+import HatsTab from "@/components/home/tabs/craft/tabs/hats";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
@@ -56,21 +55,45 @@ const Utils = () => {
     current_exp?: number;
   }>({});
 
+  //To call the api in every 5 minutes
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (profile?.platformData?.xp !== undefined) {
+        dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+      }
+    }, 5 * 60 * 1000);
+
+    return () => {
+      console.log("Component unmounting, clearing interval");
+      clearInterval(interval);
+    };
+  }, []);
+
+  //To call the api only when the component mounts or refreshInventory/authLoader state changes
+  useEffect(() => {
+    if (
+      (profile?.platformData?.xp !== undefined && refreshInventory === true) ||
+      (profile?.platformData?.xp !== undefined &&
+        authLoader === false &&
+        refreshInventory === false)
+    ) {
+      getUserLevelInfo(profile?.platformData?.xp);
+      dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
+    }
+  }, [refreshInventory, authLoader]);
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
-      case "Bronze":
-        return <BronzeTab />;
-      case "Iron":
-        return <IronTab />;
-      case "Steel":
-        return <SteelTab />;
-      case "Mithril":
-        return <MithrilTab />;
-      case "Adamantite":
-        return <AdamantiteTab />;
-      case "Runite":
-        return <RuniteTab />;
+      case "Weapons":
+        return <WeaponsTab />;
+      case "Shoulder":
+        return <ShoulderTab />;
+      case "Hats":
+        return <HatsTab />;
+      case "Clothes":
+        return <ClothesTab />;
+      case "Gauntlets":
+        return <GauntletsTab />;
     }
   };
 
@@ -242,6 +265,20 @@ const Utils = () => {
     }
   };
 
+  // const getSymbol = (name) => {
+  //   // console.log(cache.craftData);
+
+  //   console.log("data.metadata.name", cache?.craftData);
+  //   if (cache?.craftData?.result?.length > 0) {
+  //     cache?.craftData?.result?.filter((data: any) => {
+  //       if (data.metadata.name === name) {
+  //         console.log("data.metadata.symbol", data.metadata.symbol);
+  //         return data.metadata.symbol;
+  //       }
+  //     });
+  //   }
+  // };
+
   //fetchCraftData that takes name and refetch boolean
   const fetchCraftData = async (
     name: string,
@@ -252,6 +289,8 @@ const Utils = () => {
       setDataLoading(true);
 
       let data = getCache("craftData");
+
+      // await getSymbol("Katana");
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
@@ -387,13 +426,6 @@ const Utils = () => {
       setDataLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (profile?.platformData?.xp !== undefined) {
-      getUserLevelInfo(profile?.platformData?.xp);
-      dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
-    }
-  }, [refreshInventory, authLoader]);
 
   return {
     renderCraftTabComponents,

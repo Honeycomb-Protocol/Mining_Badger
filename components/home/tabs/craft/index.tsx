@@ -29,7 +29,7 @@ const CraftTab = () => {
       <CustomTabs
         isVertical={true}
         tabData={craftTabData}
-        initialActiveTab="Bronze"
+        initialActiveTab="Weapons"
       />
     </div>
   );

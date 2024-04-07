@@ -1,7 +1,7 @@
 import { Spinner } from "@nextui-org/react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
@@ -22,8 +22,9 @@ const BronzeTab = () => {
 
   useEffect(() => {
     if (!publicKey) return;
+
     const fetchData = async () => {
-      const res = await fetchCraftData("runite", setDataLoading);
+      const res = await fetchCraftData("weapons", setDataLoading);
       setCraftData(res);
     };
 
@@ -63,7 +64,7 @@ const BronzeTab = () => {
                     setLoading
                   ).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                    // fetchCraftData("runite", setDataLoading, true);
+                    // fetchCraftData("weapons", setDataLoading, true);
                   }));
               }}
               loading={loading}

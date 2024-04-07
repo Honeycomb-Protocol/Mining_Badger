@@ -23,7 +23,7 @@ const BronzeTab = () => {
   useEffect(() => {
     if (!publicKey) return;
     const fetchData = async () => {
-      const res = await fetchCraftData("adamantite", setDataLoading);
+      const res = await fetchCraftData("gauntlets", setDataLoading);
       setCraftData(res);
     };
 
@@ -63,7 +63,7 @@ const BronzeTab = () => {
                     setLoading
                   ).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                    // fetchCraftData("adamantite", setDataLoading, true);
+                    // fetchCraftData("gauntlets", setDataLoading, true);
                   }));
               }}
               loading={loading}

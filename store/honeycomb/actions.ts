@@ -10,14 +10,15 @@ import type { AsyncActions } from "../actions/types.js";
 import type { HoneycombState } from "../types.js";
 import { HPL_PROJECT } from "../../config/config.js";
 import base58 from "bs58";
-import {
-  VersionedTransaction,
-  sendAndConfirmTransaction,
-} from "@solana/web3.js";
+import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 const actionFactory = (actions: AsyncActions) => {
+  const connection = new Connection(
+    process.env.NEXT_PUBLIC_RPC_ENDPOINT!,
+    "confirmed"
+  );
   const setWallet = createAsyncThunk<WalletContextState, WalletContextState>(
     "honeycomb/identity",
     async (wallet, { rejectWithValue, fulfillWithValue, getState }) => {
@@ -118,7 +119,7 @@ const actionFactory = (actions: AsyncActions) => {
   >(
     "honeycomb/createUserAndProfile",
     async (args, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
-      console.log("createUserAndProfile", args);
+      // console.log("createUserAndProfile", args);
 
       const { wallet, edgeClient } = (
         getState() as { honeycomb: HoneycombState }
@@ -162,10 +163,6 @@ const actionFactory = (actions: AsyncActions) => {
         });
 
         const transaction = data.createNewUserWithProfileTransaction;
-        // const txn = VersionedTransaction.deserialize(
-        //   base58.decode(transaction.transaction)
-        // );
-        // const signTxn = await wallet.signTransaction(txn);
 
         const user = await edgeClient
           .sendBulkTransactions({
@@ -176,15 +173,6 @@ const actionFactory = (actions: AsyncActions) => {
               commitment: "confirmed",
               skipPreflight: true,
             },
-          })
-          .then((res) => {
-            toast.update(toastId, {
-              autoClose: 5000,
-              type: "success",
-              render: "Profile Creation Successful!!",
-              progress: 1,
-            });
-            return res;
           })
           .catch((e) => {
             console.error(
@@ -201,7 +189,27 @@ const actionFactory = (actions: AsyncActions) => {
           });
 
         await wait(1000);
-        await dispatch(fetchUser());
+        await dispatch(fetchUser()).then(async (x: any) => {
+          try {
+            const airdropSignature = await connection.requestAirdrop(
+              new PublicKey(x.payload?.wallets?.shadow),
+              5 * LAMPORTS_PER_SOL
+            );
+            const confirmation = await connection.confirmTransaction(
+              airdropSignature,
+              "confirmed"
+            );
+            console.log("Airdrop successful:", confirmation);
+            toast.update(toastId, {
+              autoClose: 5000,
+              type: "success",
+              render: "Profile Creation Successful!!",
+              progress: 1,
+            });
+          } catch (error) {
+            console.error("Airdrop error:", error);
+          }
+        });
         await dispatch(fetchProfile());
         await dispatch(authenticate());
 
@@ -384,10 +392,11 @@ const actionFactory = (actions: AsyncActions) => {
   >(
     "honeycomb/createProfile",
     async (args, { rejectWithValue, fulfillWithValue, getState, dispatch }) => {
-      const { wallet, edgeClient } = (
+      const { wallet, edgeClient, user } = (
         getState() as { honeycomb: HoneycombState }
       ).honeycomb;
       // const { authToken } = (getState() as { auth: AuthState }).auth;
+      console.log("user", user);
 
       try {
         if (!wallet.publicKey) {
@@ -443,6 +452,17 @@ const actionFactory = (actions: AsyncActions) => {
               commitment: "confirmed",
               skipPreflight: true,
             },
+          })
+          .then(async (res) => {
+            const airdropSignature = await connection.requestAirdrop(
+              new PublicKey(user?.wallets?.shadow),
+              5 * LAMPORTS_PER_SOL
+            );
+            const confirmation = await connection.confirmTransaction(
+              airdropSignature
+            );
+            console.log("Airdrop confirmation", confirmation);
+            return res;
           })
           .catch((e) => {
             console.error(
