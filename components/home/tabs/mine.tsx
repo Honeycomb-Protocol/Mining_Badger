@@ -14,7 +14,7 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const MineTab = () => {
   const dispatch = useDispatch();
-  const { fetchMineResourcesData, userLevelInfo } = Utils();
+  const { fetchMineResourcesData } = Utils();
   const { publicKey } = useWallet();
   const [mineData, setMineData] = useState([]);
   const { user } = useHoneycomb();
@@ -64,7 +64,7 @@ const MineTab = () => {
             key={index}
             name={data?.metadata?.name}
             picture={data?.metadata?.uri}
-            level={data?.level_req}
+            // level={data?.level_req}
             buttonText="Mine"
             width={150}
             imageWidth={80}
@@ -72,22 +72,20 @@ const MineTab = () => {
             nftNameStyle="text-[15px] pr-1"
             btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
             expIn={data?.expire}
-            resourceInfo={
-              userLevelInfo.level < data?.level_req
-                ? `User level ${data?.level_req} is required to mine this resource.`
-                : ""
-            }
+            // resourceInfo={
+            //   userLevelInfo.level < data?.level_req
+            //     ? `User level ${data?.level_req} is required to mine this resource.`
+            //     : ""
+            // }
             btnDisabled={
               data?.expire - Date.now() > 0 ||
-              loading.name === data.metadata?.name ||
-              userLevelInfo.level < data?.level_req
+              loading.name === data.metadata?.name
+              //  ||
+              // userLevelInfo.level < data?.level_req
             }
             btnClick={async () =>
-              userLevelInfo.level >= data?.level_req &&
-              (await mineResource(
-                data?.addresses?.resource,
-                data.metadata?.name
-              ))
+              // userLevelInfo.level >= data?.level_req &&
+              await mineResource(data?.addresses?.resource, data.metadata?.name)
             }
             loading={loading}
           />
