@@ -91,6 +91,7 @@ const actionFactory = (actions: AsyncActions) => {
         const profile = await edgeClient
           .findProfiles({
             userIds: [user.id],
+            projects: [HPL_PROJECT.toString()],
           })
           .then((data) => {
             if (!data || !data.profile.length) {
