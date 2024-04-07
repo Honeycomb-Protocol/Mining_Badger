@@ -10,6 +10,10 @@ import type { AsyncActions } from "../actions/types.js";
 import type { HoneycombState } from "../types.js";
 import { HPL_PROJECT } from "../../config/config.js";
 import base58 from "bs58";
+import {
+  VersionedTransaction,
+  sendAndConfirmTransaction,
+} from "@solana/web3.js";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -157,6 +161,10 @@ const actionFactory = (actions: AsyncActions) => {
         });
 
         const transaction = data.createNewUserWithProfileTransaction;
+        // const txn = VersionedTransaction.deserialize(
+        //   base58.decode(transaction.transaction)
+        // );
+        // const signTxn = await wallet.signTransaction(txn);
 
         const user = await edgeClient
           .sendBulkTransactions({
@@ -351,14 +359,11 @@ const actionFactory = (actions: AsyncActions) => {
             return createdProfile;
           })
           .catch((e) => {
-            console.error(
-              "an unexpected error occured while creating User Profile",
-              e
-            );
+            console.error("an unexpected error occured while creating User", e);
             toast.update(toastId, {
               autoClose: 5000,
               type: "error",
-              render: "an unexpected error occured while creating User Profile",
+              render: "an unexpected error occured while creating User",
               progress: 1,
             });
             throw rejectWithValue(e);

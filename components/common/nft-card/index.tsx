@@ -37,13 +37,17 @@ const NftCard: React.FC<CardProps> = ({
     height: imageHeight ? `${imageHeight}px` : "176px",
   };
 
-  const materialsList = materials?.map((material, index) => (
-    <div key={index} className="flex items-center justify-center mr-2">
-      <Image src={material?.uri} alt={material?.name} width={20} height={20} />
-      <p className="text-xs text-gray-300 ml-1">x{material?.amount}</p>
-    </div>
-  ));
+  const materialsList = materials?.map((material, index) => {
+    const uri = material?.uri.replace("htthttps://", "https://");
+    return (
+      <div key={index} className="flex items-center justify-center mr-2">
+        <Image src={uri} alt={material?.name} width={20} height={20} />
+        <p className="text-xs text-gray-300 ml-1">x{material?.amount}</p>
+      </div>
+    );
+  });
 
+  const imagePic = picture.replace("htthttps://", "https://");
   return (
     <div
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}
@@ -73,7 +77,7 @@ const NftCard: React.FC<CardProps> = ({
         </div>
       )}
       <div className={`relative`} style={cardStyle}>
-        <Image src={picture} alt={name} fill />
+        <Image src={imagePic} alt={name} fill />
         {miningTimeReduction && (
           <div className="absolute top-2 -right-8 z-50 bg-gradient-to-r from-[#2d2f31,#747474] to-[#2d2f31] text-sm px-2 rounded">
             {miningTimeReduction}

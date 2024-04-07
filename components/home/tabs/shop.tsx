@@ -35,6 +35,7 @@ const ShopTab = () => {
   const claimResource = async (resourceId: string, name: string) => {
     try {
       setLoading({ name: name, status: true });
+      console.log("Claiming resource", resourceId);
       const result = await axios.post(`${API_URL}faucet/mine`, {
         user: {
           id: user.id,
