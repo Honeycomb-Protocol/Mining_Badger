@@ -45,10 +45,12 @@ const getCache = (name: string) => {
 const Utils = () => {
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
+
   const { edgeClient, user, authToken, profile } = useHoneycomb();
   const { refreshInventory, authLoader } = useSelector(
     (state: RootState) => state.auth
   );
+
   const [userLevelInfo, setUserLevelInfo] = useState<{
     level?: number;
     exp_req?: number;
