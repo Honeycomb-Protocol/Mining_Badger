@@ -110,7 +110,7 @@ const Header = () => {
           <div className="flex flex-row gap-5 ml-5">
             <Image
               onClick={() => {
-                router.push("/home");
+                window.open("https://docs.honeycombprotocol.com/");
               }}
               className="cursor-pointer"
               width={35}
@@ -124,12 +124,20 @@ const Header = () => {
               height={30}
               src="/assets/svgs/twitter-x-icon.svg"
               alt="twitter"
+              className="cursor-pointer"
+              onClick={() => {
+                window.open("https://twitter.com/honeycomb_prtcl");
+              }}
             />
             <Image
               width={30}
               height={30}
               src="/assets/svgs/discord-icon.svg"
               alt="discord"
+              className="cursor-pointer"
+              onClick={() => {
+                window.open("https://discord.com/invite/honeycombprotocol");
+              }}
             />
           </div>
         </div>
