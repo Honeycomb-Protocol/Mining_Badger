@@ -47,19 +47,15 @@ const Utils = () => {
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
   const { edgeClient, user, authToken, profile } = useHoneycomb();
-  const { refreshInventory } = useSelector((state: RootState) => state.auth);
+  const { refreshInventory, authLoader } = useSelector(
+    (state: RootState) => state.auth
+  );
   const [userLevelInfo, setUserLevelInfo] = useState<{
     level?: number;
     exp_req?: number;
     current_exp?: number;
   }>({});
 
-  useEffect(() => {
-    if (profile?.platformData?.xp) {
-      getUserLevelInfo();
-      dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
-    }
-  }, [refreshInventory]);
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
@@ -134,7 +130,7 @@ const Utils = () => {
     return LevelsData[LevelsData.length - 1].level;
   };
 
-  const getUserLevelInfo = async () => {
+  const getUserLevelInfo = async (xp: number) => {
     try {
       let data = getCache("userInfo");
 
@@ -142,11 +138,7 @@ const Utils = () => {
         setUserLevelInfo(data?.result);
         return data?.result;
       }
-      data = (
-        await axios.get(
-          `${API_URL}resources/level/${profile?.platformData?.xp}`
-        )
-      ).data;
+      data = (await axios.get(`${API_URL}resources/level/${xp}`)).data;
       setCache("userInfo", data);
       setUserLevelInfo(data?.result);
       return data?.result;
@@ -395,6 +387,13 @@ const Utils = () => {
       setDataLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (profile?.platformData?.xp !== undefined) {
+      getUserLevelInfo(profile?.platformData?.xp);
+      dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
+    }
+  }, [refreshInventory, authLoader]);
 
   return {
     renderCraftTabComponents,
