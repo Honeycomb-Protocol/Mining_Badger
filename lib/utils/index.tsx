@@ -5,11 +5,12 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CraftTab from "@/components/home/tabs/craft";
-import WeaponsTab from "@/components/home/tabs/craft/tabs/weapons";
-import ShoulderTab from "@/components/home/tabs/craft/tabs/shoulder";
-import GauntletsTab from "@/components/home/tabs/craft/tabs/gauntlets";
-import ClothesTab from "@/components/home/tabs/craft/tabs/clothes";
-import HatsTab from "@/components/home/tabs/craft/tabs/hats";
+import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
+import IronTab from "@/components/home/tabs/craft/tabs/iron";
+import AdamantiteTab from "@/components/home/tabs/craft/tabs/adamantite";
+import MithrilTab from "@/components/home/tabs/craft/tabs/mithril";
+import RuniteTab from "@/components/home/tabs/craft/tabs/runite";
+import SteelTab from "@/components/home/tabs/craft/tabs/steel";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
@@ -87,16 +88,18 @@ const Utils = () => {
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
-      case "Weapons":
-        return <WeaponsTab />;
-      case "Shoulder":
-        return <ShoulderTab />;
-      case "Hats":
-        return <HatsTab />;
-      case "Clothes":
-        return <ClothesTab />;
-      case "Gauntlets":
-        return <GauntletsTab />;
+      case "Bronze":
+        return <BronzeTab />;
+      case "Iron":
+        return <IronTab />;
+      case "Steel":
+        return <SteelTab />;
+      case "Mithril":
+        return <MithrilTab />;
+      case "Adamantite":
+        return <AdamantiteTab />;
+      case "Runite":
+        return <RuniteTab />;
     }
   };
 

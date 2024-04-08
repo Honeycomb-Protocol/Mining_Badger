@@ -1,26 +1,31 @@
 [
   {
-    "name": "Weapons",
+    "name": "Bronze",
     "notifications": 0,
     "tabComponent": ""
   },
   {
-    "name": "Shoulder",
+    "name": "Iron",
     "notifications": 0,
     "tabComponent": ""
   },
   {
-    "name": "Hats",
+    "name": "Steel",
     "notifications": 0,
     "tabComponent": ""
   },
   {
-    "name": "Clothes",
+    "name": "Mithril",
     "notifications": 0,
     "tabComponent": ""
   },
   {
-    "name": "Gauntlets",
+    "name": "Adamantite",
+    "notifications": 0,
+    "tabComponent": ""
+  },
+  {
+    "name": "Runite",
     "notifications": 0,
     "tabComponent": ""
   }

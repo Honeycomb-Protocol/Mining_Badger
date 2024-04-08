@@ -7,9 +7,7 @@ import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
 import { AuthActionsWithoutThunk } from "@/store/auth";
 
-//import filterResourcesByMetadataSymbols
-
-const BronzeTab = () => {
+const AdamantiteTab = () => {
   const { publicKey } = useWallet();
   const { createRecipe, fetchCraftData, userLevelInfo } = Utils();
   const dispatch = useDispatch();
@@ -23,7 +21,7 @@ const BronzeTab = () => {
   useEffect(() => {
     if (!publicKey) return;
     const fetchData = async () => {
-      const res = await fetchCraftData("clothes", setDataLoading);
+      const res = await fetchCraftData("adamantite", setDataLoading);
       setCraftData(res);
     };
 
@@ -63,7 +61,7 @@ const BronzeTab = () => {
                     setLoading
                   ).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                    // fetchCraftData("clothes", setDataLoading, true);
+                    // fetchCraftData("adamantite", setDataLoading, true);
                   }));
               }}
               loading={loading}
@@ -80,4 +78,4 @@ const BronzeTab = () => {
   );
 };
 
-export default BronzeTab;
+export default AdamantiteTab;

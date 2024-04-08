@@ -1,11 +1,12 @@
 import { CraftSymbols } from "@/interfaces";
 
 export const craftSymbols: CraftSymbols = {
-  gauntlets: ["CH", "JT", "KC", "LG", "OG", "PGL", "PGun", "PP", "PS"],
-  weapons: ["HS", "BD", "BS", "BM", "CD", "DR", "PXB", "PG", "RA", "WH"],
-  shoulder: ["CB", "FBC", "FG", "ID", "KT", "MH", "PC", "RH", "TK"],
-  hats: ["EH", "HS", "MG", "MS", "RAG", "R-Hair", "RG", "TC", "TTH"],
-  clothes: ["BJ", "DE", "EG", "HA", "JR", "SD", "SF", "SK", "SW"],
+  adamantite: ["CH", "JT", "KC", "LG", "OG", "PGL", "PGun", "PP", "PS"],
+  bronze: ["BD", "BS", "BM", "CD", "DR", "PXB", "PG", "RA", "WH"],
+  iron: ["CB", "FBC", "FG", "ID", "KT", "MH", "PC", "RH", "TK"],
+  mithril: ["EH", "HS", "MG", "MS", "RAG", "R-Hair", "RG", "TC", "TTH"],
+  runite: ["CS", "ECB", "JJ", "KI", "MA", "OGR", "PO", "SC", "SM"],
+  steel: ["BJ", "DE", "EG", "HA", "JR", "SD", "SF", "SK", "SW"],
 };
 
 export const inventorySymbols = {
