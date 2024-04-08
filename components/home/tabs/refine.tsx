@@ -39,7 +39,6 @@ const RefineTab = () => {
               key={index}
               name={refinement?.metadata?.name}
               picture={refinement?.metadata?.uri}
-              level={refinement?.level_req}
               buttonText="Refine"
               width={150}
               imageWidth={90}
