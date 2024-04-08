@@ -233,7 +233,7 @@ const Utils = () => {
             blockhash: txResponse!.blockhash,
             lastValidBlockHeight: txResponse!.lastValidBlockHeight,
             options: {
-              commitment: "confirmed",
+              commitment: "processed",
               skipPreflight: true,
             },
           },

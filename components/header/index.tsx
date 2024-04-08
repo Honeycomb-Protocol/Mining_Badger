@@ -19,7 +19,7 @@ const Header = () => {
 
   const connection = new Connection(
     process.env.NEXT_PUBLIC_RPC_ENDPOINT!,
-    "confirmed"
+    "processed"
   );
 
   //To get the user's sol balance

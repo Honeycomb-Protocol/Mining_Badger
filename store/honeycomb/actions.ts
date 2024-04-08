@@ -17,7 +17,7 @@ const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 const actionFactory = (actions: AsyncActions) => {
   const connection = new Connection(
     process.env.NEXT_PUBLIC_RPC_ENDPOINT!,
-    "confirmed"
+    "processed"
   );
   const setWallet = createAsyncThunk<WalletContextState, WalletContextState>(
     "honeycomb/identity",
@@ -170,7 +170,7 @@ const actionFactory = (actions: AsyncActions) => {
             blockhash: transaction.blockhash,
             lastValidBlockHeight: transaction.lastValidBlockHeight,
             options: {
-              commitment: "confirmed",
+              commitment: "processed",
               skipPreflight: true,
             },
           })
@@ -197,7 +197,7 @@ const actionFactory = (actions: AsyncActions) => {
             );
             const confirmation = await connection.confirmTransaction(
               airdropSignature,
-              "confirmed"
+              "processed"
             );
             console.log("Airdrop successful:", confirmation);
             toast.update(toastId, {
@@ -272,7 +272,7 @@ const actionFactory = (actions: AsyncActions) => {
             blockhash: transaction.blockhash,
             lastValidBlockHeight: transaction.lastValidBlockHeight,
             options: {
-              commitment: "confirmed",
+              commitment: "processed",
               skipPreflight: true,
             },
           })
@@ -449,7 +449,7 @@ const actionFactory = (actions: AsyncActions) => {
             blockhash: transaction.blockhash,
             lastValidBlockHeight: transaction.lastValidBlockHeight,
             options: {
-              commitment: "confirmed",
+              commitment: "processed",
               skipPreflight: true,
             },
           })
