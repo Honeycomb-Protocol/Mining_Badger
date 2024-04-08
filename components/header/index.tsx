@@ -65,7 +65,7 @@ const Header = () => {
               fontSize: "12px",
             }}
           />
-          {user?.wallets?.shadow && (
+          {/* {user?.wallets?.shadow && (
             <div className="rounded-lg border-2 border-gray-800 p-2 ml-6">
               <div className="flex justify-center items-center">
                 <p>Shadow Signer</p>
@@ -103,7 +103,7 @@ const Header = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
         </div>
       )}
       <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
