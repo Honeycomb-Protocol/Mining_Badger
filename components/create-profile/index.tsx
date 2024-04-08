@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import CustomInput from "../common/input";
@@ -9,7 +7,6 @@ import Button from "../common/button";
 import { useHoneycomb } from "@/hooks";
 
 const CreateProfilePage = () => {
-  const router = useRouter();
   const { createUserAndProfile, user, createProfile } = useHoneycomb();
   const [profile, setProfile] = useState({
     username: "",

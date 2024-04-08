@@ -9,7 +9,7 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 
 //import filterResourcesByMetadataSymbols
 
-const BronzeTab = () => {
+const SteelTab = () => {
   const { publicKey } = useWallet();
   const { createRecipe, fetchCraftData, userLevelInfo } = Utils();
   const dispatch = useDispatch();
@@ -22,8 +22,9 @@ const BronzeTab = () => {
 
   useEffect(() => {
     if (!publicKey) return;
+
     const fetchData = async () => {
-      const res = await fetchCraftData("hats", setDataLoading);
+      const res = await fetchCraftData("steel", setDataLoading);
       setCraftData(res);
     };
 
@@ -63,7 +64,7 @@ const BronzeTab = () => {
                     setLoading
                   ).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                    // fetchCraftData("hats", setDataLoading, true);
+                    // fetchCraftData("steel", setDataLoading, true);
                   }));
               }}
               loading={loading}
@@ -80,4 +81,4 @@ const BronzeTab = () => {
   );
 };
 
-export default BronzeTab;
+export default SteelTab;

@@ -51,25 +51,22 @@ const Header = () => {
       } items-center w-full`}
     >
       {router.pathname !== "/" && (
-        <WalletMultiButton
-          style={{
-            height: "40px",
-            borderRadius: "15px",
-            backgroundColor: "transparent",
-            color: "#ffffff",
-            width: "174px",
-            display: "flex",
-            justifyContent: "center",
-            border: "2px solid #8E8B77",
-            fontSize: "12px",
-          }}
-        />
-      )}
-      <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
-      {router.pathname !== "/" && (
         <div className="flex justify-center items-center">
+          <WalletMultiButton
+            style={{
+              height: "40px",
+              borderRadius: "15px",
+              backgroundColor: "transparent",
+              color: "#ffffff",
+              width: "174px",
+              display: "flex",
+              justifyContent: "center",
+              border: "2px solid #8E8B77",
+              fontSize: "12px",
+            }}
+          />
           {user?.wallets?.shadow && (
-            <div className="rounded-lg border-2 border-gray-800 p-2">
+            <div className="rounded-lg border-2 border-gray-800 p-2 ml-6">
               <div className="flex justify-center items-center">
                 <p>Shadow Signer</p>
                 <p className="text-sm text-gray-400 ml-5">{`${user?.wallets?.shadow.slice(
@@ -107,31 +104,42 @@ const Header = () => {
               </div>
             </div>
           )}
-          <div className="flex flex-row gap-5 ml-5">
-            <Image
-              onClick={() => {
-                router.push("/home");
-              }}
-              className="cursor-pointer"
-              width={35}
-              height={35}
-              src="/assets/svgs/home-icon.svg"
-              alt="github"
-            />
+        </div>
+      )}
+      <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
+      {router.pathname !== "/" && (
+        <div className="flex flex-row gap-5">
+          <Image
+            onClick={() => {
+              window.open("https://docs.honeycombprotocol.com/");
+            }}
+            className="cursor-pointer"
+            width={35}
+            height={35}
+            src="/assets/svgs/home-icon.svg"
+            alt="github"
+          />
 
-            <Image
-              width={30}
-              height={30}
-              src="/assets/svgs/twitter-x-icon.svg"
-              alt="twitter"
-            />
-            <Image
-              width={30}
-              height={30}
-              src="/assets/svgs/discord-icon.svg"
-              alt="discord"
-            />
-          </div>
+          <Image
+            width={30}
+            height={30}
+            src="/assets/svgs/twitter-x-icon.svg"
+            alt="twitter"
+            className="cursor-pointer"
+            onClick={() => {
+              window.open("https://twitter.com/honeycomb_prtcl");
+            }}
+          />
+          <Image
+            width={30}
+            height={30}
+            src="/assets/svgs/discord-icon.svg"
+            alt="discord"
+            className="cursor-pointer"
+            onClick={() => {
+              window.open("https://discord.com/invite/honeycombprotocol");
+            }}
+          />
         </div>
       )}
     </div>
