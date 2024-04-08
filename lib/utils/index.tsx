@@ -25,6 +25,7 @@ import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
 import { RootState } from "@/store";
 import { AuthActionsWithoutThunk } from "@/store/auth";
+import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 
 let cache = {
   craftData: {},
@@ -206,10 +207,21 @@ const Utils = () => {
       if (!edgeClient || !user || !authToken)
         throw new Error("Unable to find edgeClient or user or authToken");
 
-      console.log(
-        "fund this wallet if it doesn't work or you're doing it for the first time",
-        user.wallets.shadow
+      const connection = new Connection(
+        process.env.NEXT_PUBLIC_RPC_ENDPOINT!,
+        "confirmed"
       );
+
+      const balance =
+        (await connection.getBalance(new PublicKey(user?.wallets?.shadow))) /
+        LAMPORTS_PER_SOL;
+
+      if (balance < 0.000005) {
+        toast.error(
+          "Insufficient balance! Fund your shadow signer wallet with SOL to continue creating recipe."
+        );
+        return;
+      }
 
       console.log("Recipe", recipe);
       setLoading({ name: name, status: true });

@@ -195,11 +195,7 @@ const actionFactory = (actions: AsyncActions) => {
               new PublicKey(x.payload?.wallets?.shadow),
               5 * LAMPORTS_PER_SOL
             );
-            const confirmation = await connection.confirmTransaction(
-              airdropSignature,
-              "confirmed"
-            );
-            console.log("Airdrop successful:", confirmation);
+            await connection.confirmTransaction(airdropSignature, "confirmed");
             toast.update(toastId, {
               autoClose: 5000,
               type: "success",
