@@ -203,7 +203,7 @@ const actionFactory = (actions: AsyncActions) => {
               progress: 1,
             });
           } catch (error) {
-            console.error("Airdrop error:", error);
+            console.error("Airdrop error :", error);
           }
         });
         await dispatch(fetchProfile());
