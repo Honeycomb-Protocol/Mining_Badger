@@ -111,7 +111,7 @@ const Header = () => {
         <div className="flex flex-row gap-5">
           <Image
             onClick={() => {
-              window.open("https://docs.honeycombprotocol.com/");
+              window.open("https://www.honeycombprotocol.com/");
             }}
             className="cursor-pointer"
             width={35}
