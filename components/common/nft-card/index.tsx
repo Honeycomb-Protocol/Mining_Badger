@@ -27,6 +27,7 @@ const NftCard: React.FC<CardProps> = ({
   loading,
   miningTimeReduction,
   resourceInfo,
+  isCompressed,
 }) => {
   const [timeLeft, setTimeLeft] = useState(
     expIn > Date.now() ? expIn - Date.now() : 0
@@ -50,6 +51,11 @@ const NftCard: React.FC<CardProps> = ({
   const imagePic = picture.replace("htthttps://", "https://");
   return (
     <div
+      onClick={() => {
+        if (isCompressed) {
+          console.log("Compressed Item Clicked");
+        }
+      }}
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}
       style={{ width: width ? width : "max-content" }}
     >

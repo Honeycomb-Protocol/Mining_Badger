@@ -77,6 +77,7 @@ export interface CardProps {
   loading?: { name: string; status: boolean };
   miningTimeReduction?: string;
   resourceInfo?: string;
+  isCompressed?: boolean;
 }
 
 export interface ModalProps {
