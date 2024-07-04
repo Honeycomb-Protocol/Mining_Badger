@@ -44,6 +44,18 @@ const setCache = (name: string, data: any) => {
 const getCache = (name: string) => {
   return cache[name];
 };
+
+const resetCache = () => {
+  cache = {
+    craftData: {},
+    inventoryData: {},
+    refineData: {},
+    mineData: {},
+    shopData: {},
+    userInfo: null,
+  };
+};
+
 const Utils = () => {
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
@@ -460,6 +472,7 @@ const Utils = () => {
     fetchShopResourcesData,
     getUserLevelInfo,
     userLevelInfo,
+    resetCache,
   };
 };
 
