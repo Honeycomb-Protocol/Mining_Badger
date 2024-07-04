@@ -9,6 +9,8 @@ export interface HoneycombState {
   loaders: {
     [key: string]: boolean;
   };
+  userApiCalled: boolean;
+  profileApiCalled: boolean;
 }
 
 export interface AuthState {
@@ -16,6 +18,7 @@ export interface AuthState {
   authLoader: boolean;
   refreshInventory: boolean;
   authToken: string | null | undefined;
+  wallet: string | null;
 }
 
 export type SignUpUserData = {

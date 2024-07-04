@@ -14,25 +14,35 @@ interface AuthenticationWrapperProps {
 const CheckConnection: React.FC<AuthenticationWrapperProps> = ({
   children,
 }) => {
-  const { user, profile } = useHoneycomb();
+  const {
+    user,
+    profile,
+    fetchingUser,
+    fetchingProfile,
+    userApiCalled,
+    profileApiCalled,
+  } = useHoneycomb();
   const { authLoader } = useSelector((state: RootState) => state.auth);
 
   const { connected } = useWallet();
   const router = useRouter();
 
   useEffect(() => {
-    if (!connected) {
-      router.push("/");
-    } else if (!user || !profile) {
+    if (
+      connected &&
+      !fetchingProfile &&
+      !fetchingUser &&
+      userApiCalled &&
+      profileApiCalled &&
+      (!user || !profile)
+    ) {
       router.push("/create-profile");
-    } else {
-      router.push("/home");
     }
-  }, [connected, user, profile]);
+  }, [user, profile]);
 
   return (
     <>
-      {authLoader ? (
+      {authLoader || fetchingProfile || fetchingUser ? (
         <div className="flex justify-center items-center mt-10">
           <Spinner color="white" />
         </div>

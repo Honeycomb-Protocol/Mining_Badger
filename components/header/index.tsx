@@ -8,6 +8,7 @@ import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 
 import { useHoneycomb } from "@/hooks";
 import { RootState } from "@/store";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const Header = () => {
   const router = useRouter();

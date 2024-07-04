@@ -91,6 +91,7 @@ const CreateProfilePage = () => {
             styles="h-12 text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={async () => {
+              console.log("userrrr", user);
               if (user) {
                 await createProfile({
                   name: profile.username,

@@ -7,6 +7,7 @@ const initialState: AuthState = {
   authLoader: false,
   authToken: null,
   refreshInventory: false,
+  wallet: null,
 };
 
 export const slice = createSlice({
@@ -18,6 +19,7 @@ export const slice = createSlice({
       state.authLoader = initialState.authLoader;
       state.authToken = initialState.authToken;
       state.refreshInventory = initialState.refreshInventory;
+      state.wallet = initialState.wallet;
     },
     setRefreshInventory: (state, action) => {
       state.refreshInventory = action.payload;
@@ -34,6 +36,7 @@ export const slice = createSlice({
         state.authStatus = "success";
         state.authToken = action.payload.token;
         state.authLoader = false;
+        state.wallet = action.payload.wallet;
       }
     );
     builder.addCase(actions.honeycomb.authenticate.rejected, (state) => {

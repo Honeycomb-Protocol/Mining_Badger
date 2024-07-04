@@ -7,7 +7,7 @@ const HPL_PROJECT = new PublicKey(
 const API_URL = process.env.NEXT_PUBLIC_APIURL || "";
 const LUT_ADDRESSES = process.env.NEXT_PUBLIC_LUTADDRESSES?.split(",") || [];
 const EDGE_CLIENT = process.env.NEXT_PUBLIC_EDGE_CLIENT || "";
-const PAYER_DRIVER = process.env.PAYER_DRIVER || "";
+const PAYER_DRIVER = process.env.NEXT_PUBLIC_PAYER_DRIVER || "";
 
 const connection = new Connection(RPC_URL);
 

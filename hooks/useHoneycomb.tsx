@@ -1,7 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store";
-import { honeycomb as honeycombActions } from "../store/actions";
+import {
+  honeycomb as honeycombActions,
+  auth as AuthActions,
+} from "../store/actions";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { Profile, User } from "@honeycomb-protocol/edge-client";
 
@@ -11,13 +14,17 @@ export function useHoneycomb() {
     (state: RootState) => state.honeycomb
   );
   const {
-    fetchUser: fetchingUser,
-    fetchProfile: fetchingProfile,
-    createUser: creatingUser,
-    createProfile: creatingProfile,
-    honeycomb: honeycombLoading,
-    fetchUserNfts: fetchingNfts,
-  } = useSelector((state: RootState) => state.honeycomb.loaders);
+    loaders: {
+      fetchUser: fetchingUser,
+      fetchProfile: fetchingProfile,
+      createUser: creatingUser,
+      createProfile: creatingProfile,
+      honeycomb: honeycombLoading,
+      fetchUserNfts: fetchingNfts,
+    },
+    userApiCalled,
+    profileApiCalled,
+  } = useSelector((state: RootState) => state.honeycomb);
   const { authToken, authLoader, refreshInventory } = useSelector(
     (state: RootState) => state.auth
   );
@@ -49,6 +56,7 @@ export function useHoneycomb() {
 
   const createUserAndProfile = React.useCallback(
     async (args: { username: string; bio: string; pfp: string | File }) => {
+      console.log("checking create user and profile");
       const identity = await dispatch(
         honeycombActions.createUserAndProfile(args)
       ).then((x) => x.payload as User);
@@ -92,6 +100,10 @@ export function useHoneycomb() {
     return status;
   }, []);
 
+  const logout = React.useCallback(async () => {
+    await dispatch(AuthActions.logout());
+  }, []);
+
   return {
     user,
     profile,
@@ -114,5 +126,8 @@ export function useHoneycomb() {
     authLoader,
     authToken,
     refreshInventory,
+    userApiCalled,
+    profileApiCalled,
+    logout,
   };
 }

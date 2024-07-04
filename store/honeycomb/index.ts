@@ -27,6 +27,8 @@ const initialState: HoneycombState = {
     loadIdentityDeps: false,
     fetchUserNfts: false,
   },
+  userApiCalled: false,
+  profileApiCalled: false,
 };
 
 export const slice = createSlice({
@@ -39,9 +41,20 @@ export const slice = createSlice({
     clearUser: (state) => {
       state.user = null;
     },
+    clearProfile: (state) => {
+      state.profile = null;
+    },
+    clearUserApiCalled: (state) => {
+      state.userApiCalled = false;
+    },
+    clearProfileApiCalled: (state) => {
+      state.profileApiCalled = false;
+    },
     resetStates: (state) => {
       state.user = null;
       state.profile = null;
+      state.userApiCalled = false;
+      state.profileApiCalled = false;
     },
   },
   extraReducers: (builder) => {
@@ -74,12 +87,14 @@ export const slice = createSlice({
       state.loaders = { ...state.loaders, fetchUser: true };
     });
     builder.addCase(actions.honeycomb.fetchUser.fulfilled, (state, action) => {
-      console.log("irun", action.payload);
+      console.log("sadkas");
       state.user = action.payload;
+      state.userApiCalled = true;
       state.loaders = { ...state.loaders, fetchUser: false };
     });
     builder.addCase(actions.honeycomb.fetchUser.rejected, (state, action) => {
       state.user = null;
+      state.userApiCalled = true;
       state.loaders = { ...state.loaders, fetchUser: false };
     });
     builder.addCase(actions.honeycomb.fetchProfile.pending, (state) => {
@@ -89,11 +104,13 @@ export const slice = createSlice({
       actions.honeycomb.fetchProfile.fulfilled,
       (state, action) => {
         state.profile = action.payload;
+        state.profileApiCalled = true;
         state.loaders = { ...state.loaders, fetchProfile: false };
       }
     );
     builder.addCase(actions.honeycomb.fetchProfile.rejected, (state) => {
       state.profile = null;
+      state.profileApiCalled = true;
       state.loaders = { ...state.loaders, fetchProfile: false };
     });
 
