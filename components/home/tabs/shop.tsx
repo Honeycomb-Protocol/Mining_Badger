@@ -54,14 +54,14 @@ const ShopTab = () => {
         <Spinner color="white" />
       ) : (
         shopData
-          ?.sort((a, b) => a.level_req - b.level_req)
+          ?.sort((a, b) => a.lvl_req - b.lvl_req)
           .map((item, index) => (
             <NftCard
               key={index}
               name={item?.name}
               picture={item?.uri}
-              level={item?.level_req}
-              lock={userLevelInfo.level < item?.level_req}
+              level={item?.lvl_req}
+              lock={userLevelInfo.level < item?.lvl_req}
               // lock={true}
               buttonText={item?.claimed ? "Claimed" : "Claim Axe"}
               imageWidth={150}

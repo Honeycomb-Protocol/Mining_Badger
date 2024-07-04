@@ -113,13 +113,14 @@ export interface MineDataType {
   address: string;
   tree: string;
   recipe: null;
+  expire?: number;
 }
 
 export type CraftSymbols = {
   [key: string]: string[];
 };
 
-interface Ingredient {
+export interface Ingredient {
   name: string;
   symbol: string;
   uri: string;

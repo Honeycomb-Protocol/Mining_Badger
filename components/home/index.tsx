@@ -74,7 +74,7 @@ const HomePage = () => {
               />
               <div className="flex flex-col justify-center items-start">
                 <p className="text-white font-semibold text-lg">
-                  {user?.info?.username || "Max"}
+                  {profile?.info?.name || "Max"}
                 </p>
                 <p className="text-gray-500">Bronze Pickaxe</p>
               </div>
