@@ -32,7 +32,7 @@ const NftCard: React.FC<CardProps> = ({
   unWrappingItemFunc,
 }) => {
   const [timeLeft, setTimeLeft] = useState(
-    expIn > Date.now() ? expIn - Date.now() : 0
+    new Date(expIn).getTime() > Date.now() ? expIn - Date.now() : 0
   );
 
   const cardStyle = {
@@ -102,7 +102,7 @@ const NftCard: React.FC<CardProps> = ({
             className={`absolute flex justify-center items-center backdrop-blur-sm w-full h-full ${lockStyle}`}
           >
             <div className="bg-[#464646] text-[#6e6e6e] font-bold px-4 py-1 rounded-md">
-              Lock
+              Locked
             </div>
           </div>
         )}
@@ -114,7 +114,14 @@ const NftCard: React.FC<CardProps> = ({
         {level && (
           <p className="flex items-center justify-center text-sm text-gray-300 ml-2 whitespace-nowrap">
             Lvl {level}
-            <Tooltip content={resourceInfo} className="bg-[#1D1D1D]">
+            <Tooltip
+              content={
+                resourceInfo
+                  ? resourceInfo
+                  : "Your level is sufficient for this resource"
+              }
+              className="bg-[#1D1D1D]"
+            >
               <Image
                 src="/assets/svgs/info-icon.svg"
                 alt="info"

@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { CustomTabsProps } from "@/interfaces";
+import Utils from "@/lib/utils";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { Spinner } from "@nextui-org/react";
 
 const CustomTabs = ({
   tabData,
   styles,
   initialActiveTab,
   isVertical,
-
 }: CustomTabsProps) => {
+  const { fetchInventoryData } = Utils();
+  const { publicKey } = useWallet();
   const [activeTab, setActiveTab] = useState(initialActiveTab);
   const currentData = tabData?.filter((tab) => tab?.name === activeTab)[0]
     ?.tabComponent;
+  const [inventoryData, setInventoryData] = useState([]);
+  const [dataLoading, setDataLoading] = useState(false);
 
-  return (
+  useEffect(() => {
+    if (!publicKey) return;
+    const fetchData = async () => {
+      const inventoryData = await fetchInventoryData("pickaxe", setDataLoading);
+      setInventoryData(inventoryData);
+    };
+    fetchData();
+  }, []);
+
+  return dataLoading ? (
+    <Spinner color="white" />
+  ) : (
     <div
       className={`w-full flex rounded-xl ${
         isVertical ? "flex-row justify-center items-start" : "flex-col"
@@ -36,7 +53,15 @@ const CustomTabs = ({
               isVertical ? "mb-2 m-4 justify-start " : "mr-2 justify-center"
             }`}
             key={tab.name}
-            onClick={() => setActiveTab(tab.name)}
+            onClick={() => {
+              if (
+                inventoryData
+                  ?.map((item) => item.name)
+                  .includes("Bronze Pickaxe")
+              ) {
+                setActiveTab(tab.name);
+              }
+            }}
           >
             {tab.name}
             {tab.notifications && tab.notifications !== 0 ? (
