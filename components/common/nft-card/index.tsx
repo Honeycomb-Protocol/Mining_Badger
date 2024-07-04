@@ -28,6 +28,8 @@ const NftCard: React.FC<CardProps> = ({
   miningTimeReduction,
   resourceInfo,
   isCompressed,
+  canUnwrapped,
+  unWrappingItemFunc,
 }) => {
   const [timeLeft, setTimeLeft] = useState(
     expIn > Date.now() ? expIn - Date.now() : 0
@@ -52,8 +54,9 @@ const NftCard: React.FC<CardProps> = ({
   return (
     <div
       onClick={() => {
-        if (isCompressed) {
-          console.log("Compressed Item Clicked");
+        if (isCompressed && !canUnwrapped) {
+          console.log("Compressed canUnwrapped Item Clicked");
+          unWrappingItemFunc();
         }
       }}
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}

@@ -51,6 +51,17 @@ export function useHoneycomb() {
     return isClaimed;
   }, []);
 
+  const UnWrapResource = React.useCallback(
+    async (resourceId: string, qty: number) => {
+      const unwrapResource = await dispatch(
+        honeycombActions.unwrapResource({ resourceId, qty })
+      );
+
+      return unwrapResource;
+    },
+    []
+  );
+
   const setWallet = React.useCallback(async (wallet: WalletContextState) => {
     // console.log("Set Wallet");
     // alert('Auth');
@@ -138,5 +149,6 @@ export function useHoneycomb() {
     profileApiCalled,
     logout,
     faucetClaim,
+    UnWrapResource,
   };
 }

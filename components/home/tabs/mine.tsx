@@ -17,7 +17,7 @@ const MineTab = () => {
   const { fetchMineResourcesData } = Utils();
   const { publicKey } = useWallet();
   const [mineData, setMineData] = useState([]);
-  const { user } = useHoneycomb();
+  const { user, faucetClaim } = useHoneycomb();
   const [dataLoader, setDataLoader] = useState(false);
   const [loading, setLoading] = useState({
     name: "",
@@ -36,18 +36,12 @@ const MineTab = () => {
   const mineResource = async (resourceId: string, name: string) => {
     try {
       setLoading({ name: name, status: true });
-      const result = await axios.post(`${API_URL}faucet/mine`, {
-        user: {
-          id: user.id,
-          wallet: publicKey?.toString(),
-        },
-        resource: resourceId,
-      });
+      await faucetClaim(resourceId);
       const data = await fetchMineResourcesData(setDataLoader, true);
       setMineData(data);
       setLoading({ name: "", status: false });
       dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-      toast.success(result.data.message || "Resource mined successfully");
+      toast.success(`${name} Resource mined successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -84,7 +78,7 @@ const MineTab = () => {
             }
             btnClick={async () =>
               // userLevelInfo.level >= data?.level_req &&
-              await mineResource(data?.addresses?.resource, data.metadata?.name)
+              await mineResource(data?.address, data?.name)
             }
             loading={loading}
           />

@@ -78,6 +78,8 @@ export interface CardProps {
   miningTimeReduction?: string;
   resourceInfo?: string;
   isCompressed?: boolean;
+  canUnwrapped?: boolean;
+  unWrappingItemFunc?: () => void;
 }
 
 export interface ModalProps {

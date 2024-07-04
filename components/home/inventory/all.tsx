@@ -6,14 +6,23 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
+import { useHoneycomb } from "@/hooks";
 
 const AllTab = () => {
   const dispatch = useDispatch();
   const { refreshInventory } = useSelector((state: RootState) => state.auth);
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { UnWrapResource } = useHoneycomb();
 
   const { fetchInventoryData } = Utils();
+
+  const unWrappingItem = React.useCallback(
+    (resourceId: string, qty: number) => {
+      UnWrapResource(resourceId, qty);
+    },
+    []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +52,8 @@ const AllTab = () => {
             btnDisabled
             amount={item?.amount}
             isCompressed={item.isCompressed}
+            canUnwrapped={item.canUnwrapped}
+            unWrappingItemFunc={() => unWrappingItem(item.address, item.amount)}
           />
         ))
       )}

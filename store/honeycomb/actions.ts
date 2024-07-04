@@ -2,15 +2,14 @@ import { honeycomb } from "./../actions/index";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { WalletContextState } from "@solana/wallet-adapter-react";
-import {
+import edgeClient, {
   User,
   Profile,
   SendBulkTransactionsQuery,
 } from "@honeycomb-protocol/edge-client";
 import type { AsyncActions } from "../actions/types.js";
 import type { AuthState, HoneycombState } from "../types.js";
-import { API_URL, HPL_PROJECT, PAYER_DRIVER } from "../../config/config.js";
-import base58 from "bs58";
+import { API_URL, HPL_PROJECT, PAYER_DRIVER, RESOURCE_DRIVER } from "../../config/config.js";
 import {
   Connection,
   LAMPORTS_PER_SOL,
@@ -19,6 +18,7 @@ import {
 } from "@solana/web3.js";
 import { HoneycombActionsWithoutThunk } from ".";
 import axios from "axios";
+import bs58 from "bs58";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -351,6 +351,81 @@ const actionFactory = (actions: AsyncActions) => {
     }
   );
 
+  const unwrapResource = createAsyncThunk<
+    SendBulkTransactionsQuery,
+    { resourceId: string; qty: number }
+  >(
+    "honeycomb/updateProfile",
+    async (
+      { resourceId, qty },
+      { rejectWithValue, fulfillWithValue, getState }
+    ) => {
+      let toastId;
+      const {
+        // auth: { wallet },
+        honeycomb: { edgeClient, wallet: stateWallet },
+      } = getState() as { honeycomb: HoneycombState; auth: AuthState };
+
+      toastId = toast.loading("Unwrapping Resource...", { progress: 0 });
+
+      try {
+        const data = await edgeClient.createCreateUnwrapResourceTransaction({
+          payer: RESOURCE_DRIVER,
+          authority: stateWallet?.publicKey?.toString(),
+          resource: resourceId,
+          params: {
+            fungible: {
+              amount: (qty * 1e6).toString(),
+            },
+          },
+        });
+
+        const { tx: transaction } = data.createCreateUnwrapResourceTransaction;
+
+        toast.update(toastId, { progress: 0.5 });
+
+        transaction.transaction = await stateWallet
+          .signTransaction(
+            VersionedTransaction.deserialize(
+              bs58.decode(transaction.transaction)
+            )
+          )
+          .then((x) => bs58.encode(x.serialize()));
+
+        0;
+        const unwrapResourceRes = await edgeClient.sendBulkTransactions({
+          txs: [transaction.transaction],
+          blockhash: transaction.blockhash,
+          lastValidBlockHeight: transaction.lastValidBlockHeight,
+          options: {
+            commitment: "processed",
+            skipPreflight: true,
+          },
+        });
+
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "success",
+          render: "Resource Unwrapped",
+          progress: 1,
+        });
+
+        return fulfillWithValue(unwrapResourceRes);
+      } catch (error) {
+        console.error("Error: Unwraping Resource", error);
+
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "error",
+          render: "Error while Unwrapping Resource",
+          progress: 1,
+        });
+
+        return rejectWithValue(error);
+      }
+    }
+  );
+
   const createUser = createAsyncThunk<
     User,
     { username: string; bio: string; pfp: string | File }
@@ -551,7 +626,7 @@ const actionFactory = (actions: AsyncActions) => {
 
         const message = new TextEncoder().encode(res.authRequest.message);
         const sig = await wallet.signMessage(message);
-        const signature = base58.encode(sig);
+        const signature = bs58.encode(sig);
 
         const {
           authConfirm: { accessToken: token },
@@ -586,6 +661,7 @@ const actionFactory = (actions: AsyncActions) => {
     authenticate,
     updateProfile,
     claimFaucet,
+    unwrapResource,
   };
 };
 export default actionFactory;
