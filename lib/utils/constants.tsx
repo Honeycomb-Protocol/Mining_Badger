@@ -1,12 +1,26 @@
 import { CraftSymbols } from "@/interfaces";
 
 export const craftSymbols: CraftSymbols = {
-  adamantite: ["CH", "JT", "KC", "LG", "OG", "PGL", "PGun", "PP", "PS"],
-  bronze: ["BD", "BS", "BM", "CD", "DR", "PXB", "PG", "RA", "WH"],
-  iron: ["CB", "FBC", "FG", "ID", "KT", "MH", "PC", "RH", "TK"],
-  mithril: ["EH", "HS", "MG", "MS", "RAG", "R-Hair", "RG", "TC", "TTH"],
-  runite: ["CS", "ECB", "JJ", "KI", "MA", "OGR", "PO", "SC", "SM"],
-  steel: ["BJ", "DE", "EG", "HA", "JR", "SD", "SF", "SK", "SW"],
+  bronze: [
+    "WHB",
+    "RAV",
+    "PKX",
+    "PRG",
+    "STK",
+    "ELG",
+    "LSG",
+    "JTK",
+    "PHG",
+    "BLM",
+    "DSR",
+    "CPD",
+  ],
+  iron: ["RNH", "TLN", "TLK", "PHG", "BLM"],
+  steel: ["DME", "HLO", "STK", "ELG", "BLM"],
+  silver: ["PRG", "RKH", "CLH"],
+  mithril: ["EHL", "RKH", "MTG", "RDG", "LSG", "JTK"],
+  adamantite: ["OGA", "OGR", "CLH", "CPD"],
+  runite: ["SPM", "MAC", "SCT", "OGR", "DSR"],
 };
 
 export const inventorySymbols = {

@@ -40,15 +40,15 @@ const MithrilTab = () => {
             <NftCard
               divStyle="bg-black shadow-black shadow-xl  rounded-xl p-2"
               key={index}
-              name={craftment?.metadata?.name}
-              picture={craftment?.metadata?.uri}
+              name={craftment?.name}
+              picture={craftment?.uri}
               buttonText="Craft"
               width={165}
               imageWidth={155}
               imageHeight={140}
               nftNameStyle="text-[15px]"
               btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
-              materials={craftment?.material}
+              materials={craftment?.ingredients}
               experience={craftment?.level_req}
               resourceInfo={
                 craftment?.level_req > userLevelInfo?.level

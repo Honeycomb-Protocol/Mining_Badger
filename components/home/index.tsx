@@ -11,7 +11,7 @@ import LevelsRequiredModal from "../common/modal";
 import { useHoneycomb } from "@/hooks";
 
 const HomePage = () => {
-  const { user,profile } = useHoneycomb();
+  const { user, profile } = useHoneycomb();
   const {
     renderHomeTabComponents,
     renderInventoryTabComponents,
@@ -20,7 +20,6 @@ const HomePage = () => {
   const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
   const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
   const [visible, setVisible] = useState(false);
-
 
   useEffect(() => {
     const addHomeTabComponents = async () => {

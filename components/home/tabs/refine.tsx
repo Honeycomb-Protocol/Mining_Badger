@@ -37,8 +37,8 @@ const RefineTab = () => {
           .map((refinement, index) => (
             <NftCard
               key={index}
-              name={refinement?.metadata?.name}
-              picture={refinement?.metadata?.uri}
+              name={refinement?.name}
+              picture={refinement?.uri}
               buttonText="Refine"
               width={150}
               imageWidth={90}

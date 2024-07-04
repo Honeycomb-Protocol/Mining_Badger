@@ -62,8 +62,8 @@ const MineTab = () => {
         mineData?.map((data: MineDataType, index: number) => (
           <NftCard
             key={index}
-            name={data?.metadata?.name}
-            picture={data?.metadata?.uri}
+            name={data?.name}
+            picture={data?.uri}
             // level={data?.level_req}
             buttonText="Mine"
             width={150}
@@ -71,15 +71,14 @@ const MineTab = () => {
             imageHeight={100}
             nftNameStyle="text-[15px] pr-1"
             btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
-            expIn={data?.expire}
+            // expIn={data?.expire}
             // resourceInfo={
             //   userLevelInfo.level < data?.level_req
             //     ? `User level ${data?.level_req} is required to mine this resource.`
             //     : ""
             // }
             btnDisabled={
-              data?.expire - Date.now() > 0 ||
-              loading.name === data.metadata?.name
+              data?.expire - Date.now() > 0 || loading.name === data?.name
               //  ||
               // userLevelInfo.level < data?.level_req
             }

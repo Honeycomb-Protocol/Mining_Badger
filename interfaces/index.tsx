@@ -84,44 +84,85 @@ export interface ModalProps {
   setVisible: (visible: boolean) => void;
 }
 
+// export interface MineDataType {
+//   addresses: {
+//     mint: string;
+//     recipe: string | null;
+//     resource: string;
+//     tree: string;
+//   };
+//   amount: number | null;
+//   expire?: number;
+//   level_req: number;
+//   metadata: {
+//     name: string;
+//     symbol: string;
+//     uri: string;
+//   };
+// }
 export interface MineDataType {
-  addresses: {
-    mint: string;
-    recipe: string | null;
-    resource: string;
-    tree: string;
-  };
-  amount: number | null;
-  expire?: number;
-  level_req: number;
-  metadata: {
-    name: string;
-    symbol: string;
-    uri: string;
-  };
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  mine_time: number;
+  xp: number;
+  address: string;
+  tree: string;
+  recipe: null;
 }
 
 export type CraftSymbols = {
   [key: string]: string[];
 };
 
-export type Resource = {
-  addresses: Record<string, string>;
+interface Ingredient {
+  name: string;
+  symbol: string;
+  uri: string;
   amount: number;
-  material: Array<{
-    name: string;
-    symbol: string;
-    uri: string;
-    amount: number;
-  }>;
-  level_req: number;
-  sell_price: number;
-  metadata: {
-    name: string;
-    symbol: string;
-    uri: string;
-  };
-};
+}
+
+export interface Resource {
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  refine_time: number;
+  xp: number;
+  ingredients: Ingredient[];
+  address: string;
+  tree: string;
+  recipe: string;
+}
+
+export interface Craft {
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  craft_time: number;
+  xp: number;
+  ingredients: Ingredient[];
+}
+
+// export type Resource = {
+//   addresses: Record<string, string>;
+//   amount: number;
+//   material: Array<{
+//     name: string;
+//     symbol: string;
+//     uri: string;
+//     amount: number;
+//   }>;
+//   level_req: number;
+//   sell_price: number;
+//   metadata: {
+//     name: string;
+//     symbol: string;
+//     uri: string;
+//   };
+// };
 
 export type Dataset = {
   success: boolean;

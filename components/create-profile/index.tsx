@@ -33,11 +33,11 @@ const CreateProfilePage = () => {
 
       <div className="mt-16 flex justify-center items-center w-full gap-28">
         <div className="w-[40%] px-5 md:px-10 lg:px-14 xl:px-20">
-          <div className="flex flex-col justify-center items-center mb-8">
+          <div className="flex flex-col justify-center items-center mb-8 rounded-xl">
             <Image
               width={250}
               height={0}
-              src="/assets/images/nftprofile.png"
+              src="/assets/images/profile-picture.png"
               alt="profile"
             />
           </div>

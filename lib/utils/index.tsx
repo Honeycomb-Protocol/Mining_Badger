@@ -191,7 +191,7 @@ const Utils = () => {
       const categorySymbols = symbols[categoryName];
 
       const matchedResources = resources.result.filter((resource) =>
-        categorySymbols.includes(resource.metadata.symbol)
+        categorySymbols.includes(resource?.symbol)
       );
 
       categorizedResources[categoryName] = matchedResources;
@@ -311,12 +311,14 @@ const Utils = () => {
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
+        // return data?.result;
         return organizeDataByCategories(data, craftSymbols)?.[name];
       }
 
       data = (await axios.get(`${API_URL}resources/craft`)).data;
       setCache("craftData", data);
       setDataLoading(false);
+      // return data?.result;
       return organizeDataByCategories(data, craftSymbols)?.[name];
     } catch (error) {
       toast.error(

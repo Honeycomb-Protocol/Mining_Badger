@@ -64,32 +64,32 @@ const ShopTab = () => {
           .map((item, index) => (
             <NftCard
               key={index}
-              name={item?.metadata?.name}
-              picture={item?.metadata?.uri}
+              name={item?.name}
+              picture={item?.uri}
               level={item?.level_req}
               lock={userLevelInfo.level < item?.level_req}
-              buttonText={item?.holding ? "Claimed" : "Claim Axe"}
+              buttonText={item?.claimed ? "Claimed" : "Claim Axe"}
               imageWidth={150}
               imageHeight={150}
               nftNameStyle="text-[15px] pr-1"
               miningTimeReduction={
-                item?.metadata?.name.split(" ")[0] === "Bronze"
+                item?.name.split(" ")[0] === "Bronze"
                   ? null
-                  : `-${String(item?.reduce_time)}%`
+                  : `-${String(item?.time_reduced ? item.time_reduced : "0")}%`
               }
               resourceInfo={
-                item?.holding
+                item?.claimed
                   ? "This pickaxe is already in your inventory."
-                  : `This pickaxe can be claimed for a ${item?.reduce_time}% reduction in mining time.`
+                  : `This pickaxe can be claimed for a ${
+                      item?.time_reduced ? item.time_reduced : "0"
+                    }% reduction in mining time.`
               }
               btnStyle={
                 "bg-gradient-to-b from-[#81FD9C] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
               }
-              btnDisabled={
-                loading.name === item?.metadata?.name || item?.holding
-              }
+              btnDisabled={loading.name === item?.name || item?.claimed}
               btnClick={async () =>
-                !item.holding &&
+                !item.claimed &&
                 (await claimResource(
                   item?.addresses?.resource,
                   item?.metadata?.name
