@@ -9,7 +9,7 @@ import {
 } from "@honeycomb-protocol/edge-client";
 import type { AsyncActions } from "../actions/types.js";
 import type { AuthState, HoneycombState } from "../types.js";
-import { HPL_PROJECT, PAYER_DRIVER } from "../../config/config.js";
+import { API_URL, HPL_PROJECT, PAYER_DRIVER } from "../../config/config.js";
 import base58 from "bs58";
 import {
   Connection,
@@ -18,6 +18,7 @@ import {
   VersionedTransaction,
 } from "@solana/web3.js";
 import { HoneycombActionsWithoutThunk } from ".";
+import axios from "axios";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -324,6 +325,32 @@ const actionFactory = (actions: AsyncActions) => {
     }
   );
 
+  const claimFaucet = createAsyncThunk<void, string>(
+    "honeycomb/updateProfile",
+    async (resourceId, { rejectWithValue, fulfillWithValue, getState }) => {
+      const {
+        auth: { wallet },
+        honeycomb: { user },
+      } = getState() as { honeycomb: HoneycombState; auth: AuthState };
+
+      try {
+        const { data } = await axios.post(`${API_URL}faucet/mine`, {
+          user: {
+            wallet,
+            id: user.id,
+          },
+          resource: resourceId,
+        });
+
+        return fulfillWithValue(data);
+      } catch (error) {
+        console.error("Error Uploading file during Profile Creation:", error);
+
+        return rejectWithValue(error);
+      }
+    }
+  );
+
   const createUser = createAsyncThunk<
     User,
     { username: string; bio: string; pfp: string | File }
@@ -483,12 +510,12 @@ const actionFactory = (actions: AsyncActions) => {
             });
             throw rejectWithValue(e);
           });
-          toast.update(toastId, {
-            autoClose: 5000,
-            type: "success",
-            render: "Profile Created",
-            progress: 1,
-          });
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "success",
+          render: "Profile Created",
+          progress: 1,
+        });
 
         await wait(1000);
         await fetchProfile();
@@ -558,6 +585,7 @@ const actionFactory = (actions: AsyncActions) => {
     createUserAndProfile,
     authenticate,
     updateProfile,
+    claimFaucet,
   };
 };
 export default actionFactory;

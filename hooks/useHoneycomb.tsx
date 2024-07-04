@@ -7,11 +7,13 @@ import {
 } from "../store/actions";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { Profile, User } from "@honeycomb-protocol/edge-client";
+import Utils from "@/lib/utils";
+import { HoneycombState } from "@/store/types";
 
 export function useHoneycomb() {
   const dispatch = useAppDispatch();
   const { user, edgeClient, wallet, profile } = useSelector(
-    (state: RootState) => state.honeycomb
+    (state: { honeycomb: HoneycombState }) => state.honeycomb
   );
   const {
     loaders: {
@@ -41,6 +43,12 @@ export function useHoneycomb() {
       (x) => x.payload as User
     );
     return profile;
+  }, []);
+
+  const faucetClaim = React.useCallback(async (resourceId: string) => {
+    const isClaimed = await dispatch(honeycombActions.claimFaucet(resourceId));
+
+    return isClaimed;
   }, []);
 
   const setWallet = React.useCallback(async (wallet: WalletContextState) => {
@@ -129,5 +137,6 @@ export function useHoneycomb() {
     userApiCalled,
     profileApiCalled,
     logout,
+    faucetClaim,
   };
 }

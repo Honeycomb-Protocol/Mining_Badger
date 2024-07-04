@@ -14,10 +14,10 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 const ShopTab = () => {
   const { userLevelInfo, fetchShopResourcesData } = Utils();
   const { publicKey } = useWallet();
-  const { user } = useHoneycomb();
-  const dispatch = useDispatch();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
+  const dispatch = useDispatch();
+  const { faucetClaim } = useHoneycomb();
   const [loading, setLoading] = useState({
     name: "",
     status: false,
@@ -36,18 +36,12 @@ const ShopTab = () => {
     try {
       setLoading({ name: name, status: true });
       console.log("Claiming resource", resourceId);
-      const result = await axios.post(`${API_URL}faucet/mine`, {
-        user: {
-          id: user.id,
-          wallet: publicKey?.toString(),
-        },
-        resource: resourceId,
-      });
+      const result = await faucetClaim(resourceId);
       const data = await fetchShopResourcesData(setDataLoader, true);
       setShopData(data);
       setLoading({ name: "", status: false });
       dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-      toast.success(result.data.message || "Pickaxe claimed successfully");
+      toast.success(`${name} claimed successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -90,10 +84,7 @@ const ShopTab = () => {
               btnDisabled={loading.name === item?.name || item?.claimed}
               btnClick={async () =>
                 !item.claimed &&
-                (await claimResource(
-                  item?.addresses?.resource,
-                  item?.metadata?.name
-                ))
+                (await claimResource(item?.address, item?.name))
               }
               loading={loading}
             />
