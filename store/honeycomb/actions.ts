@@ -8,9 +8,14 @@ import {
 } from "@honeycomb-protocol/edge-client";
 import type { AsyncActions } from "../actions/types.js";
 import type { HoneycombState } from "../types.js";
-import { HPL_PROJECT } from "../../config/config.js";
+import { HPL_PROJECT, PAYER_DRIVER } from "../../config/config.js";
 import base58 from "bs58";
-import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import {
+  Connection,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  VersionedTransaction,
+} from "@solana/web3.js";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -147,6 +152,7 @@ const actionFactory = (actions: AsyncActions) => {
         );
 
         const data = await edgeClient.createNewUserWithProfileTransaction({
+          project: HPL_PROJECT.toString(),
           wallet: wallet.publicKey.toString(),
           userInfo: {
             bio: args.bio,
@@ -154,7 +160,6 @@ const actionFactory = (actions: AsyncActions) => {
             pfp,
             name: args.username,
           },
-          project: HPL_PROJECT.toString(),
           profileInfo: {
             bio: args.bio,
             pfp,
@@ -163,6 +168,14 @@ const actionFactory = (actions: AsyncActions) => {
         });
 
         const transaction = data.createNewUserWithProfileTransaction;
+
+        transaction.transaction = await wallet
+          .signTransaction(
+            VersionedTransaction.deserialize(
+              base58.decode(transaction.transaction)
+            )
+          )
+          .then((x) => base58.encode(x.serialize()));
 
         const user = await edgeClient
           .sendBulkTransactions({
@@ -256,8 +269,9 @@ const actionFactory = (actions: AsyncActions) => {
         );
 
         const data = await edgeClient.createUpdateProfileTransaction({
-          profileId: profile.id,
+          profile: profile.address,
           info: profileInfo,
+          payer: PAYER_DRIVER,
         });
 
         const transaction = data.createUpdateProfileTransaction;
@@ -427,6 +441,7 @@ const actionFactory = (actions: AsyncActions) => {
               pfp,
               name: args.name,
             },
+            payer: PAYER_DRIVER,
           },
           {
             fetchOptions: {
@@ -506,7 +521,7 @@ const actionFactory = (actions: AsyncActions) => {
           wallet: wallet.publicKey.toString(),
         });
 
-        const message = new TextEncoder().encode(res.authRequest);
+        const message = new TextEncoder().encode(res.authRequest.message);
         const sig = await wallet.signMessage(message);
         const signature = base58.encode(sig);
 
