@@ -3,7 +3,10 @@ import { useHoneycomb } from "../hooks";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { usePathname, useRouter } from "next/navigation";
 
+import Utils from "@/lib/utils";
+
 export default function Effects() {
+  const { resetCache } = Utils();
   const wallet = useWallet();
   const pathname = usePathname();
   const router = useRouter();
@@ -23,6 +26,7 @@ export default function Effects() {
     (async () => {
       if (wallet.disconnecting) {
         await logout();
+        resetCache();
         router.push("/");
       }
     })();
