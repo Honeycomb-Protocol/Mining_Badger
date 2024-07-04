@@ -39,7 +39,7 @@ export const slice = createSlice({
       state.user = action.payload;
     },
     clearUser: (state) => {
-      state.user = null;
+      state.user = initialState.user;
     },
     clearProfile: (state) => {
       state.profile = null;

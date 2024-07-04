@@ -17,10 +17,6 @@ const actionFactory = (actions: AsyncActions) => {
           .honeycomb;
         dispatch(AuthActionsWithoutThunk.clearAuthData());
         dispatch(HoneycombActionsWithoutThunk.clearUser());
-        dispatch(HoneycombActionsWithoutThunk.clearProfile());
-        dispatch(HoneycombActionsWithoutThunk.clearUserApiCalled());
-        dispatch(HoneycombActionsWithoutThunk.clearProfileApiCalled());
-
         // let userExists = false;
 
         // if (!isAuth) {

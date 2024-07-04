@@ -41,26 +41,14 @@ export default function Effects() {
   }, [wallet]);
 
   useEffect(() => {
-    console.log(
-      "sadasdasd",
-      stateWallet?.publicKey || authToken,
-      userApiCalled,
-      profileApiCalled,
-      user,
-      profile
-    );
-    if (
-      (stateWallet?.publicKey || authToken) &&
-      (!userApiCalled || !profileApiCalled) &&
-      (!user || !profile)
-    ) {
+    if (stateWallet?.publicKey || authToken) {
       console.log("EFFECT 2: loadIdentityDeps");
       loadIdentityDeps();
     }
-  }, [stateWallet, authToken, user, profile]);
+  }, [stateWallet, authToken]);
 
   useEffect(() => {
-    if (user && profile) {
+    if (user && profile && wallet?.connected) {
       if (pathname === "/create-profile" || pathname === "/") {
         console.log("EFFECT 3: Redirecting to home");
         router.push("/home");

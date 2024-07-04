@@ -17,6 +17,7 @@ import {
   PublicKey,
   VersionedTransaction,
 } from "@solana/web3.js";
+import { HoneycombActionsWithoutThunk } from ".";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -59,8 +60,8 @@ const actionFactory = (actions: AsyncActions) => {
         authToken = newToken;
       }
       //todo: add fetching functions here
-      if (!userApiCalled && !user) await dispatch(fetchUser());
-      if (!profileApiCalled && !profile) await dispatch(fetchProfile());
+      await dispatch(fetchUser());
+      await dispatch(fetchProfile());
       return true;
     }
   );
@@ -186,14 +187,6 @@ const actionFactory = (actions: AsyncActions) => {
 
         const transaction = data.createNewUserWithProfileTransaction;
 
-        transaction.transaction = await wallet
-          .signTransaction(
-            VersionedTransaction.deserialize(
-              base58.decode(transaction.transaction)
-            )
-          )
-          .then((x) => base58.encode(x.serialize()));
-
         const user = await edgeClient
           .sendBulkTransactions({
             txs: [transaction.transaction],
@@ -217,27 +210,17 @@ const actionFactory = (actions: AsyncActions) => {
             });
             throw rejectWithValue(e);
           });
-
-        await wait(1000);
-        await dispatch(fetchUser()).then(async (x: any) => {
-          try {
-            const airdropSignature = await connection.requestAirdrop(
-              new PublicKey(x.payload?.wallets?.shadow),
-              5 * LAMPORTS_PER_SOL
-            );
-            await connection.confirmTransaction(airdropSignature, "processed");
-            toast.update(toastId, {
-              autoClose: 5000,
-              type: "success",
-              render: "Profile Creation Successful!!",
-              progress: 1,
-            });
-          } catch (error) {
-            console.error("Airdrop error :", error);
-          }
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "success",
+          render: "Profile created..",
+          progress: 1,
         });
+        dispatch(HoneycombActionsWithoutThunk.clearProfileApiCalled());
+        dispatch(HoneycombActionsWithoutThunk.clearUserApiCalled());
+        await dispatch(fetchUser());
         await dispatch(fetchProfile());
-        // await dispatch(authenticate());
+        await dispatch(authenticate());
 
         return fulfillWithValue(user);
       } catch (error) {
@@ -487,17 +470,6 @@ const actionFactory = (actions: AsyncActions) => {
               skipPreflight: true,
             },
           })
-          .then(async (res) => {
-            const airdropSignature = await connection.requestAirdrop(
-              new PublicKey(user?.wallets?.shadow),
-              5 * LAMPORTS_PER_SOL
-            );
-            const confirmation = await connection.confirmTransaction(
-              airdropSignature
-            );
-            console.log("Airdrop confirmation", confirmation);
-            return res;
-          })
           .catch((e) => {
             console.error(
               "an unexpected error occured while creating User Profile",
@@ -511,8 +483,14 @@ const actionFactory = (actions: AsyncActions) => {
             });
             throw rejectWithValue(e);
           });
+          toast.update(toastId, {
+            autoClose: 5000,
+            type: "success",
+            render: "Profile Created",
+            progress: 1,
+          });
 
-        await wait(100);
+        await wait(1000);
         await fetchProfile();
         return fulfillWithValue(profile);
       } catch (error) {

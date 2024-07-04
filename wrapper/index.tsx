@@ -38,7 +38,7 @@ const CheckConnection: React.FC<AuthenticationWrapperProps> = ({
     ) {
       router.push("/create-profile");
     }
-  }, [user, profile]);
+  }, [user, profile, connected]);
 
   return (
     <>
