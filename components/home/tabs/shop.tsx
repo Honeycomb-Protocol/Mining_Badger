@@ -62,6 +62,7 @@ const ShopTab = () => {
               picture={item?.uri}
               level={item?.level_req}
               lock={userLevelInfo.level < item?.level_req}
+              // lock={true}
               buttonText={item?.claimed ? "Claimed" : "Claim Axe"}
               imageWidth={150}
               imageHeight={150}

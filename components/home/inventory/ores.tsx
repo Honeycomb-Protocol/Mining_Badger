@@ -36,15 +36,15 @@ const OresTab = () => {
         inventoryData?.map((item, index) => (
           <NftCard
             key={index}
-            name={item.metadata.name}
-            picture={item.metadata.uri}
+            name={item?.name}
+            picture={item?.uri}
             width={90}
             imageWidth={70}
             imageHeight={70}
             nftNameStyle="text-[13px]"
             btnStyle="bg-opacity-70 text-xs h-6"
             btnDisabled
-            amount={item?.balance}
+            amount={item?.amount}
           />
         ))
       )}

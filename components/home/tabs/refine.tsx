@@ -45,7 +45,7 @@ const RefineTab = () => {
               imageHeight={80}
               nftNameStyle="text-[15px] pr-1"
               btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
-              materials={refinement?.material}
+              materials={refinement?.ingredients}
               resourceInfo={
                 refinement?.level_req > userLevelInfo?.level
                   ? `User level ${refinement?.level_req} is required to refine this resource.`
