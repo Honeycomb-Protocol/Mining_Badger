@@ -62,6 +62,14 @@ export function useHoneycomb() {
     []
   );
 
+  const createRecipe = React.useCallback(async (recipe: string) => {
+    const createRecipe = await dispatch(
+      honeycombActions.createRecipe({ recipeAddress: recipe })
+    );
+
+    return createRecipe;
+  }, []);
+
   const setWallet = React.useCallback(async (wallet: WalletContextState) => {
     // console.log("Set Wallet");
     // alert('Auth');
@@ -150,5 +158,6 @@ export function useHoneycomb() {
     logout,
     faucetClaim,
     UnWrapResource,
+    createRecipe
   };
 }

@@ -6,9 +6,11 @@ import { useDispatch } from "react-redux";
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
 import { AuthActionsWithoutThunk } from "@/store/auth";
+import { useHoneycomb } from "@/hooks";
 
 const RefineTab = () => {
-  const { fetchRefinedResoucesData, createRecipe, userLevelInfo } = Utils();
+  const { fetchRefinedResoucesData, userLevelInfo } = Utils();
+  const { createRecipe } = useHoneycomb();
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
   const [refineData, setRefineData] = useState([]);
@@ -52,20 +54,17 @@ const RefineTab = () => {
                   : ""
               }
               btnClick={() =>
-                userLevelInfo?.level >= refinement?.level_req &&
-                createRecipe(
-                  refinement?.addresses?.recipe,
-                  refinement?.metadata?.name,
-                  setLoading
-                ).then(() => {
+                // userLevelInfo?.level >= refinement?.level_req &&
+                createRecipe(refinement.recipe).then(() => {
                   dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
                 })
               }
               loading={loading}
               btnDisabled={
                 (loading.status &&
-                  loading.name === refinement?.metadata?.name) ||
-                refinement?.level_req > userLevelInfo?.level
+                  loading.name === refinement?.metadata?.name)
+                //    ||
+                // refinement?.level_req > userLevelInfo?.level
               }
             />
           ))

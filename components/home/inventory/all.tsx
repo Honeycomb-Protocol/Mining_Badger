@@ -18,18 +18,18 @@ const AllTab = () => {
   const { fetchInventoryData } = Utils();
 
   const unWrappingItem = React.useCallback(
-    (resourceId: string, qty: number) => {
-      UnWrapResource(resourceId, qty);
+    async (resourceId: string, qty: number) => {
+      await UnWrapResource(resourceId, qty);
+      fetchData();
     },
     []
   );
+  const fetchData = async () => {
+    const res = await fetchInventoryData("all", setLoading, refreshInventory);
+    setInventoryData(res);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetchInventoryData("all", setLoading, refreshInventory);
-      setInventoryData(res);
-    };
-
     fetchData();
     dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
   }, [refreshInventory]);

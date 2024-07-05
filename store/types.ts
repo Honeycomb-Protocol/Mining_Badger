@@ -19,6 +19,9 @@ export interface AuthState {
   refreshInventory: boolean;
   authToken: string | null | undefined;
   wallet: string | null;
+  cookingAddresses: {
+    [key: string]: string;
+  };
 }
 
 export type SignUpUserData = {

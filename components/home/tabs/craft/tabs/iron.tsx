@@ -6,12 +6,14 @@ import { useDispatch } from "react-redux";
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
 import { AuthActionsWithoutThunk } from "@/store/auth";
+import { useHoneycomb } from "@/hooks";
 
 //import filterResourcesByMetadataSymbols
 
 const IronTab = () => {
   const { publicKey } = useWallet();
-  const { createRecipe, fetchCraftData, userLevelInfo } = Utils();
+  const { fetchCraftData, userLevelInfo } = Utils();
+  const { createRecipe } = useHoneycomb();
   const dispatch = useDispatch();
   const [craftData, setCraftData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
@@ -57,13 +59,9 @@ const IronTab = () => {
               }
               btnClick={async () => {
                 userLevelInfo?.level >= craftment?.level_req &&
-                  (await createRecipe(
-                    craftment?.addresses?.recipe,
-                    craftment?.metadata?.name,
-                    setLoading
-                  ).then(() => {
+                  (await createRecipe(craftment?.address).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                    // fetchCraftData("iron", setDataLoading, true);
+                    // fetchCraftData("adamantite", setDataLoading, true);
                   }));
               }}
               loading={loading}

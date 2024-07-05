@@ -9,7 +9,13 @@ import edgeClient, {
 } from "@honeycomb-protocol/edge-client";
 import type { AsyncActions } from "../actions/types.js";
 import type { AuthState, HoneycombState } from "../types.js";
-import { API_URL, HPL_PROJECT, PAYER_DRIVER, RESOURCE_DRIVER } from "../../config/config.js";
+import {
+  API_URL,
+  HPL_PROJECT,
+  LUT_ADDRESS,
+  PAYER_DRIVER,
+  RESOURCE_DRIVER,
+} from "../../config/config.js";
 import {
   Connection,
   LAMPORTS_PER_SOL,
@@ -19,6 +25,7 @@ import {
 import { HoneycombActionsWithoutThunk } from ".";
 import axios from "axios";
 import bs58 from "bs58";
+import { AuthActionsWithoutThunk } from "../auth";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -326,7 +333,7 @@ const actionFactory = (actions: AsyncActions) => {
   );
 
   const claimFaucet = createAsyncThunk<void, string>(
-    "honeycomb/updateProfile",
+    "honeycomb/claimFaucet",
     async (resourceId, { rejectWithValue, fulfillWithValue, getState }) => {
       const {
         auth: { wallet },
@@ -355,7 +362,7 @@ const actionFactory = (actions: AsyncActions) => {
     SendBulkTransactionsQuery,
     { resourceId: string; qty: number }
   >(
-    "honeycomb/updateProfile",
+    "honeycomb/unwrapResource",
     async (
       { resourceId, qty },
       { rejectWithValue, fulfillWithValue, getState }
@@ -370,7 +377,7 @@ const actionFactory = (actions: AsyncActions) => {
 
       try {
         const data = await edgeClient.createCreateUnwrapResourceTransaction({
-          payer: RESOURCE_DRIVER,
+          payer: RESOURCE_DRIVER.publicKey.toString(),
           authority: stateWallet?.publicKey?.toString(),
           resource: resourceId,
           params: {
@@ -383,13 +390,12 @@ const actionFactory = (actions: AsyncActions) => {
         const { tx: transaction } = data.createCreateUnwrapResourceTransaction;
 
         toast.update(toastId, { progress: 0.5 });
-
+        const versionedTx = VersionedTransaction.deserialize(
+          bs58.decode(transaction.transaction)
+        );
+        versionedTx.sign([RESOURCE_DRIVER]);
         transaction.transaction = await stateWallet
-          .signTransaction(
-            VersionedTransaction.deserialize(
-              bs58.decode(transaction.transaction)
-            )
-          )
+          .signTransaction(versionedTx)
           .then((x) => bs58.encode(x.serialize()));
 
         0;
@@ -418,6 +424,153 @@ const actionFactory = (actions: AsyncActions) => {
           autoClose: 5000,
           type: "error",
           render: "Error while Unwrapping Resource",
+          progress: 1,
+        });
+
+        return rejectWithValue(error);
+      }
+    }
+  );
+
+  const createRecipe = createAsyncThunk<
+    SendBulkTransactionsQuery[],
+    { recipeAddress: string }
+  >(
+    "honeycomb/createRecipe",
+    async (
+      { recipeAddress },
+      { rejectWithValue, fulfillWithValue, getState, dispatch }
+    ) => {
+      let toastId;
+      const {
+        auth: { cookingAddresses },
+        honeycomb: { edgeClient, wallet: stateWallet },
+      } = getState() as { honeycomb: HoneycombState; auth: AuthState };
+
+      toastId = toast.loading("Crafting Recipe", { progress: 0 });
+
+      try {
+        const transactions: string[] = [];
+        let cooking: string | undefined;
+        const {
+          recipes: [recipe],
+        } = await edgeClient.findRecipes({
+          addresses: [recipeAddress],
+        });
+
+        if (!cookingAddresses?.[recipeAddress]) {
+          const data = await edgeClient.createBeginCookingTransaction({
+            lutAddresses: LUT_ADDRESS,
+            payer: RESOURCE_DRIVER.publicKey.toString(),
+            owner: stateWallet?.publicKey?.toString(),
+            recipe: recipeAddress,
+          });
+
+          const {
+            transaction: { transaction },
+            cooking: cookingAddress,
+          } = data.createBeginCookingTransaction;
+          dispatch(
+            AuthActionsWithoutThunk.setCookingAddress({
+              recipeAddress,
+              cookingAddresses: cooking,
+            })
+          );
+          transactions.push(transaction);
+
+          cooking = cookingAddress;
+        } else cooking = cookingAddresses[recipeAddress];
+
+        const {
+          createUseIngredientsTransaction: { transactions: ingTransactions },
+        } = await edgeClient.createUseIngredientsTransaction({
+          cooking: cooking,
+          ingredients: recipe.ingredients.map((ing) => ({
+            fungible: {
+              address: ing.params.mint,
+            },
+          })),
+          lutAddresses: LUT_ADDRESS,
+          owner: stateWallet?.publicKey?.toString(),
+          recipe: recipeAddress,
+          payer: RESOURCE_DRIVER.publicKey.toString(),
+        });
+
+        transactions.push(...ingTransactions);
+
+        const {
+          createClaimXPTransaction: { transaction: claimXPTx },
+        } = await edgeClient.createClaimXPTransaction({
+          cooking,
+          owner: stateWallet?.publicKey?.toString(),
+          recipe: recipeAddress,
+          payer: RESOURCE_DRIVER.publicKey.toString(),
+          lutAddresses: LUT_ADDRESS,
+        });
+
+        transactions.push(claimXPTx);
+
+        const {
+          createFinishCookingTransaction: {
+            transaction: finishCookingTx,
+            blockhash,
+            lastValidBlockHeight,
+          },
+        } = await edgeClient.createFinishCookingTransaction({
+          cooking,
+          owner: stateWallet?.publicKey?.toString(),
+          recipe: recipeAddress,
+          lutAddresses: LUT_ADDRESS,
+          payer: RESOURCE_DRIVER.publicKey.toString(),
+        });
+
+        transactions.push(finishCookingTx);
+
+        toast.update(toastId, { progress: 0.5 });
+
+        const versionedTxs = transactions.map((tx) => {
+          const vTx = VersionedTransaction.deserialize(bs58.decode(tx));
+          console.log("addresses", vTx.message.addressTableLookups.map((e) => e.accountKey.toString()));
+          vTx.sign([RESOURCE_DRIVER]);
+          return vTx;
+        });
+
+        const signedTxs = await stateWallet
+          .signAllTransactions(versionedTxs)
+          .then((x) => x.map((tx) => bs58.encode(tx.serialize())));
+        const unwrapResourceRes = [];
+        for (let tx of signedTxs) {
+          // eslint-disable-next-line no-await-in-loop
+          await edgeClient
+            .sendBulkTransactions({
+              txs: tx,
+              blockhash,
+              lastValidBlockHeight,
+              options: {
+                commitment: "processed",
+                skipPreflight: true,
+              },
+            })
+            .then((res) => unwrapResourceRes.push(res));
+        }
+
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "success",
+          render: "Crafting Recipe Successful",
+          progress: 1,
+        });
+        dispatch(
+          AuthActionsWithoutThunk.remoreCookingAddress({ recipeAddress })
+        );
+        return fulfillWithValue(unwrapResourceRes);
+      } catch (error) {
+        console.error("Error: Crafting Recipe", error);
+
+        toast.update(toastId, {
+          autoClose: 5000,
+          type: "error",
+          render: "Error while Crafting Recipe",
           progress: 1,
         });
 
@@ -662,6 +815,7 @@ const actionFactory = (actions: AsyncActions) => {
     updateProfile,
     claimFaucet,
     unwrapResource,
+    createRecipe,
   };
 };
 export default actionFactory;

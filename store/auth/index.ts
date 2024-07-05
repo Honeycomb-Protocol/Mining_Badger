@@ -8,6 +8,7 @@ const initialState: AuthState = {
   authToken: null,
   refreshInventory: false,
   wallet: null,
+  cookingAddresses: {},
 };
 
 export const slice = createSlice({
@@ -23,6 +24,15 @@ export const slice = createSlice({
     },
     setRefreshInventory: (state, action) => {
       state.refreshInventory = action.payload;
+    },
+    setCookingAddress: (state, action) => {
+      state.cookingAddresses = {
+        ...state.cookingAddresses,
+        [action.payload.recipeAddress]: action.payload.cookingAddresses,
+      };
+    },
+    remoreCookingAddress: (state, action) => {
+      delete state.cookingAddresses[action.payload.recipeAddress];
     },
   },
   extraReducers: (builder) => {

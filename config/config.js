@@ -8,6 +8,7 @@ const API_URL = process.env.NEXT_PUBLIC_APIURL || "";
 const LUT_ADDRESSES = process.env.NEXT_PUBLIC_LUTADDRESSES?.split(",") || [];
 const EDGE_CLIENT = process.env.NEXT_PUBLIC_EDGE_CLIENT || "";
 const PAYER_DRIVER = process.env.NEXT_PUBLIC_PAYER_DRIVER || "";
+const LUT_ADDRESS = process.env.NEXT_PUBLIC_LUT_ADDRESS || "";
 const RESOURCE_DRIVER = Keypair.fromSecretKey(
   new Uint8Array(
     JSON.parse(process.env.NEXT_PUBLIC_MAIN_RESOURCE_PAYER_DRIVER || "")
@@ -25,4 +26,5 @@ export {
   PAYER_DRIVER,
   EDGE_CLIENT,
   RESOURCE_DRIVER,
+  LUT_ADDRESS
 };
