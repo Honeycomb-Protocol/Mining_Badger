@@ -1,6 +1,6 @@
 import { Spinner } from "@nextui-org/react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
@@ -18,6 +18,9 @@ const RefineTab = () => {
   const [inventoryData, setInventoryData] = useState<Map<string, number>>(
     new Map()
   );
+  const [inventoryData, setInventoryData] = useState<Map<string, number>>(
+    new Map()
+  );
   const [refineData, setRefineData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
@@ -30,6 +33,13 @@ const RefineTab = () => {
     const fetchData = async () => {
       const res = await fetchRefinedResoucesData(setDataLoading);
       setRefineData(res);
+
+      const inventoryData = await fetchInventoryData("ores", setDataLoading);
+      const map = new Map();
+      inventoryData.forEach((item) => {
+        map.set(item.name, item.amount);
+      });
+      setInventoryData(map);
 
       const inventoryData = await fetchInventoryData("ores", setDataLoading);
       const map = new Map();

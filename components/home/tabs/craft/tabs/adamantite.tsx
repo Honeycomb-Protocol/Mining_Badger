@@ -18,6 +18,9 @@ const AdamantiteTab = () => {
   const [inventoryData, setInventoryData] = useState<Map<string, number>>(
     new Map()
   );
+  const [inventoryData, setInventoryData] = useState<Map<string, number>>(
+    new Map()
+  );
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
     name: "",
@@ -29,6 +32,13 @@ const AdamantiteTab = () => {
     const fetchData = async () => {
       const res = await fetchCraftData("adamantite", setDataLoading);
       setCraftData(res);
+
+      const inventoryData = await fetchInventoryData("bars", setDataLoading);
+      const map = new Map();
+      inventoryData.forEach((item) => {
+        map.set(item.name, item.amount);
+      });
+      setInventoryData(map);
 
       const inventoryData = await fetchInventoryData("bars", setDataLoading);
       const map = new Map();

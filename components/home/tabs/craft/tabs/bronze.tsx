@@ -18,6 +18,9 @@ const BronzeTab = () => {
   const [inventoryData, setInventoryData] = useState<Map<string, number>>(
     new Map()
   );
+  const [inventoryData, setInventoryData] = useState<Map<string, number>>(
+    new Map()
+  );
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
     name: "",
