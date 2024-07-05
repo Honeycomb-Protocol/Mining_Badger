@@ -92,11 +92,13 @@ const ShopTab = () => {
               btnClick={async () =>
                 userLevelInfo.level >= item?.lvl_req &&
                 !item.claimed &&
-                (await claimResource(item?.address, item?.name).then(() => {
+                claimResource(item?.address, item?.name).then(() => {
+                  console.log("Claimed resource");
                   dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                }))
+                })
               }
               loading={loading}
+              addStyles={"!absolute !bottom-[25%] !right-[25%]"}
             />
           ))
       )}

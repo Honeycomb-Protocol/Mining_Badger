@@ -264,10 +264,13 @@ const Utils = () => {
   const fetchInventoryData = async (
     name: string,
     setDataLoading: (status: boolean) => void,
-    refetch = false
+    refetch = false,
+    isLoaded: boolean = false
   ) => {
     try {
-      setDataLoading(true);
+      if (!isLoaded) {
+        setDataLoading(true);
+      }
 
       let data = getCache("inventoryData");
 

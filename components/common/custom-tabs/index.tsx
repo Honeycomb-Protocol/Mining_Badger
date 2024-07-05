@@ -60,6 +60,16 @@ const CustomTabs = ({
                   .includes("Bronze Pickaxe")
               ) {
                 setActiveTab(tab.name);
+              } else {
+                const inventoryData = fetchInventoryData(
+                  "pickaxe",
+                  setDataLoading,
+                  true,
+                  true
+                ).then((res: any) => {
+                  if (res?.map((item) => item.name).includes("Bronze Pickaxe"))
+                    setActiveTab(tab.name);
+                });
               }
             }}
           >

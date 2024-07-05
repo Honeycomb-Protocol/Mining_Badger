@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import { Button, Spinner, Tooltip } from "@nextui-org/react";
 
@@ -36,6 +36,10 @@ const NftCard: React.FC<CardProps> = ({
     new Date(expIn).getTime() > Date.now() ? expIn - Date.now() : 0
   );
 
+  useEffect(() => {
+    console.log(btnDisabled, "btnDisabled");
+  }, [btnDisabled]);
+
   const cardStyle = {
     width: imageWidth ? `${imageWidth}px` : "165px",
     height: imageHeight ? `${imageHeight}px` : "176px",
@@ -63,7 +67,7 @@ const NftCard: React.FC<CardProps> = ({
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}
       style={{ width: width ? width : "max-content" }}
     >
-      {expIn && timeLeft > 0 && btnDisabled && (
+      {expIn && timeLeft > 0 && (
         <MineExpiry exp={expIn} setTimeLeft={setTimeLeft} timeLeft={timeLeft} />
       )}
       {experience && (
@@ -87,7 +91,26 @@ const NftCard: React.FC<CardProps> = ({
         </div>
       )}
       <div className={`relative`} style={cardStyle}>
-        <Image src={imagePic} alt={name} fill className={`${addStyles}`} />
+        {addStyles ? (
+          <img
+            src={imagePic}
+            alt={name}
+            className={addStyles ? addStyles : ""}
+            width={imageWidth + 70}
+            height={imageHeight + 70}
+            style={{
+              maxWidth: "200%",
+              pointerEvents: "none",
+            }}
+          />
+        ) : (
+          <Image
+            src={imagePic}
+            alt={name}
+            fill
+            className={addStyles ? addStyles : ""}
+          />
+        )}
         {miningTimeReduction && (
           <div className="absolute top-2 -right-8 z-50 bg-gradient-to-r from-[#2d2f31,#747474] to-[#2d2f31] text-sm px-2 rounded">
             {miningTimeReduction}

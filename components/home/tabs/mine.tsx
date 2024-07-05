@@ -76,7 +76,6 @@ const MineTab = () => {
                   : ""
               }
               btnDisabled={
-                new Date(data?.expire).getTime() - Date.now() > 0 ||
                 loading.name === data?.name ||
                 userLevelInfo.level < data?.lvl_req
               }
