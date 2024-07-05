@@ -16,9 +16,9 @@ const SteelTab = () => {
   const { createRecipe } = useHoneycomb();
   const dispatch = useDispatch();
   const [craftData, setCraftData] = useState([]);
-  const [inventoryData, setInventoryData] = useState<Map<string, number>>(
-    new Map()
-  );
+  const [inventoryData, setInventoryData] = useState<
+    Map<string, { amount: number; usable: boolean }>
+  >(new Map());
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
     name: "",
@@ -35,7 +35,10 @@ const SteelTab = () => {
       const inventoryData = await fetchInventoryData("bars", setDataLoading);
       const map = new Map();
       inventoryData.forEach((item) => {
-        map.set(item.name, item.amount);
+        map.set(item.name, {
+          amount: item.amount,
+          usable: !item.canUnwrapped && !item.isCompressed,
+        });
       });
       setInventoryData(map);
     };
@@ -52,10 +55,11 @@ const SteelTab = () => {
           ?.sort((a, b) => a.lvl_req - b.lvl_req)
           .map((craftment, index) => {
             const canCraft = craftment.ingredients.reduce(
-              (cond, ingredient) =>
+              (cond, ingredient: Ingredient) =>
                 cond &&
-                (inventoryData?.get(ingredient?.name) || 0) >=
-                  ingredient?.amount,
+                (inventoryData?.get(ingredient?.name)?.amount || 0) >=
+                  ingredient?.amount &&
+                inventoryData?.get(ingredient?.name)?.usable,
               true
             );
             return (
@@ -73,6 +77,8 @@ const SteelTab = () => {
                   btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
                   materials={craftment?.ingredients}
                   experience={craftment?.lvl_req}
+                  isCompressed={true}
+                  canUnwrapped={false}
                   resourceInfo={
                     craftment?.lvl_req > userLevelInfo?.level
                       ? `User level ${craftment?.lvl_req} is required to craft this resource.`
@@ -90,8 +96,7 @@ const SteelTab = () => {
                   }}
                   loading={loading}
                   btnDisabled={
-                    (loading.status &&
-                      loading.name === craftment?.metadata?.name) ||
+                    (loading.status && loading.name === craftment?.name) ||
                     craftment?.lvl_req > userLevelInfo?.level ||
                     !canCraft
                   }

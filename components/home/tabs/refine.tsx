@@ -15,9 +15,9 @@ const RefineTab = () => {
   const { createRecipe } = useHoneycomb();
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
-  const [inventoryData, setInventoryData] = useState<Map<string, number>>(
-    new Map()
-  );
+  const [inventoryData, setInventoryData] = useState<
+    Map<string, { amount: number; usable: boolean }>
+  >(new Map());
   const [refineData, setRefineData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
@@ -34,7 +34,10 @@ const RefineTab = () => {
       const inventoryData = await fetchInventoryData("ores", setDataLoading);
       const map = new Map();
       inventoryData.forEach((item) => {
-        map.set(item.name, item.amount);
+        map.set(item.name, {
+          amount: item.amount,
+          usable: !item.canUnwrapped && !item.isCompressed,
+        });
       });
       setInventoryData(map);
     };
@@ -52,11 +55,12 @@ const RefineTab = () => {
             const canRefine = refinement.ingredients.reduce(
               (cond, ingredient: Ingredient) =>
                 cond &&
-                (inventoryData?.get(ingredient?.name) || 0) >=
-                  ingredient?.amount,
+                (inventoryData?.get(ingredient?.name)?.amount || 0) >=
+                  ingredient?.amount &&
+                inventoryData?.get(ingredient?.name)?.usable,
               true
             );
-
+            console.log("canrefine", canRefine);
             return (
               <NftCard
                 key={index}
@@ -70,6 +74,8 @@ const RefineTab = () => {
                 nftNameStyle="text-[15px] pr-1"
                 btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
                 materials={refinement?.ingredients}
+                isCompressed={true}
+                canUnwrapped={false}
                 resourceInfo={
                   refinement?.lvl_req > userLevelInfo?.level
                     ? `User level ${
@@ -77,12 +83,12 @@ const RefineTab = () => {
                       } is required to refine this resource.`
                     : ""
                 }
-                btnClick={() =>
+                btnClick={async () =>
                   userLevelInfo?.level >= refinement?.lvl_req &&
                   canRefine &&
-                  createRecipe(refinement.recipe).then(() => {
+                  (await createRecipe(refinement.recipe).then(() => {
                     dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                  })
+                  }))
                 }
                 loading={loading}
                 btnDisabled={

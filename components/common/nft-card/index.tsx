@@ -30,6 +30,7 @@ const NftCard: React.FC<CardProps> = ({
   isCompressed,
   canUnwrapped,
   unWrappingItemFunc,
+  addStyles,
 }) => {
   const [timeLeft, setTimeLeft] = useState(
     new Date(expIn).getTime() > Date.now() ? expIn - Date.now() : 0
@@ -86,16 +87,38 @@ const NftCard: React.FC<CardProps> = ({
         </div>
       )}
       <div className={`relative`} style={cardStyle}>
-        <Image src={imagePic} alt={name} fill />
+        <Image src={imagePic} alt={name} fill className={`${addStyles}`} />
         {miningTimeReduction && (
           <div className="absolute top-2 -right-8 z-50 bg-gradient-to-r from-[#2d2f31,#747474] to-[#2d2f31] text-sm px-2 rounded">
             {miningTimeReduction}
           </div>
         )}
         {amount && (
-          <div className="absolute top-0 right-0 bg-red-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
+          <div className="absolute -top-2 left-0 bg-red-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
             {amount}
           </div>
+        )}
+        {isCompressed && canUnwrapped ? (
+          <div className="absolute -top-2 right-0 bg-blue-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
+            <Tooltip
+              content="This resource is compressed and can be wrapped to be used for refining. Click on it to unwrap."
+              className="bg-[#1D1D1D]"
+            >
+              <span>C</span>
+            </Tooltip>
+          </div>
+        ) : (
+          !isCompressed &&
+          !canUnwrapped && (
+            <div className="absolute -top-2 right-0 bg-blue-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
+              <Tooltip
+                content="This resource is unrwapped and ready to be used."
+                className="bg-[#1D1D1D]"
+              >
+                <span>U</span>
+              </Tooltip>
+            </div>
+          )
         )}
         {lock && (
           <div

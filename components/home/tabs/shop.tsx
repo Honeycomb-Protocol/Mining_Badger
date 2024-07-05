@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { Spinner } from "@nextui-org/react";
+import { Spinner, user } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
@@ -67,6 +67,8 @@ const ShopTab = () => {
               imageWidth={150}
               imageHeight={150}
               nftNameStyle="text-[15px] pr-1"
+              isCompressed={true}
+              canUnwrapped={false}
               miningTimeReduction={
                 item?.name.split(" ")[0] === "Bronze"
                   ? null
@@ -82,10 +84,17 @@ const ShopTab = () => {
               btnStyle={
                 "bg-gradient-to-b from-[#81FD9C] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
               }
-              btnDisabled={loading.name === item?.name || item?.claimed}
+              btnDisabled={
+                loading.name === item?.name ||
+                item?.claimed ||
+                userLevelInfo.level < item?.lvl_req
+              }
               btnClick={async () =>
+                userLevelInfo.level >= item?.lvl_req &&
                 !item.claimed &&
-                (await claimResource(item?.address, item?.name))
+                (await claimResource(item?.address, item?.name).then(() => {
+                  dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+                }))
               }
               loading={loading}
             />

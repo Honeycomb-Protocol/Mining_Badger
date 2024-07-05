@@ -66,6 +66,8 @@ const MineTab = () => {
               imageWidth={80}
               imageHeight={100}
               nftNameStyle="text-[15px] pr-1"
+              isCompressed={true}
+              canUnwrapped={false}
               btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
               expIn={data?.expire}
               resourceInfo={
@@ -80,7 +82,9 @@ const MineTab = () => {
               }
               btnClick={async () =>
                 userLevelInfo.level >= data?.lvl_req &&
-                (await mineResource(data?.address, data?.name))
+                mineResource(data?.address, data?.name).then(() => {
+                  dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+                })
               }
               loading={loading}
             />

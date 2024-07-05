@@ -7,6 +7,7 @@ import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
 import { AuthActionsWithoutThunk } from "@/store/auth";
 import { RootState } from "@/store";
+import { useHoneycomb } from "@/hooks";
 
 const OresTab = () => {
   const { fetchInventoryData } = Utils();
@@ -14,16 +15,22 @@ const OresTab = () => {
   const dispatch = useDispatch();
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { UnWrapResource } = useHoneycomb();
+
+  const fetchData = async () => {
+    const res = await fetchInventoryData("ores", setLoading, refreshInventory);
+    setInventoryData(res);
+  };
+
+  const unWrappingItem = React.useCallback(
+    async (resourceId: string, qty: number) => {
+      await UnWrapResource(resourceId, qty);
+      fetchData();
+    },
+    []
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetchInventoryData(
-        "ores",
-        setLoading,
-        refreshInventory
-      );
-      setInventoryData(res);
-    };
     fetchData();
     dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
   }, [refreshInventory]);
@@ -45,6 +52,9 @@ const OresTab = () => {
             btnStyle="bg-opacity-70 text-xs h-6"
             btnDisabled
             amount={item?.amount}
+            isCompressed={item.isCompressed}
+            canUnwrapped={item.canUnwrapped}
+            unWrappingItemFunc={() => unWrappingItem(item.address, item.amount)}
           />
         ))
       )}

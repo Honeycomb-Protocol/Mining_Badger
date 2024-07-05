@@ -24,6 +24,7 @@ const AllTab = () => {
     },
     []
   );
+
   const fetchData = async () => {
     const res = await fetchInventoryData("all", setLoading, refreshInventory);
     setInventoryData(res);

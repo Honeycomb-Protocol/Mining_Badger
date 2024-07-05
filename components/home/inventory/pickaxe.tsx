@@ -44,6 +44,8 @@ const PickaxeTab = () => {
             btnStyle="bg-opacity-70 text-xs h-6"
             btnDisabled
             // amount={item?.amount}
+            isCompressed={item.isCompressed}
+            canUnwrapped={item.canUnwrapped}
           />
         ))
       )}

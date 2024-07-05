@@ -80,6 +80,7 @@ export interface CardProps {
   isCompressed?: boolean;
   canUnwrapped?: boolean;
   unWrappingItemFunc?: () => void;
+  addStyles?: string;
 }
 
 export interface ModalProps {
