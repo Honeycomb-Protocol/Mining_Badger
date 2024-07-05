@@ -32,7 +32,7 @@ const MithrilTab = () => {
       const res = await fetchCraftData("mithril", setDataLoading);
       setCraftData(res);
 
-      const inventoryData = await fetchInventoryData("bars", setDataLoading);
+      const inventoryData = await fetchInventoryData("all", setDataLoading);
       const map = new Map();
       inventoryData.forEach((item) => {
         map.set(item.name, {

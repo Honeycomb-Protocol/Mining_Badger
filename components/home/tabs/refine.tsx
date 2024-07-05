@@ -31,7 +31,7 @@ const RefineTab = () => {
       const res = await fetchRefinedResoucesData(setDataLoading);
       setRefineData(res);
 
-      const inventoryData = await fetchInventoryData("ores", setDataLoading);
+      const inventoryData = await fetchInventoryData("all", setDataLoading);
       const map = new Map();
       inventoryData.forEach((item) => {
         map.set(item.name, {
