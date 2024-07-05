@@ -336,14 +336,14 @@ const actionFactory = (actions: AsyncActions) => {
     "honeycomb/claimFaucet",
     async (resourceId, { rejectWithValue, fulfillWithValue, getState }) => {
       const {
-        auth: { wallet },
-        honeycomb: { user },
+        // auth: { wallet },
+        honeycomb: { user, wallet },
       } = getState() as { honeycomb: HoneycombState; auth: AuthState };
 
       try {
         const { data } = await axios.post(`${API_URL}faucet/mine`, {
           user: {
-            wallet,
+            wallet: wallet?.publicKey?.toString(),
             id: user.id,
           },
           resource: resourceId,
