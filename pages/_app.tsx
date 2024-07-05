@@ -3,9 +3,7 @@ import { K2D } from "next/font/google";
 import { NextUIProvider } from "@nextui-org/react";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
-
 import "react-toastify/dist/ReactToastify.css";
-
 import "@/styles/globals.css";
 import Header from "@/components/header";
 import WalletContextProvider from "@/components/wallet-context-provider";
@@ -18,7 +16,7 @@ import {
   useGateway,
 } from "@civic/solana-gateway-react";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { GATE_NETWORK, RPC_URL } from "@/config/config";
+import { GATE_NETWORK } from "@/config/config";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Button from "@/components/common/button";
 const k2d = K2D({ weight: "400", subsets: ["latin"] });
@@ -43,13 +41,18 @@ export const Footer = () => {
   const { requestGatewayToken, gatewayStatus } = useGateway();
 
   return (
-    <div className="text-xs">
-      Proof your identity through civic{" "}
+    <div className="text-xs flex justify-between items-center">
+      <div>
+        <p>Proof your identity through civic.</p>
+        <p className="text-yellow-500">
+          Make sure to have ( SOL ) on devnet.
+        </p>{" "}
+      </div>
       <Button
         btnText={GatewayStatus[gatewayStatus]}
         onClick={requestGatewayToken}
         loading={false}
-        styles="text-[10px] ml-10"
+        styles="text-[10px]"
       />
     </div>
   );
