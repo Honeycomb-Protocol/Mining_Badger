@@ -24,7 +24,7 @@ const AllTab = () => {
     },
     []
   );
-
+//changes
   const fetchData = async (refetch: boolean = false) => {
     const res = await fetchInventoryData(
       "all",
