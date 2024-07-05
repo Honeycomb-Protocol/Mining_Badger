@@ -27,8 +27,10 @@ const GateWayCivic = ({ children }) => {
   const wallet = useWallet();
   return (
     <GatewayProvider
-      connection={new Connection(RPC_URL, "processed")}
-      cluster="mainnet-beta"
+      connection={
+        new Connection("https://rpc.magicblock.app/devnet/", "processed")
+      }
+      cluster="devnet"
       wallet={wallet}
       gatekeeperNetwork={new PublicKey(GATE_NETWORK)}
     >
@@ -47,7 +49,7 @@ export const Footer = () => {
         btnText={GatewayStatus[gatewayStatus]}
         onClick={requestGatewayToken}
         loading={false}
-         styles="text-[10px] ml-10"
+        styles="text-[10px] ml-10"
       />
     </div>
   );
