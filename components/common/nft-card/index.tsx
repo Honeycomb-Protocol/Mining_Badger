@@ -54,7 +54,7 @@ const NftCard: React.FC<CardProps> = ({
   return (
     <div
       onClick={() => {
-        if (isCompressed && !canUnwrapped) {
+        if (isCompressed && canUnwrapped) {
           console.log("Compressed canUnwrapped Item Clicked");
           unWrappingItemFunc();
         }
