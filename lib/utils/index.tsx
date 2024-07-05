@@ -212,87 +212,6 @@ const Utils = () => {
     return categorizedResources;
   };
 
-  const createRecipe = async (
-    recipe: string,
-    name: string,
-    // eslint-disable-next-line no-unused-vars
-    setLoading: (_) => void
-  ) => {
-    try {
-      if (!edgeClient || !user || !authToken)
-        throw new Error("Unable to find edgeClient or user or authToken");
-
-      const connection = new Connection(
-        process.env.NEXT_PUBLIC_RPC_ENDPOINT!,
-        "confirmed"
-      );
-
-      const balance =
-        (await connection.getBalance(new PublicKey(user?.wallets?.shadow))) /
-        LAMPORTS_PER_SOL;
-
-      if (balance < 0.000005) {
-        toast.error(
-          "Insufficient balance! Fund your shadow signer wallet with SOL to continue creating recipe."
-        );
-        return;
-      }
-
-      console.log("Recipe", recipe);
-      setLoading({ name: name, status: true });
-
-      const { createCraftRecipeTransaction: txResponse } =
-        await edgeClient.CreateCraftRecipeTransaction({
-          recipe: recipe,
-          wallet: publicKey.toString(),
-          authority: user.wallets.shadow,
-          lutAddresses: LUT_ADDRESSES,
-        });
-
-      for (let i = 0; i < txResponse.transactions.length; i++) {
-        const tx = txResponse.transactions[i];
-        const {
-          signWithShadowSignerAndSendBulkTransactions: sendBulkTransactions,
-          // eslint-disable-next-line no-await-in-loop
-        } = await edgeClient.signWithShadowSignerAndSendBulkTransactions(
-          {
-            txs: tx,
-            blockhash: txResponse!.blockhash,
-            lastValidBlockHeight: txResponse!.lastValidBlockHeight,
-            options: {
-              commitment: "processed",
-              skipPreflight: true,
-            },
-          },
-          {
-            fetchOptions: {
-              headers: {
-                authorization: `Bearer ${authToken}`,
-              },
-            },
-          }
-        );
-
-        sendBulkTransactions.forEach((txResponse) => {
-          if (txResponse.status !== "Success") {
-            console.log(
-              "Transaction",
-              txResponse.status,
-              txResponse.error,
-              txResponse.signature
-            );
-          }
-
-          console.log("Transaction", txResponse.signature);
-        });
-      }
-      toast.success("Resource crafted successfully");
-      setLoading({ name: "", status: false });
-    } catch (error) {
-      toast.error(error.message || "Something went wrong");
-      setLoading({ name: "", status: false });
-    }
-  };
 
   // const getSymbol = (name) => {
   //   // console.log(cache.craftData);
@@ -464,7 +383,6 @@ const Utils = () => {
     renderInventoryTabComponents,
     formatTime,
     getLevelsFromExp,
-    createRecipe,
     fetchCraftData,
     fetchInventoryData,
     fetchRefinedResoucesData,

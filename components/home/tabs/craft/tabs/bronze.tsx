@@ -30,7 +30,7 @@ const BronzeTab = () => {
       const res = await fetchCraftData("bronze", setDataLoading);
       setCraftData(res);
 
-      const inventoryData = await fetchInventoryData("bars", setDataLoading);
+      const inventoryData = await fetchInventoryData("all", setDataLoading);
       const map = new Map();
       inventoryData.forEach((item) => {
         map.set(item.name, {
@@ -53,11 +53,15 @@ const BronzeTab = () => {
           ?.sort((a, b) => a.lvl_req - b.lvl_req)
           ?.map((craftment, index) => {
             const canCraft = craftment.ingredients.reduce(
-              (cond, ingredient: Ingredient) =>
-                cond &&
-                (inventoryData?.get(ingredient?.name)?.amount || 0) >=
-                  ingredient?.amount &&
-                inventoryData?.get(ingredient?.name)?.usable,
+              (cond: boolean, ingredient: Ingredient) => {
+                return (
+                  (cond &&
+                    inventoryData?.get(ingredient?.name)?.amount >=
+                      ingredient?.amount &&
+                    inventoryData?.get(ingredient?.name)?.usable) ||
+                  false
+                );
+              },
               true
             );
             return (
@@ -83,15 +87,12 @@ const BronzeTab = () => {
                       : "You can craft this resource."
                   }
                   btnClick={async () => {
-                    userLevelInfo?.level >= craftment?.lvl_req &&
-                      canCraft &&
-                      userLevelInfo?.level >= craftment?.level_req &&
-                      (await createRecipe(craftment?.address).then(() => {
-                        dispatch(
-                          AuthActionsWithoutThunk.setRefreshInventory(true)
-                        );
-                        // fetchCraftData("adamantite", setDataLoading, true);
-                      }));
+                    await createRecipe(craftment?.recipe).then(() => {
+                      dispatch(
+                        AuthActionsWithoutThunk.setRefreshInventory(true)
+                      );
+                      // fetchCraftData("adamantite", setDataLoading, true);
+                    });
                   }}
                   loading={loading}
                   btnDisabled={

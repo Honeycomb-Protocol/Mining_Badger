@@ -17,7 +17,7 @@ const BarTab = () => {
   const { UnWrapResource } = useHoneycomb();
 
   const fetchData = async () => {
-    const res = await fetchInventoryData("bar", setLoading, refreshInventory);
+    const res = await fetchInventoryData("bars", setLoading, refreshInventory);
     setInventoryData(res);
   };
 
