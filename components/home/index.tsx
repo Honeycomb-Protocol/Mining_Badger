@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
+import { Accordion, AccordionItem, Button, Progress } from "@nextui-org/react";
 
 import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
@@ -9,6 +9,7 @@ import { TabDataProps } from "@/interfaces";
 import Utils from "@/lib/utils";
 import LevelsRequiredModal from "../common/modal";
 import { useHoneycomb } from "@/hooks";
+import { Footer } from "@/pages/_app";
 
 const HomePage = () => {
   const { user, profile } = useHoneycomb();
@@ -111,6 +112,9 @@ const HomePage = () => {
                 indicator: "bg-gradient-to-r from-[#FCC85D,94%] to-[#FFEAC0]",
               }}
             />
+          </div>
+          <div className="px-2 mt-3 mb-2">
+            <Footer />
           </div>
         </div>
 

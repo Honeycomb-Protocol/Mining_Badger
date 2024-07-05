@@ -9,6 +9,8 @@ import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { useHoneycomb } from "@/hooks";
 import { RootState } from "@/store";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { Button } from "@nextui-org/react";
+import { Footer } from "@/pages/_app";
 
 const Header = () => {
   const router = useRouter();
@@ -53,19 +55,22 @@ const Header = () => {
     >
       {router.pathname !== "/" && (
         <div className="flex justify-center items-center">
-          <WalletMultiButton
-            style={{
-              height: "40px",
-              borderRadius: "15px",
-              backgroundColor: "transparent",
-              color: "#ffffff",
-              width: "174px",
-              display: "flex",
-              justifyContent: "center",
-              border: "2px solid #8E8B77",
-              fontSize: "12px",
-            }}
-          />
+          <div>
+            <WalletMultiButton
+              style={{
+                height: "40px",
+                borderRadius: "15px",
+                backgroundColor: "transparent",
+                color: "#ffffff",
+                width: "174px",
+                display: "flex",
+                justifyContent: "center",
+                border: "2px solid #8E8B77",
+                fontSize: "12px",
+              }}
+            />
+            {/* <Footer /> */}
+          </div>
           {/* {user?.wallets?.shadow && (
             <div className="rounded-lg border-2 border-gray-800 p-2 ml-6">
               <div className="flex justify-center items-center">
