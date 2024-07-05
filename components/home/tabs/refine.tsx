@@ -1,7 +1,8 @@
 import { Spinner } from "@nextui-org/react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
@@ -10,8 +11,12 @@ import { useHoneycomb } from "@/hooks";
 import { Ingredient } from "@/interfaces";
 
 const RefineTab = () => {
-  const { fetchRefinedResoucesData, userLevelInfo, fetchInventoryData } =
-    Utils();
+  const {
+    fetchRefinedResoucesData,
+    userLevelInfo,
+    fetchInventoryData,
+    apiCallDelay,
+  } = Utils();
   const { createRecipe } = useHoneycomb();
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
@@ -43,6 +48,22 @@ const RefineTab = () => {
     };
     fetchData();
   }, []);
+
+  const refineResource = async (recipe: any, name: string) => {
+    try {
+      setLoading({ name: name, status: true });
+      await createRecipe(recipe);
+      await apiCallDelay();
+      const data = await fetchRefinedResoucesData(setDataLoading, true);
+      setRefineData(data);
+      setLoading({ name: "", status: false });
+      dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+      toast.success(`${name} Resource refined successfully`);
+    } catch (err: any) {
+      setLoading({ name: "", status: false });
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  };
 
   return (
     <div className="py-10 grid grid-cols-4 gap-8">
@@ -86,9 +107,16 @@ const RefineTab = () => {
                 btnClick={async () =>
                   userLevelInfo?.level >= refinement?.lvl_req &&
                   canRefine &&
-                  (await createRecipe(refinement.recipe).then(() => {
-                    dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
-                  }))
+                  // (await createRecipe(refinement.recipe).then(() => {
+                  //   dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+                  // }))
+                  refineResource(refinement.recipe, refinement.name).then(
+                    () => {
+                      dispatch(
+                        AuthActionsWithoutThunk.setRefreshInventory(true)
+                      );
+                    }
+                  )
                 }
                 loading={loading}
                 btnDisabled={

@@ -14,10 +14,10 @@ import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const MineTab = () => {
   const dispatch = useDispatch();
-  const { fetchMineResourcesData, userLevelInfo } = Utils();
+  const { fetchMineResourcesData, userLevelInfo, apiCallDelay } = Utils();
   const { publicKey } = useWallet();
   const [mineData, setMineData] = useState([]);
-  const { profile, faucetClaim } = useHoneycomb();
+  const { faucetClaim } = useHoneycomb();
   const [dataLoader, setDataLoader] = useState(false);
   const [loading, setLoading] = useState({
     name: "",
@@ -37,6 +37,7 @@ const MineTab = () => {
     try {
       setLoading({ name: name, status: true });
       await faucetClaim(resourceId);
+      await apiCallDelay();
       const data = await fetchMineResourcesData(setDataLoader, true);
       setMineData(data);
       setLoading({ name: "", status: false });

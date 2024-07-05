@@ -12,7 +12,7 @@ import { useHoneycomb } from "@/hooks";
 import { AuthActionsWithoutThunk } from "@/store/auth";
 
 const ShopTab = () => {
-  const { userLevelInfo, fetchShopResourcesData } = Utils();
+  const { userLevelInfo, fetchShopResourcesData, apiCallDelay } = Utils();
   const { publicKey } = useWallet();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
@@ -37,6 +37,7 @@ const ShopTab = () => {
       setLoading({ name: name, status: true });
       console.log("Claiming resource", resourceId);
       const result = await faucetClaim(resourceId);
+      await apiCallDelay();
       const data = await fetchShopResourcesData(setDataLoader, true);
       setShopData(data);
       setLoading({ name: "", status: false });

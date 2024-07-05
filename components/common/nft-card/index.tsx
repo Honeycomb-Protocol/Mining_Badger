@@ -133,7 +133,7 @@ const NftCard: React.FC<CardProps> = ({
         ) : (
           !isCompressed &&
           !canUnwrapped && (
-            <div className="absolute -top-2 right-0 bg-blue-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
+            <div className="absolute -top-2 right-0 bg-green-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
               <Tooltip
                 content="This resource is unrwapped and ready to be used."
                 className="bg-[#1D1D1D]"

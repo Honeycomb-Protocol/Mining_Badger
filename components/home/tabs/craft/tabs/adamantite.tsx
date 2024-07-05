@@ -11,9 +11,15 @@ import { Ingredient } from "@/interfaces";
 
 const AdamantiteTab = () => {
   const { publicKey } = useWallet();
-  const { fetchCraftData, userLevelInfo, fetchInventoryData } = Utils();
+  const {
+    fetchCraftData,
+    userLevelInfo,
+    fetchInventoryData,
+    getUserLevelInfo,
+    apiCallDelay,
+  } = Utils();
   const dispatch = useDispatch();
-  const { createRecipe } = useHoneycomb();
+  const { profile, createRecipe } = useHoneycomb();
   const [craftData, setCraftData] = useState([]);
   const [inventoryData, setInventoryData] = useState<
     Map<string, { amount: number; usable: boolean }>
@@ -30,6 +36,7 @@ const AdamantiteTab = () => {
     const fetchData = async () => {
       const res = await fetchCraftData("adamantite", setDataLoading);
       setCraftData(res);
+      await apiCallDelay();
 
       const inventoryData = await fetchInventoryData("all", setDataLoading);
       const map = new Map();
@@ -45,6 +52,22 @@ const AdamantiteTab = () => {
     fetchData();
   }, []);
 
+  const mineResource = async (recipe: any, name: string) => {
+    try {
+      setLoading({ name: name, status: true });
+      await createRecipe(recipe);
+      const data = await fetchCraftData("adamantite", setDataLoading);
+      setCraftData(data);
+      setLoading({ name: "", status: false });
+      dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+      await getUserLevelInfo(profile.platformData.xp);
+
+      // toast.success(`${name} Resource crafted successfully`);
+    } catch (err: any) {
+      setLoading({ name: "", status: false });
+      // toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  };
   return (
     <div className="grid grid-cols-3 gap-x-24 gap-y-8">
       {dataLoading ? (
@@ -86,12 +109,20 @@ const AdamantiteTab = () => {
                   btnClick={async () => {
                     userLevelInfo?.level >= craftment?.lvl_req &&
                       canCraft &&
-                      (await createRecipe(craftment?.address).then(() => {
-                        dispatch(
-                          AuthActionsWithoutThunk.setRefreshInventory(true)
-                        );
-                        // fetchCraftData("adamantite", setDataLoading, true);
-                      }));
+                      // (await createRecipe(craftment?.address).then(() => {
+                      //   dispatch(
+                      //     AuthActionsWithoutThunk.setRefreshInventory(true)
+                      //   );
+                      //   // fetchCraftData("adamantite", setDataLoading, true);
+                      // }));
+                      mineResource(craftment?.recipe, craftment?.name).then(
+                        () => {
+                          dispatch(
+                            AuthActionsWithoutThunk.setRefreshInventory(true)
+                          );
+                          // fetchCraftData("adamantite", setDataLoading, true);
+                        }
+                      );
                   }}
                   loading={loading}
                   btnDisabled={

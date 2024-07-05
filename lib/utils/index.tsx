@@ -171,11 +171,11 @@ const Utils = () => {
     return LevelsData[LevelsData.length - 1].level;
   };
 
-  const getUserLevelInfo = async (xp: number) => {
+  const getUserLevelInfo = async (xp: number, refetch: boolean = false) => {
     try {
       let data = getCache("userInfo");
 
-      if (data !== null && !refreshInventory) {
+      if (data !== null && !refreshInventory && !refetch) {
         setUserLevelInfo(data?.result);
         return data?.result;
       }
@@ -211,7 +211,6 @@ const Utils = () => {
 
     return categorizedResources;
   };
-
 
   // const getSymbol = (name) => {
   //   // console.log(cache.craftData);
@@ -267,6 +266,7 @@ const Utils = () => {
     refetch = false,
     isLoaded: boolean = false
   ) => {
+    if (!publicKey || publicKey.toString().length !== 44) return;
     try {
       if (!isLoaded) {
         setDataLoading(true);
@@ -380,6 +380,14 @@ const Utils = () => {
     }
   };
 
+  const apiCallDelay = async (delay: number = 5000) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, delay);
+    });
+  };
+
   return {
     renderCraftTabComponents,
     renderHomeTabComponents,
@@ -394,6 +402,7 @@ const Utils = () => {
     getUserLevelInfo,
     userLevelInfo,
     resetCache,
+    apiCallDelay,
   };
 };
 
