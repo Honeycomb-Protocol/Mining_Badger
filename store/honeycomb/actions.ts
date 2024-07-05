@@ -84,7 +84,7 @@ const actionFactory = (actions: AsyncActions) => {
         honeycomb: HoneycombState;
         auth: AuthState;
       };
-      const wallet = walletKey || stateWallet?.publicKey?.toString();
+      const wallet = stateWallet?.publicKey?.toString() || walletKey;
 
       try {
         console.log("fetchUser", wallet);
@@ -530,7 +530,10 @@ const actionFactory = (actions: AsyncActions) => {
 
         const versionedTxs = transactions.map((tx) => {
           const vTx = VersionedTransaction.deserialize(bs58.decode(tx));
-          console.log("addresses", vTx.message.addressTableLookups.map((e) => e.accountKey.toString()));
+          console.log(
+            "addresses",
+            vTx.message.addressTableLookups.map((e) => e.accountKey.toString())
+          );
           vTx.sign([RESOURCE_DRIVER]);
           return vTx;
         });
@@ -662,8 +665,6 @@ const actionFactory = (actions: AsyncActions) => {
         auth: { authToken: token },
       } = getState() as { honeycomb: HoneycombState; auth: AuthState };
       // const { authToken } = (getState() as { auth: AuthState }).auth;
-      console.log("user", user);
-      console.log("lfjaljaljdlaskjd", PAYER_DRIVER);
       try {
         if (!wallet.publicKey) {
           return rejectWithValue("No identity found");

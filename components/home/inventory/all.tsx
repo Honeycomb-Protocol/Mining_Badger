@@ -20,13 +20,17 @@ const AllTab = () => {
   const unWrappingItem = React.useCallback(
     async (resourceId: string, qty: number) => {
       await UnWrapResource(resourceId, qty);
-      fetchData();
+      fetchData(true);
     },
     []
   );
 
-  const fetchData = async () => {
-    const res = await fetchInventoryData("all", setLoading, refreshInventory);
+  const fetchData = async (refetch: boolean = false) => {
+    const res = await fetchInventoryData(
+      "all",
+      setLoading,
+      refetch || refreshInventory
+    );
     setInventoryData(res);
   };
 

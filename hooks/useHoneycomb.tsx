@@ -56,7 +56,7 @@ export function useHoneycomb() {
       const unwrapResource = await dispatch(
         honeycombActions.unwrapResource({ resourceId, qty })
       );
-
+      
       return unwrapResource;
     },
     []
@@ -158,6 +158,6 @@ export function useHoneycomb() {
     logout,
     faucetClaim,
     UnWrapResource,
-    createRecipe
+    createRecipe,
   };
 }
