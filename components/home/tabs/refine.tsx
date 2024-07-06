@@ -32,11 +32,15 @@ const RefineTab = () => {
 
   useEffect(() => {
     if (!publicKey) return;
-    const fetchData = async () => {
+    (async () => {
+      const res = await fetchRefinedResoucesData(setDataLoading);
+      setRefineData(res);
+    })();
+    const fetchData = setInterval(async () => {
       const res = await fetchRefinedResoucesData(setDataLoading);
       setRefineData(res);
 
-      const inventoryData = await fetchInventoryData("all", setDataLoading);
+      const inventoryData = await fetchInventoryData("all", () => true, true);
       const map = new Map();
       inventoryData.forEach((item) => {
         map.set(item.name, {
@@ -45,8 +49,10 @@ const RefineTab = () => {
         });
       });
       setInventoryData(map);
-    };
-    fetchData();
+    }, 5000);
+
+    return () => clearInterval(fetchData);
+    // fetchData();
   }, []);
 
   const refineResource = async (recipe: any, name: string) => {

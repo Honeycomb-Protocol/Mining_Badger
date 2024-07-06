@@ -34,11 +34,15 @@ const MithrilTab = () => {
 
   useEffect(() => {
     if (!publicKey) return;
-    const fetchData = async () => {
+    (async () => {
+      const res = await fetchCraftData("mithril", setDataLoading);
+      setCraftData(res);
+    })();
+    const fetchData = setInterval(async () => {
       const res = await fetchCraftData("mithril", setDataLoading);
       setCraftData(res);
 
-      const inventoryData = await fetchInventoryData("all", setDataLoading);
+      const inventoryData = await fetchInventoryData("all", () => true);
       const map = new Map();
       inventoryData.forEach((item) => {
         map.set(item.name, {
@@ -47,9 +51,9 @@ const MithrilTab = () => {
         });
       });
       setInventoryData(map);
-    };
+    }, 5000);
 
-    fetchData();
+    return () => clearInterval(fetchData);
   }, []);
 
   const mineResource = async (recipe: any, name: string) => {

@@ -22,7 +22,11 @@ const CustomTabs = ({
   useEffect(() => {
     if (!publicKey) return;
     const fetchData = async () => {
-      const inventoryData = await fetchInventoryData("pickaxe", setDataLoading);
+      const inventoryData = await fetchInventoryData(
+        "pickaxe",
+        setDataLoading,
+        true
+      );
       setInventoryData(inventoryData);
     };
     fetchData();

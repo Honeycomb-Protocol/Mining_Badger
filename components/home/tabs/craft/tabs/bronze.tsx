@@ -32,11 +32,15 @@ const BronzeTab = () => {
 
   useEffect(() => {
     if (!publicKey) return;
-    const fetchData = async () => {
+    (async () => {
+      const res = await fetchCraftData("bronze", setDataLoading);
+      setCraftData(res);
+    })();
+    const fetchData = setInterval(async () => {
       const res = await fetchCraftData("bronze", setDataLoading);
       setCraftData(res);
 
-      const inventoryData = await fetchInventoryData("all", setDataLoading);
+      const inventoryData = await fetchInventoryData("all", () => true);
       const map = new Map();
       inventoryData.forEach((item) => {
         map.set(item.name, {
@@ -45,9 +49,9 @@ const BronzeTab = () => {
         });
       });
       setInventoryData(map);
-    };
+    }, 5000);
 
-    fetchData();
+    return () => clearInterval(fetchData);
   }, []);
 
   const mineResource = async (recipe: any, name: string) => {
