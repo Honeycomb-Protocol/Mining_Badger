@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useHoneycomb } from "../hooks";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import Utils from "@/lib/utils";
+import { useHoneycomb } from "../hooks";
 
 export default function Effects() {
   const { resetCache } = Utils();
@@ -11,14 +11,9 @@ export default function Effects() {
   const pathname = usePathname();
   const router = useRouter();
   const {
-    setWallet,
-    loadIdentityDeps,
-    wallet: stateWallet,
     user,
     profile,
     authToken,
-    userApiCalled,
-    profileApiCalled,
     logout,
   } = useHoneycomb();
 
@@ -31,25 +26,6 @@ export default function Effects() {
       }
     })();
   }, [wallet]);
-
-  useEffect(() => {
-    if (
-      wallet?.publicKey &&
-      stateWallet?.publicKey &&
-      stateWallet?.publicKey?.equals(wallet?.publicKey)
-    ) {
-      return;
-    }
-    console.log("EFFECT 1: Setting Wallet");
-    setWallet(wallet);
-  }, [wallet]);
-
-  useEffect(() => {
-    if (stateWallet?.publicKey || authToken) {
-      console.log("EFFECT 2: loadIdentityDeps");
-      loadIdentityDeps();
-    }
-  }, [stateWallet, authToken]);
 
   useEffect(() => {
     if (user && profile && wallet?.connected) {

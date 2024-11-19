@@ -60,7 +60,7 @@ const Utils = () => {
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
 
-  const { edgeClient, user, authToken, profile } = useHoneycomb();
+  const { profile } = useHoneycomb();
   const { refreshInventory, authLoader } = useSelector(
     (state: RootState) => state.auth
   );

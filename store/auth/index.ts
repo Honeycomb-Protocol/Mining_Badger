@@ -1,13 +1,10 @@
-import * as actions from "../actions";
-import type { AuthState } from "../types";
 import { createSlice } from "@reduxjs/toolkit";
 
+import * as actions from "../actions";
+import type { AuthState } from "../types";
+
 const initialState: AuthState = {
-  authStatus: null,
-  authLoader: false,
-  authToken: null,
   refreshInventory: false,
-  wallet: null,
   cookingAddresses: {},
 };
 
@@ -16,11 +13,7 @@ export const slice = createSlice({
   initialState: () => initialState,
   reducers: {
     clearAuthData: (state) => {
-      state.authStatus = initialState.authStatus;
-      state.authLoader = initialState.authLoader;
-      state.authToken = initialState.authToken;
       state.refreshInventory = initialState.refreshInventory;
-      state.wallet = initialState.wallet;
     },
     setRefreshInventory: (state, action) => {
       state.refreshInventory = action.payload;

@@ -1,47 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { HoneycombActionsWithoutThunk } from "../honeycomb";
-import type { HoneycombState } from "../types";
-import type { AsyncActions } from "../actions/types.js";
+import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
 import { AuthActionsWithoutThunk } from ".";
 
-const actionFactory = (actions: AsyncActions) => {
+const actionFactory = () => {
   const logout = createAsyncThunk<boolean, void>(
     "honeycomb/logout",
-    async (
-      isAuth,
-      { rejectWithValue, fulfillWithValue, dispatch, getState }
-    ) => {
+    async (_, { rejectWithValue, fulfillWithValue, dispatch }) => {
       try {
-        const { wallet } = (getState() as { honeycomb: HoneycombState })
-          .honeycomb;
+        const { logout } = useHoneycombAuth();
         dispatch(AuthActionsWithoutThunk.clearAuthData());
-        dispatch(HoneycombActionsWithoutThunk.clearUser());
-        // let userExists = false;
-
-        // if (!isAuth) {
-        //   userExists = await identity
-        //     .walletResolver(ForceScenario.Force)
-        //     .then((user) => {
-        //       console.log("WalletResolved", user);
-        //       if (!user) return false;
-        //       return true;
-        //     })
-        //     .catch((e) => {
-        //       console.log("Error resolving wallet:", e);
-        //       return false;
-        //       // console.error("Error resolving wallet:", e);
-        //     });
-        // }
-
-        // if (isAuth || userExists) {
-        //   setTimeout(async () => {
-        //     await dispatch(actions.honeycomb.loadIdentityDeps("switch"));
-        //   }, 1000);
-        // }
+        logout();
         return fulfillWithValue(true);
       } catch (error) {
-        console.error("Error in logging out:", error);
+        console.error("Error while logging out:", error);
         throw rejectWithValue(error);
       }
     }

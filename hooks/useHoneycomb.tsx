@@ -17,8 +17,6 @@ export function useHoneycomb() {
   );
   const {
     loaders: {
-      fetchUser: fetchingUser,
-      fetchProfile: fetchingProfile,
       createUser: creatingUser,
       createProfile: creatingProfile,
       honeycomb: honeycombLoading,
@@ -30,20 +28,6 @@ export function useHoneycomb() {
   const { authToken, authLoader, refreshInventory } = useSelector(
     (state: RootState) => state.auth
   );
-
-  const fetchUser = React.useCallback(async () => {
-    const user = await dispatch(honeycombActions.fetchUser()).then(
-      (x) => x.payload as User
-    );
-    return user;
-  }, []);
-
-  const fetchProfile = React.useCallback(async () => {
-    const profile = await dispatch(honeycombActions.fetchProfile()).then(
-      (x) => x.payload as User
-    );
-    return profile;
-  }, []);
 
   const faucetClaim = React.useCallback(async (resourceId: string) => {
     const isClaimed = await dispatch(honeycombActions.claimFaucet(resourceId));
@@ -70,28 +54,6 @@ export function useHoneycomb() {
     return createRecipe;
   }, []);
 
-  const setWallet = React.useCallback(async (wallet: WalletContextState) => {
-    // console.log("Set Wallet");
-    // alert('Auth');
-
-    const walletContext = await dispatch(
-      honeycombActions.setWallet(wallet)
-    ).then((x) => x.payload as WalletContextState);
-    // console.log("Wallet", walletContext);
-    return walletContext;
-  }, []);
-
-  const createUserAndProfile = React.useCallback(
-    async (args: { username: string; bio: string; pfp: string | File }) => {
-      console.log("checking create user and profile");
-      const identity = await dispatch(
-        honeycombActions.createUserAndProfile(args)
-      ).then((x) => x.payload as User);
-      return identity;
-    },
-    []
-  );
-
   const createUser = React.useCallback(
     async (args: { username: string; bio: string; pfp: string | File }) => {
       const identity = await dispatch(honeycombActions.createUser(args)).then(
@@ -112,21 +74,6 @@ export function useHoneycomb() {
     []
   );
 
-  const updateProfile = React.useCallback(
-    async (args: { name?: string; bio?: string; pfp?: string | File }) => {
-      const identity = await dispatch(honeycombActions.updateProfile(args));
-      return identity;
-    },
-    []
-  );
-
-  const loadIdentityDeps = React.useCallback(async () => {
-    const status = await dispatch(honeycombActions.loadIdentityDeps()).then(
-      (x) => x.payload as boolean
-    );
-    return status;
-  }, []);
-
   const logout = React.useCallback(async () => {
     await dispatch(AuthActions.logout());
   }, []);
@@ -135,21 +82,13 @@ export function useHoneycomb() {
     user,
     profile,
     creatingUser,
-    fetchingUser,
     creatingProfile,
-    fetchingProfile,
     honeycombLoading,
     fetchingNfts,
-    loadIdentityDeps,
     createUser,
     createProfile,
-    updateProfile,
-    setWallet,
-    fetchUser,
-    fetchProfile,
     edgeClient,
     wallet,
-    createUserAndProfile,
     authLoader,
     authToken,
     refreshInventory,

@@ -1,14 +1,16 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
 import CustomInput from "../common/input";
 import CustomTextArea from "../common/textarea";
 import Button from "../common/button";
-import { useHoneycomb } from "@/hooks";
+import { toast } from "react-toastify";
 
 const CreateProfilePage = () => {
-  const { createUserAndProfile, user, createProfile } = useHoneycomb();
+  const { authneticate } = useHoneycombAuth();
   const [profile, setProfile] = useState({
+    name: "",
     username: "",
     bio: "",
     pfp: "https://www.arweave.net/qR_n1QvCaHqVTYFaTdnZoAXR6JBwWspDLtDNcLj2a5w?ext=png",
@@ -70,6 +72,14 @@ const CreateProfilePage = () => {
         </div>
         <div className="w-[40%] flex flex-col justify-center gap-6 px-3">
           <CustomInput
+            name="name"
+            styles="h-12 placeholder-white"
+            value={profile.name}
+            placeholder="Enter Name"
+            type="text"
+            onChange={onInputChange}
+          />
+          <CustomInput
             name="username"
             styles="h-12 placeholder-white"
             value={profile.username}
@@ -91,16 +101,21 @@ const CreateProfilePage = () => {
             styles="h-12 text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={async () => {
-              console.log("userrrr", user);
-              if (user) {
-                await createProfile({
-                  name: profile.username,
-                  bio: profile.bio,
-                  pfp: profile.pfp,
-                });
-                return;
+              try {
+                await authneticate(
+                  profile.name,
+                  profile.username,
+                  profile.bio,
+                  profile.pfp
+                );
+              } catch (e) {
+                console.log(e);
+                toast.error(
+                  e.message ||
+                    e.toString() ||
+                    "An error occured while creating profile"
+                );
               }
-              await createUserAndProfile(profile);
             }}
           />
         </div>

@@ -4,21 +4,24 @@ import { NextUIProvider } from "@nextui-org/react";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import "@/styles/globals.css";
-import Header from "@/components/header";
-import WalletContextProvider from "@/components/wallet-context-provider";
-import CheckConnection from "@/wrapper";
-import { store } from "@/store";
-import Effects from "@/effects";
 import {
   GatewayProvider,
   GatewayStatus,
   useGateway,
 } from "@civic/solana-gateway-react";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { GATE_NETWORK } from "@/config/config";
+import { HoneycombProvider } from "@honeycomb-protocol/profile-hooks";
 import { useWallet } from "@solana/wallet-adapter-react";
+
+import { GATE_NETWORK } from "@/config/config";
 import Button from "@/components/common/button";
+import "@/styles/globals.css";
+import Header from "@/components/header";
+import WalletContextProvider from "@/components/wallet-context-provider";
+import CheckConnection from "@/wrapper";
+import { store } from "@/store";
+import Effects from "@/effects";
+
 const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
 const GateWayCivic = ({ children }) => {
@@ -65,24 +68,29 @@ export default function App({ Component, pageProps }: AppProps) {
         <GateWayCivic>
           <Effects />
           <main className={k2d.className}>
-            <NextUIProvider>
-              <Header />
-              <CheckConnection>
-                <ToastContainer
-                  position="top-right"
-                  autoClose={5000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="light"
-                />
-                <Component {...pageProps} />
-              </CheckConnection>
-            </NextUIProvider>
+            <HoneycombProvider
+              hplProjectAddress={process.env.NEXT_PUBLIC_HPL_PROJECT}
+              wallet={useWallet()}
+            >
+              <NextUIProvider>
+                <Header />
+                <CheckConnection>
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                  />
+                  <Component {...pageProps} />
+                </CheckConnection>
+              </NextUIProvider>
+            </HoneycombProvider>
           </main>
         </GateWayCivic>
       </Provider>
