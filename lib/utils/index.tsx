@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import CraftTab from "@/components/home/tabs/craft";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
@@ -19,14 +19,12 @@ import AllTab from "@/components/home/inventory/all";
 import BarTab from "@/components/home/inventory/bar";
 import PickaxeTab from "@/components/home/inventory/pickaxe";
 
-import { useHoneycomb } from "@/hooks";
 import { Dataset, Resource } from "@/interfaces";
 import LevelsData from "../../data/level-data.json";
-import { API_URL, LUT_ADDRESSES } from "@/config/config";
+import { API_URL } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
 import { RootState } from "@/store";
-import { AuthActionsWithoutThunk } from "@/store/auth";
-import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 let cache = {
   craftData: {},
@@ -57,13 +55,16 @@ const resetCache = () => {
 };
 
 const Utils = () => {
-  const { publicKey } = useWallet();
   const dispatch = useDispatch();
 
-  const { profile } = useHoneycomb();
-  const { refreshInventory, authLoader } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const { currentUser, currentProfile, currentWallet } = useHoneycombInfo();
+
+  // TODO: Do it later.
+
+  // const { authLoader } = useSelector(
+  //   (state: RootState) => state.auth
+  // );
+  const inventoryState = useSelector((state: RootState) => state.inventory);
 
   const [userLevelInfo, setUserLevelInfo] = useState<{
     level?: number;
@@ -74,8 +75,8 @@ const Utils = () => {
   //To call the api in every 5 minutes
   useEffect(() => {
     const interval = setInterval(async () => {
-      if (profile?.platformData?.xp !== undefined) {
-        dispatch(AuthActionsWithoutThunk.setRefreshInventory(true));
+      if (currentProfile?.platformData?.xp !== undefined) {
+        dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       }
     }, 5 * 60 * 1000);
 
@@ -88,15 +89,17 @@ const Utils = () => {
   //To call the api only when the component mounts or refreshInventory/authLoader state changes
   useEffect(() => {
     if (
-      (profile?.platformData?.xp !== undefined && refreshInventory === true) ||
-      (profile?.platformData?.xp !== undefined &&
-        authLoader === false &&
-        refreshInventory === false)
+      (currentProfile?.platformData?.xp !== undefined &&
+        inventoryState?.refreshInventory === true) ||
+      (currentProfile?.platformData?.xp !== undefined &&
+        // authLoader === false &&
+        inventoryState?.refreshInventory === false)
     ) {
-      getUserLevelInfo(profile?.platformData?.xp);
-      dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
+      getUserLevelInfo(currentProfile?.platformData?.xp);
+      dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
     }
-  }, [refreshInventory, authLoader]);
+    // }, [refreshInventory, authLoader]);
+  }, [inventoryState?.refreshInventory]);
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
@@ -175,7 +178,7 @@ const Utils = () => {
     try {
       let data = getCache("userInfo");
 
-      if (data !== null && !refreshInventory && !refetch) {
+      if (data !== null && !inventoryState?.refreshInventory && !refetch) {
         setUserLevelInfo(data?.result);
         return data?.result;
       }
@@ -266,7 +269,11 @@ const Utils = () => {
     refetch = false,
     isLoaded: boolean = false
   ) => {
-    if (!publicKey || publicKey.toString().length !== 44) return;
+    if (
+      !currentWallet?.publicKey ||
+      currentWallet?.publicKey.toString().length !== 44
+    )
+      return;
     try {
       if (!isLoaded) {
         setDataLoading(true);
@@ -282,8 +289,11 @@ const Utils = () => {
         return organizeDataByCategories(data, inventorySymbols)?.[name];
       }
 
-      data = (await axios.get(`${API_URL}resources/inventory/${publicKey}`))
-        .data;
+      data = (
+        await axios.get(
+          `${API_URL}resources/inventory/${currentWallet?.publicKey}`
+        )
+      ).data;
       setCache("inventoryData", data);
       setDataLoading(false);
       if (name === "all") {
@@ -340,7 +350,9 @@ const Utils = () => {
         setDataLoading(false);
         return data?.result;
       }
-      data = (await axios.get(`${API_URL}resources/ores/${publicKey}`)).data;
+      data = (
+        await axios.get(`${API_URL}resources/ores/${currentWallet?.publicKey}`)
+      ).data;
       setCache("mineData", data);
       setDataLoading(false);
       return data?.result;
@@ -365,8 +377,11 @@ const Utils = () => {
         setDataLoading(false);
         return data?.result;
       }
-      data = (await axios.get(`${API_URL}resources/pickaxes/${publicKey}`))
-        .data;
+      data = (
+        await axios.get(
+          `${API_URL}resources/pickaxes/${currentWallet?.publicKey}`
+        )
+      ).data;
       setCache("shopData", data);
       setDataLoading(false);
       return data?.result;
@@ -388,6 +403,29 @@ const Utils = () => {
     });
   };
 
+  const claimFaucet = async (resourceId: string) => {
+    try {
+      const { data } = await axios.post(`${API_URL}faucet/mine`, {
+        user: {
+          wallet: currentWallet?.publicKey.toString(),
+          id: currentUser?.id,
+        },
+        resource: resourceId,
+      });
+
+      return data;
+    } catch (error) {
+      console.error("Error while faucet claim", error);
+      toast.error(
+        error?.message ||
+          error?.response?.data?.message ||
+          error ||
+          "Something went wrong"
+      );
+      throw new Error(error);
+    }
+  };
+
   return {
     renderCraftTabComponents,
     renderHomeTabComponents,
@@ -403,6 +441,7 @@ const Utils = () => {
     userLevelInfo,
     resetCache,
     apiCallDelay,
+    claimFaucet,
   };
 };
 

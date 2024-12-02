@@ -5,7 +5,11 @@ import { ButtonProps } from "@/interfaces";
 
 const Button = ({ styles, onClick, loading, btnText }: ButtonProps) => {
   return (
-    <button className={`${styles}`} onClick={onClick}>
+    <button
+      className={`${styles}`}
+      onClick={onClick}
+      disabled={loading ? true : false}
+    >
       {loading ? <Spinner color="default" size="sm" /> : btnText}
     </button>
   );

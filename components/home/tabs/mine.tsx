@@ -10,7 +10,7 @@ import { MineDataType } from "@/interfaces";
 import { useHoneycomb } from "@/hooks";
 import Utils from "@/lib/utils";
 import { API_URL } from "@/config/config";
-import { AuthActionsWithoutThunk } from "@/store/auth";
+import { AuthActionsWithoutThunk } from "@/store/inventory";
 
 const MineTab = () => {
   const dispatch = useDispatch();

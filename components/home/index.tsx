@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionItem, Button, Progress } from "@nextui-org/react";
+import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
@@ -8,11 +9,10 @@ import CustomTabs from "../common/custom-tabs";
 import { TabDataProps } from "@/interfaces";
 import Utils from "@/lib/utils";
 import LevelsRequiredModal from "../common/modal";
-import { useHoneycomb } from "@/hooks";
 import { Footer } from "@/pages/_app";
 
 const HomePage = () => {
-  const { user, profile } = useHoneycomb();
+  const { currentProfile } = useHoneycombInfo();
   const {
     renderHomeTabComponents,
     renderInventoryTabComponents,
@@ -75,7 +75,7 @@ const HomePage = () => {
               />
               <div className="flex flex-col justify-center items-start">
                 <p className="text-white font-semibold text-lg">
-                  {profile?.info?.name || "Max"}
+                  {currentProfile?.info?.name || "Max"}
                 </p>
                 <p className="text-gray-500">Bronze Pickaxe</p>
               </div>

@@ -1,17 +1,18 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
 import CustomInput from "../common/input";
 import CustomTextArea from "../common/textarea";
 import Button from "../common/button";
-import { toast } from "react-toastify";
 
 const CreateProfilePage = () => {
-  const { authneticate } = useHoneycombAuth();
+  const { authenticate } = useHoneycombAuth();
+  const [loading, setLoading] = useState(false);
+
   const [profile, setProfile] = useState({
     name: "",
-    username: "",
     bio: "",
     pfp: "https://www.arweave.net/qR_n1QvCaHqVTYFaTdnZoAXR6JBwWspDLtDNcLj2a5w?ext=png",
   });
@@ -79,14 +80,6 @@ const CreateProfilePage = () => {
             type="text"
             onChange={onInputChange}
           />
-          <CustomInput
-            name="username"
-            styles="h-12 placeholder-white"
-            value={profile.username}
-            placeholder="Enter Username"
-            type="text"
-            onChange={onInputChange}
-          />
 
           <CustomTextArea
             name="bio"
@@ -97,22 +90,33 @@ const CreateProfilePage = () => {
           />
 
           <Button
-            loading={false}
+            loading={loading}
             styles="h-12 text-white mt-5 rounded-2xl"
             btnText="Create Account"
             onClick={async () => {
               try {
-                await authneticate(
+                setLoading(true);
+                debugger;
+                const data = await authenticate(
                   profile.name,
-                  profile.username,
                   profile.bio,
                   profile.pfp
                 );
+                setLoading(false);
+                if (data.success) {
+                  return toast.success(
+                    data.message || "Profile created successfully"
+                  );
+                } else {
+                  return toast.error(
+                    data.message || "An error occured while creating profile"
+                  );
+                }
               } catch (e) {
                 console.log(e);
                 toast.error(
-                  e.message ||
-                    e.toString() ||
+                  e.toString() ||
+                    e.message ||
                     "An error occured while creating profile"
                 );
               }

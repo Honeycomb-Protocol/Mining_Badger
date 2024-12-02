@@ -1,9 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+import withTM from "next-transpile-modules";
+
+const WithTM = withTM([
+  "@honeycomb-protocol/profile-hooks", // Add the problematic package here
+]);
+
+const nextConfig = WithTM({
   reactStrictMode: false,
   images: {
     domains: ["arweave.net"],
   },
-};
+  webpack: (config) => {
+    config.resolve.extensions.push(".jsx"); // Add support for .jsx files
+    return config;
+  },
+});
 
 export default nextConfig;

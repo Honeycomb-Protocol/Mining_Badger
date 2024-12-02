@@ -9,7 +9,7 @@ import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
 import { API_URL } from "@/config/config";
 import { useHoneycomb } from "@/hooks";
-import { AuthActionsWithoutThunk } from "@/store/auth";
+import { AuthActionsWithoutThunk } from "@/store/inventory";
 
 const ShopTab = () => {
   const { userLevelInfo, fetchShopResourcesData, apiCallDelay } = Utils();

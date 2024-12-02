@@ -1,40 +1,30 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import type {
-  HoneycombState,
-  AuthState,
-} from './types';
-import honeycombReducer from './honeycomb';
-import authReducer from './auth';
-import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
-import { useDispatch } from 'react-redux';
+import { Action, ThunkDispatch } from "@reduxjs/toolkit";
+import type { InventoryState } from "./types";
+import inventoryReducer from "./inventory";
+import { useDispatch } from "react-redux";
+import {
+  configureHoneycombStore,
+  HoneycombRootState,
+} from "@honeycomb-protocol/profile-hooks/store";
 
-const persistedReducer = persistReducer(
-  {
-    key: 'root',
-    storage,
-    whitelist: ['auth'],
-  },
-  combineReducers({
-    honeycomb: honeycombReducer,
-    auth: authReducer,
-  })
-);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-  devTools: true,
+export const store = configureHoneycombStore({
+  reducers: { inventory: inventoryReducer },
+  persistsWhitelist: ["inventory"],
 });
+// export const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({
+//       serializableCheck: false,
+//     }),
+//   devTools: true,
+// });
 
-export const persistor = persistStore(store);
 
-export type RootState = {
-  honeycomb: HoneycombState;
-  auth: AuthState;
-};
-export type AppDispatch = typeof store.dispatch;
+export type RootState = HoneycombRootState<{
+  inventory: InventoryState;
+}>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, Action<any>>; // Update to use ThunkDispatch
+
 export const useAppDispatch = () => useDispatch<AppDispatch>();

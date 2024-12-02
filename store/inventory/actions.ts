@@ -1,15 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
-import { AuthActionsWithoutThunk } from ".";
+import { InventoryActionsWithoutThunk } from ".";
+import { AsyncActions } from "../actions/types";
 
-const actionFactory = () => {
+const actionFactory = (actions: AsyncActions) => {
   const logout = createAsyncThunk<boolean, void>(
     "honeycomb/logout",
     async (_, { rejectWithValue, fulfillWithValue, dispatch }) => {
       try {
         const { logout } = useHoneycombAuth();
-        dispatch(AuthActionsWithoutThunk.clearAuthData());
+        dispatch(InventoryActionsWithoutThunk.clearInventoryData());
         logout();
         return fulfillWithValue(true);
       } catch (error) {

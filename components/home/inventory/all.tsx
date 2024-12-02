@@ -2,7 +2,7 @@ import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthActionsWithoutThunk } from "@/store/auth";
+import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
@@ -10,16 +10,16 @@ import { useHoneycomb } from "@/hooks";
 
 const AllTab = () => {
   const dispatch = useDispatch();
-  const { refreshInventory } = useSelector((state: RootState) => state.auth);
+  const inventorySTate = useSelector((state: RootState) => state.inventory);
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { UnWrapResource } = useHoneycomb();
+  // const { UnWrapResource } = useHoneycomb();
 
   const { fetchInventoryData } = Utils();
 
   const unWrappingItem = React.useCallback(
     async (resourceId: string, qty: number) => {
-      await UnWrapResource(resourceId, qty);
+      // await UnWrapResource(resourceId, qty);
       fetchData(true);
     },
     []
@@ -29,15 +29,15 @@ const AllTab = () => {
     const res = await fetchInventoryData(
       "all",
       setLoading,
-      refetch || refreshInventory
+      refetch || inventorySTate?.refreshInventory
     );
     setInventoryData(res);
   };
 
   useEffect(() => {
     fetchData();
-    dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
-  }, [refreshInventory]);
+    dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
+  }, [inventorySTate?.refreshInventory]);
 
   return (
     <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 py-3">

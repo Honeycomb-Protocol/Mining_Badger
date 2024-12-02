@@ -4,26 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
-import { AuthActionsWithoutThunk } from "@/store/auth";
+import { InventoryActionsWithoutThunk } from "@/store/inventory";
 import { RootState } from "@/store";
 import { useHoneycomb } from "@/hooks";
 
 const BarTab = () => {
   const dispatch = useDispatch();
-  const { refreshInventory } = useSelector((state: RootState) => state.auth);
+  const miningAuthState = useSelector((state: RootState) => state.inventory);
   const { fetchInventoryData } = Utils();
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { UnWrapResource } = useHoneycomb();
+  // const { UnWrapResource } = useHoneycomb();
 
   const fetchData = async () => {
-    const res = await fetchInventoryData("bars", setLoading, refreshInventory);
+    const res = await fetchInventoryData(
+      "bars",
+      setLoading,
+      miningAuthState?.refreshInventory
+    );
     setInventoryData(res);
   };
 
   const unWrappingItem = React.useCallback(
     async (resourceId: string, qty: number) => {
-      await UnWrapResource(resourceId, qty);
+      // await UnWrapResource(resourceId, qty);
       fetchData();
     },
     []
@@ -31,8 +35,8 @@ const BarTab = () => {
 
   useEffect(() => {
     fetchData();
-    dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
-  }, [refreshInventory]);
+    dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
+  }, [miningAuthState?.refreshInventory]);
 
   return (
     <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 p-3">

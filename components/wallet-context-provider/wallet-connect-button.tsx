@@ -1,18 +1,17 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useRouter } from "next/router";
-import { useHoneycomb } from "@/hooks";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 import Button from "@/components/common/button";
 
 const WalletConnectButton = () => {
   const router = useRouter();
-  const { publicKey } = useWallet();
-  const { user, profile } = useHoneycomb();
+  const wallet = useWallet();
+
   return (
     <div className="flex flex-col items-center">
       <div className="mb-6 mt-4">
-        {publicKey && (
+        {wallet?.publicKey && (
           <WalletMultiButton
             style={{
               height: "40px",
@@ -29,7 +28,7 @@ const WalletConnectButton = () => {
         )}
       </div>
 
-      {publicKey ? (
+      {wallet?.publicKey ? (
         <Button
           styles="w-96 text-lg"
           btnText="Let's Create an Account"

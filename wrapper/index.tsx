@@ -1,11 +1,8 @@
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useSelector } from "react-redux";
 import { Spinner } from "@nextui-org/react";
 
-import { useHoneycomb } from "@/hooks";
-import { RootState } from "@/store";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 interface AuthenticationWrapperProps {
   children?: ReactNode;
@@ -14,41 +11,27 @@ interface AuthenticationWrapperProps {
 const CheckConnection: React.FC<AuthenticationWrapperProps> = ({
   children,
 }) => {
-  const {
-    user,
-    profile,
-    fetchingUser,
-    fetchingProfile,
-    userApiCalled,
-    profileApiCalled,
-  } = useHoneycomb();
-  const { authLoader } = useSelector((state: RootState) => state.auth);
+  const { currentUser, currentProfile, currentWallet } = useHoneycombInfo();
 
-  const { connected } = useWallet();
   const router = useRouter();
 
   useEffect(() => {
-    if (
-      connected &&
-      !fetchingProfile &&
-      !fetchingUser &&
-      userApiCalled &&
-      profileApiCalled &&
-      !profile
-    ) {
+    if (currentWallet?.connected && !currentProfile && !currentUser) {
       router.push("/create-profile");
     }
-  }, [user, profile, connected]);
+  }, [currentUser, currentProfile, currentWallet?.connected]);
 
   return (
     <>
-      {authLoader || fetchingProfile || fetchingUser ? (
+      {/* TODO: EXPORT THESE LOADERS FROM THE HOOKS PACKAGE AND ADD HERE AND ALSO SEE PREVIOUS COMMIT AND ADD THERE AS WELL WHICH HAS BEEN REMOVED NOW */}
+
+      {/* {authLoader || fetchingProfile || fetchingUser ? (
         <div className="flex justify-center items-center mt-10">
           <Spinner color="white" />
         </div>
-      ) : (
-        children
-      )}
+      ) : ( */}
+      {children}
+      {/* )} */}
     </>
   );
 };

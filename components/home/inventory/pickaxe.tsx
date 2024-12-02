@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
-import { AuthActionsWithoutThunk } from "@/store/auth";
+import { AuthActionsWithoutThunk } from "@/store/inventory";
 import { RootState } from "@/store";
 
 const PickaxeTab = () => {
   const dispatch = useDispatch();
-  const { refreshInventory } = useSelector((state: RootState) => state.auth);
+  const miningAuthState = useSelector((state: RootState) => state.miningAuth);
   const { fetchInventoryData } = Utils();
   const [pickaxeData, setPickaxeData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -19,13 +19,13 @@ const PickaxeTab = () => {
       const res = await fetchInventoryData(
         "pickaxe",
         setLoading,
-        refreshInventory
+        miningAuthState?.refreshInventory
       );
       setPickaxeData(res);
     };
     fetchData();
     dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
-  }, [refreshInventory]);
+  }, [miningAuthState?.refreshInventory]);
 
   return (
     <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 p-3">

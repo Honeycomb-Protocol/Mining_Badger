@@ -1,15 +1,4 @@
-import { Profile, Sdk, User } from "@honeycomb-protocol/edge-client";
-import { WalletContextState } from "@solana/wallet-adapter-react";
-
-export interface HoneycombState {
-  loaders: {
-    [key: string]: boolean;
-  };
-  userApiCalled: boolean;
-  profileApiCalled: boolean;
-}
-
-export interface AuthState {
+export interface InventoryState {
   refreshInventory: boolean;
   cookingAddresses: {
     [key: string]: string;

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
-import { AuthActionsWithoutThunk } from "@/store/auth";
+import { AuthActionsWithoutThunk } from "@/store/inventory";
 import { useHoneycomb } from "@/hooks";
 import { Ingredient } from "@/interfaces";
 //import filterResourcesByMetadataSymbols

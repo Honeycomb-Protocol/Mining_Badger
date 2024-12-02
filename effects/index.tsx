@@ -1,34 +1,48 @@
 import { useEffect } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { toast } from "react-toastify";
 import { usePathname, useRouter } from "next/navigation";
+import {
+  useHoneycombAuth,
+  useHoneycombInfo,
+} from "@honeycomb-protocol/profile-hooks";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 import Utils from "@/lib/utils";
 import { useHoneycomb } from "../hooks";
 
 export default function Effects() {
   const { resetCache } = Utils();
-  const wallet = useWallet();
   const pathname = usePathname();
   const router = useRouter();
-  const {
-    user,
-    profile,
+  const { logout } = useHoneycomb();
+  const { currentUser, currentProfile, currentWallet, edgeClient } =
+    useHoneycombInfo();
+  const { authToken } = useHoneycombAuth();
+  const wallet = useWallet();
+
+  console.log(
+    "currentUser, currentProfile, currentWallet, authToken, edge client",
+    currentUser,
+    currentProfile,
+    currentWallet,
     authToken,
-    logout,
-  } = useHoneycomb();
+    edgeClient
+  );
 
   useEffect(() => {
     (async () => {
-      if (wallet.disconnecting) {
+      if (wallet?.disconnecting) {
+        console.log("EFFECT 1: Logging out");
         await logout();
         resetCache();
+        toast.success("Logged out successfully");
         router.push("/");
       }
     })();
-  }, [wallet]);
+  }, [wallet?.disconnecting]);
 
   useEffect(() => {
-    if (user && profile && wallet?.connected) {
+    if (currentUser && currentProfile && wallet?.connected) {
       if (pathname === "/create-profile" || pathname === "/") {
         console.log("EFFECT 3: Redirecting to home");
         router.push("/home");
@@ -36,7 +50,7 @@ export default function Effects() {
     } else if (!authToken && pathname !== "/") {
       router.push("/");
     }
-  }, [user, profile]);
+  }, [currentUser, currentProfile, wallet?.connected]);
 
   return <></>;
 }
