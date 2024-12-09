@@ -77,9 +77,6 @@ export interface CardProps {
   loading?: { name: string; status: boolean };
   miningTimeReduction?: string;
   resourceInfo?: string;
-  isCompressed?: boolean;
-  canUnwrapped?: boolean;
-  unWrappingItemFunc?: () => void;
   addStyles?: string;
 }
 
@@ -133,12 +130,14 @@ export interface Resource {
   symbol: string;
   uri: string;
   lvl_req: number;
-  refine_time: number;
+  craft_time: number;
   xp: number;
   ingredients: Ingredient[];
   address: string;
-  tree: string;
+  mint: string;
   recipe: string;
+  time_reduced: number;
+  amount: number;
 }
 
 export interface Craft {
@@ -150,24 +149,6 @@ export interface Craft {
   xp: number;
   ingredients: Ingredient[];
 }
-
-// export type Resource = {
-//   addresses: Record<string, string>;
-//   amount: number;
-//   material: Array<{
-//     name: string;
-//     symbol: string;
-//     uri: string;
-//     amount: number;
-//   }>;
-//   level_req: number;
-//   sell_price: number;
-//   metadata: {
-//     name: string;
-//     symbol: string;
-//     uri: string;
-//   };
-// };
 
 export type Dataset = {
   success: boolean;

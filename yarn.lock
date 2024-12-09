@@ -888,8 +888,10 @@
     rxjs "^7.8.0"
     tweetnacl "^1.0.3"
 
-"@honeycomb-protocol/profile-hooks@file:.yalc/@honeycomb-protocol/profile-hooks":
-  version "0.0.4-beta.25"
+"@honeycomb-protocol/profile-hooks@^0.0.5-beta.1":
+  version "0.0.5-beta.1"
+  resolved "https://registry.yarnpkg.com/@honeycomb-protocol/profile-hooks/-/profile-hooks-0.0.5-beta.1.tgz#86a4c60fc7d155ca0022a74c4f850def280a9628"
+  integrity sha512-1aCFYjxfTb2qaBqkEp4FtMhRxJ3jM7o+e2tWdsxKON9WW8m4mtrOYuu7WTMty3LWimLO1uUHO1gmJzsp+yk47A==
   dependencies:
     "@honeycomb-protocol/edge-client" "^0.0.7-beta.4"
     "@metaplex-foundation/umi" "^0.9.2"

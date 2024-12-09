@@ -96,7 +96,6 @@ const CreateProfilePage = () => {
             onClick={async () => {
               try {
                 setLoading(true);
-                debugger;
                 const data = await authenticate(
                   profile.name,
                   profile.bio,

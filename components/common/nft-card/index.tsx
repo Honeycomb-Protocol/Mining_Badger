@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button, Spinner, Tooltip } from "@nextui-org/react";
 
@@ -27,18 +27,11 @@ const NftCard: React.FC<CardProps> = ({
   loading,
   miningTimeReduction,
   resourceInfo,
-  isCompressed,
-  canUnwrapped,
-  unWrappingItemFunc,
   addStyles,
 }) => {
   const [timeLeft, setTimeLeft] = useState(
     new Date(expIn).getTime() > Date.now() ? expIn - Date.now() : 0
   );
-
-  useEffect(() => {
-    console.log(btnDisabled, "btnDisabled");
-  }, [btnDisabled]);
 
   const cardStyle = {
     width: imageWidth ? `${imageWidth}px` : "165px",
@@ -58,12 +51,6 @@ const NftCard: React.FC<CardProps> = ({
   const imagePic = picture.replace("htthttps://", "https://");
   return (
     <div
-      onClick={() => {
-        if (isCompressed && canUnwrapped) {
-          console.log("Compressed canUnwrapped Item Clicked");
-          unWrappingItemFunc();
-        }
-      }}
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}
       style={{ width: width ? width : "max-content" }}
     >
@@ -120,28 +107,6 @@ const NftCard: React.FC<CardProps> = ({
           <div className="absolute -top-2 left-0 bg-red-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
             {amount}
           </div>
-        )}
-        {isCompressed && canUnwrapped ? (
-          <div className="absolute -top-2 right-0 bg-blue-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
-            <Tooltip
-              content="This resource is compressed and can be wrapped to be used for refining. Click on it to unwrap."
-              className="bg-[#1D1D1D]"
-            >
-              <span>C</span>
-            </Tooltip>
-          </div>
-        ) : (
-          !isCompressed &&
-          !canUnwrapped && (
-            <div className="absolute -top-2 right-0 bg-green-700 rounded-full text-xs w-6 h-6 flex justify-center items-center">
-              <Tooltip
-                content="This resource is unrwapped and ready to be used."
-                className="bg-[#1D1D1D]"
-              >
-                <span>U</span>
-              </Tooltip>
-            </div>
-          )
         )}
         {lock && (
           <div

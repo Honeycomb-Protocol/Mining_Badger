@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { CustomTabsProps } from "@/interfaces";
-import Utils from "@/lib/utils";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { Spinner } from "@nextui-org/react";
 
 const CustomTabs = ({
   tabData,
@@ -11,30 +8,11 @@ const CustomTabs = ({
   initialActiveTab,
   isVertical,
 }: CustomTabsProps) => {
-  const { fetchInventoryData } = Utils();
-  const { publicKey } = useWallet();
   const [activeTab, setActiveTab] = useState(initialActiveTab);
   const currentData = tabData?.filter((tab) => tab?.name === activeTab)[0]
     ?.tabComponent;
-  const [inventoryData, setInventoryData] = useState([]);
-  const [dataLoading, setDataLoading] = useState(false);
 
-  useEffect(() => {
-    if (!publicKey) return;
-    const fetchData = async () => {
-      const inventoryData = await fetchInventoryData(
-        "pickaxe",
-        setDataLoading,
-        true
-      );
-      setInventoryData(inventoryData);
-    };
-    fetchData();
-  }, []);
-
-  return dataLoading ? (
-    <Spinner color="white" />
-  ) : (
+  return (
     <div
       className={`w-full flex rounded-xl ${
         isVertical ? "flex-row justify-center items-start" : "flex-col"
@@ -58,23 +36,7 @@ const CustomTabs = ({
             }`}
             key={tab.name}
             onClick={() => {
-              if (
-                inventoryData
-                  ?.map((item) => item.name)
-                  .includes("Bronze Pickaxe")
-              ) {
-                setActiveTab(tab.name);
-              } else {
-                const inventoryData = fetchInventoryData(
-                  "pickaxe",
-                  setDataLoading,
-                  true,
-                  true
-                ).then((res: any) => {
-                  if (res?.map((item) => item.name).includes("Bronze Pickaxe"))
-                    setActiveTab(tab.name);
-                });
-              }
+              setActiveTab(tab.name);
             }}
           >
             {tab.name}
