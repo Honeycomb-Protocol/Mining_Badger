@@ -93,6 +93,7 @@ const CreateProfilePage = () => {
             loading={loading}
             styles="h-12 text-white mt-5 rounded-2xl"
             btnText="Create Account"
+            disable={!profile.name || !profile.bio}
             onClick={async () => {
               try {
                 setLoading(true);

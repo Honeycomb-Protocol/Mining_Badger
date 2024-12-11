@@ -10,6 +10,7 @@ export interface ButtonProps {
   onClick: () => void;
   loading: boolean;
   btnText: string;
+  disable?: boolean;
 }
 
 export interface WalletContextProviderProps {
