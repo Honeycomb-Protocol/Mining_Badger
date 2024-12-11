@@ -78,6 +78,7 @@ const Utils = () => {
       if (
         data?.result?.length === 0 ||
         !data ||
+        Object.keys(data)?.length === 0 ||
         inventoryState?.refreshInventory
       ) {
         await fetchInventoryData(
