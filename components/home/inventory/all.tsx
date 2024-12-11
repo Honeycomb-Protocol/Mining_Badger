@@ -1,45 +1,29 @@
+import { useSelector } from "react-redux";
 import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { RootState } from "@/store";
-import { useDispatch, useSelector } from "react-redux";
-import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
-import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
-import { useHoneycomb } from "@/hooks";
+import { RootState } from "@/store";
+import NftCard from "@/components/common/nft-card";
 
 const AllTab = () => {
-  const dispatch = useDispatch();
-  const inventorySTate = useSelector((state: RootState) => state.inventory);
   const [inventoryData, setInventoryData] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const { UnWrapResource } = useHoneycomb();
-
+  const inventoryState = useSelector((state: RootState) => state.inventory);
   const { fetchInventoryData } = Utils();
 
-  const unWrappingItem = React.useCallback(
-    async (resourceId: string, qty: number) => {
-      // await UnWrapResource(resourceId, qty);
-      fetchData(true);
-    },
-    []
-  );
-//changes
-  const fetchData = async (refetch: boolean = false) => {
-    const res = await fetchInventoryData(
-      "all",
-      setLoading,
-      refetch || inventorySTate?.refreshInventory
-    );
+  const fetchData = async () => {
+    const res = await fetchInventoryData("all", setLoading, false, loading);
     setInventoryData(res);
   };
 
   useEffect(() => {
     fetchData();
-    dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
-  }, [inventorySTate?.refreshInventory]);
+  }, [inventoryState?.refreshInventory]);
 
-  return (
+  return inventoryData?.length === 0 ? (
+    <p className="text-gray-400 text-sm text-center my-5">No data to show.</p>
+  ) : (
     <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 py-3">
       {loading ? (
         <Spinner color="white" />
@@ -56,9 +40,6 @@ const AllTab = () => {
             btnStyle="bg-opacity-70 text-xs h-6"
             btnDisabled
             amount={item?.amount}
-            isCompressed={item.isCompressed}
-            canUnwrapped={item.canUnwrapped}
-            unWrappingItemFunc={() => unWrappingItem(item.address, item.amount)}
           />
         ))
       )}

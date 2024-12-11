@@ -1,38 +1,34 @@
+import { useSelector } from "react-redux";
 import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import NftCard from "@/components/common/nft-card";
 import Utils from "@/lib/utils";
-import { AuthActionsWithoutThunk } from "@/store/inventory";
 import { RootState } from "@/store";
+import NftCard from "@/components/common/nft-card";
 
 const PickaxeTab = () => {
-  const dispatch = useDispatch();
-  const miningAuthState = useSelector((state: RootState) => state.miningAuth);
   const { fetchInventoryData } = Utils();
-  const [pickaxeData, setPickaxeData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [inventoryData, setInventoryData] = useState([]);
+  const inventoryState = useSelector((state: RootState) => state.inventory);
+
+  const fetchData = async () => {
+    const res = await fetchInventoryData("pickaxe", setLoading, false, loading);
+    setInventoryData(res);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetchInventoryData(
-        "pickaxe",
-        setLoading,
-        miningAuthState?.refreshInventory
-      );
-      setPickaxeData(res);
-    };
     fetchData();
-    dispatch(AuthActionsWithoutThunk.setRefreshInventory(false));
-  }, [miningAuthState?.refreshInventory]);
+  }, [inventoryState?.refreshInventory]);
 
-  return (
+  return inventoryData?.length === 0 ? (
+    <p className="text-gray-400 text-sm text-center my-5">No data to show.</p>
+  ) : (
     <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 p-3">
       {loading ? (
         <Spinner color="white" />
       ) : (
-        pickaxeData?.map((item, index) => (
+        inventoryData?.map((item, index) => (
           <NftCard
             key={index}
             name={item?.name}
@@ -44,8 +40,6 @@ const PickaxeTab = () => {
             btnStyle="bg-opacity-70 text-xs h-6"
             btnDisabled
             // amount={item?.amount}
-            isCompressed={item.isCompressed}
-            canUnwrapped={item.canUnwrapped}
           />
         ))
       )}

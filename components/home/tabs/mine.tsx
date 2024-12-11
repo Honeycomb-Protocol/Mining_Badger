@@ -33,18 +33,18 @@ const MineTab = () => {
         const res = await fetchMineResourcesData(setDataLoader);
         setMineData(res);
       }
-      if (inventory.length === 0) {
+      if (inventory?.length === 0) {
         const cacheInventory = (await getCache("inventoryData"))?.result;
-        if (cacheInventory.length > 0) {
+        if (cacheInventory?.length > 0) {
           setInventory(cacheInventory);
-        } else if (cacheInventory.length === 0) {
+        } else if (cacheInventory?.length === 0) {
           setInventory(
             (await fetchInventoryData("refine", () => true))?.result
           );
         }
       }
     })();
-  }, [publicKey, mineData.length]);
+  }, [publicKey, mineData?.length]);
 
   const mineResource = async (resourceId: string, name: string) => {
     try {
@@ -82,20 +82,17 @@ const MineTab = () => {
               btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
               expIn={data?.expire}
               resourceInfo={
-                userLevelInfo.level < data?.lvl_req
+                userLevelInfo?.level < data?.lvl_req
                   ? `User level ${data?.lvl_req} is required to mine this resource.`
                   : ""
               }
               btnDisabled={
                 loading.name === data?.name ||
-                userLevelInfo.level < data?.lvl_req ||
-                !inventory?.includes((e) => e.symbol === "BRP")
+                userLevelInfo?.level < data?.lvl_req ||
+                !inventory?.some((e) => e.symbol === "BRP")
               }
               btnClick={async () => {
                 await mineResource(data?.address, data?.name);
-                dispatch(
-                  InventoryActionsWithoutThunk.setRefreshInventory(true)
-                );
               }}
               loading={loading}
             />

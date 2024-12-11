@@ -15,25 +15,15 @@ export default function Effects() {
   const pathname = usePathname();
   const router = useRouter();
   const { logout } = useHoneycomb();
-  const { currentUser, currentProfile, currentWallet, edgeClient } =
-    useHoneycombInfo();
-  const { authToken } = useHoneycombAuth();
+  const { currentUser, currentProfile } = useHoneycombInfo();
+  const { authToken, logout: HoneycombLogout } = useHoneycombAuth();
   const wallet = useWallet();
-
-  console.log(
-    "currentUser, currentProfile, currentWallet, authToken, edge client",
-    currentUser,
-    currentProfile,
-    currentWallet,
-    authToken,
-    edgeClient
-  );
 
   useEffect(() => {
     (async () => {
       if (wallet?.disconnecting) {
-        console.log("EFFECT 1: Logging out");
         await logout();
+        await HoneycombLogout();
         resetCache();
         toast.success("Logged out successfully");
         router.push("/");
@@ -44,7 +34,6 @@ export default function Effects() {
   useEffect(() => {
     if (currentUser && currentProfile && wallet?.connected) {
       if (pathname === "/create-profile" || pathname === "/") {
-        console.log("EFFECT 3: Redirecting to home");
         router.push("/home");
       }
     } else if (!authToken && pathname !== "/") {

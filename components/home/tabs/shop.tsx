@@ -27,7 +27,7 @@ const ShopTab = () => {
         setShopData(res);
       }
     })();
-  }, [publicKey, shopData.length]);
+  }, [publicKey, shopData?.length]);
 
   const claimResource = async (resourceId: string, name: string) => {
     try {
@@ -57,7 +57,7 @@ const ShopTab = () => {
               name={item?.name}
               picture={item?.uri}
               level={item?.lvl_req}
-              lock={userLevelInfo.level < item?.lvl_req}
+              lock={userLevelInfo?.level < item?.lvl_req}
               buttonText={item?.claimed ? "Claimed" : "Claim Axe"}
               imageWidth={150}
               imageHeight={150}
@@ -80,13 +80,10 @@ const ShopTab = () => {
               btnDisabled={
                 loading.name === item?.name ||
                 item?.claimed ||
-                userLevelInfo.level < item?.lvl_req
+                userLevelInfo?.level < item?.lvl_req
               }
               btnClick={async () => {
                 await claimResource(item?.address, item?.name);
-                dispatch(
-                  InventoryActionsWithoutThunk.setRefreshInventory(true)
-                );
               }}
               loading={loading}
               addStyles={"!absolute !bottom-[25%] !right-[25%]"}

@@ -1,16 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import base58 from "bs58";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { VersionedTransaction } from "@solana/web3.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import CraftTab from "@/components/home/tabs/craft";
 import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
 import IronTab from "@/components/home/tabs/craft/tabs/iron";
-import AdamantiteTab from "@/components/home/tabs/craft/tabs/adamantite";
 import MithrilTab from "@/components/home/tabs/craft/tabs/mithril";
 import RuniteTab from "@/components/home/tabs/craft/tabs/runite";
-import SteelTab from "@/components/home/tabs/craft/tabs/steel";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
@@ -19,11 +19,11 @@ import AllTab from "@/components/home/inventory/all";
 import BarTab from "@/components/home/inventory/bar";
 import PickaxeTab from "@/components/home/inventory/pickaxe";
 
+import { RootState } from "@/store";
 import { Dataset, Resource } from "@/interfaces";
 import LevelsData from "../../data/level-data.json";
-import { API_URL } from "@/config/config";
+import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { craftSymbols, inventorySymbols } from "./constants";
-import { RootState } from "@/store";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 let cache = {
@@ -39,7 +39,7 @@ const setCache = (name: string, data: any) => {
   cache[name] = data;
 };
 
-const getCache = (name: string) => {
+export const getCache = (name: string) => {
   return cache[name];
 };
 
@@ -56,50 +56,45 @@ const resetCache = () => {
 
 const Utils = () => {
   const dispatch = useDispatch();
+  const { currentUser, currentProfile, currentWallet, edgeClient } =
+    useHoneycombInfo();
+  const inventoryState = useSelector((state: RootState) => state.inventory);
 
-  const { currentUser, currentProfile, currentWallet } = useHoneycombInfo();
+  useEffect(() => {
+    (async () => {
+      let data = await getCache("userInfo");
+      if (
+        currentProfile?.platformData.xp &&
+        (data?.result?.length === 0 || !data)
+      ) {
+        await getUserLevelInfo(currentProfile.platformData.xp, false, () => {});
+      }
+    })();
+  }, [currentProfile?.platformData.xp]);
+
+  useEffect(() => {
+    (async () => {
+      let data = await getCache("inventoryData");
+      if (
+        data?.result?.length === 0 ||
+        !data ||
+        inventoryState?.refreshInventory
+      ) {
+        await fetchInventoryData(
+          "all",
+          () => true,
+          inventoryState?.refreshInventory
+        );
+        dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
+      }
+    })();
+  }, [inventoryState?.refreshInventory, currentWallet?.publicKey]);
 
   // TODO: Do it later.
 
   // const { authLoader } = useSelector(
   //   (state: RootState) => state.auth
   // );
-  const inventoryState = useSelector((state: RootState) => state.inventory);
-
-  const [userLevelInfo, setUserLevelInfo] = useState<{
-    level?: number;
-    exp_req?: number;
-    current_exp?: number;
-  }>({});
-
-  //To call the api in every 5 minutes
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      if (currentProfile?.platformData?.xp !== undefined) {
-        dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
-      }
-    }, 5 * 60 * 1000);
-
-    return () => {
-      console.log("Component unmounting, clearing interval");
-      clearInterval(interval);
-    };
-  }, []);
-
-  //To call the api only when the component mounts or refreshInventory/authLoader state changes
-  useEffect(() => {
-    if (
-      (currentProfile?.platformData?.xp !== undefined &&
-        inventoryState?.refreshInventory === true) ||
-      (currentProfile?.platformData?.xp !== undefined &&
-        // authLoader === false &&
-        inventoryState?.refreshInventory === false)
-    ) {
-      getUserLevelInfo(currentProfile?.platformData?.xp);
-      dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
-    }
-    // }, [refreshInventory, authLoader]);
-  }, [inventoryState?.refreshInventory]);
 
   const renderCraftTabComponents = async (component: string) => {
     switch (component) {
@@ -107,12 +102,8 @@ const Utils = () => {
         return <BronzeTab />;
       case "Iron":
         return <IronTab />;
-      case "Steel":
-        return <SteelTab />;
       case "Mithril":
         return <MithrilTab />;
-      case "Adamantite":
-        return <AdamantiteTab />;
       case "Runite":
         return <RuniteTab />;
     }
@@ -174,25 +165,33 @@ const Utils = () => {
     return LevelsData[LevelsData.length - 1].level;
   };
 
-  const getUserLevelInfo = async (xp: number, refetch: boolean = false) => {
+  const getUserLevelInfo = async (
+    xp: number,
+    refetch: boolean = false,
+    setDataLoading: (status: boolean) => void
+  ) => {
     try {
-      let data = getCache("userInfo");
+      let data = await getCache("userInfo");
 
-      if (data !== null && !inventoryState?.refreshInventory && !refetch) {
-        setUserLevelInfo(data?.result);
+      if (
+        data?.result?.length > 0 &&
+        !inventoryState?.refreshInventory &&
+        !refetch
+      ) {
+        setDataLoading(false);
+        return data?.result;
+      } else {
+        data = (await axios.get(`${API_URL}resources/level/${xp}`)).data;
+        setCache("userInfo", data);
         return data?.result;
       }
-      data = (await axios.get(`${API_URL}resources/level/${xp}`)).data;
-      setCache("userInfo", data);
-      setUserLevelInfo(data?.result);
-      return data?.result;
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
           error?.message ||
           "Something went wrong"
       );
-      return null;
+      setDataLoading(false);
     }
   };
 
@@ -215,44 +214,76 @@ const Utils = () => {
     return categorizedResources;
   };
 
-  // const getSymbol = (name) => {
-  //   // console.log(cache.craftData);
-
-  //   console.log("data.metadata.name", cache?.craftData);
-  //   if (cache?.craftData?.result?.length > 0) {
-  //     cache?.craftData?.result?.filter((data: any) => {
-  //       if (data.metadata.name === name) {
-  //         console.log("data.metadata.symbol", data.metadata.symbol);
-  //         return data.metadata.symbol;
-  //       }
-  //     });
-  //   }
-  // };
-
-  //fetchCraftData that takes name and refetch boolean
   const fetchCraftData = async (
     name: string,
     setDataLoading: (status: boolean) => void,
-    refetch = false
+    refetch = false,
+    recipe?: string
   ) => {
     try {
       setDataLoading(true);
 
-      let data = getCache("craftData");
+      let data = await getCache("craftData");
 
-      // await getSymbol("Katana");
+      if (recipe) {
+        const {
+          createInitCookingProcessTransactions: {
+            blockhash,
+            lastValidBlockHeight,
+            transactions: txHash,
+          },
+        } = await edgeClient.createInitCookingProcessTransactions({
+          recipe: recipe,
+          lutAddresses: LUT_ADDRESSES,
+          authority: currentWallet?.publicKey.toString(),
+        });
+
+        const transactions = txHash.map((tx) =>
+          VersionedTransaction.deserialize(base58.decode(tx))
+        );
+
+        const signedTransactions = await currentWallet.signAllTransactions(
+          transactions
+        );
+
+        const signatures = await Promise.all(
+          signedTransactions.map(async (transaction) => {
+            try {
+              const serializedTx = base58.encode(transaction.serialize());
+
+              const signature = await edgeClient.sendBulkTransactions({
+                txs: serializedTx,
+                blockhash,
+                lastValidBlockHeight,
+                options: {
+                  commitment: "processed",
+                  skipPreflight: true,
+                },
+              });
+              return signature;
+            } catch (error) {
+              console.error("Failed to send transaction:", error);
+              return null;
+            }
+          })
+        );
+        const successfulSignatures = signatures.filter((sig) => sig !== null);
+
+        if (!successfulSignatures.length) {
+          console.error("Error minting resource");
+          return;
+        }
+      }
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
-        // return data?.result;
+        return organizeDataByCategories(data, craftSymbols)?.[name];
+      } else {
+        data = (await axios.get(`${API_URL}resources/craft`)).data;
+        setCache("craftData", data);
+        setDataLoading(false);
         return organizeDataByCategories(data, craftSymbols)?.[name];
       }
-
-      data = (await axios.get(`${API_URL}resources/craft`)).data;
-      setCache("craftData", data);
-      setDataLoading(false);
-      // return data?.result;
-      return organizeDataByCategories(data, craftSymbols)?.[name];
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
@@ -279,7 +310,7 @@ const Utils = () => {
         setDataLoading(true);
       }
 
-      let data = getCache("inventoryData");
+      let data = await getCache("inventoryData");
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
@@ -287,19 +318,19 @@ const Utils = () => {
           return data?.result;
         }
         return organizeDataByCategories(data, inventorySymbols)?.[name];
+      } else {
+        data = (
+          await axios.get(
+            `${API_URL}resources/inventory/${currentWallet?.publicKey}`
+          )
+        ).data;
+        setCache("inventoryData", data);
+        setDataLoading(false);
+        if (name === "all") {
+          return data?.result;
+        }
+        return organizeDataByCategories(data, inventorySymbols)?.[name];
       }
-
-      data = (
-        await axios.get(
-          `${API_URL}resources/inventory/${currentWallet?.publicKey}`
-        )
-      ).data;
-      setCache("inventoryData", data);
-      setDataLoading(false);
-      if (name === "all") {
-        return data?.result;
-      }
-      return organizeDataByCategories(data, inventorySymbols)?.[name];
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
@@ -312,21 +343,73 @@ const Utils = () => {
 
   const fetchRefinedResoucesData = async (
     setDataLoading: (status: boolean) => void,
-    refetch = false
+    refetch = false,
+    recipe?: string
   ) => {
     try {
       setDataLoading(true);
 
-      let data = getCache("refineData");
+      let data = await getCache("refineData");
+
+      if (recipe) {
+        const {
+          createInitCookingProcessTransactions: {
+            blockhash,
+            lastValidBlockHeight,
+            transactions: txHash,
+          },
+        } = await edgeClient.createInitCookingProcessTransactions({
+          recipe: recipe,
+          lutAddresses: LUT_ADDRESSES,
+          authority: currentWallet?.publicKey.toString(),
+        });
+
+        const transactions = txHash.map((tx) =>
+          VersionedTransaction.deserialize(base58.decode(tx))
+        );
+
+        const signedTransactions = await currentWallet.signAllTransactions(
+          transactions
+        );
+
+        const signatures = await Promise.all(
+          signedTransactions.map(async (transaction) => {
+            try {
+              const serializedTx = base58.encode(transaction.serialize());
+
+              const signature = await edgeClient.sendBulkTransactions({
+                txs: serializedTx,
+                blockhash,
+                lastValidBlockHeight,
+                options: {
+                  commitment: "processed",
+                  skipPreflight: true,
+                },
+              });
+              return signature;
+            } catch (error) {
+              console.error("Failed to send transaction:", error);
+              return null;
+            }
+          })
+        );
+        const successfulSignatures = signatures.filter((sig) => sig !== null);
+
+        if (!successfulSignatures.length) {
+          console.error("Error minting resource");
+          return;
+        }
+      }
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
         return data?.result;
+      } else {
+        data = (await axios.get(`${API_URL}resources/refine`)).data;
+        setCache("refineData", data);
+        setDataLoading(false);
+        return data?.result;
       }
-      data = (await axios.get(`${API_URL}resources/refine`)).data;
-      setCache("refineData", data);
-      setDataLoading(false);
-      return data?.result;
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
@@ -344,18 +427,21 @@ const Utils = () => {
     try {
       setDataLoading(true);
 
-      let data = getCache("mineData");
+      let data = await getCache("mineData");
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
         return data?.result;
+      } else {
+        data = (
+          await axios.get(
+            `${API_URL}resources/ores/${currentWallet?.publicKey}`
+          )
+        ).data;
+        setCache("mineData", data);
+        setDataLoading(false);
+        return data?.result;
       }
-      data = (
-        await axios.get(`${API_URL}resources/ores/${currentWallet?.publicKey}`)
-      ).data;
-      setCache("mineData", data);
-      setDataLoading(false);
-      return data?.result;
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
@@ -372,11 +458,12 @@ const Utils = () => {
   ) => {
     try {
       setDataLoading(true);
-      let data = getCache("shopData");
+      let data = await getCache("shopData");
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
         return data?.result;
       }
+
       data = (
         await axios.get(
           `${API_URL}resources/pickaxes/${currentWallet?.publicKey}`
@@ -426,6 +513,41 @@ const Utils = () => {
     }
   };
 
+  const craftResource = async (
+    recipe: string,
+    name: string,
+    craftCategory: string,
+    setLoading: ({ name, status }) => void,
+    setDataLoading: (status: boolean) => void,
+    setCraftData: (data: Resource[]) => void
+  ) => {
+    try {
+      setLoading({ name: name, status: true });
+      const data = await fetchCraftData(
+        craftCategory,
+        setDataLoading,
+        true,
+        recipe
+      );
+      setCraftData(data);
+      dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
+      await apiCallDelay(2000);
+      await getUserLevelInfo(
+        currentProfile.platformData.xp,
+        true,
+        setDataLoading
+      );
+      await apiCallDelay(3000);
+      setLoading({ name: "", status: false });
+      toast.success(`${name} Resource crafted successfully`);
+    } catch (err: any) {
+      setLoading({ name: "", status: false });
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  };
+
+  const userLevelInfo = getCache("userInfo")?.result;
+
   return {
     renderCraftTabComponents,
     renderHomeTabComponents,
@@ -442,6 +564,7 @@ const Utils = () => {
     resetCache,
     apiCallDelay,
     claimFaucet,
+    craftResource,
   };
 };
 

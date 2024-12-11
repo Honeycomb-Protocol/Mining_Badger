@@ -1,25 +1,24 @@
-import { useDispatch } from "react-redux";
 import { Spinner } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
-import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const IronTab = () => {
   const { publicKey } = useWallet();
-  const dispatch = useDispatch();
   const { fetchCraftData, userLevelInfo, fetchInventoryData, craftResource } =
     Utils();
   const [craftData, setCraftData] = useState([]);
   const [inventory, setInventory] = useState([]);
+  const [enrichedCraftData, setEnrichedCraftData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState({
     name: "",
     status: false,
   });
 
+  const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
     if (!publicKey) return;
     (async () => {
@@ -27,7 +26,10 @@ const IronTab = () => {
         const res = await fetchCraftData("iron", setDataLoading);
         setCraftData(res);
       }
-      if (inventory?.length === 0) {
+      if (
+        inventory?.length === 0 ||
+        (!loading?.status && prevLoadingRef.current)
+      ) {
         const cacheInventory = (await getCache("inventoryData"))?.result;
         if (cacheInventory?.length > 0) {
           setInventory(cacheInventory);
@@ -37,16 +39,33 @@ const IronTab = () => {
           );
         }
       }
+      prevLoadingRef.current = loading.status;
     })();
-  }, [publicKey, craftData?.length, inventory?.length]);
+  }, [publicKey, craftData?.length, inventory?.length, loading?.status]);
 
-  const enrichedCraftData = craftData?.map((craftment) => {
-    const canCraft = craftment.ingredients.every(async (ing) => {
-      const accessory = await inventory?.find((e) => e.symbol === ing.symbol);
-      return accessory?.amount >= ing.amount;
-    });
-    return { ...craftment, canCraft };
-  });
+  const enrichCraftData = async () => {
+    const enrichedCraftData = await Promise.all(
+      craftData?.map(async (craftment) => {
+        const allIngredientsAvailable = await Promise.all(
+          craftment.ingredients.map(async (ing) => {
+            const accessory = inventory?.find((e) => e.symbol === ing.symbol);
+            return accessory && accessory.amount >= ing.amount;
+          })
+        );
+
+        const canCraft = allIngredientsAvailable.every(
+          (isAvailable) => isAvailable
+        );
+        return { ...craftment, canCraft };
+      }) || []
+    );
+
+    return enrichedCraftData;
+  };
+
+  useEffect(() => {
+    enrichCraftData().then(setEnrichedCraftData);
+  }, [craftData, inventory]);
 
   return (
     <div className="grid grid-cols-3 gap-x-24 gap-y-8">
@@ -83,9 +102,6 @@ const IronTab = () => {
                     setLoading,
                     setDataLoading,
                     setCraftData
-                  );
-                  dispatch(
-                    InventoryActionsWithoutThunk.setRefreshInventory(true)
                   );
                 }}
                 loading={loading}

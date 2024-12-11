@@ -1,9 +1,9 @@
-import CustomTabs from "@/components/common/custom-tabs";
 import React, { useEffect, useState } from "react";
 
-import craftData from "@/data/craft-data.json";
 import Utils from "@/lib/utils";
 import { TabDataProps } from "@/interfaces";
+import craftData from "@/data/craft-data.json";
+import CustomTabs from "@/components/common/custom-tabs";
 
 const CraftTab = () => {
   const { renderCraftTabComponents } = Utils();

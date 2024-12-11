@@ -1,15 +1,15 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
+import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 
+import Utils from "@/lib/utils";
+import { Footer } from "@/pages/_app";
+import { TabDataProps } from "@/interfaces";
+import CustomTabs from "../common/custom-tabs";
+import LevelsRequiredModal from "../common/modal";
 import tabData from "@/data/home-page-tab-data.json";
 import inventoryData from "@/data/inventory-data.json";
-import CustomTabs from "../common/custom-tabs";
-import { TabDataProps } from "@/interfaces";
-import Utils from "@/lib/utils";
-import LevelsRequiredModal from "../common/modal";
-import { Footer } from "@/pages/_app";
 
 const HomePage = () => {
   const { currentProfile } = useHoneycombInfo();
@@ -103,7 +103,7 @@ const HomePage = () => {
             </div>
             <Progress
               size="md"
-              value={userLevelInfo?.current_exp}
+              value={Number(userLevelInfo?.current_exp)}
               maxValue={userLevelInfo?.exp_req}
               color="warning"
               showValueLabel={false}

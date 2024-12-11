@@ -9,9 +9,7 @@ const actionFactory = (actions: AsyncActions) => {
     "honeycomb/logout",
     async (_, { rejectWithValue, fulfillWithValue, dispatch }) => {
       try {
-        const { logout } = useHoneycombAuth();
         dispatch(InventoryActionsWithoutThunk.clearInventoryData());
-        logout();
         return fulfillWithValue(true);
       } catch (error) {
         console.error("Error while logging out:", error);
