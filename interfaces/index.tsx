@@ -34,18 +34,11 @@ export interface CustomInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface TabDataProps {
-  name: string;
-  notifications?: number;
-  tabComponent: React.ReactNode;
-}
-
 export interface CustomTabsProps {
-  tabData: TabDataProps[];
+  tabData: string[];
   styles?: string;
   initialActiveTab: string;
   isVertical?: boolean;
-  data?: any;
 }
 
 export interface materials {
@@ -115,10 +108,6 @@ export interface MineDataType {
   expire?: number;
 }
 
-export type CraftSymbols = {
-  [key: string]: string[];
-};
-
 export interface Ingredient {
   name: string;
   symbol: string;
@@ -139,6 +128,7 @@ export interface Resource {
   recipe: string;
   time_reduced: number;
   amount: number;
+  tags: string[];
 }
 
 export interface Craft {
@@ -157,3 +147,10 @@ export type Dataset = {
   message: string;
   result: Resource[];
 };
+
+export enum ResourceType {
+  ALL = "All",
+  ORE = "ORE",
+  Pickaxe = "Pickaxe",
+  BAR = "BAR",
+}

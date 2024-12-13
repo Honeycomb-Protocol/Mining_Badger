@@ -4,6 +4,7 @@ import { Spinner } from "@nextui-org/react";
 import { useEffect, useRef, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
+import { ResourceType } from "@/interfaces";
 import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
@@ -30,6 +31,7 @@ const RefineTab = () => {
   useEffect(() => {
     if (!publicKey) return;
     (async () => {
+      setDataLoading(true);
       if (refineData?.length === 0) {
         const res = await fetchRefinedResoucesData(setDataLoading);
         setRefineData(res);
@@ -42,7 +44,8 @@ const RefineTab = () => {
         if (cacheInventory?.length > 0) {
           setInventory(cacheInventory);
         } else if (cacheInventory?.length === 0) {
-          setInventory((await fetchInventoryData("all", () => true))?.result);
+          const invent = await fetchInventoryData(ResourceType.ALL, () => true);
+          setInventory(invent);
         }
       }
       prevLoadingRef.current = loading?.status;
@@ -80,6 +83,7 @@ const RefineTab = () => {
         return { ...refinement, canRefine };
       }) || []
     );
+    setDataLoading(false);
 
     return enrichedRefineData;
   };

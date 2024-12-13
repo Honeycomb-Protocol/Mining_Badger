@@ -7,26 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import CraftTab from "@/components/home/tabs/craft";
-import BronzeTab from "@/components/home/tabs/craft/tabs/bronze";
-import IronTab from "@/components/home/tabs/craft/tabs/iron";
-import MithrilTab from "@/components/home/tabs/craft/tabs/mithril";
-import RuniteTab from "@/components/home/tabs/craft/tabs/runite";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
-import OresTab from "@/components/home/inventory/ores";
-import AllTab from "@/components/home/inventory/all";
-import BarTab from "@/components/home/inventory/bar";
-import PickaxeTab from "@/components/home/inventory/pickaxe";
 
 import { RootState } from "@/store";
-import { Dataset, Resource } from "@/interfaces";
 import LevelsData from "../../data/level-data.json";
+import { Resource, ResourceType } from "@/interfaces";
 import { API_URL, LUT_ADDRESSES } from "@/config/config";
-import { craftSymbols, inventorySymbols } from "./constants";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 let cache = {
+  craftTags: {},
   craftData: {},
   inventoryData: {},
   refineData: {},
@@ -45,6 +37,7 @@ export const getCache = (name: string) => {
 
 const resetCache = () => {
   cache = {
+    craftTags: {},
     craftData: {},
     inventoryData: {},
     refineData: {},
@@ -82,7 +75,7 @@ const Utils = () => {
         inventoryState?.refreshInventory
       ) {
         await fetchInventoryData(
-          "all",
+          ResourceType.ALL,
           () => true,
           inventoryState?.refreshInventory
         );
@@ -96,19 +89,6 @@ const Utils = () => {
   // const { authLoader } = useSelector(
   //   (state: RootState) => state.auth
   // );
-
-  const renderCraftTabComponents = async (component: string) => {
-    switch (component) {
-      case "Bronze":
-        return <BronzeTab />;
-      case "Iron":
-        return <IronTab />;
-      case "Mithril":
-        return <MithrilTab />;
-      case "Runite":
-        return <RuniteTab />;
-    }
-  };
 
   const renderHomeTabComponents = async (component: string) => {
     switch (component) {
@@ -126,17 +106,9 @@ const Utils = () => {
     }
   };
 
-  const renderInventoryTabComponents = async (component: string) => {
-    switch (component) {
-      case "All":
-        return <AllTab />;
-      case "Ores":
-        return <OresTab />;
-      case "Bar":
-        return <BarTab />;
-      case "Pickaxes":
-        return <PickaxeTab />;
-    }
+  const organizeDataByCategories = (data: Resource[], name: ResourceType) => {
+    const organizedData = data?.filter((item) => item.tags.includes(name));
+    return organizedData;
   };
 
   const formatTime = (timeLeft: number) => {
@@ -196,34 +168,37 @@ const Utils = () => {
     }
   };
 
-  const organizeDataByCategories = (
-    resources: Dataset,
-    symbols: Record<string, string[]>
-  ): Record<string, Resource[]> => {
-    const categorizedResources: Record<string, Resource[]> = {};
-
-    Object.keys(symbols).forEach((categoryName) => {
-      const categorySymbols = symbols[categoryName];
-
-      const matchedResources = resources.result.filter((resource) =>
-        categorySymbols.includes(resource?.symbol)
+  const getCraftTags = async (setLoading: (status: boolean) => void) => {
+    try {
+      setLoading(true);
+      let data = await getCache("craftTags");
+      if (data?.result?.length > 0) {
+        setLoading(false);
+        return data?.result;
+      } else {
+        data = (await axios.get(`${API_URL}resources/tags`)).data;
+        setCache("craftTags", data);
+        setLoading(false);
+        return data?.result;
+      }
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
       );
-
-      categorizedResources[categoryName] = matchedResources;
-    });
-
-    return categorizedResources;
+      setLoading(false);
+    }
   };
 
   const fetchCraftData = async (
-    name: string,
+    tag: string,
     setDataLoading: (status: boolean) => void,
     refetch = false,
     recipe?: string
   ) => {
     try {
       setDataLoading(true);
-
       let data = await getCache("craftData");
 
       if (recipe) {
@@ -276,14 +251,18 @@ const Utils = () => {
         }
       }
 
-      if (data?.result?.length > 0 && !refetch) {
+      if (data?.result && data?.result[tag]?.length > 0 && !refetch) {
         setDataLoading(false);
-        return organizeDataByCategories(data, craftSymbols)?.[name];
+        return data?.result[tag];
       } else {
-        data = (await axios.get(`${API_URL}resources/craft`)).data;
+        const craftData = (await axios.get(`${API_URL}resources/craft/${tag}`))
+          .data;
+        data = {
+          result: { ...data?.result, [tag]: craftData.result },
+        };
         setCache("craftData", data);
         setDataLoading(false);
-        return organizeDataByCategories(data, craftSymbols)?.[name];
+        return craftData?.result;
       }
     } catch (error) {
       toast.error(
@@ -296,7 +275,7 @@ const Utils = () => {
   };
 
   const fetchInventoryData = async (
-    name: string,
+    name: ResourceType,
     setDataLoading: (status: boolean) => void,
     refetch = false,
     isLoaded: boolean = false
@@ -315,22 +294,22 @@ const Utils = () => {
 
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
-        if (name === "all") {
+        if (name === ResourceType.ALL) {
           return data?.result;
         }
-        return organizeDataByCategories(data, inventorySymbols)?.[name];
+        return organizeDataByCategories(data?.result, name);
       } else {
         data = (
           await axios.get(
-            `${API_URL}resources/inventory/${currentWallet?.publicKey}`
+            `${API_URL}resources/inventory/${String(currentWallet?.publicKey)}`
           )
         ).data;
         setCache("inventoryData", data);
         setDataLoading(false);
-        if (name === "all") {
+        if (name === ResourceType.ALL) {
           return data?.result;
         }
-        return organizeDataByCategories(data, inventorySymbols)?.[name];
+        return organizeDataByCategories(data?.result, name);
       }
     } catch (error) {
       toast.error(
@@ -436,7 +415,7 @@ const Utils = () => {
       } else {
         data = (
           await axios.get(
-            `${API_URL}resources/ores/${currentWallet?.publicKey}`
+            `${API_URL}resources/ores/${String(currentWallet?.publicKey)}`
           )
         ).data;
         setCache("mineData", data);
@@ -467,7 +446,7 @@ const Utils = () => {
 
       data = (
         await axios.get(
-          `${API_URL}resources/pickaxes/${currentWallet?.publicKey}`
+          `${API_URL}resources/pickaxes/${String(currentWallet?.publicKey)}`
         )
       ).data;
       setCache("shopData", data);
@@ -517,19 +496,14 @@ const Utils = () => {
   const craftResource = async (
     recipe: string,
     name: string,
-    craftCategory: string,
+    tag: string,
     setLoading: ({ name, status }) => void,
     setDataLoading: (status: boolean) => void,
     setCraftData: (data: Resource[]) => void
   ) => {
     try {
       setLoading({ name: name, status: true });
-      const data = await fetchCraftData(
-        craftCategory,
-        setDataLoading,
-        true,
-        recipe
-      );
+      const data = await fetchCraftData(tag, setDataLoading, true, recipe);
       setCraftData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       await apiCallDelay(2000);
@@ -550,9 +524,7 @@ const Utils = () => {
   const userLevelInfo = getCache("userInfo")?.result;
 
   return {
-    renderCraftTabComponents,
     renderHomeTabComponents,
-    renderInventoryTabComponents,
     formatTime,
     getLevelsFromExp,
     fetchCraftData,
@@ -566,6 +538,7 @@ const Utils = () => {
     apiCallDelay,
     claimFaucet,
     craftResource,
+    getCraftTags,
   };
 };
 

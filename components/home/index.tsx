@@ -5,49 +5,13 @@ import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 
 import Utils from "@/lib/utils";
 import { Footer } from "@/pages/_app";
-import { TabDataProps } from "@/interfaces";
 import CustomTabs from "../common/custom-tabs";
 import LevelsRequiredModal from "../common/modal";
-import tabData from "@/data/home-page-tab-data.json";
-import inventoryData from "@/data/inventory-data.json";
 
 const HomePage = () => {
   const { currentProfile } = useHoneycombInfo();
-  const {
-    renderHomeTabComponents,
-    renderInventoryTabComponents,
-    userLevelInfo,
-  } = Utils();
-  const [homeTabData, setHomeTabData] = useState<TabDataProps[]>([]);
-  const [inventoryTabData, setInventoryTabData] = useState<TabDataProps[]>([]);
+  const { userLevelInfo } = Utils();
   const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const addHomeTabComponents = async () => {
-      setHomeTabData(
-        await Promise.all(
-          tabData.map(async (tab: TabDataProps) => {
-            tab.tabComponent = await renderHomeTabComponents(tab.name);
-            return tab;
-          })
-        )
-      );
-    };
-
-    const addInventoryTabComponents = async () => {
-      setInventoryTabData(
-        await Promise.all(
-          inventoryData.map(async (tab: TabDataProps) => {
-            tab.tabComponent = await renderInventoryTabComponents(tab.name);
-            return tab;
-          })
-        )
-      );
-    };
-
-    addHomeTabComponents();
-    addInventoryTabComponents();
-  }, []);
 
   useEffect(() => {
     document.body.style.backgroundImage =
@@ -129,14 +93,17 @@ const HomePage = () => {
               <CustomTabs
                 styles="min-w-max !h-10"
                 initialActiveTab="All"
-                tabData={inventoryTabData}
+                tabData={["All", "Ores", "Bars", "Pickaxes"]}
               />
             </AccordionItem>
           </Accordion>
         </div>
       </div>
       <div className="w-[50%]">
-        <CustomTabs initialActiveTab="Shop" tabData={homeTabData} />
+        <CustomTabs
+          initialActiveTab="Shop"
+          tabData={["Shop", "Mine", "Refine", "Craft"]}
+        />
       </div>
       <LevelsRequiredModal visible={visible} setVisible={setVisible} />
     </main>

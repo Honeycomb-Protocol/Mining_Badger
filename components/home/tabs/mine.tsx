@@ -4,9 +4,9 @@ import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
-import { MineDataType } from "@/interfaces";
 import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
+import { MineDataType, ResourceType } from "@/interfaces";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const MineTab = () => {
@@ -29,6 +29,7 @@ const MineTab = () => {
   useEffect(() => {
     if (!publicKey) return;
     (async () => {
+      setDataLoader(true);
       if (mineData?.length === 0) {
         const res = await fetchMineResourcesData(setDataLoader);
         setMineData(res);
@@ -38,11 +39,11 @@ const MineTab = () => {
         if (cacheInventory?.length > 0) {
           setInventory(cacheInventory);
         } else if (cacheInventory?.length === 0) {
-          setInventory(
-            (await fetchInventoryData("refine", () => true))?.result
-          );
+          const invent = await fetchInventoryData(ResourceType.BAR, () => true);
+          setInventory(invent);
         }
       }
+      setDataLoader(false);
     })();
   }, [publicKey, mineData?.length]);
 
@@ -72,7 +73,9 @@ const MineTab = () => {
             <NftCard
               key={index}
               name={data?.name}
-              picture={data?.uri}
+              picture={
+                data?.uri.includes("assets") ? `/${data?.uri}` : data?.uri
+              }
               level={data?.lvl_req}
               buttonText="Mine"
               width={150}

@@ -1,36 +1,33 @@
+import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
 import Utils from "@/lib/utils";
-import { TabDataProps } from "@/interfaces";
-import craftData from "@/data/craft-data.json";
 import CustomTabs from "@/components/common/custom-tabs";
 
 const CraftTab = () => {
-  const { renderCraftTabComponents } = Utils();
-  const [craftTabData, setCraftTabData] = useState<TabDataProps[]>([]);
+  const { getCraftTags } = Utils();
+  const [loading, setLoading] = useState(false);
+  const [craftTabs, setCraftTabs] = useState<string[]>([]);
 
   useEffect(() => {
-    const addCraftTabComponents = async () => {
-      setCraftTabData(
-        await Promise.all(
-          craftData.map(async (tab: TabDataProps) => {
-            tab.tabComponent = await renderCraftTabComponents(tab.name);
-            return tab;
-          })
-        )
-      );
-    };
-
-    addCraftTabComponents();
+    (async () => {
+      if (craftTabs.length > 0) return;
+      const tags = await getCraftTags(setLoading);
+      setCraftTabs(tags);
+    })();
   }, []);
 
   return (
     <div className="mt-5">
-      <CustomTabs
-        isVertical={true}
-        tabData={craftTabData}
-        initialActiveTab="Bronze"
-      />
+      {loading ? (
+        <Spinner color="white" />
+      ) : (
+        <CustomTabs
+          isVertical={true}
+          tabData={craftTabs}
+          initialActiveTab={craftTabs[0]}
+        />
+      )}
     </div>
   );
 };
