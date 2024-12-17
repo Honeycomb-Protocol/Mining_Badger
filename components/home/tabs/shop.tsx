@@ -1,24 +1,32 @@
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Spinner } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
-import Utils from "@/lib/utils";
+import Utils, { getCache } from "@/lib/utils";
+import { ResourceType } from "@/interfaces";
 import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const ShopTab = () => {
-  const { userLevelInfo, fetchShopResourcesData, claimFaucet } = Utils();
+  const dispatch = useDispatch();
+  const {
+    userLevelInfo,
+    fetchShopResourcesData,
+    claimFaucet,
+    fetchInventoryData,
+  } = Utils();
   const { publicKey } = useWallet();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
-  const dispatch = useDispatch();
+  const [inventory, setInventory] = useState([]);
   const [loading, setLoading] = useState({
     name: "",
     status: false,
   });
 
+  const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
     if (!publicKey) return;
     (async () => {
@@ -26,8 +34,24 @@ const ShopTab = () => {
         const res = await fetchShopResourcesData(setDataLoader);
         setShopData(res);
       }
+      if (
+        inventory?.length === 0 ||
+        (!loading?.status && prevLoadingRef.current)
+      ) {
+        const cacheInventory = (await getCache("inventoryData"))?.result;
+        if (cacheInventory && cacheInventory?.length > 0) {
+          setInventory(cacheInventory);
+        } else if (!cacheInventory || cacheInventory?.length === 0) {
+          const invent = await fetchInventoryData(
+            ResourceType.ALL,
+            setDataLoader
+          );
+          setInventory(invent);
+        }
+      }
+      prevLoadingRef.current = loading?.status;
     })();
-  }, [publicKey, shopData?.length]);
+  }, [publicKey, shopData?.length, inventory?.length, loading?.status]);
 
   const claimResource = async (resourceId: string, name: string) => {
     try {
@@ -36,6 +60,12 @@ const ShopTab = () => {
       const data = await fetchShopResourcesData(setDataLoader, true);
       setShopData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
+      await fetchInventoryData(
+        ResourceType.ALL,
+        setDataLoader,
+        true,
+        dataLoader
+      );
       setLoading({ name: "", status: false });
       toast.success(`${name} claimed successfully`);
     } catch (err: any) {

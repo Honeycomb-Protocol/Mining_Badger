@@ -1,6 +1,6 @@
 import axios from "axios";
 import base58 from "bs58";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { VersionedTransaction } from "@solana/web3.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import CraftTab from "@/components/home/tabs/craft";
 import MineTab from "@/components/home/tabs/mine";
 import RefineTab from "@/components/home/tabs/refine";
 import ShopTab from "@/components/home/tabs/shop";
+import BodyTab from "@/components/home/tabs/body";
 
 import { RootState } from "@/store";
 import LevelsData from "../../data/level-data.json";
@@ -65,24 +66,45 @@ const Utils = () => {
     })();
   }, [currentProfile?.platformData.xp]);
 
-  useEffect(() => {
-    (async () => {
-      let data = await getCache("inventoryData");
-      if (
-        data?.result?.length === 0 ||
-        !data ||
-        Object.keys(data)?.length === 0 ||
-        inventoryState?.refreshInventory
-      ) {
-        await fetchInventoryData(
-          ResourceType.ALL,
-          () => true,
-          inventoryState?.refreshInventory
-        );
-        dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
-      }
-    })();
-  }, [inventoryState?.refreshInventory, currentWallet?.publicKey]);
+  // useEffect(() => {
+  //   let isFetching = false;
+  //   const fetchData = async () => {
+  //     if (isFetching) return;
+  //     isFetching = true;
+
+  //     try {
+  //       let data = await getCache("inventoryData");
+  //       console.log(inventoryState?.refreshInventory);
+
+  //       if (data?.result?.length === 0 || inventoryState?.refreshInventory) {
+  //         console.log(
+  //           "Fetching inventory data",
+  //           inventoryState?.refreshInventory,
+  //           typeof data
+  //         );
+  //         await fetchInventoryData(
+  //           ResourceType.ALL,
+  //           () => true,
+  //           inventoryState?.refreshInventory
+  //         );
+  //         apiCallDelay(5000);
+  //         dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
+  //         console.log(
+  //           "Inventory data fetched",
+  //           inventoryState?.refreshInventory
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching inventory data:", error);
+  //     } finally {
+  //       isFetching = false; // Reset the flag after completion
+  //     }
+  //   };
+
+  //   if (inventoryState?.refreshInventory) {
+  //     fetchData();
+  //   }
+  // }, [inventoryState?.refreshInventory, currentWallet?.publicKey]);
 
   // TODO: Do it later.
 
@@ -103,6 +125,9 @@ const Utils = () => {
 
       case "Refine":
         return <RefineTab />;
+
+      case "Body":
+        return <BodyTab />;
     }
   };
 
@@ -505,14 +530,14 @@ const Utils = () => {
       setLoading({ name: name, status: true });
       const data = await fetchCraftData(tag, setDataLoading, true, recipe);
       setCraftData(data);
+      await fetchInventoryData(ResourceType.ALL, setDataLoading, true);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
-      await apiCallDelay(2000);
       await getUserLevelInfo(
         currentProfile.platformData.xp,
         true,
         setDataLoading
       );
-      await apiCallDelay(3000);
+      await apiCallDelay(2000);
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource crafted successfully`);
     } catch (err: any) {

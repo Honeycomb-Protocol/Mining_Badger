@@ -24,7 +24,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
     if (!publicKey) return;
     const fetchData = async () => {
       setDataLoading(true);
-      if (craftData?.length === 0 || craftData[0]?.tag !== tag) {
+      if (craftData?.length === 0 || (tag && craftData[0]?.tag !== tag)) {
         const res = await fetchCraftData(tag, setDataLoading);
         setCraftData(res);
       }
@@ -33,9 +33,9 @@ const CraftComponent = ({ tag }: { tag: string }) => {
         (!loading?.status && prevLoadingRef.current)
       ) {
         const cacheInventory = (await getCache("inventoryData"))?.result;
-        if (cacheInventory?.length > 0) {
+        if (cacheInventory && cacheInventory?.length > 0) {
           setInventory(cacheInventory);
-        } else if (cacheInventory?.length === 0) {
+        } else if (!cacheInventory || cacheInventory?.length === 0) {
           const invent = await fetchInventoryData(ResourceType.ALL, () => true);
           setInventory(invent);
         }
@@ -43,7 +43,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
       prevLoadingRef.current = loading.status;
     };
     fetchData();
-  }, [publicKey, loading?.status, tag]);
+  }, [publicKey, loading?.status, tag, inventory?.length, craftData?.length]);
 
   const enrichCraftData = async () => {
     const enrichedCraftData = await Promise.all(
@@ -80,7 +80,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
           ?.map((craftment, index) => {
             return (
               <NftCard
-                divStyle="bg-black shadow-black shadow-xl  rounded-xl p-2"
+                divStyle="bg-black shadow-black shadow-xl rounded-xl p-2"
                 key={index}
                 name={craftment.name}
                 picture={

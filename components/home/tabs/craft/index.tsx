@@ -19,7 +19,7 @@ const CraftTab = () => {
 
   return (
     <div className="mt-5">
-      {loading ? (
+      {loading || craftTabs.length === 0 ? (
         <Spinner color="white" />
       ) : (
         <CustomTabs

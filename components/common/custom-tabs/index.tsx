@@ -69,7 +69,7 @@ const CustomTabs = ({
       <div
         className={` ${
           isVertical
-            ? "flex-col w-48 overflow-x-hidden overflow-y-auto"
+            ? "flex-col w-52 overflow-x-hidden overflow-y-auto"
             : "flex w-full overflow-y-hidden overflow-x-auto"
         }   bg-black bg-opacity-100 rounded-xl`}
       >
@@ -80,7 +80,9 @@ const CustomTabs = ({
               "bg-gradient-to-r from-[#E7CB5F] to-[#CD6448]"
             }  h-12  px-4 rounded-xl flex-1 flex items-center font-bold cursor-pointer
           transition-all hover:scale-105 hover:bg-opacity-10 hover:bg-black ${styles} whitespace-nowrap  ${
-              isVertical ? "mb-2 m-4 justify-start " : "mr-2 justify-center"
+              isVertical
+                ? "mb-2 my-4 mx-2 justify-start "
+                : "mr-2 justify-center"
             }`}
             key={tab}
             onClick={() => {

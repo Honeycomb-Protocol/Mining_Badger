@@ -64,3 +64,11 @@ textarea {
 .text-foreground {
   color: white;
 }
+
+/* set the white color to all text inside the divs on this class */
+.selector {
+  color: white !important;
+  & > * {
+    color: white !important;
+  }
+}

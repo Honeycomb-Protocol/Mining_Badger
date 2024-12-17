@@ -48,7 +48,7 @@ const NftCard: React.FC<CardProps> = ({
     );
   });
 
-  const imagePic = picture.replace("htthttps://", "https://");
+  const imagePic = picture?.replace("htthttps://", "https://");
   return (
     <div
       className={`flex flex-col justify-center items-center cursor-pointer ${divStyle}`}

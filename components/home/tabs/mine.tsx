@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Spinner } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 import Utils, { getCache } from "@/lib/utils";
@@ -26,26 +26,31 @@ const MineTab = () => {
     status: false,
   });
 
+  const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
     if (!publicKey) return;
     (async () => {
       setDataLoader(true);
-      if (mineData?.length === 0) {
+      if (
+        mineData?.length === 0 ||
+        (!loading?.status && prevLoadingRef.current)
+      ) {
         const res = await fetchMineResourcesData(setDataLoader);
         setMineData(res);
       }
       if (inventory?.length === 0) {
         const cacheInventory = (await getCache("inventoryData"))?.result;
-        if (cacheInventory?.length > 0) {
+        if (cacheInventory && cacheInventory?.length > 0) {
           setInventory(cacheInventory);
-        } else if (cacheInventory?.length === 0) {
+        } else if (!cacheInventory || cacheInventory?.length === 0) {
           const invent = await fetchInventoryData(ResourceType.BAR, () => true);
           setInventory(invent);
         }
       }
       setDataLoader(false);
+      prevLoadingRef.current = loading?.status;
     })();
-  }, [publicKey, mineData?.length]);
+  }, [publicKey, mineData?.length, inventory?.length, loading?.status]);
 
   const mineResource = async (resourceId: string, name: string) => {
     try {
@@ -54,6 +59,12 @@ const MineTab = () => {
       const data = await fetchMineResourcesData(setDataLoader, true);
       setMineData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
+      await fetchInventoryData(
+        ResourceType.ALL,
+        setDataLoader,
+        true,
+        dataLoader
+      );
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource mined successfully`);
     } catch (err: any) {

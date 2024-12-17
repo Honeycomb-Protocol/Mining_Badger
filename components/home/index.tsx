@@ -101,8 +101,8 @@ const HomePage = () => {
       </div>
       <div className="w-[50%]">
         <CustomTabs
-          initialActiveTab="Shop"
-          tabData={["Shop", "Mine", "Refine", "Craft"]}
+          initialActiveTab="Body"
+          tabData={["Body", "Shop", "Mine", "Refine", "Craft"]}
         />
       </div>
       <LevelsRequiredModal visible={visible} setVisible={setVisible} />

@@ -10,6 +10,7 @@ import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const RefineTab = () => {
+  const dispatch = useDispatch();
   const {
     fetchRefinedResoucesData,
     userLevelInfo,
@@ -17,7 +18,6 @@ const RefineTab = () => {
     apiCallDelay,
   } = Utils();
   const { publicKey } = useWallet();
-  const dispatch = useDispatch();
   const [inventory, setInventory] = useState([]);
   const [refineData, setRefineData] = useState([]);
   const [enrichedRefinetData, setEnrichedRefineData] = useState([]);
@@ -41,9 +41,9 @@ const RefineTab = () => {
         (!loading?.status && prevLoadingRef.current)
       ) {
         const cacheInventory = (await getCache("inventoryData"))?.result;
-        if (cacheInventory?.length > 0) {
+        if (cacheInventory && cacheInventory?.length > 0) {
           setInventory(cacheInventory);
-        } else if (cacheInventory?.length === 0) {
+        } else if (!cacheInventory || cacheInventory?.length === 0) {
           const invent = await fetchInventoryData(ResourceType.ALL, () => true);
           setInventory(invent);
         }
@@ -58,7 +58,13 @@ const RefineTab = () => {
       const data = await fetchRefinedResoucesData(setDataLoading, true, recipe);
       setRefineData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
-      await apiCallDelay();
+      await fetchInventoryData(
+        ResourceType.ALL,
+        setDataLoading,
+        true,
+        dataLoading
+      );
+      await apiCallDelay(2000);
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource refined successfully`);
     } catch (err: any) {
