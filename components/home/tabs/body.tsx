@@ -88,41 +88,43 @@ const BodyTab = () => {
     setEquippedItems((prev) => ({ ...prev, [part]: null }));
   };
 
-  // const fetchCharacter = async () => {
-  //   const character = await edgeClient
-  //     ?.findCharacters({
-  //       trees: "",
-  //       wallets: [currentWallet?.publicKey.toString()],
-  //     })
-  //     .then((res) => res?.character);
-  //   return character;
-  // };
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await fetchCharacter();
-  //     setInitialCharacter(res);
-  //   })();
-  // }, []);
+  const fetchCharacter = async () => {
+    const character = await edgeClient
+      ?.findCharacters({
+        trees: "",
+        wallets: [currentWallet?.publicKey.toString()],
+      })
+      .then((res) => res?.character);
+    return character;
+  };
+  useEffect(() => {
+    (async () => {
+      const res = await fetchCharacter();
+      setInitialCharacter(res);
+    })();
+  }, []);
 
-  // const InitializeCharacter = () => {
-  //   setLoading(true);
+  //shayan
+  const InitializeCharacter = () => {
+    setLoading(true);
 
-  //   setLoading(false);
-  // };
+    setLoading(false);
+  };
+
+  //shayan
 
   return (
     <>
       {loading ? (
         <Spinner color="white" />
+      ) : InitialCharacter ? (
+        <div className="flex flex-col items-center justify-center mt-10">
+          <p>Character not found</p>
+          <button className="w-52 m-4" onClick={InitializeCharacter}>
+            Start
+          </button>
+        </div>
       ) : (
-        // : InitialCharacter ? (
-        //   <div className="flex flex-col items-center justify-center mt-10">
-        //     <p>Character not found</p>
-        //     <button className="w-52 m-4" onClick={InitializeCharacter()}>
-        //       Start
-        //     </button>
-        //   </div>
-        // )
         <div className="flex flex-col items-center justify-center">
           <div className="border-2 border-[#e7cb5f] rounded-lg w-[335px] h-[335px] bg-black my-5 relative">
             {Object.entries(equippedItems).map(([part, item], i) => {
