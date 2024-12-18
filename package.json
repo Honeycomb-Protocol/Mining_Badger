@@ -13,7 +13,7 @@
     "@civic/solana-gateway-react": "^1.2.1",
     "@honeycomb-protocol/edge-client": "^0.0.7-beta.4",
     "@honeycomb-protocol/hive-control": "^0.2.19-beta.29",
-    "@honeycomb-protocol/profile-hooks": "file:.yalc/@honeycomb-protocol/profile-hooks",
+    "@honeycomb-protocol/profile-hooks": "^0.0.5-beta.2",
     "@nextui-org/react": "^2.2.9",
     "@reduxjs/toolkit": "^2.2.1",
     "@solana/wallet-adapter-base": "^0.9.23",
