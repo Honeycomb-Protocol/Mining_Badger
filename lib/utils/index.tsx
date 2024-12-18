@@ -1,6 +1,6 @@
 import axios from "axios";
 import base58 from "bs58";
-import { useEffect, useRef } from "react";
+import { useEffect} from "react";
 import { toast } from "react-toastify";
 import { VersionedTransaction } from "@solana/web3.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,46 +65,6 @@ const Utils = () => {
       }
     })();
   }, [currentProfile?.platformData.xp]);
-
-  // useEffect(() => {
-  //   let isFetching = false;
-  //   const fetchData = async () => {
-  //     if (isFetching) return;
-  //     isFetching = true;
-
-  //     try {
-  //       let data = await getCache("inventoryData");
-  //       console.log(inventoryState?.refreshInventory);
-
-  //       if (data?.result?.length === 0 || inventoryState?.refreshInventory) {
-  //         console.log(
-  //           "Fetching inventory data",
-  //           inventoryState?.refreshInventory,
-  //           typeof data
-  //         );
-  //         await fetchInventoryData(
-  //           ResourceType.ALL,
-  //           () => true,
-  //           inventoryState?.refreshInventory
-  //         );
-  //         apiCallDelay(5000);
-  //         dispatch(InventoryActionsWithoutThunk.setRefreshInventory(false));
-  //         console.log(
-  //           "Inventory data fetched",
-  //           inventoryState?.refreshInventory
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching inventory data:", error);
-  //     } finally {
-  //       isFetching = false; // Reset the flag after completion
-  //     }
-  //   };
-
-  //   if (inventoryState?.refreshInventory) {
-  //     fetchData();
-  //   }
-  // }, [inventoryState?.refreshInventory, currentWallet?.publicKey]);
 
   // TODO: Do it later.
 

@@ -1,20 +1,22 @@
+// import axios from "axios";
 import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
 import Utils from "@/lib/utils";
 import { ResourceType } from "@/interfaces";
 import NftCard from "@/components/common/nft-card";
-import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
+// import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
+// import { API_URL } from "@/config/config";
 
 const BodyTab = () => {
   const { fetchInventoryData, getCraftTags } = Utils();
-  const { edgeClient, currentWallet } = useHoneycombInfo();
+  // const { edgeClient, currentWallet } = useHoneycombInfo();
   const [loading, setLoading] = useState(false);
   const [inventoryData, setInventoryData] = useState([]);
   const [currentTag, setCurrentTag] = useState("Fur");
   const [craftTags, setCraftTags] = useState([]);
   const [enrichedBodyData, setEnrichedBodyData] = useState([]);
-  const [InitialCharacter, setInitialCharacter] = useState([]);
+  // const [InitialCharacter, setInitialCharacter] = useState([]);
   const [isEquiped, setIsEquiped] = useState<string[]>(null);
   const [equippedItems, setEquippedItems] = useState({
     Clothes: null,
@@ -88,43 +90,46 @@ const BodyTab = () => {
     setEquippedItems((prev) => ({ ...prev, [part]: null }));
   };
 
-  const fetchCharacter = async () => {
-    const character = await edgeClient
-      ?.findCharacters({
-        trees: "",
-        wallets: [currentWallet?.publicKey.toString()],
-      })
-      .then((res) => res?.character);
-    return character;
-  };
-  useEffect(() => {
-    (async () => {
-      const res = await fetchCharacter();
-      setInitialCharacter(res);
-    })();
-  }, []);
+  // const fetchCharacter = async () => {
+  //   const character = await edgeClient
+  //     ?.findCharacters({
+  //       trees: "",
+  //       wallets: [currentWallet?.publicKey?.toString()],
+  //     })
+  //     .then((res) => res?.character);
+  //   setInitialCharacter(character);
+  //   return character;
+  // };
+  // useEffect(() => {
+  //   (async () => {
+  //     await fetchCharacter();
+  //   })();
+  // }, []);
 
-  //shayan
-  const InitializeCharacter = () => {
-    setLoading(true);
-
-    setLoading(false);
-  };
-
-  //shayan
+  // const InitializeCharacter = async () => {
+  //   setLoading(true);
+  //   (
+  //     await axios.get(
+  //       `${API_URL}resources/init/${currentWallet?.publicKey.toString()}`
+  //     )
+  //   ).data?.result;
+  //   await fetchCharacter();
+  //   setLoading(false);
+  // };
 
   return (
     <>
       {loading ? (
         <Spinner color="white" />
-      ) : InitialCharacter ? (
-        <div className="flex flex-col items-center justify-center mt-10">
-          <p>Character not found</p>
-          <button className="w-52 m-4" onClick={InitializeCharacter}>
-            Start
-          </button>
-        </div>
       ) : (
+        // : InitialCharacter ? (
+        //   <div className="flex flex-col items-center justify-center mt-10">
+        //     <p>Character not found</p>
+        //     <button className="w-52 m-4" onClick={InitializeCharacter}>
+        //       Start
+        //     </button>
+        //   </div>
+        // )
         <div className="flex flex-col items-center justify-center">
           <div className="border-2 border-[#e7cb5f] rounded-lg w-[335px] h-[335px] bg-black my-5 relative">
             {Object.entries(equippedItems).map(([part, item], i) => {
