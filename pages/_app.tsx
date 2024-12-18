@@ -1,6 +1,5 @@
 import type { AppProps } from "next/app";
 // import { K2D } from "next/font/google";
-import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NextUIProvider } from "@nextui-org/react";

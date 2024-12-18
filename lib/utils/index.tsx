@@ -1,6 +1,6 @@
 import axios from "axios";
 import base58 from "bs58";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { VersionedTransaction } from "@solana/web3.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +61,11 @@ const Utils = () => {
         currentProfile?.platformData.xp &&
         (data?.result?.length === 0 || !data)
       ) {
-        await getUserLevelInfo(currentProfile.platformData.xp, false, () => {});
+        await getUserLevelInfo(
+          Number(currentProfile.platformData.xp),
+          false,
+          () => {}
+        );
       }
     })();
   }, [currentProfile?.platformData.xp]);
@@ -493,7 +497,7 @@ const Utils = () => {
       await fetchInventoryData(ResourceType.ALL, setDataLoading, true);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       await getUserLevelInfo(
-        currentProfile.platformData.xp,
+        Number(currentProfile.platformData.xp),
         true,
         setDataLoading
       );
