@@ -95,12 +95,12 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 nftNameStyle="text-[15px]"
                 btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
                 materials={craftment?.ingredients}
-                experience={craftment?.lvl_req}
-                resourceInfo={
-                  craftment?.lvl_req > userLevelInfo?.level
-                    ? `User level ${craftment?.lvl_req} is required to craft this resource.`
-                    : "You can craft this resource."
-                }
+                // experience={craftment?.lvl_req}
+                // resourceInfo={
+                //   craftment?.lvl_req > userLevelInfo?.level
+                //     ? `User level ${craftment?.lvl_req} is required to craft this resource.`
+                //     : "You can craft this resource."
+                // }
                 btnClick={async () => {
                   await craftResource(
                     craftment?.recipe,
@@ -114,7 +114,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 loading={loading}
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
-                  craftment?.lvl_req > userLevelInfo?.level ||
+                  // craftment?.lvl_req > userLevelInfo?.level ||
                   !craftment?.canCraft
                 }
               />
