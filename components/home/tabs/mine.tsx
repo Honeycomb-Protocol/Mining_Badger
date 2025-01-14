@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useRef, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
@@ -17,7 +17,7 @@ const MineTab = () => {
     fetchInventoryData,
     claimFaucet,
   } = Utils();
-  const { publicKey } = useWallet();
+  const { currentWallet } = useHoneycombInfo();
   const [mineData, setMineData] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
@@ -28,7 +28,7 @@ const MineTab = () => {
 
   const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
-    if (!publicKey) return;
+    if (!currentWallet?.publicKey) return;
     (async () => {
       setDataLoader(true);
       if (
@@ -50,7 +50,12 @@ const MineTab = () => {
       setDataLoader(false);
       prevLoadingRef.current = loading?.status;
     })();
-  }, [publicKey, mineData?.length, inventory?.length, loading?.status]);
+  }, [
+    currentWallet?.publicKey,
+    mineData?.length,
+    inventory?.length,
+    loading?.status,
+  ]);
 
   const mineResource = async (resourceId: string, name: string) => {
     try {

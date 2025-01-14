@@ -19,6 +19,7 @@ import { GATE_NETWORK } from "@/config/config";
 import Button from "@/components/common/button";
 import WalletContextProvider from "@/components/wallet-context-provider";
 import HoneycombProfilesWrapper from "@/wrapper/HoneycombProfilesWrapper";
+import PrivyProviderWrapper from "@/components/privy-provider";
 
 // const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
@@ -45,7 +46,7 @@ export const Footer = () => {
   return (
     <div className="text-xs flex justify-between items-center">
       <div>
-        <p>Proof your identity through civic.</p>
+        <p>Prove your identity through civic.</p>
         <p className="text-yellow-500">
           Make sure to have ( SOL ) on devnet.
         </p>{" "}
@@ -63,7 +64,8 @@ export const Footer = () => {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WalletContextProvider>
-      <HoneycombProfilesWrapper>
+      <PrivyProviderWrapper>
+        <HoneycombProfilesWrapper>
           <GateWayCivic>
             <Effects />
             {/* <main className={k2d.className}> */}
@@ -88,7 +90,8 @@ export default function App({ Component, pageProps }: AppProps) {
               </NextUIProvider>
             </main>
           </GateWayCivic>
-      </HoneycombProfilesWrapper>
+        </HoneycombProfilesWrapper>
+      </PrivyProviderWrapper>
     </WalletContextProvider>
   );
 }

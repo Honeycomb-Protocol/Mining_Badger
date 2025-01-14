@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 80",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,10 +11,12 @@
   "dependencies": {
     "@bundlr-network/client": "^0.11.17",
     "@civic/solana-gateway-react": "^1.2.1",
-    "@honeycomb-protocol/edge-client": "^0.0.7-beta.9",
+    "@honeycomb-protocol/edge-client": "^0.0.7-beta.11",
     "@honeycomb-protocol/hive-control": "^0.2.19-beta.29",
-    "@honeycomb-protocol/profile-hooks": "^0.0.5-beta.3",
+    "@honeycomb-protocol/profile-hooks": "file:.yalc/@honeycomb-protocol/profile-hooks",
     "@nextui-org/react": "^2.2.9",
+    "@privy-io/react-auth": "^1.98.4",
+    "@privy-io/server-auth": "^1.17.1",
     "@reduxjs/toolkit": "^2.2.1",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
@@ -26,6 +28,7 @@
     "bs58": "^6.0.0",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.11.17",
+    "metakeep": "^2.2.8",
     "next": "14.1.0",
     "next-transpile-modules": "^10.0.1",
     "react": "^18",

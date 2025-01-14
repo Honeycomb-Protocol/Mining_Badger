@@ -72,3 +72,7 @@ textarea {
     color: white !important;
   }
 }
+
+.btn-gradient-color {
+  background-image: linear-gradient(to right, #e7cb5f -80%, #cd6448 150%);
+}

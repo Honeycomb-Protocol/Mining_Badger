@@ -8,7 +8,7 @@ const WithTM = withTM([
 const nextConfig = WithTM({
   reactStrictMode: false,
   images: {
-    domains: ["arweave.net"],
+    domains: ["arweave.net", "gateway.irys.xyz", "devnet.irys.xyz"],
   },
   webpack: (config) => {
     config.resolve.extensions.push(".jsx"); // Add support for .jsx files

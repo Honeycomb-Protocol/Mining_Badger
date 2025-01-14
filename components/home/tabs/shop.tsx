@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useRef, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils, { getCache } from "@/lib/utils";
 import { ResourceType } from "@/interfaces";
@@ -17,7 +17,7 @@ const ShopTab = () => {
     claimFaucet,
     fetchInventoryData,
   } = Utils();
-  const { publicKey } = useWallet();
+  const { currentWallet } = useHoneycombInfo();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
   const [inventory, setInventory] = useState([]);
@@ -28,7 +28,7 @@ const ShopTab = () => {
 
   const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
-    if (!publicKey) return;
+    if (!currentWallet?.publicKey) return;
     (async () => {
       if (shopData?.length === 0) {
         const res = await fetchShopResourcesData(setDataLoader);
@@ -51,7 +51,12 @@ const ShopTab = () => {
       }
       prevLoadingRef.current = loading?.status;
     })();
-  }, [publicKey, shopData?.length, inventory?.length, loading?.status]);
+  }, [
+    currentWallet?.publicKey,
+    shopData?.length,
+    inventory?.length,
+    loading?.status,
+  ]);
 
   const claimResource = async (resourceId: string, name: string) => {
     try {

@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Spinner } from "@nextui-org/react";
 import { useEffect, useRef, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import { ResourceType } from "@/interfaces";
 import Utils, { getCache } from "@/lib/utils";
@@ -17,7 +17,7 @@ const RefineTab = () => {
     fetchInventoryData,
     apiCallDelay,
   } = Utils();
-  const { publicKey } = useWallet();
+  const { currentWallet } = useHoneycombInfo();
   const [inventory, setInventory] = useState([]);
   const [refineData, setRefineData] = useState([]);
   const [enrichedRefinetData, setEnrichedRefineData] = useState([]);
@@ -29,7 +29,7 @@ const RefineTab = () => {
 
   const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
-    if (!publicKey) return;
+    if (!currentWallet?.publicKey) return;
     (async () => {
       setDataLoading(true);
       if (refineData?.length === 0) {
@@ -50,7 +50,12 @@ const RefineTab = () => {
       }
       prevLoadingRef.current = loading?.status;
     })();
-  }, [publicKey, refineData?.length, inventory?.length, loading?.status]);
+  }, [
+    currentWallet?.publicKey,
+    refineData?.length,
+    inventory?.length,
+    loading?.status,
+  ]);
 
   const refineResource = async (recipe: string, name: string) => {
     try {

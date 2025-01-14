@@ -1,20 +1,30 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { usePrivy } from "@privy-io/react-auth";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+
+import Utils from "@/lib/utils";
+import CustomWalletConnectButton from "../custom-wallet-button";
 
 const Header = () => {
   const router = useRouter();
-
+  const wallet = useWallet();
+  const { authenticated, ready, user } = usePrivy();
+  const { getMetakeepCache } = Utils();
+  const metakeepCache = getMetakeepCache();
   return (
     <div
       className={`flex flex-row ${
-        router.pathname !== "/" ? "justify-between" : "justify-center"
+        router.pathname !== "/" && router.pathname !== "/login-with-email"
+          ? "justify-between"
+          : "justify-center"
       } items-center w-full`}
     >
-      {router.pathname !== "/" && (
+      {router.pathname !== "/" && router.pathname !== "/login-with-email" && (
         <div className="flex justify-center items-center">
-          <div>
+          {wallet?.publicKey ? (
             <WalletMultiButton
               style={{
                 height: "40px",
@@ -28,12 +38,14 @@ const Header = () => {
                 fontSize: "12px",
               }}
             />
-            {/* <Footer /> */}
-          </div>
+          ) : metakeepCache?.publicKey ||
+            (authenticated && ready && user?.wallet?.address) ? (
+            <CustomWalletConnectButton />
+          ) : null}
         </div>
       )}
       <Image src="/assets/images/logo.png" alt="logo" width={370} height={0} />
-      {router.pathname !== "/" && (
+      {router.pathname !== "/" && router.pathname !== "/login-with-email" && (
         <div className="flex flex-row gap-5">
           <Image
             onClick={() => {

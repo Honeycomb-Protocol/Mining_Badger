@@ -1,15 +1,15 @@
 import { Spinner } from "@nextui-org/react";
-import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useEffect, useRef, useState } from "react";
+import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import { ResourceType } from "@/interfaces";
 import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
 
 const CraftComponent = ({ tag }: { tag: string }) => {
-  const { publicKey } = useWallet();
   const { fetchCraftData, userLevelInfo, fetchInventoryData, craftResource } =
     Utils();
+  const { currentWallet } = useHoneycombInfo();
   const [craftData, setCraftData] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [enrichedCraftData, setEnrichedCraftData] = useState([]);
@@ -21,7 +21,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
 
   const prevLoadingRef = useRef(loading?.status);
   useEffect(() => {
-    if (!publicKey) return;
+    if (!currentWallet?.publicKey) return;
     const fetchData = async () => {
       setDataLoading(true);
       if (craftData?.length === 0 || (tag && craftData[0]?.tag !== tag)) {
@@ -43,7 +43,13 @@ const CraftComponent = ({ tag }: { tag: string }) => {
       prevLoadingRef.current = loading.status;
     };
     fetchData();
-  }, [publicKey, loading?.status, tag, inventory?.length, craftData?.length]);
+  }, [
+    currentWallet?.publicKey,
+    loading?.status,
+    tag,
+    inventory?.length,
+    craftData?.length,
+  ]);
 
   const enrichCraftData = async () => {
     const enrichedCraftData = await Promise.all(
@@ -95,12 +101,12 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 nftNameStyle="text-[15px]"
                 btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
                 materials={craftment?.ingredients}
-                // experience={craftment?.lvl_req}
-                // resourceInfo={
-                //   craftment?.lvl_req > userLevelInfo?.level
-                //     ? `User level ${craftment?.lvl_req} is required to craft this resource.`
-                //     : "You can craft this resource."
-                // }
+                experience={craftment?.lvl_req}
+                resourceInfo={
+                  craftment?.lvl_req > userLevelInfo?.level
+                    ? `User level ${craftment?.lvl_req} is required to craft this resource.`
+                    : "You can craft this resource."
+                }
                 btnClick={async () => {
                   await craftResource(
                     craftment?.recipe,
@@ -114,7 +120,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 loading={loading}
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
-                  // craftment?.lvl_req > userLevelInfo?.level ||
+                  craftment?.lvl_req > userLevelInfo?.level ||
                   !craftment?.canCraft
                 }
               />

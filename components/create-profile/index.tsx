@@ -1,6 +1,6 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
 import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
 import CustomInput from "../common/input";
