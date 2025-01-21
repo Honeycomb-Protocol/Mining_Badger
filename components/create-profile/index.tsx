@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
@@ -8,6 +9,7 @@ import CustomTextArea from "../common/textarea";
 import Button from "../common/button";
 
 const CreateProfilePage = () => {
+  const router = useRouter();
   const { authenticate } = useHoneycombAuth();
   const [loading, setLoading] = useState(false);
 
@@ -104,9 +106,8 @@ const CreateProfilePage = () => {
                 );
                 setLoading(false);
                 if (data.success) {
-                  return toast.success(
-                    data.message || "Profile created successfully"
-                  );
+                  toast.success(data.message || "Profile created successfully");
+                  return router.push("/home");
                 } else {
                   return toast.error(
                     data.message || "An error occured while creating profile"

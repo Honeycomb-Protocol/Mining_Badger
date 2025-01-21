@@ -1,3 +1,4 @@
+import { PublicKey, Transaction, VersionedTransaction } from "@solana/web3.js";
 import { ReactNode } from "react";
 
 export interface AuthenticationState {
@@ -62,6 +63,7 @@ export interface CardProps {
   btnStyle?: string;
   btnDisabled?: boolean;
   lock?: boolean;
+  btnInfo?: string;
   lockStyle?: string;
   materials?: materials[];
   experience?: number;
@@ -154,3 +156,18 @@ export enum ResourceType {
   Pickaxe = "Pickaxe",
   BAR = "BAR",
 }
+
+export type ProxyAdapter = {
+  publicKey: PublicKey | null;
+  connected: boolean;
+  signTransaction?<T extends Transaction | VersionedTransaction>(
+    transaction: T,
+    reason?: string
+  ): Promise<T>;
+  signAllTransactions?<T extends Transaction | VersionedTransaction>(
+    transaction: T[],
+    reason?: string
+  ): Promise<T[]>;
+  signMessage?(message: Uint8Array, reason?: string): Promise<Uint8Array>;
+  sendTransaction?(transaction: Transaction): Promise<string>;
+};

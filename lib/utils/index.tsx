@@ -207,9 +207,18 @@ const Utils = () => {
           VersionedTransaction.deserialize(base58.decode(tx))
         );
 
-        const signedTransactions = await currentWallet.signAllTransactions(
-          transactions
-        );
+        let signedTransactions; //@ts-ignore
+        if (currentWallet?.address && currentWallet?.address !== "") {
+          signedTransactions = await Promise.all(
+            transactions?.map((tx) => {
+              return currentWallet?.signTransaction(tx);
+            })
+          );
+        } else {
+          signedTransactions = await currentWallet.signAllTransactions(
+            transactions
+          );
+        }
 
         const signatures = await Promise.all(
           signedTransactions.map(async (transaction) => {
@@ -337,12 +346,21 @@ const Utils = () => {
           VersionedTransaction.deserialize(base58.decode(tx))
         );
 
-        const signedTransactions = await currentWallet.signAllTransactions(
-          transactions
-        );
+        let signedTransactions; //@ts-ignore
+        if (currentWallet?.address && currentWallet?.address !== "") {
+          signedTransactions = await Promise.all(
+            transactions?.map((tx) => {
+              return currentWallet?.signTransaction(tx);
+            })
+          );
+        } else {
+          signedTransactions = await currentWallet.signAllTransactions(
+            transactions
+          );
+        }
 
         const signatures = await Promise.all(
-          signedTransactions.map(async (transaction) => {
+          signedTransactions?.map(async (transaction) => {
             try {
               const serializedTx = base58.encode(transaction.serialize());
 

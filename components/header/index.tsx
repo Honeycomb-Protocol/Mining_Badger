@@ -5,15 +5,14 @@ import { usePrivy } from "@privy-io/react-auth";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-import Utils from "@/lib/utils";
+import { useMetakeep } from "@/context/metakeep-context";
 import CustomWalletConnectButton from "../custom-wallet-button";
 
 const Header = () => {
   const router = useRouter();
   const wallet = useWallet();
   const { authenticated, ready, user } = usePrivy();
-  const { getMetakeepCache } = Utils();
-  const metakeepCache = getMetakeepCache();
+  const { metakeepCache } = useMetakeep();
   return (
     <div
       className={`flex flex-row ${

@@ -5,8 +5,8 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useLogin, usePrivy } from "@privy-io/react-auth";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-import Utils from "@/lib/utils";
 import Button from "@/components/common/button";
+import { useMetakeep } from "@/context/metakeep-context";
 import CustomWalletConnectButton from "../custom-wallet-button";
 
 const WalletConnectButton = () => {
@@ -14,8 +14,7 @@ const WalletConnectButton = () => {
   const wallet = useWallet();
   const [email, setEmail] = useState("");
   const { authenticated, user, ready } = usePrivy();
-  const { getMetakeepCache } = Utils();
-  const metakeepCache = getMetakeepCache();
+  const { metakeepCache } = useMetakeep();
   const emailRef = useRef("");
 
   useEffect(() => {
@@ -161,7 +160,7 @@ const WalletConnectButton = () => {
             className="w-[384px] !py-3 !px-4 rounded-xl font-bold"
             onClick={() => router.push("/login-with-email")}
           >
-            Login with Email
+            Login with metakeep
           </button>
           <p className="py-4 font-bold">----- Or -----</p>
           <button

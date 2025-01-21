@@ -23,6 +23,7 @@ const NftCard: React.FC<CardProps> = ({
   experience,
   divStyle,
   expIn,
+  btnInfo,
   btnClick,
   loading,
   miningTimeReduction,
@@ -155,7 +156,7 @@ const NftCard: React.FC<CardProps> = ({
 
       {buttonText && !lock && (
         <Tooltip
-          content={expIn && timeLeft > 0 && "Freezing time is not over yet!"}
+          content={expIn && timeLeft > 0 ? "Freezing time is not over yet!" : btnInfo}
           className={`bg-black`}
         >
           <Button

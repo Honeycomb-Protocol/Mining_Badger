@@ -1,0 +1,104 @@
+import base58 from "bs58";
+import { MetaKeep } from "metakeep";
+import { PublicKey } from "@solana/web3.js";
+import React, { createContext, useContext, useState } from "react";
+
+import { connection } from "@/config/config";
+
+interface ProxyAdapter {
+  connected: boolean;
+  publicKey: PublicKey;
+  signMessage: (message: Uint8Array, reason?: string) => Promise<Buffer>;
+  signTransaction: (tx: any, reason?: string) => Promise<any>;
+  sendTransaction: (tx: any) => Promise<any>;
+}
+
+const MetakeepContext = createContext<{
+  metakeepCache: ProxyAdapter | null;
+  setMetakeepCache: (user: { publicKey: string; email: string }) => void;
+  clearMetakeepCache: () => void; // New function to clear the cache
+}>({
+  metakeepCache: null,
+  setMetakeepCache: () => {},
+  clearMetakeepCache: () => {},
+});
+
+export const MetakeepProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [metakeepCache, setMetakeepCacheState] = useState<ProxyAdapter | null>(
+    null
+  );
+
+  const setMetakeepCache = (user: { publicKey: string; email: string }) => {
+    const sdk = new MetaKeep({
+      appId: process.env.NEXT_PUBLIC_METAKEEP_APP_ID!,
+      user: {
+        email: user.email,
+      },
+    });
+
+    const proxyAdapter: ProxyAdapter = {
+      connected: true,
+      publicKey: new PublicKey(user.publicKey),
+      signMessage: async (message: Uint8Array, reason?: string) => {
+        const { signature } = await sdk.signMessage(
+          base58.encode(message),
+          reason || "Sign this message"
+        );
+        return Buffer.from(signature.slice(2), "hex");
+      },
+      signTransaction: async (tx: any, reason?: string) => {
+        const transactionResponse = await sdk.signTransaction(
+          tx,
+          reason || "Sign this transaction"
+        );
+        tx.addSignature(
+          new PublicKey(user.publicKey),
+          Buffer.from(transactionResponse?.signature.slice(2), "hex")
+        );
+        return tx;
+      },
+      sendTransaction: async (tx: any) => {
+        const transactionResponse = await sdk.signTransaction(
+          tx,
+          "Sign this transaction"
+        );
+        tx.addSignature(
+          new PublicKey(user.publicKey),
+          Buffer.from(transactionResponse?.signature.slice(2), "hex")
+        );
+        const signature = await connection.sendRawTransaction(tx.serialize());
+        return await connection.confirmTransaction(signature).then((res) => {
+          if (res.value.err) {
+            throw res.value.err;
+          } else {
+            return signature;
+          }
+        });
+      },
+    };
+
+    setMetakeepCacheState(proxyAdapter);
+  };
+
+  const clearMetakeepCache = () => {
+    setMetakeepCacheState(null); // Clear the state
+  };
+
+  return (
+    <MetakeepContext.Provider
+      value={{
+        metakeepCache,
+        setMetakeepCache,
+        clearMetakeepCache,
+      }}
+    >
+      {children}
+    </MetakeepContext.Provider>
+  );
+};
+
+export const useMetakeep = () => useContext(MetakeepContext);

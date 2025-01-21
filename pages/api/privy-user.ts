@@ -7,20 +7,27 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      if (!req.body.email) {
+      const { email } = req.body;
+      if (!email) {
         throw new Error("Email address is missing.");
       }
 
-      const privy = new PrivyClient(
-        "cm5f9koyu0crpehoh2f5cxu40",
-        "4iMYquSnyvtai3jCztMx7Apjh3WL3kJN9XXCKccY5AvwvoTmtBqgBP8F1TTA5wWmkGmGuLkJNcRz58bZpBMczDCL"
-      );
+      const privyAppId = "cm5f9koyu0crpehoh2f5cxu40";
+      const privyAppSecret = process.env.PRIVY_APP_SECRET;
+
+      if (!privyAppId || !privyAppSecret) {
+        throw new Error(
+          "Privy App ID or Secret is missing in environment variables."
+        );
+      }
+
+      const privy = new PrivyClient(privyAppId, privyAppSecret);
 
       const response = await privy.importUser({
         linkedAccounts: [
           {
             type: "email",
-            address: req.body.email,
+            address: email,
           },
         ],
         createEthereumWallet: false,
@@ -29,12 +36,9 @@ export default async function handler(
       });
 
       res.status(200).json(response);
-    } catch (e) {
-      console.error(
-        "Error while creating user:",
-        e.response?.data || e.message
-      );
-      res.status(500).json({ error: e.response?.data || e.message });
+    } catch (error) {
+      console.error("Error while creating user:", error.message);
+      res.status(500).json({ error: error.message });
     }
   } else {
     res.status(405).json({ error: "Method not allowed" });

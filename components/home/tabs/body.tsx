@@ -26,6 +26,7 @@ const BodyTab = () => {
   const [inventoryData, setInventoryData] = useState([]);
   const [currentTag, setCurrentTag] = useState("Fur");
   const [craftTags, setCraftTags] = useState([]);
+  const [uri, setUri] = useState(null);
   const [equippedItems, setEquippedItems] = useState({});
   const [enrichedBodyData, setEnrichedBodyData] = useState([]);
   const [InitialCharacter, setInitialCharacter] = useState<Character | null>(
@@ -40,7 +41,7 @@ const BodyTab = () => {
       const res = await fetchInventoryData(
         ResourceType.ALL,
         refreshInventory ? () => true : setLoading,
-        false,
+        refreshInventory ? true : false,
         refreshInventory ? false : loading
       );
       const filteredData = await res?.filter((item) =>
@@ -48,6 +49,7 @@ const BodyTab = () => {
       );
       setInventoryData(filteredData);
       await InitializeCharacter(filteredData);
+      return filteredData;
     } catch (error) {
       console.error("Error fetching inventory data:", error);
     } finally {
@@ -85,25 +87,37 @@ const BodyTab = () => {
   const equipItem = async (item) => {
     try {
       setEquipmentLoading({ name: item?.name, status: true });
-      const response = await axios.post(`${API_URL}resources/equip`, {
-        wallet: currentWallet?.publicKey?.toString(),
-        resource: item.address,
-      });
-      const transaction = VersionedTransaction.deserialize(
-        base58.decode(response.data.result.tx)
-      );
-      const signedTransaction = await currentWallet.signTransaction(
-        transaction
-      );
+      if (
+        item.tags[0] === "Fur" ||
+        item.tags[0] === "Eyes" ||
+        item.tags[0] === "Mouth"
+      ) {
+        await axios.post(`${API_URL}resources/update-trait`, {
+          wallet: currentWallet?.publicKey?.toString(),
+          resource: item.address,
+          tag: item.tags[0],
+        });
+      } else {
+        const response = await axios.post(`${API_URL}resources/equip`, {
+          wallet: currentWallet?.publicKey?.toString(),
+          resource: item.address,
+        });
+        const transaction = VersionedTransaction.deserialize(
+          base58.decode(response.data.result.tx)
+        );
+        const signedTransaction = await currentWallet.signTransaction(
+          transaction
+        );
 
-      await edgeClient.sendBulkTransactions({
-        txs: base58.encode(signedTransaction.serialize()),
-        blockhash: response.data.result.blockhash,
-        lastValidBlockHeight: response.data.result.lastValidBlockHeight,
-        options: { commitment: "processed", skipPreflight: true },
-      });
-      await fetchData(craftTags, true);
-      InitializeCharacter();
+        await edgeClient.sendBulkTransactions({
+          txs: base58.encode(signedTransaction.serialize()),
+          blockhash: response.data.result.blockhash,
+          lastValidBlockHeight: response.data.result.lastValidBlockHeight,
+          options: { commitment: "processed", skipPreflight: true },
+        });
+      }
+      const data = await fetchData(craftTags, true);
+      await InitializeCharacter(data);
     } catch (error) {
       console.error("Error equipping item:", error);
     } finally {
@@ -143,19 +157,8 @@ const BodyTab = () => {
       });
 
       setEquippedItems((prev) => ({ ...prev, [item?.tags[0]]: null }));
-      await fetchData(craftTags, true);
-      setInventoryData((prev) => {
-        const updatedInventory = [...prev];
-        const existingItem = updatedInventory.find(
-          (inventoryItem) => inventoryItem.address === item.address
-        );
-        if (existingItem) {
-          existingItem.amount += amount;
-        } else {
-          updatedInventory.push({ ...item, amount });
-        }
-        return updatedInventory;
-      });
+      const data = await fetchData(craftTags, true);
+      await InitializeCharacter(data);
     } catch (error) {
       console.error("Error unequipping item:", error);
     } finally {
@@ -181,23 +184,26 @@ const BodyTab = () => {
             ({
               "/json": "/images",
               ".json": ".png",
-              localhost: "192.168.100.174",
+              localhost: process.env.NEXT_PUBLIC_APIURL?.includes("eboy")
+                ? process.env.NEXT_PUBLIC_APIURL.split("//")[1].split("/")[0]
+                : process.env.NEXT_PUBLIC_APIURL?.split("//")[1].split(":")[0],
             }[match])
         );
+        setUri(`${character.source.params.uri}?t=${Date.now()}`);
         setInitialCharacter(character);
 
-        if (character.equipments.length > 0) {
-          const updatedInventory = [
-            ...currInventory,
-            ...character.equipments,
-          ].reduce((acc, current) => {
-            if (!acc.find((item) => item.address === current.address)) {
-              acc.push(current);
-            }
-            return acc;
-          }, []);
-          setInventoryData(updatedInventory);
+        const updatedInventory = [
+          ...currInventory,
+          ...(character?.equipments || []),
+        ].reduce((acc, current) => {
+          if (!acc.find((item) => item.address === current.address)) {
+            acc.push(current);
+          }
+          return acc;
+        }, []);
+        setInventoryData(updatedInventory);
 
+        if (character.equipments.length > 0) {
           const equipped = character.equipments.reduce((acc, item) => {
             const inventoryItem = updatedInventory.find(
               (invItem) => invItem.address === item.address
@@ -227,13 +233,7 @@ const BodyTab = () => {
       ) : (
         <div className="flex flex-col items-center justify-center">
           <div className="border-2 border-[#e7cb5f] rounded-lg w-[335px] h-[335px] bg-black my-5 relative">
-            {InitialCharacter?.source?.params?.uri && (
-              <img
-                src={InitialCharacter.source.params.uri}
-                alt="fur"
-                className="absolute z-0"
-              />
-            )}
+            {uri && <img src={uri} alt="Character" className="absolute z-0" />}
             {Object.entries(equippedItems).map(([part, item]) =>
               item ? (
                 <img
@@ -250,7 +250,7 @@ const BodyTab = () => {
               className="w-[150px] m-5 slelector"
               defaultSelectedKeys={["Fur"]}
             >
-              {craftTags.map((tag) => (
+              {craftTags?.map((tag) => (
                 <SelectItem
                   key={tag}
                   style={{ color: "black" }}
@@ -261,13 +261,13 @@ const BodyTab = () => {
               ))}
             </Select>
           </div>
-          {enrichedBodyData.length === 0 ? (
+          {enrichedBodyData?.length === 0 ? (
             <p className="text-gray-400 text-sm text-center py-5 bg-black w-full">
               No data to show.
             </p>
           ) : (
             <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 py-3 bg-black w-full p-4">
-              {enrichedBodyData.map((item, index) => (
+              {enrichedBodyData?.map((item, index) => (
                 <NftCard
                   key={index}
                   name={item.name}
@@ -283,13 +283,21 @@ const BodyTab = () => {
                     loading ||
                     item.amount === 0 ||
                     (equipmentLoading.name === item.name &&
-                      equipmentLoading.status)
+                      equipmentLoading.status) ||
+                    (equippedItems[item.tags[0]]?.address &&
+                      equippedItems[item.tags[0]]?.address !== item.address)
                   }
                   loading={equipmentLoading}
                   buttonText={
                     equippedItems[item.tags[0]]?.address === item.address
                       ? "Unequip"
                       : "Equip"
+                  }
+                  btnInfo={
+                    equippedItems[item.tags[0]]?.address &&
+                    equippedItems[item.tags[0]]?.address !== item.address
+                      ? "Unequip the current item to equip this one"
+                      : ""
                   }
                   btnClick={async () => {
                     if (equippedItems[item.tags[0]]?.address === item.address) {

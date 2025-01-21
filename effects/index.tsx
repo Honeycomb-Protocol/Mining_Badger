@@ -10,16 +10,17 @@ import { useWallet } from "@solana/wallet-adapter-react";
 
 import Utils from "@/lib/utils";
 import { useHoneycomb } from "../hooks";
+import { useMetakeep } from "@/context/metakeep-context";
 
 export default function Effects() {
-  const { resetCache, getMetakeepCache } = Utils();
+  const { resetCache } = Utils();
   const pathname = usePathname();
   const router = useRouter();
   const { logout } = useHoneycomb();
-  const { user, authenticated,ready } = usePrivy();
+  const { user, authenticated, ready } = usePrivy();
   const { currentUser, currentProfile, currentWallet } = useHoneycombInfo();
   const { authToken, logout: HoneycombLogout } = useHoneycombAuth();
-  const metakeepCache = getMetakeepCache();
+  const { metakeepCache } = useMetakeep();
   const wallet = useWallet();
 
   useEffect(() => {
@@ -39,8 +40,11 @@ export default function Effects() {
       currentUser &&
       currentProfile &&
       (wallet?.connected ||
-        metakeepCache?.connected ||
-        (authenticated && ready && user?.wallet?.address && currentWallet?.connected))
+        (metakeepCache?.connected && metakeepCache?.publicKey) ||
+        (authenticated &&
+          ready &&
+          user?.wallet?.address &&
+          currentWallet?.connected))
     ) {
       if (
         pathname === "/create-profile" ||

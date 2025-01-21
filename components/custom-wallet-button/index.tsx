@@ -1,11 +1,12 @@
 import { toast } from "react-toastify";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useLogout, usePrivy, useSolanaWallets } from "@privy-io/react-auth";
 import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
+import { useLogout, usePrivy, useSolanaWallets } from "@privy-io/react-auth";
 
 import Utils from "@/lib/utils";
 import { useHoneycomb } from "@/hooks";
+import { useMetakeep } from "@/context/metakeep-context";
 
 const CustomWalletConnectButton = () => {
   const router = useRouter();
@@ -15,9 +16,8 @@ const CustomWalletConnectButton = () => {
   const { logout } = useLogout();
   const { authenticated, user } = usePrivy();
   const { logout: HoneycombAuthLogout } = useHoneycombAuth();
-  const { getMetakeepCache, setMetakeepCache, resetCache } = Utils();
-
-  const metakeepCache = getMetakeepCache();
+  const { resetCache } = Utils();
+  const { metakeepCache, clearMetakeepCache } = useMetakeep();
 
   return (
     <div className="flex flex-col items-center relative">
@@ -67,15 +67,11 @@ const CustomWalletConnectButton = () => {
               if (authenticated && user?.wallet?.address) {
                 await logout();
                 wallets[0].disconnect();
-              } else {
-                setMetakeepCache({
-                  email: null,
-                  publicKey: null,
-                });
+              } else if (metakeepCache?.publicKey) {
+                clearMetakeepCache();
               }
               await honeyLogout();
               await HoneycombAuthLogout();
-
               resetCache();
               toast.success("Logged out successfully");
               router.push("/");

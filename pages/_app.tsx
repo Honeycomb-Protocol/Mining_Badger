@@ -20,6 +20,7 @@ import Button from "@/components/common/button";
 import WalletContextProvider from "@/components/wallet-context-provider";
 import HoneycombProfilesWrapper from "@/wrapper/HoneycombProfilesWrapper";
 import PrivyProviderWrapper from "@/components/privy-provider";
+import { MetakeepProvider } from "@/context/metakeep-context";
 
 // const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
@@ -65,32 +66,34 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WalletContextProvider>
       <PrivyProviderWrapper>
-        <HoneycombProfilesWrapper>
-          <GateWayCivic>
-            <Effects />
-            {/* <main className={k2d.className}> */}
-            <main>
-              <NextUIProvider>
-                <Header />
-                <CheckConnection>
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                  />
-                  <Component {...pageProps} />
-                </CheckConnection>
-              </NextUIProvider>
-            </main>
-          </GateWayCivic>
-        </HoneycombProfilesWrapper>
+        <MetakeepProvider>
+          <HoneycombProfilesWrapper>
+            <GateWayCivic>
+              <Effects />
+              {/* <main className={k2d.className}> */}
+              <main>
+                <NextUIProvider>
+                  <Header />
+                  <CheckConnection>
+                    <ToastContainer
+                      position="top-right"
+                      autoClose={5000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                      theme="light"
+                    />
+                    <Component {...pageProps} />
+                  </CheckConnection>
+                </NextUIProvider>
+              </main>
+            </GateWayCivic>
+          </HoneycombProfilesWrapper>
+        </MetakeepProvider>
       </PrivyProviderWrapper>
     </WalletContextProvider>
   );
