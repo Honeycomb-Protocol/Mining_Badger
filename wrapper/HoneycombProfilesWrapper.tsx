@@ -15,6 +15,18 @@ const HoneycombProfilesWrapper = ({ children }) => {
   const { metakeepCache } = useMetakeep();
 
   useEffect(() => {
+    const handleDisconnect = () => {
+      setCurrentWallet(null);
+    };
+    //@ts-ignore
+    wallet?.adapter?.on("disconnect", handleDisconnect);
+    return () => {
+      //@ts-ignore
+      wallet?.adapter?.off("disconnect", handleDisconnect);
+    };
+  }, [wallet]);
+
+  useEffect(() => {
     (async () => {
       if (wallet?.publicKey) {
         setCurrentWallet(wallet);
