@@ -120,7 +120,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 loading={loading}
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
-                  craftment?.lvl_req > userLevelInfo?.level ||
+                  // craftment?.lvl_req > userLevelInfo?.level ||
                   !craftment?.canCraft
                 }
               />

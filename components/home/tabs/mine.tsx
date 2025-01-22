@@ -107,7 +107,7 @@ const MineTab = () => {
               }
               btnDisabled={
                 loading.name === data?.name ||
-                userLevelInfo?.level < data?.lvl_req ||
+                // userLevelInfo?.level < data?.lvl_req ||
                 !inventory?.some((e) => e.symbol === "BRP")
               }
               btnClick={async () => {
