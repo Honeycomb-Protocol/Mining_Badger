@@ -24,7 +24,10 @@ const CraftComponent = ({ tag }: { tag: string }) => {
     if (!currentWallet?.publicKey) return;
     const fetchData = async () => {
       setDataLoading(true);
-      if (craftData?.length === 0 || (tag && craftData[0]?.tag !== tag)) {
+      if (
+        craftData?.length === 0 ||
+        (tag && craftData && craftData[0]?.tag !== tag)
+      ) {
         const res = await fetchCraftData(tag, setDataLoading);
         setCraftData(res);
       }

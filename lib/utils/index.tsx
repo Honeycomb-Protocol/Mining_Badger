@@ -70,12 +70,6 @@ const Utils = () => {
     })();
   }, [currentProfile?.platformData.xp]);
 
-  // TODO: Do it later.
-
-  // const { authLoader } = useSelector(
-  //   (state: RootState) => state.auth
-  // );
-
   const renderHomeTabComponents = async (component: string) => {
     switch (component) {
       case "Shop":
@@ -202,11 +196,9 @@ const Utils = () => {
           lutAddresses: LUT_ADDRESSES,
           authority: currentWallet?.publicKey.toString(),
         });
-
         const transactions = txHash.map((tx) =>
           VersionedTransaction.deserialize(base58.decode(tx))
         );
-
         let signedTransactions; //@ts-ignore
         if (currentWallet?.address && currentWallet?.address !== "") {
           signedTransactions = await Promise.all(
@@ -219,7 +211,6 @@ const Utils = () => {
             transactions
           );
         }
-
         const signatures = await Promise.all(
           signedTransactions.map(async (transaction) => {
             try {
@@ -519,7 +510,7 @@ const Utils = () => {
         true,
         setDataLoading
       );
-      await apiCallDelay(2000);
+      // await apiCallDelay(2000);
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource crafted successfully`);
     } catch (err: any) {

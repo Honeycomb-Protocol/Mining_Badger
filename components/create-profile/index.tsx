@@ -106,7 +106,7 @@ const CreateProfilePage = () => {
                 );
                 setLoading(false);
                 if (data.success) {
-                  toast.success(data.message || "Profile created successfully");
+                  toast.success(data.message || "User & Profile created successfully");
                   return router.push("/home");
                 } else {
                   return toast.error(

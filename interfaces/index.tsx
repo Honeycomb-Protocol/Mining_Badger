@@ -168,6 +168,10 @@ export type ProxyAdapter = {
     transaction: T[],
     reason?: string
   ): Promise<T[]>;
+  signAllTransactions?<T extends Transaction | VersionedTransaction>(
+    transaction: T[],
+    reason?: string
+  ): Promise<T[]>;
   signMessage?(message: Uint8Array, reason?: string): Promise<Uint8Array>;
   sendTransaction?(transaction: Transaction): Promise<string>;
 };

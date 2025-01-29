@@ -69,7 +69,7 @@ const RefineTab = () => {
         true,
         dataLoading
       );
-      await apiCallDelay(2000);
+      // await apiCallDelay(2000);
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource refined successfully`);
     } catch (err: any) {

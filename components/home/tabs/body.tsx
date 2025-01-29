@@ -9,7 +9,7 @@ import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils from "@/lib/utils";
-import { API_URL } from "@/config/config";
+import { API_URL, LUT_ADDRESSES } from "@/config/config";
 import { ResourceType } from "@/interfaces";
 import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
@@ -140,7 +140,7 @@ const BodyTab = () => {
         characterAddress: InitialCharacter?.address,
         resource: item?.address,
         owner: currentWallet.publicKey.toString(),
-        lutAddresses: [process.env.NEXT_PUBLIC_LUTADDRESSES!],
+        lutAddresses: LUT_ADDRESSES,
         amount: String(amount),
       });
 
@@ -248,7 +248,7 @@ const BodyTab = () => {
           <div className="flex justify-end w-full bg-black mt-5">
             <Select
               className="w-[150px] m-5 slelector"
-              defaultSelectedKeys={["Fur"]}
+              defaultSelectedKeys={[currentTag]}
             >
               {craftTags?.map((tag) => (
                 <SelectItem

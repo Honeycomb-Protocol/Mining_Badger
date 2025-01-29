@@ -1,7 +1,7 @@
 import base58 from "bs58";
 import { MetaKeep } from "metakeep";
 import { PublicKey } from "@solana/web3.js";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { connection } from "@/config/config";
 
@@ -10,13 +10,14 @@ interface ProxyAdapter {
   publicKey: PublicKey;
   signMessage: (message: Uint8Array, reason?: string) => Promise<Buffer>;
   signTransaction: (tx: any, reason?: string) => Promise<any>;
+  signAllTransactions: (txs: any[], reason?: string) => Promise<any[]>;
   sendTransaction: (tx: any) => Promise<any>;
 }
 
 const MetakeepContext = createContext<{
   metakeepCache: ProxyAdapter | null;
   setMetakeepCache: (user: { publicKey: string; email: string }) => void;
-  clearMetakeepCache: () => void; // New function to clear the cache
+  clearMetakeepCache: () => void;
 }>({
   metakeepCache: null,
   setMetakeepCache: () => {},
@@ -32,6 +33,15 @@ export const MetakeepProvider = ({
     null
   );
 
+  const saveToLocalStorage = (key: string, value: any) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const loadFromLocalStorage = (key: string) => {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  };
+
   const setMetakeepCache = (user: { publicKey: string; email: string }) => {
     const sdk = new MetaKeep({
       appId: process.env.NEXT_PUBLIC_METAKEEP_APP_ID!,
@@ -46,7 +56,7 @@ export const MetakeepProvider = ({
       signMessage: async (message: Uint8Array, reason?: string) => {
         const { signature } = await sdk.signMessage(
           base58.encode(message),
-          reason || "Sign this message"
+          reason || "Sign this message for login"
         );
         return Buffer.from(signature.slice(2), "hex");
       },
@@ -60,6 +70,22 @@ export const MetakeepProvider = ({
           Buffer.from(transactionResponse?.signature.slice(2), "hex")
         );
         return tx;
+      },
+      signAllTransactions: async (txs: any[], reason?: string) => {
+        const signedTransactions = await Promise.all(
+          txs.map(async (tx) => {
+            const transactionResponse = await sdk.signTransaction(
+              tx,
+              reason || "Sign this transaction"
+            );
+            tx.addSignature(
+              new PublicKey(user.publicKey),
+              Buffer.from(transactionResponse?.signature.slice(2), "hex")
+            );
+            return tx;
+          })
+        );
+        return signedTransactions;
       },
       sendTransaction: async (tx: any) => {
         const transactionResponse = await sdk.signTransaction(
@@ -81,12 +107,24 @@ export const MetakeepProvider = ({
       },
     };
 
+    saveToLocalStorage("metakeepUser", {
+      publicKey: user.publicKey,
+      email: user.email,
+    });
     setMetakeepCacheState(proxyAdapter);
   };
 
   const clearMetakeepCache = () => {
-    setMetakeepCacheState(null); // Clear the state
+    setMetakeepCacheState(null);
+    localStorage.removeItem("metakeepUser");
   };
+
+  useEffect(() => {
+    const storedUser = loadFromLocalStorage("metakeepUser");
+    if (storedUser) {
+      setMetakeepCache(storedUser);
+    }
+  }, []);
 
   return (
     <MetakeepContext.Provider
