@@ -58,17 +58,17 @@ const Utils = () => {
     (async () => {
       let data = await getCache("userInfo");
       if (
-        currentProfile?.platformData.xp &&
+        currentProfile?.platformData?.xp &&
         (data?.result?.length === 0 || !data)
       ) {
         await getUserLevelInfo(
-          Number(currentProfile.platformData.xp),
+          Number(currentProfile?.platformData?.xp),
           false,
           () => {}
         );
       }
     })();
-  }, [currentProfile?.platformData.xp]);
+  }, [currentProfile?.platformData?.xp]);
 
   const renderHomeTabComponents = async (component: string) => {
     switch (component) {
@@ -506,7 +506,7 @@ const Utils = () => {
       await fetchInventoryData(ResourceType.ALL, setDataLoading, true);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       await getUserLevelInfo(
-        Number(currentProfile.platformData.xp),
+        Number(currentProfile?.platformData?.xp),
         true,
         setDataLoading
       );
