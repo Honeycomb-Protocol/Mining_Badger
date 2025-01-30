@@ -8,7 +8,7 @@ import { connection } from "@/config/config";
 interface ProxyAdapter {
   connected: boolean;
   publicKey: PublicKey;
-  signMessage: (message: Uint8Array, reason?: string) => Promise<Buffer>;
+  signMessage: (message: Uint8Array, reason?: string) => Promise<Uint8Array>;
   signTransaction: (tx: any, reason?: string) => Promise<any>;
   signAllTransactions: (txs: any[], reason?: string) => Promise<any[]>;
   sendTransaction: (tx: any) => Promise<any>;
@@ -54,11 +54,23 @@ export const MetakeepProvider = ({
       connected: true,
       publicKey: new PublicKey(user.publicKey),
       signMessage: async (message: Uint8Array, reason?: string) => {
-        const { signature } = await sdk.signMessage(
-          base58.encode(message),
-          reason || "Sign this message for login"
-        );
-        return Buffer.from(signature.slice(2), "hex");
+        return new Promise(async (resolve, reject) => {
+          try {
+            const decodedMessage = new TextDecoder().decode(message);
+            const response = await sdk.signMessage(
+              decodedMessage,
+              reason || "Sign this message for login"
+            );
+            let signatureBytes: Uint8Array;
+            signatureBytes = Uint8Array.from(
+              Buffer.from(response.signature.slice(2), "hex")
+            );
+            resolve(signatureBytes);
+          } catch (error) {
+            console.error("🚨 Error signing message:", error);
+            reject(error);
+          }
+        });
       },
       signTransaction: async (tx: any, reason?: string) => {
         const transactionResponse = await sdk.signTransaction(
