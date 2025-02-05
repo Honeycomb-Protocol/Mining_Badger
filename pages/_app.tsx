@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 // import { K2D } from "next/font/google";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { NextUIProvider } from "@nextui-org/react";
+import { NextUIProvider, Tooltip } from "@nextui-org/react";
 import {
   GatewayProvider,
   GatewayStatus,
@@ -35,7 +35,7 @@ const GateWayCivic = ({ children }) => {
           "processed"
         )
       }
-      cluster="devnet"
+      // cluster="devnet"
       wallet={currentWallet}
       gatekeeperNetwork={new PublicKey(GATE_NETWORK)}
     >
@@ -47,20 +47,24 @@ const GateWayCivic = ({ children }) => {
 export const Footer = () => {
   const { requestGatewayToken, gatewayStatus } = useGateway();
   return (
-    <div className="text-xs flex justify-between items-center">
-      <div>
-        <p>Prove your identity through civic.</p>
-        <p className="text-yellow-500">
-          Make sure to have SOL.
-        </p>{" "}
+    <Tooltip
+      content={"Civic pass will be enabled once we are live on mainnet"}
+      className="bg-[#1D1D1D]"
+    >
+      <div className="text-xs flex justify-between items-center">
+        <div>
+          <p>Prove your identity through civic.</p>
+          <p className="text-yellow-500">Make sure to have SOL.</p>{" "}
+        </div>
+        <Button
+          btnText={GatewayStatus[gatewayStatus]}
+          onClick={requestGatewayToken}
+          loading={false}
+          styles="text-[10px]"
+          disable={true}
+        />
       </div>
-      <Button
-        btnText={GatewayStatus[gatewayStatus]}
-        onClick={requestGatewayToken}
-        loading={false}
-        styles="text-[10px]"
-      />
-    </div>
+    </Tooltip>
   );
 };
 

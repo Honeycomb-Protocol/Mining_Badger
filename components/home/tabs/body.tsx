@@ -105,6 +105,15 @@ const BodyTab = () => {
         const transaction = VersionedTransaction.deserialize(
           base58.decode(response.data.result.tx)
         );
+        const userBalance = await connection.getBalance(
+          currentWallet.publicKey
+        );
+        const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+        const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+        if (userBalance < LOW_BALANCE_THRESHOLD) {
+          setDataLoading(false);
+          throw new Error("Transaction Simulation Failed: Insufficient funds.");
+        }
         const signedTransaction = await currentWallet.signTransaction(
           transaction
         );
@@ -113,7 +122,7 @@ const BodyTab = () => {
           txs: base58.encode(signedTransaction.serialize()),
           blockhash: response.data.result.blockhash,
           lastValidBlockHeight: response.data.result.lastValidBlockHeight,
-          options: { commitment: "processed", skipPreflight: true },
+          options: { commitment: "processed", skipPreflight: false },
         });
       }
       const data = await fetchData(craftTags, true);
@@ -143,8 +152,14 @@ const BodyTab = () => {
         lutAddresses: LUT_ADDRESSES,
         amount: String(amount),
       });
-
       const transaction = VersionedTransaction.deserialize(base58.decode(tx));
+      const userBalance = await connection.getBalance(currentWallet.publicKey);
+      const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+      const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+      if (userBalance < LOW_BALANCE_THRESHOLD) {
+        setDataLoading(false);
+        throw new Error("Transaction Simulation Failed: Insufficient funds.");
+      }
       const signedTransaction = await currentWallet.signTransaction(
         transaction
       );
@@ -153,7 +168,7 @@ const BodyTab = () => {
         txs: base58.encode(signedTransaction.serialize()),
         blockhash,
         lastValidBlockHeight,
-        options: { commitment: "processed", skipPreflight: true },
+        options: { commitment: "processed", skipPreflight: false },
       });
 
       setEquippedItems((prev) => ({ ...prev, [item?.tags[0]]: null }));

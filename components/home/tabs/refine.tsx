@@ -11,12 +11,8 @@ import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const RefineTab = () => {
   const dispatch = useDispatch();
-  const {
-    fetchRefinedResoucesData,
-    userLevelInfo,
-    fetchInventoryData,
-    apiCallDelay,
-  } = Utils();
+  const { fetchRefinedResoucesData, userLevelInfo, fetchInventoryData } =
+    Utils();
   const { currentWallet } = useHoneycombInfo();
   const [inventory, setInventory] = useState([]);
   const [refineData, setRefineData] = useState([]);
@@ -49,6 +45,7 @@ const RefineTab = () => {
         }
       }
       prevLoadingRef.current = loading?.status;
+      setDataLoading(false);
     })();
   }, [
     currentWallet?.publicKey,
@@ -74,7 +71,9 @@ const RefineTab = () => {
       toast.success(`${name} Resource refined successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
-      toast.error(err.response?.data?.message || "Something went wrong");
+      toast.error(
+        err.response?.data?.message || err.toString() || "Something went wrong"
+      );
     }
   };
 

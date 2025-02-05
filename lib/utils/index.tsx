@@ -15,7 +15,7 @@ import BodyTab from "@/components/home/tabs/body";
 import { RootState } from "@/store";
 import LevelsData from "../../data/level-data.json";
 import { Resource, ResourceType } from "@/interfaces";
-import { API_URL, LUT_ADDRESSES } from "@/config/config";
+import { API_URL, LUT_ADDRESSES, connection } from "@/config/config";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 let cache = {
@@ -201,12 +201,34 @@ const Utils = () => {
         );
         let signedTransactions; //@ts-ignore
         if (currentWallet?.address && currentWallet?.address !== "") {
+          const userBalance = await connection.getBalance(
+            currentWallet.publicKey
+          );
+          const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+          const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+
+          if (userBalance < LOW_BALANCE_THRESHOLD) {
+            setDataLoading(false);
+            throw new Error(
+              "Transaction Simulation Failed: Insufficient funds."
+            );
+          }
           signedTransactions = await Promise.all(
-            transactions?.map((tx) => {
-              return currentWallet?.signTransaction(tx);
-            })
+            transactions.map((tx) => currentWallet?.signTransaction(tx))
           );
         } else {
+          const userBalance = await connection.getBalance(
+            currentWallet.publicKey
+          );
+          const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+          const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+
+          if (userBalance < LOW_BALANCE_THRESHOLD) {
+            setDataLoading(false);
+            throw new Error(
+              "Transaction Simulation Failed: Insufficient funds."
+            );
+          }
           signedTransactions = await currentWallet.signAllTransactions(
             transactions
           );
@@ -215,14 +237,13 @@ const Utils = () => {
           signedTransactions.map(async (transaction) => {
             try {
               const serializedTx = base58.encode(transaction.serialize());
-
               const signature = await edgeClient.sendBulkTransactions({
                 txs: serializedTx,
                 blockhash,
                 lastValidBlockHeight,
                 options: {
                   commitment: "processed",
-                  skipPreflight: true,
+                  skipPreflight: false,
                 },
               });
               return signature;
@@ -254,12 +275,13 @@ const Utils = () => {
         return craftData?.result;
       }
     } catch (error) {
-      toast.error(
+      setDataLoading(false);
+      throw new Error(
         error?.response?.data?.message ||
           error?.message ||
+          error ||
           "Something went wrong"
       );
-      setDataLoading(false);
     }
   };
 
@@ -278,9 +300,7 @@ const Utils = () => {
       if (!isLoaded) {
         setDataLoading(true);
       }
-
       let data = await getCache("inventoryData");
-
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
         if (name === ResourceType.ALL) {
@@ -317,9 +337,7 @@ const Utils = () => {
   ) => {
     try {
       setDataLoading(true);
-
       let data = await getCache("refineData");
-
       if (recipe) {
         const {
           createInitCookingProcessTransactions: {
@@ -339,29 +357,49 @@ const Utils = () => {
 
         let signedTransactions; //@ts-ignore
         if (currentWallet?.address && currentWallet?.address !== "") {
+          const userBalance = await connection.getBalance(
+            currentWallet.publicKey
+          );
+          const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+          const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+
+          if (userBalance < LOW_BALANCE_THRESHOLD) {
+            setDataLoading(false);
+            throw new Error(
+              "Transaction Simulation Failed: Insufficient funds."
+            );
+          }
           signedTransactions = await Promise.all(
-            transactions?.map((tx) => {
-              return currentWallet?.signTransaction(tx);
-            })
+            transactions.map((tx) => currentWallet?.signTransaction(tx))
           );
         } else {
+          const userBalance = await connection.getBalance(
+            currentWallet.publicKey
+          );
+          const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+          const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+
+          if (userBalance < LOW_BALANCE_THRESHOLD) {
+            setDataLoading(false);
+            throw new Error(
+              "Transaction Simulation Failed: Insufficient funds."
+            );
+          }
           signedTransactions = await currentWallet.signAllTransactions(
             transactions
           );
         }
-
         const signatures = await Promise.all(
           signedTransactions?.map(async (transaction) => {
             try {
               const serializedTx = base58.encode(transaction.serialize());
-
               const signature = await edgeClient.sendBulkTransactions({
                 txs: serializedTx,
                 blockhash,
                 lastValidBlockHeight,
                 options: {
                   commitment: "processed",
-                  skipPreflight: true,
+                  skipPreflight: false,
                 },
               });
               return signature;
@@ -372,13 +410,11 @@ const Utils = () => {
           })
         );
         const successfulSignatures = signatures.filter((sig) => sig !== null);
-
         if (!successfulSignatures.length) {
           console.error("Error minting resource");
           return;
         }
       }
-
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
         return data?.result;
@@ -389,12 +425,13 @@ const Utils = () => {
         return data?.result;
       }
     } catch (error) {
-      toast.error(
+      setDataLoading(false);
+      throw new Error(
         error?.response?.data?.message ||
           error?.message ||
+          error ||
           "Something went wrong"
       );
-      setDataLoading(false);
     }
   };
 
@@ -515,7 +552,9 @@ const Utils = () => {
       toast.success(`${name} Resource crafted successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
-      toast.error(err.response?.data?.message || "Something went wrong");
+      toast.error(
+        err.response?.data?.message || err.toString() || "Something went wrong"
+      );
     }
   };
 
