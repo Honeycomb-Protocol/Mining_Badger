@@ -9,7 +9,7 @@ import NftCard from "@/components/common/nft-card";
 const CraftComponent = ({ tag }: { tag: string }) => {
   const { fetchCraftData, userLevelInfo, fetchInventoryData, craftResource } =
     Utils();
-  const { currentWallet } = useHoneycombInfo();
+  const { currentWallet, currentUser } = useHoneycombInfo();
   const [craftData, setCraftData] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [enrichedCraftData, setEnrichedCraftData] = useState([]);
@@ -87,6 +87,15 @@ const CraftComponent = ({ tag }: { tag: string }) => {
         enrichedCraftData
           ?.sort((a, b) => a.lvl_req - b.lvl_req)
           ?.map((craftment, index) => {
+            const hasCivicPass = currentUser?.socialInfo?.civic?.map((item) => {
+              if (
+                item?.gatekeeperNetwork.toString() ===
+                  process.env.NEXT_PUBLIC_GATEKEEPER_NETWORK &&
+                currentUser?.wallets?.wallets[item?.walletIndex]
+              ) {
+                return item;
+              }
+            });
             return (
               <NftCard
                 divStyle="bg-black shadow-black shadow-xl rounded-xl p-2"
@@ -121,10 +130,18 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                   );
                 }}
                 loading={loading}
+                btnInfo={
+                  currentUser?.socialInfo?.civic?.length === 0 ||
+                  hasCivicPass?.length === 0
+                    ? "Prove your identity through civic to enable crafting."
+                    : ""
+                }
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
                   // craftment?.lvl_req > userLevelInfo?.level ||
-                  !craftment?.canCraft
+                  !craftment?.canCraft ||
+                  currentUser?.socialInfo?.civic?.length === 0 ||
+                  hasCivicPass?.length === 0
                 }
               />
             );

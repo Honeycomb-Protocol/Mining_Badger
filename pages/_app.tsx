@@ -30,7 +30,10 @@ const GateWayCivic = ({ children }) => {
   return (
     <GatewayProvider
       connection={
-        new Connection("https://rpc.magicblock.app/devnet/", "processed")
+        new Connection(
+          "https://mainnet.helius-rpc.com/?api-key=f0c675c2-dc2a-4ea2-b09f-c080e4205347",
+          "processed"
+        )
       }
       cluster="devnet"
       wallet={currentWallet}
@@ -43,13 +46,12 @@ const GateWayCivic = ({ children }) => {
 
 export const Footer = () => {
   const { requestGatewayToken, gatewayStatus } = useGateway();
-
   return (
     <div className="text-xs flex justify-between items-center">
       <div>
         <p>Prove your identity through civic.</p>
         <p className="text-yellow-500">
-          Make sure to have ( SOL ) on devnet.
+          Make sure to have SOL.
         </p>{" "}
       </div>
       <Button

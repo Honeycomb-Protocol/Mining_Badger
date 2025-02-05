@@ -1,4 +1,3 @@
-import base58 from "bs58";
 import { MetaKeep } from "metakeep";
 import { PublicKey } from "@solana/web3.js";
 import React, { createContext, useContext, useEffect, useState } from "react";

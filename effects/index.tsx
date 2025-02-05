@@ -5,12 +5,14 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   useHoneycombAuth,
   useHoneycombInfo,
+  useHoneycombSocials,
 } from "@honeycomb-protocol/profile-hooks";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 import Utils from "@/lib/utils";
 import { useHoneycomb } from "../hooks";
 import { useMetakeep } from "@/context/metakeep-context";
+import { useGateway } from "@civic/solana-gateway-react";
 
 export default function Effects() {
   const { resetCache } = Utils();
@@ -18,8 +20,10 @@ export default function Effects() {
   const router = useRouter();
   const { logout } = useHoneycomb();
   const { user, authenticated, ready } = usePrivy();
+  const { gatewayToken, gatewayStatus } = useGateway();
   const { currentUser, currentProfile, currentWallet } = useHoneycombInfo();
   const { authToken, logout: HoneycombLogout } = useHoneycombAuth();
+  const { populateCivicForUserWallets } = useHoneycombSocials();
   const { metakeepCache } = useMetakeep();
   const wallet = useWallet();
 
@@ -63,6 +67,28 @@ export default function Effects() {
     metakeepCache?.connected,
     authenticated && ready && user?.wallet?.address,
   ]);
+
+  useEffect(() => {
+    (async () => {
+      const gatewayPub = process.env.NEXT_PUBLIC_GATEKEEPER_NETWORK!;
+      const userCivicPass = currentUser?.socialInfo.civic?.map((item) => {
+        if (
+          item?.gatekeeperNetwork.toString() === gatewayPub &&
+          currentUser?.wallets?.wallets[item?.walletIndex]
+        ) {
+          return item;
+        }
+      });
+      if (
+        gatewayToken?.gatekeeperNetworkAddress.toString() === gatewayPub &&
+        gatewayStatus === 9 &&
+        userCivicPass?.length === 0
+      ) {
+        //TODO: remove below comment on mainnet.
+        // await populateCivicForUserWallets({ populateCivic: true });
+      }
+    })();
+  }, [gatewayToken, gatewayStatus]);
 
   return <></>;
 }
