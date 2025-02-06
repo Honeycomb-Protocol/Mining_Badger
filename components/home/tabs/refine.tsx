@@ -134,6 +134,11 @@ const RefineTab = () => {
                   await refineResource(refinement.recipe, refinement.name);
                 }}
                 loading={loading}
+                btnInfo={
+                  !refinement?.canRefine
+                    ? "You don't have enough resources to refine this item."
+                    : ""
+                }
                 btnDisabled={
                   (loading.status && loading.name === refinement?.name) ||
                   // refinement?.lvl_req > userLevelInfo?.level ||

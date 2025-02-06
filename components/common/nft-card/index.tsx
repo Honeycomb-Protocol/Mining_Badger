@@ -41,11 +41,14 @@ const NftCard: React.FC<CardProps> = ({
 
   const materialsList = materials?.map((material, index) => {
     const uri = material?.uri.replace("htthttps://", "https://");
+
     return (
-      <div key={index} className="flex items-center justify-center mr-2">
-        <Image src={uri} alt={material?.name} width={20} height={20} />
-        <p className="text-xs text-gray-300 ml-1">x{material?.amount}</p>
-      </div>
+      <Tooltip content={material?.name} className="bg-[#1D1D1D]" key={index}>
+        <div className="flex items-center justify-center mr-2">
+          <Image src={uri} alt={material?.name} width={20} height={20} />
+          <p className="text-xs text-gray-300 ml-1">x{material?.amount}</p>
+        </div>
+      </Tooltip>
     );
   });
 
