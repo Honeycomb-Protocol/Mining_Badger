@@ -210,7 +210,7 @@ const Utils = () => {
           if (userBalance < LOW_BALANCE_THRESHOLD) {
             setDataLoading(false);
             throw new Error(
-              "Transaction Simulation Failed: Insufficient funds."
+              "You don't have enough SOL in your wallet to perform this transaction."
             );
           }
           signedTransactions = await Promise.all(
@@ -226,7 +226,7 @@ const Utils = () => {
           if (userBalance < LOW_BALANCE_THRESHOLD) {
             setDataLoading(false);
             throw new Error(
-              "Transaction Simulation Failed: Insufficient funds."
+              "You don't have enough SOL in your wallet to perform this transaction."
             );
           }
           signedTransactions = await currentWallet.signAllTransactions(
@@ -366,7 +366,7 @@ const Utils = () => {
           if (userBalance < LOW_BALANCE_THRESHOLD) {
             setDataLoading(false);
             throw new Error(
-              "Transaction Simulation Failed: Insufficient funds."
+              "You don't have enough SOL in your wallet to perform this transaction."
             );
           }
           signedTransactions = await Promise.all(
@@ -382,7 +382,7 @@ const Utils = () => {
           if (userBalance < LOW_BALANCE_THRESHOLD) {
             setDataLoading(false);
             throw new Error(
-              "Transaction Simulation Failed: Insufficient funds."
+              "You don't have enough SOL in your wallet to perform this transaction."
             );
           }
           signedTransactions = await currentWallet.signAllTransactions(

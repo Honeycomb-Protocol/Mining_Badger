@@ -112,7 +112,7 @@ const BodyTab = () => {
         const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
         if (userBalance < LOW_BALANCE_THRESHOLD) {
           setDataLoading(false);
-          throw new Error("Transaction Simulation Failed: Insufficient funds.");
+          throw new Error("You don't have enough SOL in your wallet to perform this transaction.");
         }
         const signedTransaction = await currentWallet.signTransaction(
           transaction
@@ -158,7 +158,7 @@ const BodyTab = () => {
       const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
       if (userBalance < LOW_BALANCE_THRESHOLD) {
         setDataLoading(false);
-        throw new Error("Transaction Simulation Failed: Insufficient funds.");
+        throw new Error("You don't have enough SOL in your wallet to perform this transaction.");
       }
       const signedTransaction = await currentWallet.signTransaction(
         transaction
