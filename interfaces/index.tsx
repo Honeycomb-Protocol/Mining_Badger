@@ -152,9 +152,9 @@ export type Dataset = {
 
 export enum ResourceType {
   ALL = "All",
-  ORE = "ORE",
+  ORE = "ORES",
   Pickaxe = "Pickaxe",
-  BAR = "BAR",
+  BAR = "BARS",
 }
 
 export type ProxyAdapter = {
