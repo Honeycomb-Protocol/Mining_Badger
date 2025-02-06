@@ -105,6 +105,11 @@ const MineTab = () => {
                   ? `User level ${data?.lvl_req} is required to mine this resource.`
                   : ""
               }
+              btnInfo={
+                !inventory?.some((e) => e.symbol === "BRP")
+                  ? "First claim Pickaxe from the shop to mine resources."
+                  : ""
+              }
               btnDisabled={
                 loading.name === data?.name ||
                 // userLevelInfo?.level < data?.lvl_req ||
