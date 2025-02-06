@@ -134,6 +134,8 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                   currentUser?.socialInfo?.civic?.length === 0 ||
                   hasCivicPass?.length === 0
                     ? "Prove your identity through civic to enable crafting."
+                    : !craftment?.canCraft
+                    ? "You don't have enough resources to craft this item."
                     : ""
                 }
                 btnDisabled={

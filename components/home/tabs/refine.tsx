@@ -136,7 +136,7 @@ const RefineTab = () => {
                 loading={loading}
                 btnInfo={
                   !refinement?.canRefine
-                    ? "You don't have enough resources to refine this item."
+                    ? "You don't have enough resources to refine this bar."
                     : ""
                 }
                 btnDisabled={
