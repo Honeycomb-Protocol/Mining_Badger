@@ -131,19 +131,21 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 }}
                 loading={loading}
                 btnInfo={
-                  currentUser?.socialInfo?.civic?.length === 0 ||
-                  hasCivicPass?.length === 0
-                    ? "Prove your identity through civic to enable crafting."
-                    : !craftment?.canCraft
+                  // currentUser?.socialInfo?.civic?.length === 0 ||
+                  // hasCivicPass?.length === 0
+                  //   ? "Prove your identity through civic to enable crafting."
+                  //   :
+                  !craftment?.canCraft
                     ? "You don't have enough resources to craft this item."
                     : ""
                 }
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
                   // craftment?.lvl_req > userLevelInfo?.level ||
-                  !craftment?.canCraft ||
-                  currentUser?.socialInfo?.civic?.length === 0 ||
-                  hasCivicPass?.length === 0
+                  !craftment?.canCraft
+                  // ||
+                  // currentUser?.socialInfo?.civic?.length === 0 ||
+                  // hasCivicPass?.length === 0
                 }
               />
             );
