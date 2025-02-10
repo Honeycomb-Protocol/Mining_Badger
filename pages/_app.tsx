@@ -24,16 +24,13 @@ import { MetakeepProvider } from "@/context/metakeep-context";
 
 // const k2d = K2D({ weight: "400", subsets: ["latin"] });
 
-const GateWayCivic = ({ children }) => {
+const CivicGateWay = ({ children }) => {
   const { currentWallet } = useHoneycombInfo();
 
   return (
     <GatewayProvider
       connection={
-        new Connection(
-          "https://mainnet.helius-rpc.com/?api-key=f0c675c2-dc2a-4ea2-b09f-c080e4205347",
-          "processed"
-        )
+        new Connection(process.env.NEXT_PUBLIC_MAIN_RPC!, "processed")
       }
       // cluster="devnet"
       wallet={currentWallet}
@@ -74,7 +71,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <PrivyProviderWrapper>
         <MetakeepProvider>
           <HoneycombProfilesWrapper>
-            <GateWayCivic>
+            <CivicGateWay>
               <Effects />
               {/* <main className={k2d.className}> */}
               <main>
@@ -97,7 +94,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   </CheckConnection>
                 </NextUIProvider>
               </main>
-            </GateWayCivic>
+            </CivicGateWay>
           </HoneycombProfilesWrapper>
         </MetakeepProvider>
       </PrivyProviderWrapper>
