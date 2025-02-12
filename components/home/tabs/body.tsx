@@ -1,6 +1,7 @@
 //@ts-nocheck
 import axios from "axios";
 import base58 from "bs58";
+import Image from "next/image";
 import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { VersionedTransaction } from "@solana/web3.js";
@@ -9,7 +10,7 @@ import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils from "@/lib/utils";
-import { API_URL, LUT_ADDRESSES } from "@/config/config";
+import { API_URL, connection, LUT_ADDRESSES } from "@/config/config";
 import { ResourceType } from "@/interfaces";
 import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
@@ -29,9 +30,18 @@ const BodyTab = () => {
   const [uri, setUri] = useState(null);
   const [equippedItems, setEquippedItems] = useState({});
   const [enrichedBodyData, setEnrichedBodyData] = useState([]);
+  const [equipments, setEquipments] = useState([]);
   const [InitialCharacter, setInitialCharacter] = useState<Character | null>(
     null
   );
+
+  useEffect(() => {
+    if (!currentWallet?.publicKey || !InitialCharacter) return;
+    setEquipments([
+      ...InitialCharacter?.equipments,
+      ...Object.values(InitialCharacter?.source?.params?.attributes),
+    ]);
+  }, [InitialCharacter]);
 
   const fetchData = async (tags, refreshInventory = false) => {
     try {
@@ -105,14 +115,16 @@ const BodyTab = () => {
         const transaction = VersionedTransaction.deserialize(
           base58.decode(response.data.result.tx)
         );
-        const userBalance = await connection.getBalance(
+        const userBalance = await connection?.getBalance(
           currentWallet.publicKey
         );
         const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
         const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
         if (userBalance < LOW_BALANCE_THRESHOLD) {
           setDataLoading(false);
-          throw new Error("You don't have enough SOL in your wallet to perform this transaction.");
+          throw new Error(
+            "You don't have enough SOL in your wallet to perform this transaction."
+          );
         }
         const signedTransaction = await currentWallet.signTransaction(
           transaction
@@ -153,12 +165,14 @@ const BodyTab = () => {
         amount: String(amount),
       });
       const transaction = VersionedTransaction.deserialize(base58.decode(tx));
-      const userBalance = await connection.getBalance(currentWallet.publicKey);
+      const userBalance = await connection?.getBalance(currentWallet.publicKey);
       const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
       const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
       if (userBalance < LOW_BALANCE_THRESHOLD) {
         setDataLoading(false);
-        throw new Error("You don't have enough SOL in your wallet to perform this transaction.");
+        throw new Error(
+          "You don't have enough SOL in your wallet to perform this transaction."
+        );
       }
       const signedTransaction = await currentWallet.signTransaction(
         transaction
@@ -259,6 +273,24 @@ const BodyTab = () => {
                 />
               ) : null
             )}
+          </div>
+          <div className="flex flex-wrap justify-center items-start">
+            {equipments?.map((item, index) => (
+              <div key={index} className="my-3 mx-2 text-center w-[75px]">
+                <div className="border-1 border-[#e7cb5f] rounded-lg h-[69px] bg-gray-900 relative">
+                  {item && (
+                    <Image
+                      src={
+                        item.uri.includes("assets") ? `/${item.uri}` : item.uri
+                      }
+                      alt={item.tags[0]}
+                      fill={true}
+                    />
+                  )}
+                </div>
+                <p className="text-xs mt-1">{item.name}</p>
+              </div>
+            ))}
           </div>
           <div className="flex justify-end w-full bg-black mt-5">
             <Select
