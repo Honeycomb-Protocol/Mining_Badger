@@ -141,7 +141,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 }
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
-                  // craftment?.lvl_req > userLevelInfo?.level ||
+                  craftment?.lvl_req > userLevelInfo?.level ||
                   !craftment?.canCraft
                   // ||
                   // currentUser?.socialInfo?.civic?.length === 0 ||

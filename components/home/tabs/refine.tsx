@@ -141,7 +141,7 @@ const RefineTab = () => {
                 }
                 btnDisabled={
                   (loading.status && loading.name === refinement?.name) ||
-                  // refinement?.lvl_req > userLevelInfo?.level ||
+                  refinement?.lvl_req > userLevelInfo?.level ||
                   !refinement?.canRefine
                 }
               />
