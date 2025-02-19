@@ -10,7 +10,7 @@ import LevelsRequiredModal from "../common/modal";
 
 const HomePage = () => {
   const { currentProfile } = useHoneycombInfo();
-  const { userLevelInfo } = Utils();
+  const { userInfo } = Utils();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -44,14 +44,12 @@ const HomePage = () => {
                 <p className="text-gray-500">Bronze Pickaxe</p>
               </div>
             </div>
-            <p className="text-gray-500 font-bold text-sm cursor-pointer bg-gray-900 px-2 py-1 rounded-md">
-              EDIT
-            </p>
+            <p className="text-gray-500 font-bold text-sm cursor-pointer bg-gray-900 px-2 py-1 rounded-md" />
           </div>
           <div className="flex justify-between px-2 mt-4">
             <p>Level</p>
             <p className="cursor-pointer" onClick={() => setVisible(true)}>
-              <span>{userLevelInfo?.level || 1}</span>{" "}
+              <span>{userInfo?.level || 1}</span>{" "}
               <span className="text-[#61BCEF] text-lg">Lv</span>
             </p>
           </div>
@@ -60,15 +58,14 @@ const HomePage = () => {
             <div className="flex justify-between items-center mb-1">
               <p>Experience</p>
               <p>
-                {userLevelInfo?.current_exp || 0} /{" "}
-                {userLevelInfo?.exp_req || 0}{" "}
+                {userInfo?.current_exp || 0} / {userInfo?.exp_req || 0}{" "}
                 <span className="text-[#FCC85D] text-lg">XP</span>
               </p>
             </div>
             <Progress
               size="md"
-              value={Number(userLevelInfo?.current_exp)}
-              maxValue={userLevelInfo?.exp_req}
+              value={Number(userInfo?.current_exp)}
+              maxValue={userInfo?.exp_req}
               color="warning"
               showValueLabel={false}
               classNames={{

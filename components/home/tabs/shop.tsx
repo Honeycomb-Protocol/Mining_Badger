@@ -11,12 +11,8 @@ import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const ShopTab = () => {
   const dispatch = useDispatch();
-  const {
-    userLevelInfo,
-    fetchShopResourcesData,
-    claimFaucet,
-    fetchInventoryData,
-  } = Utils();
+  const { userInfo, fetchShopResourcesData, claimFaucet, fetchInventoryData } =
+    Utils();
   const { currentWallet } = useHoneycombInfo();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
@@ -92,7 +88,7 @@ const ShopTab = () => {
               name={item?.name}
               picture={item?.uri}
               level={item?.lvl_req}
-              lock={userLevelInfo?.level < item?.lvl_req}
+              lock={userInfo?.level < item?.lvl_req}
               buttonText={item?.claimed ? "Claimed" : "Claim Axe"}
               imageWidth={150}
               imageHeight={150}
@@ -115,7 +111,7 @@ const ShopTab = () => {
               btnDisabled={
                 loading.name === item?.name ||
                 item?.claimed ||
-                userLevelInfo?.level < item?.lvl_req
+                userInfo?.level < item?.lvl_req
               }
               btnClick={async () => {
                 await claimResource(item?.address, item?.name);

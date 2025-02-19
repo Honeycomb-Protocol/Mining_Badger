@@ -7,7 +7,7 @@ import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
 
 const CraftComponent = ({ tag }: { tag: string }) => {
-  const { fetchCraftData, userLevelInfo, fetchInventoryData, craftResource } =
+  const { fetchCraftData, userInfo, fetchInventoryData, craftResource } =
     Utils();
   const { currentWallet, currentUser } = useHoneycombInfo();
   const [craftData, setCraftData] = useState([]);
@@ -115,7 +115,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 materials={craftment?.ingredients}
                 experience={craftment?.lvl_req}
                 resourceInfo={
-                  craftment?.lvl_req > userLevelInfo?.level
+                  craftment?.lvl_req > userInfo?.level
                     ? `User level ${craftment?.lvl_req} is required to craft this resource.`
                     : "You can craft this resource."
                 }
@@ -124,6 +124,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                     craftment?.recipe,
                     craftment?.name,
                     tag,
+                    craftment?.xp,
                     setLoading,
                     setDataLoading,
                     setCraftData
@@ -141,7 +142,7 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                 }
                 btnDisabled={
                   (loading.status && loading.name === craftment?.name) ||
-                  craftment?.lvl_req > userLevelInfo?.level ||
+                  craftment?.lvl_req > userInfo?.level ||
                   !craftment?.canCraft
                   // ||
                   // currentUser?.socialInfo?.civic?.length === 0 ||

@@ -1,6 +1,6 @@
 import axios from "axios";
 import base58 from "bs58";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { VersionedTransaction } from "@solana/web3.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +26,7 @@ let cache = {
   mineData: {},
   shopData: {},
   userInfo: null,
+  mirroredXP: null,
 };
 
 const setCache = (name: string, data: any) => {
@@ -45,6 +46,7 @@ const resetCache = () => {
     mineData: {},
     shopData: {},
     userInfo: null,
+    mirroredXP: null,
   };
 };
 
@@ -53,16 +55,32 @@ const Utils = () => {
   const { currentUser, currentProfile, currentWallet, edgeClient } =
     useHoneycombInfo();
   const inventoryState = useSelector((state: RootState) => state.inventory);
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const info = cache?.userInfo?.result;
+      if (info && info !== userInfo) {
+        setUserInfo(info);
+      }
+    };
+    fetchUserInfo();
+    const interval = setInterval(() => {
+      fetchUserInfo();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [cache?.userInfo?.result, userInfo]);
 
   useEffect(() => {
     (async () => {
       let data = await getCache("userInfo");
+      let mirroredXP = await getCache("mirroredXP");
       if (
         currentProfile?.platformData?.xp &&
-        (data?.result?.length === 0 || !data)
+        (!data?.result || data?.result?.length === 0 || !data)
       ) {
         await getUserLevelInfo(
-          Number(currentProfile?.platformData?.xp),
+          mirroredXP ? mirroredXP : Number(currentProfile?.platformData?.xp),
           false,
           () => {}
         );
@@ -128,7 +146,6 @@ const Utils = () => {
   ) => {
     try {
       let data = await getCache("userInfo");
-
       if (
         data?.result?.length > 0 &&
         !inventoryState?.refreshInventory &&
@@ -338,57 +355,16 @@ const Utils = () => {
     try {
       setDataLoading(true);
       let data = await getCache("refineData");
-      if (recipe) {
-        const {
-          createInitCookingProcessTransactions: {
-            blockhash,
-            lastValidBlockHeight,
-            transactions: txHash,
-          },
-        } = await edgeClient.createInitCookingProcessTransactions({
-          recipe: recipe,
-          lutAddresses: LUT_ADDRESSES,
-          authority: currentWallet?.publicKey.toString(),
-        });
 
-        const transactions = txHash.map((tx) =>
-          VersionedTransaction.deserialize(base58.decode(tx))
+      const sendTransactions = async (
+        transactions,
+        blockhash,
+        lastValidBlockHeight
+      ) => {
+        const signedTransactions = await Promise.all(
+          transactions.map((tx) => currentWallet?.signTransaction(tx))
         );
 
-        let signedTransactions; //@ts-ignore
-        if (currentWallet?.address && currentWallet?.address !== "") {
-          const userBalance = await connection.getBalance(
-            currentWallet.publicKey
-          );
-          const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
-          const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
-
-          if (userBalance < LOW_BALANCE_THRESHOLD) {
-            setDataLoading(false);
-            throw new Error(
-              "You don't have enough SOL in your wallet to perform this transaction."
-            );
-          }
-          signedTransactions = await Promise.all(
-            transactions.map((tx) => currentWallet?.signTransaction(tx))
-          );
-        } else {
-          const userBalance = await connection.getBalance(
-            currentWallet.publicKey
-          );
-          const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
-          const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
-
-          if (userBalance < LOW_BALANCE_THRESHOLD) {
-            setDataLoading(false);
-            throw new Error(
-              "You don't have enough SOL in your wallet to perform this transaction."
-            );
-          }
-          signedTransactions = await currentWallet.signAllTransactions(
-            transactions
-          );
-        }
         const signatures = await Promise.all(
           signedTransactions?.map(async (transaction) => {
             try {
@@ -409,12 +385,65 @@ const Utils = () => {
             }
           })
         );
-        const successfulSignatures = signatures.filter((sig) => sig !== null);
-        if (!successfulSignatures.length) {
-          console.error("Error minting resource");
-          return;
-        }
+        return signatures.filter((sig) => sig !== null);
+      };
+
+      if (recipe) {
+        const executeTransactionWithRetry = async (attempt = 3) => {
+          if (attempt <= 0) return [];
+          try {
+            const {
+              createInitCookingProcessTransactions: {
+                blockhash,
+                lastValidBlockHeight,
+                transactions: txHash,
+              },
+            } = await edgeClient.createInitCookingProcessTransactions({
+              recipe: recipe,
+              lutAddresses: LUT_ADDRESSES,
+              authority: currentWallet?.publicKey.toString(),
+            });
+
+            const transactions = txHash.map((tx) =>
+              VersionedTransaction.deserialize(base58.decode(tx))
+            );
+
+            const userBalance = await connection.getBalance(
+              currentWallet.publicKey
+            );
+            const TRANSACTION_COST = 2_331_600; // 2,331,600 lamports = ~0.00233 SOL
+            const LOW_BALANCE_THRESHOLD = TRANSACTION_COST * 2; // Set threshold at twice the cost
+
+            if (userBalance < LOW_BALANCE_THRESHOLD) {
+              setDataLoading(false);
+              throw new Error(
+                "You don't have enough SOL in your wallet to perform this transaction."
+              );
+            }
+
+            const successfulSignatures = await sendTransactions(
+              transactions,
+              blockhash,
+              lastValidBlockHeight
+            );
+
+            if (successfulSignatures.length === 0) {
+              console.warn(
+                `Retrying transaction... Attempts left: ${attempt - 1}`
+              );
+              return executeTransactionWithRetry(attempt - 1);
+            }
+
+            return successfulSignatures;
+          } catch (error) {
+            console.error("Error during transaction:", error);
+            return executeTransactionWithRetry(attempt - 1);
+          }
+        };
+
+        await executeTransactionWithRetry(3);
       }
+
       if (data?.result?.length > 0 && !refetch) {
         setDataLoading(false);
         return data?.result;
@@ -532,21 +561,23 @@ const Utils = () => {
     recipe: string,
     name: string,
     tag: string,
+    xp: number,
     setLoading: ({ name, status }) => void,
     setDataLoading: (status: boolean) => void,
     setCraftData: (data: Resource[]) => void
   ) => {
     try {
       setLoading({ name: name, status: true });
+      const mirroredXP = getCache("mirroredXP");
       const data = await fetchCraftData(tag, setDataLoading, true, recipe);
+      const calculatedXP = mirroredXP
+        ? mirroredXP + xp
+        : Number(currentProfile?.platformData?.xp) + xp;
+      setCache("mirroredXP", calculatedXP);
       setCraftData(data);
       await fetchInventoryData(ResourceType.ALL, setDataLoading, true);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
-      await getUserLevelInfo(
-        Number(currentProfile?.platformData?.xp),
-        true,
-        setDataLoading
-      );
+      await getUserLevelInfo(calculatedXP, true, setDataLoading);
       // await apiCallDelay(2000);
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource crafted successfully`);
@@ -558,8 +589,6 @@ const Utils = () => {
     }
   };
 
-  const userLevelInfo = getCache("userInfo")?.result;
-
   return {
     renderHomeTabComponents,
     formatTime,
@@ -570,7 +599,7 @@ const Utils = () => {
     fetchMineResourcesData,
     fetchShopResourcesData,
     getUserLevelInfo,
-    userLevelInfo,
+    userInfo,
     resetCache,
     apiCallDelay,
     claimFaucet,

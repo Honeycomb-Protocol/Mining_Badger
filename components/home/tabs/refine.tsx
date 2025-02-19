@@ -11,8 +11,7 @@ import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const RefineTab = () => {
   const dispatch = useDispatch();
-  const { fetchRefinedResoucesData, userLevelInfo, fetchInventoryData } =
-    Utils();
+  const { fetchRefinedResoucesData, userInfo, fetchInventoryData } = Utils();
   const { currentWallet } = useHoneycombInfo();
   const [inventory, setInventory] = useState([]);
   const [refineData, setRefineData] = useState([]);
@@ -66,7 +65,6 @@ const RefineTab = () => {
         true,
         dataLoading
       );
-      // await apiCallDelay(2000);
       setLoading({ name: "", status: false });
       toast.success(`${name} Resource refined successfully`);
     } catch (err: any) {
@@ -124,7 +122,7 @@ const RefineTab = () => {
                 btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
                 materials={refinement?.ingredients}
                 resourceInfo={
-                  refinement?.lvl_req > userLevelInfo?.level
+                  refinement?.lvl_req > userInfo?.level
                     ? `User level ${
                         refinement?.lvl_req ? refinement.lvl_req : "1"
                       } is required to refine this resource.`
@@ -141,7 +139,7 @@ const RefineTab = () => {
                 }
                 btnDisabled={
                   (loading.status && loading.name === refinement?.name) ||
-                  refinement?.lvl_req > userLevelInfo?.level ||
+                  refinement?.lvl_req > userInfo?.level ||
                   !refinement?.canRefine
                 }
               />

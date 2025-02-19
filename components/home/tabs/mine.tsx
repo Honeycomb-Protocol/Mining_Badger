@@ -11,12 +11,8 @@ import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const MineTab = () => {
   const dispatch = useDispatch();
-  const {
-    fetchMineResourcesData,
-    userLevelInfo,
-    fetchInventoryData,
-    claimFaucet,
-  } = Utils();
+  const { fetchMineResourcesData, userInfo, fetchInventoryData, claimFaucet } =
+    Utils();
   const { currentWallet } = useHoneycombInfo();
   const [mineData, setMineData] = useState([]);
   const [inventory, setInventory] = useState([]);
@@ -101,7 +97,7 @@ const MineTab = () => {
               btnStyle="bg-gradient-to-b from-[#8E8B77] to-[#30302E] text-xs h-6 w-24 h-6 font-bold drop-shadow-lg"
               expIn={data?.expire}
               resourceInfo={
-                userLevelInfo?.level < data?.lvl_req
+                userInfo?.level < data?.lvl_req
                   ? `User level ${data?.lvl_req} is required to mine this resource.`
                   : ""
               }
@@ -112,7 +108,7 @@ const MineTab = () => {
               }
               btnDisabled={
                 loading.name === data?.name ||
-                userLevelInfo?.level < data?.lvl_req ||
+                userInfo?.level < data?.lvl_req ||
                 !inventory?.some((e) => e.symbol === "BRP")
               }
               btnClick={async () => {
