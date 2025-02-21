@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { VersionedTransaction } from "@solana/web3.js";
 import { Character } from "@honeycomb-protocol/edge-client";
-import { Select, SelectItem, Spinner } from "@nextui-org/react";
+import { Select, SelectItem, Spinner, Tooltip } from "@nextui-org/react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils from "@/lib/utils";
@@ -276,7 +276,51 @@ const BodyTab = () => {
           </div>
           <div className="flex flex-wrap justify-center items-start">
             {equipments?.map((item, index) => (
-              <div key={index} className="my-3 mx-2 text-center w-[75px]">
+              <div
+                key={index}
+                className="my-3 mx-2 text-center w-[75px] relative"
+              >
+                {item.tags[0] !== "Fur" &&
+                item.tags[0] !== "Eyes" &&
+                item.tags[0] !== "Mouth" ? (
+                  <Image
+                    src="/assets/images/minus-icon.png"
+                    alt="minus"
+                    width={17}
+                    height={17}
+                    className={`absolute -top-1.5 -right-1.5 z-50 ${
+                      equipmentLoading.name === item.name &&
+                      equipmentLoading.status
+                        ? `pointer-events-none`
+                        : "cursor-pointer"
+                    }`}
+                    onClick={async () => {
+                      if (
+                        equipments.some(
+                          (equip) =>
+                            String(equip.address) === String(item.address)
+                        )
+                      ) {
+                        await UnequipItem(item);
+                      }
+                    }}
+                  />
+                ) : (
+                  <Tooltip
+                    content={
+                      "Fur, Mouth, and Eyes can't be unequipped—swap them instead."
+                    }
+                    className="bg-[#1D1D1D]"
+                  >
+                    <Image
+                      src="/assets/svgs/info-icon.svg"
+                      alt="info"
+                      className="absolute -top-1.5 -right-1.5 z-50 cursor-pointer bg-black"
+                      width={17}
+                      height={17}
+                    />
+                  </Tooltip>
+                )}
                 <div className="border-1 border-[#e7cb5f] rounded-lg h-[69px] bg-gray-900 relative">
                   {item && (
                     <Image
@@ -287,6 +331,13 @@ const BodyTab = () => {
                       fill={true}
                     />
                   )}
+                  {equipmentLoading.name === item.name &&
+                    equipmentLoading.status && (
+                      <div className=" w-full h-full flex justify-center items-center realtive">
+                        <div className="bg-slate-300 opacity-20 w-full h-full absolute top-0 right-0 left-0 bottom-0" />
+                        <Spinner color="white" />
+                      </div>
+                    )}
                 </div>
                 <p className="text-xs mt-1">{item.name}</p>
               </div>
@@ -313,7 +364,7 @@ const BodyTab = () => {
               No data to show.
             </p>
           ) : (
-            <div className="grid grid-cols-2 xl:grid-cols-3 gap-8 py-3 bg-black w-full p-4">
+            <div className="flex justify-start items-center gap-12 py-3 bg-black w-full p-4 md:p-8">
               {enrichedBodyData?.map((item, index) => (
                 <NftCard
                   key={index}
