@@ -4,15 +4,16 @@ import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
-import Utils, { getCache } from "@/lib/utils";
+import Faucet from "@/lib/utils/faucet";
 import { ResourceType } from "@/interfaces";
+import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const ShopTab = () => {
   const dispatch = useDispatch();
-  const { userInfo, fetchShopResourcesData, claimFaucet, fetchInventoryData } =
-    Utils();
+  const { userInfo, fetchShopResourcesData, fetchInventoryData } = Utils();
+  const { claimFaucet } = Faucet();
   const { currentWallet } = useHoneycombInfo();
   const [shopData, setShopData] = useState([]);
   const [dataLoader, setDataLoader] = useState(false);
@@ -71,7 +72,9 @@ const ShopTab = () => {
       toast.success(`${name} claimed successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
-      toast.error(err.response?.data?.message || "Something went wrong");
+      toast.error(
+        err.response?.data?.message || err.toString() || "Something went wrong"
+      );
     }
   };
 

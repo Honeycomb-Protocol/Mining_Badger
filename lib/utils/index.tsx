@@ -338,12 +338,13 @@ const Utils = () => {
         return organizeDataByCategories(data?.result, name);
       }
     } catch (error) {
-      toast.error(
+      setDataLoading(false);
+      throw new Error(
         error?.response?.data?.message ||
           error?.message ||
+          error ||
           "Something went wrong"
       );
-      setDataLoading(false);
     }
   };
 
@@ -487,12 +488,13 @@ const Utils = () => {
         return data?.result;
       }
     } catch (error) {
-      toast.error(
+      setDataLoading(false);
+      throw new Error(
         error?.response?.data?.message ||
           error?.message ||
+          error ||
           "Something went wrong"
       );
-      setDataLoading(false);
     }
   };
 
@@ -517,12 +519,13 @@ const Utils = () => {
       setDataLoading(false);
       return data?.result;
     } catch (error) {
-      toast.error(
+      setDataLoading(false);
+       throw new Error(
         error?.response?.data?.message ||
           error?.message ||
+          error ||
           "Something went wrong"
       );
-      setDataLoading(false);
     }
   };
 
@@ -532,29 +535,6 @@ const Utils = () => {
         resolve(true);
       }, delay);
     });
-  };
-
-  const claimFaucet = async (resourceId: string) => {
-    try {
-      const { data } = await axios.post(`${API_URL}faucet/mine`, {
-        user: {
-          wallet: currentWallet?.publicKey.toString(),
-          id: currentUser?.id,
-        },
-        resource: resourceId,
-      });
-
-      return data;
-    } catch (error) {
-      console.error("Error while faucet claim", error);
-      toast.error(
-        error?.message ||
-          error?.response?.data?.message ||
-          error ||
-          "Something went wrong"
-      );
-      throw new Error(error);
-    }
   };
 
   const craftResource = async (
@@ -602,7 +582,6 @@ const Utils = () => {
     userInfo,
     resetCache,
     apiCallDelay,
-    claimFaucet,
     craftResource,
     getCraftTags,
   };

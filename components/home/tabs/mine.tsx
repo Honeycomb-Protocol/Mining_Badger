@@ -8,11 +8,12 @@ import Utils, { getCache } from "@/lib/utils";
 import NftCard from "@/components/common/nft-card";
 import { MineDataType, ResourceType } from "@/interfaces";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
+import Faucet from "@/lib/utils/faucet";
 
 const MineTab = () => {
   const dispatch = useDispatch();
-  const { fetchMineResourcesData, userInfo, fetchInventoryData, claimFaucet } =
-    Utils();
+  const { fetchMineResourcesData, userInfo, fetchInventoryData } = Utils();
+  const { claimFaucet } = Faucet();
   const { currentWallet } = useHoneycombInfo();
   const [mineData, setMineData] = useState([]);
   const [inventory, setInventory] = useState([]);
@@ -70,7 +71,9 @@ const MineTab = () => {
       toast.success(`${name} Resource mined successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
-      toast.error(err.response?.data?.message || "Something went wrong");
+      toast.error(
+        err.response?.data?.message || err.toString() || "Something went wrong"
+      );
     }
   };
 

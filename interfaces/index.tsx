@@ -157,6 +157,67 @@ export enum ResourceType {
   BAR = "BARS",
 }
 
+export interface HVUser {
+  id: string;
+  wallet: string;
+}
+
+export interface Ores {
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  mine_time: number;
+  xp: number;
+  tags: string[];
+  address: string;
+  mint: string;
+}
+
+export interface PickAxes {
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  time_reduced: number;
+  address: string;
+  tags: string[];
+  mint: string;
+}
+
+export interface MineData {
+  user: string;
+  wallet: string;
+  resource: string;
+  created_at: number;
+  will_expire: number;
+}
+
+export interface Traits {
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  xp: number;
+  tags: string[];
+  craft_time: number;
+  ingredients: Record<string, number>;
+  address: string;
+  mint: string;
+  recipe: string;
+}
+
+export type File = {
+  project: string;
+  characterModel: string;
+  lutAddresses: string[];
+  assemblerConfig: string;
+  characterTree: string;
+  traits: Record<string, Traits>;
+  resources: Record<string, Resource>;
+};
+
+
 export type ProxyAdapter = {
   publicKey: PublicKey | null;
   connected: boolean;
