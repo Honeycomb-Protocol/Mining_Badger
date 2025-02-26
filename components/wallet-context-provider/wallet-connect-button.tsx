@@ -160,7 +160,7 @@ const WalletConnectButton = () => {
             className="w-[384px] !py-3 !px-4 rounded-xl font-bold"
             onClick={() => router.push("/login-with-email")}
           >
-            Login with metakeep
+            Login with Metakeep
           </button>
           <p className="py-4 font-bold">----- Or -----</p>
           <button
