@@ -72,9 +72,11 @@ const ShopTab = () => {
       toast.success(`${name} claimed successfully`);
     } catch (err: any) {
       setLoading({ name: "", status: false });
-      toast.error(
-        err.response?.data?.message || err.toString() || "Something went wrong"
-      );
+      const errorMessage =
+        err.response?.data?.error || // Matches API's error format
+        err.message || // Catches any thrown errors
+        "Something went wrong"; // Fallback error message
+      toast.error(errorMessage);
     }
   };
 

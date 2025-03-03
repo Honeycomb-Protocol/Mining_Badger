@@ -33,7 +33,7 @@ const WalletConnectButton = () => {
     } catch (e) {
       console.error(
         "Error while creating user:",
-        e.response?.data || e.message
+        e.response?.data.error || e.message
       );
     }
   };

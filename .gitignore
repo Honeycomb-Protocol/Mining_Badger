@@ -38,7 +38,13 @@ yarn-error.log*
 next-env.d.ts
 
 #keys
-keys
+lib/keys
+
+#scripts
+lib/scripts
+
+#resources file
+resources.json
 
 yalc.lock
 .yalc

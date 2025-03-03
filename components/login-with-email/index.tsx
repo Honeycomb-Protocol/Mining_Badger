@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import React, { useState } from "react";
 import { Spinner } from "@nextui-org/react";
 
-import { API_URL } from "@/config/config";
 import { useMetakeep } from "@/context/metakeep-context";
 
 const MetakeepLogin = () => {
@@ -14,20 +13,20 @@ const MetakeepLogin = () => {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(
-        `${API_URL}metakeep/loginWithMetakeep/${email}`
-      );
+      const { data } = await axios.post("/api/metakeep", { email });
       if (data?.result) {
         setMetakeepCache({
           email,
           publicKey: data?.result,
         });
       } else {
-        toast.error("Something went wrong");
+        toast.error(data?.error || "Something went wrong");
       }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to log in");
+      const errorMessage =
+        error?.response?.data?.error || error?.message || "Failed to log in";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

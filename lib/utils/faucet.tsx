@@ -61,20 +61,22 @@ const Faucet = () => {
       }
 
       // save the resource to the cache
-      const data = await axios.post<MineData>("/api/resource-entry", {
-        user: {
-          wallet: currentWallet.publicKey.toString(),
-          id: currentUser?.id,
-        },
-        resource: cachedResource,
-      });
-      return data;
+      const { data } = await axios.post<{ result: MineData }>(
+        "/api/resource-entry",
+        {
+          user: {
+            wallet: currentWallet.publicKey.toString(),
+            id: currentUser?.id,
+          },
+          resource: cachedResource,
+        }
+      );
+      return data.result;
     } catch (error) {
       console.error("Error while faucet claim", error);
       throw new Error(
-        error?.message ||
-          error?.response?.data?.message ||
-          error ||
+        error?.response?.data?.error || // Correct property from API
+          error?.message ||
           "Something went wrong"
       );
     }
