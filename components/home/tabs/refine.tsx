@@ -56,7 +56,7 @@ const RefineTab = () => {
   const refineResource = async (recipe: string, name: string) => {
     try {
       setLoading({ name: name, status: true });
-      const data = await fetchRefinedResoucesData(setDataLoading, true, recipe);
+      const data = await fetchRefinedResoucesData(setDataLoading, recipe);
       setRefineData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       await fetchInventoryData(
@@ -70,7 +70,7 @@ const RefineTab = () => {
     } catch (err: any) {
       setLoading({ name: "", status: false });
       toast.error(
-        err.response?.data?.message || err.toString() || "Something went wrong"
+        err.response?.data?.error || err.message || "Something went wrong"
       );
     }
   };

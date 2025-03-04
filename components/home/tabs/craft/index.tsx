@@ -1,20 +1,19 @@
 import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
-import Utils from "@/lib/utils";
+import { TAGS } from "@/config/config";
 import CustomTabs from "@/components/common/custom-tabs";
 
 const CraftTab = () => {
-  const { getCraftTags } = Utils();
   const [loading, setLoading] = useState(false);
   const [craftTabs, setCraftTabs] = useState<string[]>([]);
 
   useEffect(() => {
-    (async () => {
-      if (craftTabs.length > 0) return;
-      const tags = await getCraftTags(setLoading);
-      setCraftTabs(tags);
-    })();
+    setLoading(true);
+    if (craftTabs.length > 0) return;
+    const tags = Array.from(TAGS);
+    setCraftTabs(tags);
+    setLoading(false);
   }, []);
 
   return (

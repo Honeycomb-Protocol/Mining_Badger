@@ -18,6 +18,7 @@
     "@privy-io/react-auth": "^2.0.4",
     "@privy-io/server-auth": "^1.18.1",
     "@reduxjs/toolkit": "^2.2.1",
+    "@solana/spl-token": "^0.4.13",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",

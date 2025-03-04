@@ -15,16 +15,20 @@ import BodyTab from "@/components/home/tabs/body";
 import { RootState } from "@/store";
 import LevelsData from "../../data/level-data.json";
 import { Resource, ResourceType } from "@/interfaces";
-import { API_URL, LUT_ADDRESSES, connection } from "@/config/config";
+import {
+  CachedBars,
+  CachedOres,
+  CachedPickaxes,
+  LUT_ADDRESSES,
+  cachedResources,
+  connection,
+  getMinedResource,
+} from "@/config/config";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 let cache = {
-  craftTags: {},
   craftData: {},
   inventoryData: {},
-  refineData: {},
-  mineData: {},
-  shopData: {},
   userInfo: null,
   mirroredXP: null,
 };
@@ -39,12 +43,8 @@ export const getCache = (name: string) => {
 
 const resetCache = () => {
   cache = {
-    craftTags: {},
     craftData: {},
     inventoryData: {},
-    refineData: {},
-    mineData: {},
-    shopData: {},
     userInfo: null,
     mirroredXP: null,
   };
@@ -52,7 +52,7 @@ const resetCache = () => {
 
 const Utils = () => {
   const dispatch = useDispatch();
-  const { currentUser, currentProfile, currentWallet, edgeClient } =
+  const { currentProfile, currentWallet, edgeClient } =
     useHoneycombInfo();
   const inventoryState = useSelector((state: RootState) => state.inventory);
   const [userInfo, setUserInfo] = useState(null);
@@ -154,40 +154,15 @@ const Utils = () => {
         setDataLoading(false);
         return data?.result;
       } else {
-        data = (await axios.get(`${API_URL}resources/level/${xp}`)).data;
+        data = (await axios.get(`/api/get-level?exp=${xp}`)).data;
         setCache("userInfo", data);
         return data?.result;
       }
     } catch (error) {
       toast.error(
-        error?.response?.data?.message ||
-          error?.message ||
-          "Something went wrong"
+        error?.response?.data?.error || error?.message || "Something went wrong"
       );
       setDataLoading(false);
-    }
-  };
-
-  const getCraftTags = async (setLoading: (status: boolean) => void) => {
-    try {
-      setLoading(true);
-      let data = await getCache("craftTags");
-      if (data?.result?.length > 0) {
-        setLoading(false);
-        return data?.result;
-      } else {
-        data = (await axios.get(`${API_URL}resources/tags`)).data;
-        setCache("craftTags", data);
-        setLoading(false);
-        return data?.result;
-      }
-    } catch (error) {
-      toast.error(
-        error?.response?.data?.message ||
-          error?.message ||
-          "Something went wrong"
-      );
-      setLoading(false);
     }
   };
 
@@ -282,7 +257,7 @@ const Utils = () => {
         setDataLoading(false);
         return data?.result[tag];
       } else {
-        const craftData = (await axios.get(`${API_URL}resources/craft/${tag}`))
+        const craftData = (await axios.get(`/api/craft-resource?tag=${tag}`))
           .data;
         data = {
           result: { ...data?.result, [tag]: craftData.result },
@@ -294,10 +269,7 @@ const Utils = () => {
     } catch (error) {
       setDataLoading(false);
       throw new Error(
-        error?.response?.data?.message ||
-          error?.message ||
-          error ||
-          "Something went wrong"
+        error?.response?.data?.error || error?.message || "Something went wrong"
       );
     }
   };
@@ -326,9 +298,10 @@ const Utils = () => {
         return organizeDataByCategories(data?.result, name);
       } else {
         data = (
-          await axios.get(
-            `${API_URL}resources/inventory/${String(currentWallet?.publicKey)}`
-          )
+          await axios.post(`/api/get-inventory`, {
+            wallet: currentWallet?.publicKey.toString(),
+            edgeClient,
+          })
         ).data;
         setCache("inventoryData", data);
         setDataLoading(false);
@@ -340,23 +313,17 @@ const Utils = () => {
     } catch (error) {
       setDataLoading(false);
       throw new Error(
-        error?.response?.data?.message ||
-          error?.message ||
-          error ||
-          "Something went wrong"
+        error?.response?.data?.error || error?.message || "Something went wrong"
       );
     }
   };
 
   const fetchRefinedResoucesData = async (
     setDataLoading: (status: boolean) => void,
-    refetch = false,
     recipe?: string
   ) => {
     try {
       setDataLoading(true);
-      let data = await getCache("refineData");
-
       const sendTransactions = async (
         transactions,
         blockhash,
@@ -445,86 +412,83 @@ const Utils = () => {
         await executeTransactionWithRetry(3);
       }
 
-      if (data?.result?.length > 0 && !refetch) {
-        setDataLoading(false);
-        return data?.result;
-      } else {
-        data = (await axios.get(`${API_URL}resources/refine`)).data;
-        setCache("refineData", data);
-        setDataLoading(false);
-        return data?.result;
-      }
+      const data = CachedBars.map((e) => ({
+        ...e,
+        ingredients: Object.entries(e.ingredients).map(([key, value]) => {
+          const resource = cachedResources[key];
+          return {
+            name: resource.name,
+            symbol: resource.symbol,
+            uri: resource.uri,
+            amount: value,
+          };
+        }),
+      }));
+      return data;
     } catch (error) {
       setDataLoading(false);
       throw new Error(
-        error?.response?.data?.message ||
-          error?.message ||
-          error ||
-          "Something went wrong"
+        error?.response?.data?.error || error?.message || "Something went wrong"
       );
     }
   };
 
   const fetchMineResourcesData = async (
-    setDataLoading: (status: boolean) => void,
-    refetch = false
+    setDataLoading: (status: boolean) => void
   ) => {
     try {
       setDataLoading(true);
-
-      let data = await getCache("mineData");
-
-      if (data?.result?.length > 0 && !refetch) {
-        setDataLoading(false);
-        return data?.result;
-      } else {
-        data = (
-          await axios.get(
-            `${API_URL}resources/ores/${String(currentWallet?.publicKey)}`
-          )
-        ).data;
-        setCache("mineData", data);
-        setDataLoading(false);
-        return data?.result;
-      }
+      const data = await Promise.all(
+        CachedOres.map(async (e) => {
+          const mine = await getMinedResource(
+            `${String(currentWallet?.publicKey)}-${e.address}`
+          );
+          return {
+            ...e,
+            expire: mine?.will_expire,
+          };
+        })
+      );
+      setDataLoading(false);
+      return data;
     } catch (error) {
       setDataLoading(false);
       throw new Error(
-        error?.response?.data?.message ||
-          error?.message ||
-          error ||
-          "Something went wrong"
+        error?.response?.data?.error || error?.message || "Something went wrong"
       );
     }
   };
 
   const fetchShopResourcesData = async (
-    setDataLoading: (status: boolean) => void,
-    refetch = false
+    setDataLoading: (status: boolean) => void
   ) => {
     try {
       setDataLoading(true);
-      let data = await getCache("shopData");
-      if (data?.result?.length > 0 && !refetch) {
-        setDataLoading(false);
-        return data?.result;
-      }
+      const { resourcesBalance } = await edgeClient.findResourcesBalance({
+        wallets: [currentWallet?.publicKey.toString()],
+        mints: CachedPickaxes.map((pickaxe) => pickaxe.mint),
+      });
 
-      data = (
-        await axios.get(
-          `${API_URL}resources/pickaxes/${String(currentWallet?.publicKey)}`
-        )
-      ).data;
-      setCache("shopData", data);
+      const axes = [];
+      for (const pickaxe of CachedPickaxes) {
+        const balance = resourcesBalance.find(
+          (resource) => resource.mint === pickaxe.mint
+        );
+
+        if (balance) {
+          axes.push({
+            ...pickaxe,
+            amount: Number(balance.amount) / 10 ** 6,
+            claimed: Number(balance.amount) > 0,
+          });
+        }
+      }
       setDataLoading(false);
-      return data?.result;
+      return axes;
     } catch (error) {
       setDataLoading(false);
-       throw new Error(
-        error?.response?.data?.message ||
-          error?.message ||
-          error ||
-          "Something went wrong"
+      throw new Error(
+        error?.response?.data?.error || error?.message || "Something went wrong"
       );
     }
   };
@@ -564,7 +528,7 @@ const Utils = () => {
     } catch (err: any) {
       setLoading({ name: "", status: false });
       toast.error(
-        err.response?.data?.message || err.toString() || "Something went wrong"
+        err.response?.data?.error || err.message || "Something went wrong"
       );
     }
   };
@@ -583,7 +547,6 @@ const Utils = () => {
     resetCache,
     apiCallDelay,
     craftResource,
-    getCraftTags,
   };
 };
 

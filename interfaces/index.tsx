@@ -138,9 +138,13 @@ export interface Craft {
   symbol: string;
   uri: string;
   lvl_req: number;
-  craft_time: number;
   xp: number;
-  ingredients: Ingredient[];
+  tags: string[];
+  craft_time: number;
+  ingredients: Record<string, number>;
+  address: string;
+  mint: string;
+  recipe: string;
 }
 
 export type Dataset = {
@@ -185,6 +189,20 @@ export interface PickAxes {
   mint: string;
 }
 
+export interface Bars {
+  name: string;
+  symbol: string;
+  uri: string;
+  lvl_req: number;
+  xp: number;
+  refine_time: number;
+  tags: string[];
+  ingredients: Record<string, number>;
+  address: string;
+  mint: string;
+  recipe: string;
+}
+
 export interface MineData {
   user: string;
   wallet: string;
@@ -216,7 +234,6 @@ export type File = {
   traits: Record<string, Traits>;
   resources: Record<string, Resource>;
 };
-
 
 export type ProxyAdapter = {
   publicKey: PublicKey | null;

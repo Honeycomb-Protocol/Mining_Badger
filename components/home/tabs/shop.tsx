@@ -59,7 +59,7 @@ const ShopTab = () => {
     try {
       setLoading({ name: name, status: true });
       await claimFaucet(resourceId);
-      const data = await fetchShopResourcesData(setDataLoader, true);
+      const data = await fetchShopResourcesData(setDataLoader);
       setShopData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       await fetchInventoryData(

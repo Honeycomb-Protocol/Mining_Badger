@@ -58,7 +58,7 @@ const MineTab = () => {
     try {
       setLoading({ name: name, status: true });
       await claimFaucet(resourceId);
-      const data = await fetchMineResourcesData(setDataLoader, true);
+      const data = await fetchMineResourcesData(setDataLoader);
       setMineData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
       await fetchInventoryData(

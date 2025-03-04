@@ -10,14 +10,14 @@ import { Select, SelectItem, Spinner, Tooltip } from "@nextui-org/react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils from "@/lib/utils";
-import { API_URL, connection, LUT_ADDRESSES } from "@/config/config";
+import { connection, LUT_ADDRESSES } from "@/config/config";
 import { ResourceType } from "@/interfaces";
 import NftCard from "@/components/common/nft-card";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const BodyTab = () => {
   const dispatch = useDispatch();
-  const { fetchInventoryData, getCraftTags } = Utils();
+  const { fetchInventoryData } = Utils();
   const { edgeClient, currentWallet } = useHoneycombInfo();
   const [loading, setLoading] = useState(false);
   const [equipmentLoading, setEquipmentLoading] = useState({
@@ -72,7 +72,7 @@ const BodyTab = () => {
     (async () => {
       try {
         setLoading(true);
-        const tags = await getCraftTags(setLoading);
+        const tags = await Array.from(TAGS);
         setCraftTags(tags);
         await fetchData(tags);
       } catch (error) {
@@ -102,18 +102,22 @@ const BodyTab = () => {
         item.tags[0] === "Eyes" ||
         item.tags[0] === "Mouth"
       ) {
-        await axios.post(`${API_URL}resources/update-trait`, {
+        await axios.post(`/api/update-trait`, {
+          edgeClient,
           wallet: currentWallet?.publicKey?.toString(),
           resource: item.address,
           tag: item.tags[0],
         });
       } else {
-        const response = await axios.post(`${API_URL}resources/equip`, {
-          wallet: currentWallet?.publicKey?.toString(),
-          resource: item.address,
-        });
+        const response = (
+          await axios.post(`/api/equip-resource`, {
+            edgeClient,
+            wallet: currentWallet?.publicKey?.toString(),
+            resource: item.address,
+          })
+        ).data;
         const transaction = VersionedTransaction.deserialize(
-          base58.decode(response.data.result.tx)
+          base58.decode(response.result.tx)
         );
         const userBalance = await connection?.getBalance(
           currentWallet.publicKey
@@ -132,8 +136,8 @@ const BodyTab = () => {
 
         await edgeClient.sendBulkTransactions({
           txs: base58.encode(signedTransaction.serialize()),
-          blockhash: response.data.result.blockhash,
-          lastValidBlockHeight: response.data.result.lastValidBlockHeight,
+          blockhash: response.result.blockhash,
+          lastValidBlockHeight: response.result.lastValidBlockHeight,
           options: { commitment: "processed", skipPreflight: false },
         });
       }
@@ -141,6 +145,9 @@ const BodyTab = () => {
       await InitializeCharacter(data);
     } catch (error) {
       console.error("Error equipping item:", error);
+      toast.error(
+        error?.response?.data?.error || error?.message || "Error equipping item"
+      );
     } finally {
       setEquipmentLoading({ name: "", status: false });
     }
@@ -201,8 +208,11 @@ const BodyTab = () => {
       if (!currentWallet?.publicKey) return;
       const currInventory = inventory || inventoryData;
       const character = (
-        await axios.get(
-          `${API_URL}resources/init/${currentWallet?.publicKey?.toString()}`
+        await axios.post(
+          `/api/init-resource?wallet=${currentWallet?.publicKey?.toString()}`,
+          {
+            edgeClient,
+          }
         )
       ).data?.result;
 

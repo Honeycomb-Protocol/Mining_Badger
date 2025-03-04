@@ -1,6 +1,15 @@
-import { Connection, Keypair, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";
 
-import { PickAxes, Ores, File } from "@/interfaces";
+import {
+  PickAxes,
+  Ores,
+  File,
+  Traits,
+  Bars,
+  Craft,
+  MineData,
+} from "@/interfaces";
+import { redis } from "@/lib/redis-client";
 import resources from "@/config/resource-addresses.json";
 
 const RPC_URL = process.env.NEXT_PUBLIC_RPC_ENDPOINT;
@@ -8,9 +17,6 @@ const HPL_PROJECT = new PublicKey(process.env.NEXT_PUBLIC_HPL_PROJECT);
 const LUT_ADDRESSES = process.env.NEXT_PUBLIC_LUTADDRESSES.split(",");
 const EDGE_CLIENT = process.env.NEXT_PUBLIC_EDGE_CLIENT;
 const GATE_NETWORK = process.env.NEXT_PUBLIC_GATEKEEPER_NETWORK || "";
-const adminKeypairString = process.env.NEXT_PUBLIC_ADMIN_KEYPAIR;
-const adminKeypairArray = JSON.parse(adminKeypairString);
-const Admin_Keypair = Keypair.fromSecretKey(Uint8Array.from(adminKeypairArray));
 const connection = new Connection(RPC_URL);
 
 const {
@@ -23,6 +29,10 @@ const {
   resources: cachedResources,
 }: File = resources as unknown as File;
 
+const CachedTraits: Traits[] = Object.entries(cachedTraits).map(
+  ([_key, value]) => value
+) as any;
+
 const CachedPickaxes: PickAxes[] = Object.entries(cachedResources)
   .filter(([_key, value]) => "time_reduced" in value)
   .map(([_key, value]) => value) as any;
@@ -31,6 +41,39 @@ const CachedOres: Ores[] = Object.entries(cachedResources)
   .filter(([_key, value]) => "mine_time" in value)
   .map(([_key, value]) => value) as any;
 
+const CachedBars: Bars[] = Object.entries(cachedResources)
+  .filter(([_key, value]) => "refine_time" in value)
+  .map(([_key, value]) => value) as any;
+
+const CachedCraft: Craft[] = Object.entries(cachedResources)
+  .filter(([_key, value]) => "craft_time" in value)
+  .map(([_key, value]) => value) as any;
+
+const CachedResources: Record<string, PickAxes | Ores | Bars | Craft> =
+  Object.entries({ ...cachedResources, ...cachedTraits }).reduce(
+    (acc, [_key, value]) => ({
+      ...acc,
+      [value.mint]: value,
+    }),
+    {}
+  );
+
+const getMinedResource = async (id: string): Promise<MineData | null> => {
+  const res = await redis.get(id);
+  if (!res) return null;
+  return JSON.parse(res) as MineData;
+};
+
+const TAGS = new Set<string>();
+[...Object.values(cachedTraits), ...Object.values(CachedResources)].map((e) => {
+  if (e.tags)
+    e.tags.map((tag: string) => {
+      if (["BARS", "ORES", "Pickaxe"].includes(tag)) return;
+
+      TAGS.add(tag);
+    });
+});
+
 export {
   RPC_URL,
   HPL_PROJECT,
@@ -38,7 +81,6 @@ export {
   LUT_ADDRESSES,
   EDGE_CLIENT,
   GATE_NETWORK,
-  Admin_Keypair,
   assemblerConfig,
   characterModel,
   characterTree,
@@ -46,6 +88,12 @@ export {
   project,
   cachedTraits,
   cachedResources,
+  CachedTraits,
   CachedPickaxes,
   CachedOres,
+  CachedBars,
+  CachedCraft,
+  CachedResources,
+  getMinedResource,
+  TAGS,
 };
