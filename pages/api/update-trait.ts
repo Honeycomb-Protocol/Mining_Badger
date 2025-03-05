@@ -1,5 +1,7 @@
-import { Keypair } from "@solana/web3.js";
+import base58 from "bs58";
 import { NextApiRequest, NextApiResponse } from "next";
+import { Transaction } from "@honeycomb-protocol/edge-client";
+import { Keypair, VersionedTransaction } from "@solana/web3.js";
 
 import {
   assemblerConfig,
@@ -11,8 +13,59 @@ import {
   project,
 } from "@/config/config";
 import { Traits } from "@/interfaces";
-import { sendTransaction } from "@/lib/scripts";
 import { getEdgeClient } from "@/lib/edge-client";
+
+const adminKeypairString = process.env.ADMIN_KEYPAIR;
+const adminKeypairArray = JSON.parse(adminKeypairString);
+const Admin_Keypair = Keypair.fromSecretKey(Uint8Array.from(adminKeypairArray));
+
+const sendTransactions = async (
+  action: string,
+  txResponses: Transaction[],
+  signer: Keypair = Admin_Keypair
+): Promise<
+  {
+    __typename?: "TransactionResponse";
+    signature?: string | null;
+    error?: any | null;
+    status: string;
+  }[]
+> => {
+  try {
+    // serialize and sign transactions
+    const signedTxs = txResponses.map((tx) => {
+      const serializedTx = VersionedTransaction.deserialize(
+        base58.decode(tx.transaction)
+      );
+      signer && serializedTx.sign([signer]);
+
+      return serializedTx;
+    });
+
+    const edgeClient = getEdgeClient();
+
+    // send transactions
+    const { sendBulkTransactions } = await edgeClient.sendBulkTransactions({
+      txs: signedTxs.map((tx) => base58.encode(tx.serialize())),
+      blockhash: txResponses[0].blockhash,
+      lastValidBlockHeight: txResponses[0].lastValidBlockHeight,
+      options: {
+        skipPreflight: true,
+      },
+    });
+
+    return sendBulkTransactions;
+  } catch (e) {
+    console.error(action, e);
+    throw e;
+  }
+};
+
+const sendTransaction = async (
+  action: string,
+  txResponses: Transaction,
+  signer: Keypair = Admin_Keypair
+) => sendTransactions(action, [txResponses], signer);
 
 export default async function handler(
   req: NextApiRequest,

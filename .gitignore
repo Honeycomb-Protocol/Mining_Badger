@@ -42,6 +42,7 @@ lib/keys
 
 #scripts
 lib/scripts
+lib/upload.ts
 
 #resources file
 resources.json
