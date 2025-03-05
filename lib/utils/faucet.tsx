@@ -4,7 +4,7 @@ import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 import { MineData } from "@/interfaces";
 
 const Faucet = () => {
-  const { currentUser, currentWallet, edgeClient } = useHoneycombInfo();
+  const { currentUser, currentWallet } = useHoneycombInfo();
 
   const claimFaucet = async (resourceId: string) => {
     try {
@@ -14,7 +14,6 @@ const Faucet = () => {
           currentUser,
           resourceId,
           currentWallet,
-          edgeClient,
         }
       );
       return data.result;

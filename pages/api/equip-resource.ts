@@ -2,6 +2,7 @@ import base58 from "bs58";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Keypair, VersionedTransaction } from "@solana/web3.js";
 
+import { getEdgeClient } from "@/lib/edge-client";
 import { characterModel, characterTree, lutAddresses } from "@/config/config";
 
 export default async function handler(
@@ -11,13 +12,14 @@ export default async function handler(
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
-  
-  try {
-    const { edgeClient, wallet, resource } = req.body;
 
-    if (!wallet || !edgeClient || !resource) {
+  try {
+    const { wallet, resource } = req.body;
+
+    if (!wallet || !resource) {
       return res.status(400).json({ error: "Missing required parameters" });
     }
+    const edgeClient = getEdgeClient();
 
     const {
       character: [character],
@@ -63,6 +65,8 @@ export default async function handler(
     });
   } catch (e) {
     console.error(e, "error");
-    return res.status(500).json({ error: e.message || "Internal server error" });
+    return res
+      .status(500)
+      .json({ error: e.message || "Internal server error" });
   }
 }

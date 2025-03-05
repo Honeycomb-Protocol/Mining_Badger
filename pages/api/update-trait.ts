@@ -12,6 +12,7 @@ import {
 } from "@/config/config";
 import { Traits } from "@/interfaces";
 import { sendTransaction } from "@/lib/scripts";
+import { getEdgeClient } from "@/lib/edge-client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,11 +23,12 @@ export default async function handler(
   }
 
   try {
-    const { edgeClient, wallet, resource, tag } = req.body;
+    const { wallet, resource, tag } = req.body;
 
-    if (!wallet || !edgeClient || !resource || !tag) {
+    if (!wallet || !resource || !tag) {
       return res.status(400).json({ error: "Missing required parameters" });
     }
+    const edgeClient = getEdgeClient();
 
     const {
       character: [character],

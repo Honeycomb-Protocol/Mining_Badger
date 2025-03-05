@@ -2,21 +2,23 @@ import { PublicKey } from "@solana/web3.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { TOKEN_2022_PROGRAM_ID } from "@solana/spl-token";
 
+import { getEdgeClient } from "@/lib/edge-client";
 import { CachedResources, connection, project } from "@/config/config";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
+  if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }
   try {
-    const { wallet, edgeClient } = req.body;
+    const { wallet } = req.query;
 
-    if (!edgeClient || !wallet) {
+    if (!wallet) {
       return res.status(400).json({ error: "Missing required parameters" });
     }
+    const edgeClient = getEdgeClient();
 
     const mints = (
       await connection.getParsedTokenAccountsByOwner(new PublicKey(wallet), {

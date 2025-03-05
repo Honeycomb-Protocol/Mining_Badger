@@ -10,9 +10,9 @@ import { Select, SelectItem, Spinner, Tooltip } from "@nextui-org/react";
 import { useHoneycombInfo } from "@honeycomb-protocol/profile-hooks";
 
 import Utils from "@/lib/utils";
-import { connection, LUT_ADDRESSES } from "@/config/config";
 import { ResourceType } from "@/interfaces";
 import NftCard from "@/components/common/nft-card";
+import { connection, LUT_ADDRESSES, TAGS } from "@/config/config";
 import { InventoryActionsWithoutThunk } from "@/store/inventory";
 
 const BodyTab = () => {
@@ -103,7 +103,6 @@ const BodyTab = () => {
         item.tags[0] === "Mouth"
       ) {
         await axios.post(`/api/update-trait`, {
-          edgeClient,
           wallet: currentWallet?.publicKey?.toString(),
           resource: item.address,
           tag: item.tags[0],
@@ -111,7 +110,6 @@ const BodyTab = () => {
       } else {
         const response = (
           await axios.post(`/api/equip-resource`, {
-            edgeClient,
             wallet: currentWallet?.publicKey?.toString(),
             resource: item.address,
           })
@@ -208,11 +206,8 @@ const BodyTab = () => {
       if (!currentWallet?.publicKey) return;
       const currInventory = inventory || inventoryData;
       const character = (
-        await axios.post(
-          `/api/init-resource?wallet=${currentWallet?.publicKey?.toString()}`,
-          {
-            edgeClient,
-          }
+        await axios.get(
+          `/api/init-resource?wallet=${currentWallet?.publicKey?.toString()}`
         )
       ).data?.result;
 

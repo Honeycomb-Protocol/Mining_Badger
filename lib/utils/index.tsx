@@ -52,8 +52,7 @@ const resetCache = () => {
 
 const Utils = () => {
   const dispatch = useDispatch();
-  const { currentProfile, currentWallet, edgeClient } =
-    useHoneycombInfo();
+  const { currentProfile, currentWallet, edgeClient } = useHoneycombInfo();
   const inventoryState = useSelector((state: RootState) => state.inventory);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -298,10 +297,9 @@ const Utils = () => {
         return organizeDataByCategories(data?.result, name);
       } else {
         data = (
-          await axios.post(`/api/get-inventory`, {
-            wallet: currentWallet?.publicKey.toString(),
-            edgeClient,
-          })
+          await axios.get(
+            `/api/get-inventory?wallet=${currentWallet?.publicKey.toString()}`
+          )
         ).data;
         setCache("inventoryData", data);
         setDataLoading(false);

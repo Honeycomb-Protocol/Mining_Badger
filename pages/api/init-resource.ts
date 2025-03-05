@@ -11,23 +11,22 @@ import {
   characterTree,
   project,
 } from "@/config/config";
+import { getEdgeClient } from "@/lib/edge-client";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
+  if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
     const { wallet } = req.query;
-    const { edgeClient } = req.body;
-
-    if (!wallet || !edgeClient) {
+    if (!wallet) {
       return res.status(400).json({ error: "Missing required parameters" });
     }
-
+    const edgeClient = getEdgeClient();
     let {
       character: [character],
     } = await edgeClient.findCharacters({

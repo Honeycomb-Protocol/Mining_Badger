@@ -1,9 +1,10 @@
 import base58 from "bs58";
+import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Keypair, VersionedTransaction } from "@solana/web3.js";
 
 import { MineData } from "@/interfaces";
-import { redis } from "@/lib/redis-client";
+import { getEdgeClient } from "@/lib/edge-client";
 import { CachedOres, CachedPickaxes } from "@/config/config";
 
 export default async function handler(
@@ -14,12 +15,13 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
   }
   try {
-    const { currentUser, resourceId, currentWallet, edgeClient } = req.body;
-    if (!currentUser || !currentWallet || !resourceId || !edgeClient) {
+    const { currentUser, resourceId, currentWallet } = req.body;
+    if (!currentUser || !currentWallet || !resourceId) {
       return res.status(400).json({
-        error: "Invalid reqest, User, resource or edge client is missing.",
+        error: "Invalid reqest, User or resource is missing.",
       });
     }
+    const edgeClient = getEdgeClient();
 
     const cachedResource = [...CachedOres, ...CachedPickaxes].find(
       (e) => e.address === resourceId
@@ -84,12 +86,14 @@ export default async function handler(
     };
 
     // save the data to the redis cache
-    const response = await redis.set(
-      `${currentWallet.publicKey.toString()}-${cachedResource.address}`,
-      JSON.stringify(data)
-    );
+    const response = (
+      await axios.post(`/api/kv`, {
+        key: `${currentWallet.publicKey.toString()}-${cachedResource.address}`,
+        value: JSON.stringify(data),
+      })
+    ).data;
 
-    if (response !== "OK")
+    if (!response?.messgae)
       return res.status(400).json({ error: "Error saving data to the cache" });
     return res.status(200).json({ result: data });
   } catch (error) {
