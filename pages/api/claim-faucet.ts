@@ -16,11 +16,12 @@ export default async function handler(
   }
   try {
     const { currentUser, resourceId, currentWallet } = req.body;
-    if (!currentUser || !currentWallet || !resourceId) {
+    if (!currentUser || !currentWallet?.publicKey || !resourceId) {
       return res.status(400).json({
         error: "Invalid reqest, User or resource is missing.",
       });
     }
+    const walletPublicKey = currentWallet.publicKey?.toBase58() || "";
     const edgeClient = getEdgeClient();
 
     const cachedResource = [...CachedOres, ...CachedPickaxes].find(
@@ -44,7 +45,7 @@ export default async function handler(
       },
     } = await edgeClient.createMintResourceTransaction({
       resource: resourceId,
-      owner: currentWallet?.publicKey.toString(),
+      owner: walletPublicKey,
       authority: Admin_Keypair.publicKey.toBase58(),
       amount: String(1 * 10 ** 6),
     });
@@ -79,16 +80,23 @@ export default async function handler(
 
     const data: MineData = {
       user: currentUser?.id,
-      wallet: currentWallet.publicKey.toString(),
+      wallet: walletPublicKey,
       resource: cachedResource.address,
       created_at: currentTime.getTime(),
       will_expire: incrementedTime.getTime(),
     };
 
+    console.log(
+      "Data to save in cache:",
+      walletPublicKey,
+      data,
+      JSON.stringify(data)
+    );
+
     // save the data to the redis cache
     const response = (
       await axios.post(`/api/kv`, {
-        key: `${currentWallet.publicKey.toString()}-${cachedResource.address}`,
+        key: `${walletPublicKey}-${cachedResource.address}`,
         value: JSON.stringify(data),
       })
     ).data;
