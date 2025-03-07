@@ -439,7 +439,7 @@ const Utils = () => {
       const data = await Promise.all(
         CachedOres.map(async (e) => {
           const mine = await getMinedResource(
-            `${String(currentWallet?.publicKey)}-${e.address}`
+            `${currentWallet?.publicKey.toBase58()}-${e.address}`
           );
           return {
             ...e,

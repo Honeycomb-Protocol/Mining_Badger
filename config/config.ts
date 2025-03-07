@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Connection, PublicKey } from "@solana/web3.js";
 
 import {
@@ -10,6 +9,7 @@ import {
   Craft,
   MineData,
 } from "@/interfaces";
+import kv from "@/lib/kv";
 import resources from "@/config/resource-addresses.json";
 
 const RPC_URL = process.env.NEXT_PUBLIC_RPC_ENDPOINT;
@@ -59,9 +59,9 @@ const CachedResources: Record<string, PickAxes | Ores | Bars | Craft> =
   );
 
 const getMinedResource = async (id: string): Promise<MineData | null> => {
-  const res = (await axios.get(`/api/kv?key=${id}`)).data;  
-  if (!res?.value) return null;
-  return JSON.parse(res?.value) as MineData;
+  const res = await kv.get(id as string);
+  if (!res) return null;
+  return JSON.parse(res as string) as MineData;
 };
 
 const TAGS = new Set<string>();

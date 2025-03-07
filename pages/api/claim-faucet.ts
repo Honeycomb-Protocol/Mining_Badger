@@ -1,8 +1,8 @@
 import base58 from "bs58";
-import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Keypair, VersionedTransaction } from "@solana/web3.js";
 
+import kv from "@/lib/kv";
 import { MineData } from "@/interfaces";
 import { getEdgeClient } from "@/lib/edge-client";
 import { CachedOres, CachedPickaxes } from "@/config/config";
@@ -94,15 +94,15 @@ export default async function handler(
     );
 
     // save the data to the redis cache
-    const response = (
-      await axios.post(`/api/kv`, {
-        key: `${walletPublicKey}-${cachedResource.address}`,
-        value: JSON.stringify(data),
-      })
-    ).data;
+    const expiryInSeconds = Math.floor(data.will_expire / 1000);
+    await kv.set(
+      `${walletPublicKey}-${cachedResource.address}`,
+      JSON.stringify(data),
+      {
+        ex: expiryInSeconds,
+      }
+    ); // Set key-value pair expiry in seconds
 
-    if (!response?.messgae)
-      return res.status(400).json({ error: "Error saving data to the cache" });
     return res.status(200).json({ result: data });
   } catch (error) {
     console.error("Error while creating user:", error.message);
