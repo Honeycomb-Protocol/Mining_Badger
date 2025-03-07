@@ -58,16 +58,21 @@ const ShopTab = () => {
   const claimResource = async (resourceId: string, name: string) => {
     try {
       setLoading({ name: name, status: true });
+      console.log("coming here 1");
       await claimFaucet(resourceId);
+      console.log("coming here 2");
       const data = await fetchShopResourcesData(setDataLoader);
+      console.log("coming here 3");
       setShopData(data);
       dispatch(InventoryActionsWithoutThunk.setRefreshInventory(true));
+      console.log("coming here 4");
       await fetchInventoryData(
         ResourceType.ALL,
         setDataLoader,
         true,
         dataLoader
       );
+      console.log("coming here 5");
       setLoading({ name: "", status: false });
       toast.success(`${name} claimed successfully`);
     } catch (err: any) {

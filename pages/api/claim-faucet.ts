@@ -28,7 +28,7 @@ export default async function handler(
       (e) => e.address === resourceId
     );
     if (!cachedResource) {
-      res.status(400).json({ error: "Resource not found" });
+      return res.status(400).json({ error: "Resource not found" });
     }
 
     const adminKeypairString = process.env.ADMIN_KEYPAIR;
@@ -66,7 +66,7 @@ export default async function handler(
     });
 
     if (!signature) {
-      res
+      return res
         .status(500)
         .json({ error: "Minting reource: Error while sending transaction" });
     }
@@ -103,7 +103,7 @@ export default async function handler(
       }
     ); // Set key-value pair expiry in seconds
 
-    return res.status(200).json({ result: data });
+    return res.status(200).json({ result: { ...data } });
   } catch (error) {
     console.error("Error while creating user:", error.message);
     return res

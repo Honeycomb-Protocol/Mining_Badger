@@ -8,6 +8,8 @@ const Faucet = () => {
 
   const claimFaucet = async (resourceId: string) => {
     try {
+      console.log("1 coming here");
+
       const { data } = await axios.post<{ result: MineData }>(
         "/api/claim-faucet",
         {
@@ -16,6 +18,7 @@ const Faucet = () => {
           currentWallet,
         }
       );
+      console.log("2 coming here", data);
       return data.result;
     } catch (error) {
       console.error("Error while faucet claim", error);
