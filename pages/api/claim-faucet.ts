@@ -21,6 +21,7 @@ export default async function handler(
         error: "Invalid reqest, User or resource is missing.",
       });
     }
+    console.log("Claiming faucet for user:", currentUser.id);
     const walletPublicKey = currentWallet.publicKey?.toBase58() || "";
     const edgeClient = getEdgeClient();
 
@@ -36,6 +37,7 @@ export default async function handler(
     const Admin_Keypair = Keypair.fromSecretKey(
       Uint8Array.from(adminKeypairArray)
     );
+    console.log("Admin_Keypair coming");
 
     const {
       createMintResourceTransaction: {
@@ -49,6 +51,8 @@ export default async function handler(
       authority: Admin_Keypair.publicKey.toBase58(),
       amount: String(1 * 10 ** 6),
     });
+
+    console.log("Transaction created:");
 
     // sign and send transaction
     const transaction = VersionedTransaction.deserialize(base58.decode(txHash));
@@ -65,6 +69,8 @@ export default async function handler(
       },
     });
 
+    console.log("Transaction sent:");
+
     if (!signature) {
       return res
         .status(500)
@@ -77,6 +83,8 @@ export default async function handler(
     const incrementedTime = new Date(
       currentTime.getTime() + secondsToIncrement * 1000
     );
+
+    console.log("Incremented time:");
 
     const data: MineData = {
       user: currentUser?.id,
@@ -93,6 +101,7 @@ export default async function handler(
     await kv.set(`${walletPublicKey}-${cachedResource.address}`, data, {
       ex: expiryInSeconds,
     }); // Set key-value pair expiry in seconds
+    console.log("Data saved in cache");
 
     return res.status(200).json({ result: data });
   } catch (error) {
