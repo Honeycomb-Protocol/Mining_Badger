@@ -5965,10 +5965,10 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@upstash/redis@^1.34.0":
-  version "1.34.4"
-  resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.34.4.tgz#293feeb8d24328addd859506b58113554708398f"
-  integrity sha512-AZx2iD5s1Pu/KCrRA7KVCffu3NSoaYnNY7N9YI7aLAYhcJfsriQKTe+8OxQWJqGqFbrvm17Lyr9HFnDLvqNpfA==
+"@upstash/redis@^1.34.5":
+  version "1.34.5"
+  resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.34.5.tgz#6d8f115d85f9bf943a89b5411ff7cc12ae25b4da"
+  integrity sha512-ZsYy1AX89OWQIGGQcO8CDBoWyLuVuvuJdjLKfj5WYxnhzYBzYb8E26gbvLO1lVlhVBAIuFX/k0LNjtv7wn2bcQ==
   dependencies:
     crypto-js "^4.2.0"
 
@@ -5979,13 +5979,6 @@
   dependencies:
     "@0no-co/graphql.web" "^1.0.5"
     wonka "^6.3.2"
-
-"@vercel/kv@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@vercel/kv/-/kv-3.0.0.tgz#4579153536c9fc0ca8c52d3d7cfe944ccffd08c0"
-  integrity sha512-pKT8fRnfyYk2MgvyB6fn6ipJPCdfZwiKDdw7vB+HL50rjboEBHDVBEcnwfkEpVSp2AjNtoaOUH7zG+bVC/rvSg==
-  dependencies:
-    "@upstash/redis" "^1.34.0"
 
 "@wallet-standard/app@^1.0.1", "@wallet-standard/app@^1.1.0":
   version "1.1.0"
