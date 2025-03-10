@@ -61,7 +61,7 @@ const CachedResources: Record<string, PickAxes | Ores | Bars | Craft> =
 const getMinedResource = async (id: string): Promise<MineData | null> => {
   const res = await kv.get(id as string);
   if (!res) return null;
-  return JSON.parse(res as string) as MineData;
+  return res as MineData;
 };
 
 const TAGS = new Set<string>();

@@ -86,24 +86,15 @@ export default async function handler(
       will_expire: incrementedTime.getTime(),
     };
 
-    console.log(
-      "Data to save in cache:",
-      walletPublicKey,
-      data,
-      JSON.stringify(data)
-    );
+    console.log("Data to save in cache:", walletPublicKey, data);
 
     // save the data to the redis cache
     const expiryInSeconds = Math.floor(data.will_expire / 1000);
-    await kv.set(
-      `${walletPublicKey}-${cachedResource.address}`,
-      JSON.stringify(data),
-      {
-        ex: expiryInSeconds,
-      }
-    ); // Set key-value pair expiry in seconds
+    await kv.set(`${walletPublicKey}-${cachedResource.address}`, data, {
+      ex: expiryInSeconds,
+    }); // Set key-value pair expiry in seconds
 
-    return res.status(200).json({ result: { ...data } });
+    return res.status(200).json({ result: data });
   } catch (error) {
     console.error("Error while creating user:", error.message);
     return res
