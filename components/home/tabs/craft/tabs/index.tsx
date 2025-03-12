@@ -136,7 +136,9 @@ const CraftComponent = ({ tag }: { tag: string }) => {
                   // hasCivicPass?.length === 0
                   //   ? "Prove your identity through civic to enable crafting."
                   //   :
-                  !craftment?.canCraft
+                  craftment?.lvl_req > userInfo?.level
+                    ? `User level ${craftment?.lvl_req} is required to craft this resource.`
+                    : !craftment?.canCraft
                     ? "You don't have enough resources to craft this item."
                     : ""
                 }

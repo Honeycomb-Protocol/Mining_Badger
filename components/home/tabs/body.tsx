@@ -2,6 +2,7 @@
 import axios from "axios";
 import base58 from "bs58";
 import Image from "next/image";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { VersionedTransaction } from "@solana/web3.js";
@@ -213,14 +214,11 @@ const BodyTab = () => {
 
       if (character) {
         character.source.params.uri = character.source.params.uri.replace(
-          /\/json|\.json|localhost/g,
+          /\/json|\.json/g,
           (match) =>
             ({
               "/json": "/images",
               ".json": ".png",
-              localhost: process.env.NEXT_PUBLIC_APIURL?.includes("eboy")
-                ? process.env.NEXT_PUBLIC_APIURL.split("//")[1].split("/")[0]
-                : process.env.NEXT_PUBLIC_APIURL?.split("//")[1].split(":")[0],
             }[match])
         );
         setUri(`${character.source.params.uri}?t=${Date.now()}`);

@@ -1,11 +1,13 @@
-import axios from "axios";
 import base58 from "bs58";
+import { Redis } from "@upstash/redis";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Keypair, VersionedTransaction } from "@solana/web3.js";
 
 import { MineData } from "@/interfaces";
 import { getEdgeClient } from "@/lib/edge-client";
 import { CachedOres, CachedPickaxes } from "@/config/config";
+
+const redis = Redis.fromEnv();
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,13 +18,12 @@ export default async function handler(
   }
   try {
     const { currentUser, resourceId, currentWallet } = req.body;
-    if (!currentUser || !currentWallet?.publicKey || !resourceId) {
+    if (!currentUser?.id || !currentWallet?.publicKey || !resourceId) {
       return res.status(400).json({
         error: "Invalid reqest, User or resource is missing.",
       });
     }
-    console.log("Claiming faucet for user:", currentUser.id);
-    const walletPublicKey = currentWallet.publicKey?.toBase58() || "";
+    const walletPublicKey = currentWallet?.publicKey || "";
     const edgeClient = getEdgeClient();
 
     const cachedResource = [...CachedOres, ...CachedPickaxes].find(
@@ -37,7 +38,6 @@ export default async function handler(
     const Admin_Keypair = Keypair.fromSecretKey(
       Uint8Array.from(adminKeypairArray)
     );
-    console.log("Admin_Keypair coming");
 
     const {
       createMintResourceTransaction: {
@@ -51,8 +51,6 @@ export default async function handler(
       authority: Admin_Keypair.publicKey.toBase58(),
       amount: String(1 * 10 ** 6),
     });
-
-    console.log("Transaction created:");
 
     // sign and send transaction
     const transaction = VersionedTransaction.deserialize(base58.decode(txHash));
@@ -69,8 +67,6 @@ export default async function handler(
       },
     });
 
-    console.log("Transaction sent:");
-
     if (!signature) {
       return res
         .status(500)
@@ -84,8 +80,6 @@ export default async function handler(
       currentTime.getTime() + secondsToIncrement * 1000
     );
 
-    console.log("Incremented time:");
-
     const data: MineData = {
       user: currentUser?.id,
       wallet: walletPublicKey,
@@ -94,21 +88,19 @@ export default async function handler(
       will_expire: incrementedTime.getTime(),
     };
 
-    console.log("Data to save in cache:", walletPublicKey, data);
-
-    // save the data to the redis cache
-    const response = (
-      await axios.post(`/api/upstash-kv`, {
-        key: `${walletPublicKey}-${cachedResource.address}`,
-        value: data,
-      })
-    ).data;
-    if (!response?.value)
-      return res.status(400).json({ error: "Error saving data to the cache" });
-    console.log("Data saved in cache");
+    const expiryInSeconds = Math.floor(
+      secondsToIncrement > 0
+        ? (data.will_expire - currentTime.getTime()) / 1000
+        : data.will_expire / 1000
+    );
+    await redis.set(
+      `${walletPublicKey}-${cachedResource.address}`,
+      JSON.stringify(data),
+      { ex: expiryInSeconds }
+    ); // Set key-value pair expiry in seconds
     return res.status(200).json({ result: data });
   } catch (error) {
-    console.error("Error while creating user:", error.message);
+    console.error("Error while claiming faucet:", error.message);
     return res
       .status(500)
       .json({ error: error.message || "Internal server error" });

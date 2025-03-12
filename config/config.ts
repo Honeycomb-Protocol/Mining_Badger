@@ -59,7 +59,7 @@ const CachedResources: Record<string, PickAxes | Ores | Bars | Craft> =
   );
 
 const getMinedResource = async (id: string): Promise<MineData | null> => {
-  const res = (await axios.get(`/api/kv?key=${id}`)).data;
+  const res = (await axios.get(`/api/upstash-kv?key=${id}`)).data;
   if (!res?.value) return null;
   return res.value as MineData;
 };

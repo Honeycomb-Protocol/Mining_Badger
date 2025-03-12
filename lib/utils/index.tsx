@@ -403,7 +403,11 @@ const Utils = () => {
             return successfulSignatures;
           } catch (error) {
             console.error("Error during transaction:", error);
-            return executeTransactionWithRetry(attempt - 1);
+            throw new Error(
+              error?.response?.data?.error ||
+                error?.message ||
+                "Something went wrong"
+            );
           }
         };
 
