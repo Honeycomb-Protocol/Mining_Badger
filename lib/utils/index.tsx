@@ -29,6 +29,7 @@ import { InventoryActionsWithoutThunk } from "@/store/inventory";
 let cache = {
   craftData: {},
   inventoryData: {},
+  mineData: {},
   userInfo: null,
   mirroredXP: null,
 };
@@ -45,6 +46,7 @@ const resetCache = () => {
   cache = {
     craftData: {},
     inventoryData: {},
+    mineData: {},
     userInfo: null,
     mirroredXP: null,
   };
@@ -436,23 +438,31 @@ const Utils = () => {
   };
 
   const fetchMineResourcesData = async (
-    setDataLoading: (status: boolean) => void
+    setDataLoading: (status: boolean) => void,
+    refetch = false
   ) => {
     try {
       setDataLoading(true);
-      const data = await Promise.all(
-        CachedOres.map(async (e) => {
-          const mine = await getMinedResource(
-            `${currentWallet?.publicKey.toBase58()}-${e.address}`
-          );
-          return {
-            ...e,
-            expire: mine?.will_expire,
-          };
-        })
-      );
-      setDataLoading(false);
-      return data;
+      let data = await getCache("mineData");      
+      if (data?.length > 0 && !refetch) {
+        setDataLoading(false);
+        return data;
+      } else {
+        data = await Promise.all(
+          CachedOres.map(async (e) => {
+            const mine = await getMinedResource(
+              `${currentWallet?.publicKey.toBase58()}-${e.address}`
+            );
+            return {
+              ...e,
+              expire: mine?.will_expire,
+            };
+          })
+        );
+        setCache("mineData", data);
+        setDataLoading(false);
+        return data;
+      }
     } catch (error) {
       setDataLoading(false);
       throw new Error(

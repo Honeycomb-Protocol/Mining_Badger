@@ -84,10 +84,10 @@ const BodyTab = () => {
     })();
   }, [currentWallet?.publicKey]);
 
-  useEffect(() => {
-    if (!currentWallet?.publicKey) return;
-    InitializeCharacter();
-  }, [currentWallet?.publicKey]);
+  // useEffect(() => {
+  //   if (!currentWallet?.publicKey) return;
+  //   InitializeCharacter();
+  // }, [currentWallet?.publicKey]);
 
   useEffect(() => {
     setEnrichedBodyData(
