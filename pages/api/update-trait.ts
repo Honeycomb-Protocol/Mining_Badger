@@ -9,6 +9,7 @@ import {
   cachedTraits,
   characterModel,
   characterTree,
+  connection,
   lutAddresses,
   project,
 } from "@/config/config";
@@ -53,6 +54,11 @@ const sendTransactions = async (
         skipPreflight: true,
       },
     });
+
+    await connection.confirmTransaction(
+      sendBulkTransactions[0]?.signature,
+      "finalized"
+    );
 
     return sendBulkTransactions;
   } catch (e) {

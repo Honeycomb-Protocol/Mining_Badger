@@ -133,12 +133,19 @@ const BodyTab = () => {
           transaction
         );
 
-        await edgeClient.sendBulkTransactions({
+        const signature = await edgeClient.sendBulkTransactions({
           txs: base58.encode(signedTransaction.serialize()),
           blockhash: response.result.blockhash,
           lastValidBlockHeight: response.result.lastValidBlockHeight,
           options: { commitment: "processed", skipPreflight: false },
         });
+        if (!signature) {
+          throw new Error("Failed to generate a valid transaction signature");
+        }
+        await connection.confirmTransaction(
+          signature?.sendBulkTransactions[0]?.signature,
+          "finalized"
+        );
       }
       const data = await fetchData(craftTags, true);
       await InitializeCharacter(data);
@@ -184,12 +191,20 @@ const BodyTab = () => {
         transaction
       );
 
-      await edgeClient.sendBulkTransactions({
+      const signature = await edgeClient.sendBulkTransactions({
         txs: base58.encode(signedTransaction.serialize()),
         blockhash,
         lastValidBlockHeight,
         options: { commitment: "processed", skipPreflight: false },
       });
+      if (!signature) {
+        throw new Error("Failed to generate a valid transaction signature");
+      }
+      // Wait for transaction confirmation
+      await connection.confirmTransaction(
+        signature?.sendBulkTransactions[0]?.signature,
+        "finalized"
+      );
 
       setEquippedItems((prev) => ({ ...prev, [item?.tags[0]]: null }));
       const data = await fetchData(craftTags, true);

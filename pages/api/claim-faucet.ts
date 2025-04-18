@@ -5,7 +5,7 @@ import { Keypair, VersionedTransaction } from "@solana/web3.js";
 
 import { MineData } from "@/interfaces";
 import { getEdgeClient } from "@/lib/edge-client";
-import { CachedOres, CachedPickaxes } from "@/config/config";
+import { CachedOres, CachedPickaxes, connection } from "@/config/config";
 
 const redis = Redis.fromEnv();
 
@@ -72,6 +72,12 @@ export default async function handler(
         .status(500)
         .json({ error: "Minting reource: Error while sending transaction" });
     }
+
+    // Wait for transaction confirmation
+    await connection.confirmTransaction(
+      signature?.sendBulkTransactions[0]?.signature,
+      "finalized"
+    );
 
     const secondsToIncrement =
       "mine_time" in cachedResource ? cachedResource.mine_time : 0; // convert seconds to milliseconds

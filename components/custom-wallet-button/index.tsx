@@ -66,7 +66,7 @@ const CustomWalletConnectButton = () => {
             onClick={async () => {
               if (authenticated && user?.wallet?.address) {
                 await logout();
-                wallets[0].disconnect();
+                wallets[0]?.disconnect();
               } else if (metakeepCache?.publicKey) {
                 clearMetakeepCache();
               }

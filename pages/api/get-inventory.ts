@@ -19,7 +19,6 @@ export default async function handler(
       return res.status(400).json({ error: "Missing required parameters" });
     }
     const edgeClient = getEdgeClient();
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const mints = (
       await connection.getParsedTokenAccountsByOwner(new PublicKey(wallet), {

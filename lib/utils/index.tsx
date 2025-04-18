@@ -239,6 +239,12 @@ const Utils = () => {
                   skipPreflight: false,
                 },
               });
+
+              if (!signature) {
+                throw new Error(
+                  "Failed to generate a valid transaction signature"
+                );
+              }
               return signature;
             } catch (error) {
               console.error("Failed to send transaction:", error);
@@ -250,8 +256,19 @@ const Utils = () => {
 
         if (!successfulSignatures.length) {
           console.error("Error minting resource");
+          setDataLoading(false);
           return;
         }
+
+        // Wait for transaction confirmation after successful minting
+        await Promise.all(
+          successfulSignatures.map((signature) =>
+            connection.confirmTransaction(
+              signature?.sendBulkTransactions[0]?.signature,
+              "finalized"
+            )
+          )
+        );
       }
 
       if (data?.result && data?.result[tag]?.length > 0 && !refetch) {
@@ -346,6 +363,11 @@ const Utils = () => {
                   skipPreflight: false,
                 },
               });
+              if (!signature) {
+                throw new Error(
+                  "Failed to generate a valid transaction signature"
+                );
+              }
               return signature;
             } catch (error) {
               console.error("Failed to send transaction:", error);
@@ -402,9 +424,19 @@ const Utils = () => {
               return executeTransactionWithRetry(attempt - 1);
             }
 
+            // Wait for transaction confirmation after successful refining
+            await Promise.all(
+              successfulSignatures.map((signature) =>
+                connection.confirmTransaction(
+                  signature?.sendBulkTransactions[0]?.signature,
+                  "finalized"
+                )
+              )
+            );
             return successfulSignatures;
           } catch (error) {
             console.error("Error during transaction:", error);
+            setDataLoading(false);
             throw new Error(
               error?.response?.data?.error ||
                 error?.message ||
@@ -443,7 +475,7 @@ const Utils = () => {
   ) => {
     try {
       setDataLoading(true);
-      let data = await getCache("mineData");      
+      let data = await getCache("mineData");
       if (data?.length > 0 && !refetch) {
         setDataLoading(false);
         return data;

@@ -1,494 +1,29 @@
 {
-  "project": "4wxZ5KLEfCX7ovJW7QNsWKauswZVZMoUhN2jfKExcgmo",
+  "project": "BasZ7rYxRahYfJiGrWRpLnKrzxXxk92joxRTUfYskmAq",
   "lutAddresses": [
-    "61cUW65MR2uCG1VUdPQJ57wArK7vSmc8ruDWmHtKG2Sp",
-    "AzKsbNcF88yFXfqQsprRs5BAHJxgSyypJptaVH1bKCb4"
+    "8ofDy47FLkhFv2eo2hHZhN7jn769v3EupTedVebBhZxM",
+    "G89gNivHKfV5cjeCcBp6ii1qyki1MzppCfyQdfRktrst"
   ],
-  "characterModel": "Encqh56u9V3XHBPa5om9JAkDbwLpgD98eTLtr17A5E5n",
-  "characterTree": "Fs3td8fYKdY4bNNatTwrRhdkVvDUnJBi1c3egzaa2vMG",
-  "assemblerConfig": "6PdQAS3LNUCNxrU6piAyHs51iNW6MkpCj3bYVJS4nDzE",
+  "characterModel": "4Lue5FCzRGdF17Ko3nHEDCWupZkaAeU9roqJBeMB65Fd",
+  "characterTree": "5HxAif6yqVRNHv5bJnkzcjf3sRH29EWm1LkvDDmdWAnr",
+  "assemblerConfig": "8kGgETMnVFr6f5bWuNSe59xUKc6jVPGr6FwsDA2CfrEG",
   "traits": {
-    "ORO": {
-      "name": "Robot",
-      "symbol": "ORO",
-      "craft_time": 48,
-      "lvl_req": 35,
-      "xp": 540,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "BRB": 5
-      },
-      "uri": "https://gateway.irys.xyz/JArDW8oDkxtqwSZEvN98K4LyaQWJ9bT3UsdagUCc8qmL",
-      "address": "3ki1iuCgFC5LQEzXLBCtjcjR7wj32uPhenkbAzdbcHxU",
-      "mint": "2dJuVHFZd7jqB2nrgHWHHMp3yaPkSiskLiT9YNSt4YmX",
-      "recipe": "8GzXePfhb58c33KDncERoPGAH2cPrW5nyxSZx6ohqWHr"
-    },
-    "RGR": {
-      "name": "Enranged",
-      "symbol": "RGR",
-      "craft_time": 21,
-      "lvl_req": 7,
-      "xp": 980,
+    "LIA": {
+      "name": "Reading Glasses",
+      "symbol": "LIA",
+      "craft_time": 15,
+      "lvl_req": 18,
+      "xp": 877,
       "tags": [
         "Eyes"
       ],
       "ingredients": {
-        "ADO": 1,
-        "GLB": 4
+        "SLO": 3
       },
-      "uri": "https://gateway.irys.xyz/G4PfvVAZU1RZ7WiVmXDopPooF7rojA1Qf1GVvh1zEUH8",
-      "address": "3uiQ1UEBVTUWL1k84kqSpe8Ho7ATUyMFgfiZnEhTrsn5",
-      "mint": "BC9jz73VijZkqt8DmRQ9WMoFcvLUx8Jzw9aBz1e57KDj",
-      "recipe": "9b1r6Zpdm77iRRcpBEr2VNV7cGGFi1GSnbdsM3C4CESW"
-    },
-    "CAC": {
-      "name": "Black Bandana",
-      "symbol": "CAC",
-      "craft_time": 17,
-      "lvl_req": 47,
-      "xp": 789,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "GLB": 6,
-        "CLO": 3,
-        "IRO": 4
-      },
-      "uri": "https://gateway.irys.xyz/39XQcMsHqxi1h5A1wgmovcpKLxRXmswBc4rmPmByWYaV",
-      "address": "H515Ln4u8Fkud2Ha19s5zbjNNtZWHijw3kYR53PxNjib",
-      "mint": "4Wv1UMK2EJBeyDuMCQJVkZ5DB4knWe4zn7EYGNbr1hxg",
-      "recipe": "4hbMzwgUF8JtfFCsaNNBJiYCc2GiBRrKKtJde7LK5Jkc"
-    },
-    "RHE": {
-      "name": "Cheerful",
-      "symbol": "RHE",
-      "craft_time": 23,
-      "lvl_req": 15,
-      "xp": 263,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "MTO": 1,
-        "IRB": 1,
-        "RUO": 2
-      },
-      "uri": "https://gateway.irys.xyz/7JWYou7GRrCRCUfMi9bsbo7rfDgroAqd2hvE2iKrBsEA",
-      "address": "9re4SwaYNtQLeWe7bK5VK4ufsTDVQ2MX1XY82V4EWTYN",
-      "mint": "HbQVGf4SFhWWWP5aKJfieCjbiQUosB368csh4hHafyM3",
-      "recipe": "EJKdDHp6V6c7PhNm3wEkH6oxmMRoEC8SSAzpTD5wNggX"
-    },
-    "ETN": {
-      "name": "Blue Exoskeleton",
-      "symbol": "ETN",
-      "craft_time": 47,
-      "lvl_req": 6,
-      "xp": 724,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "BRB": 5,
-        "IRB": 1,
-        "TNO": 4
-      },
-      "uri": "https://gateway.irys.xyz/FCrTFiFCLvkQKV4EnpkAxd8nx4Vm6GnY7z8rkhvUBi5M",
-      "address": "E8T6h5pqxwVYuiSePYWMXJyDgadXktBvi32NKD7kAsCA",
-      "mint": "2LHHqqb18uNYFX5YyPcPPH5QToEzgwzbxXj2XGvqNMLr",
-      "recipe": "3trUwvgQ7GwE5i2rGSfP56aTpT6krWKv4NTWspqfY6Ha"
-    },
-    "GID": {
-      "name": "Agitated",
-      "symbol": "GID",
-      "craft_time": 24,
-      "lvl_req": 3,
-      "xp": 844,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "IRO": 5,
-        "SLO": 6,
-        "TNO": 1
-      },
-      "uri": "https://gateway.irys.xyz/8LTsCPEGEGC1eQjNF5rwgttp1kb3EqS1cQ8rsht8tCDC",
-      "address": "CvLnghEGyJ1mTK3ZndREYZw9DmrSNTGNDrv82JAPDfC2",
-      "mint": "6ymUjHzo7vRQwJa2TGNG6R7yKwbJu4NDeYob8uJQpKt9",
-      "recipe": "3TqY9EP3378ZmKc3BPyvyrxiqwLysiYixMcysnJaZJun"
-    },
-    "VDA": {
-      "name": "Red Aviator",
-      "symbol": "VDA",
-      "craft_time": 61,
-      "lvl_req": 38,
-      "xp": 454,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "CLO": 5
-      },
-      "uri": "https://gateway.irys.xyz/Bc7NZEXzKxKxFueGtyp9onyHdrecRw7QcozBzfHrRfCT",
-      "address": "EQzz7C21C36HgBNbs5eYPpQ5QSeNYgrCM3GcFANsv1oh",
-      "mint": "F61MR7x923JgZAW3Z9nnoHbA3nSFyYS6Ysbsz8Wikk9P",
-      "recipe": "98dfD86fkAwanKHHgtGVa3935yPee6jCW7hx2HoWAQ2j"
-    },
-    "TTT": {
-      "name": "Golden Teeth",
-      "symbol": "TTT",
-      "craft_time": 12,
-      "lvl_req": 22,
-      "xp": 981,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "GLB": 6
-      },
-      "uri": "https://gateway.irys.xyz/ArAZcDhh87sGKLNxgXtFWnkx6xDTPXVGokdovSjN8k7v",
-      "address": "EKSuF3KC88KsMH6SXvDN3gudUMeWCS9tTUDZ919bZSAN",
-      "mint": "5K2gAyDAUsACAm45TJWnRoMiJPHGUbjbQiPMJXEXiog7",
-      "recipe": "B4xd9dsQ9XddX6vHoKWtaFeq6C9dC86fJMbd3pBjzGSo"
-    },
-    "IOM": {
-      "name": "Zombie",
-      "symbol": "IOM",
-      "craft_time": 19,
-      "lvl_req": 19,
-      "xp": 941,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "GLB": 1,
-        "CPO": 2,
-        "IRB": 5
-      },
-      "uri": "https://gateway.irys.xyz/8i8jn2nqcBZTCYke2iVLznU7ptV98visQH2Zvv4Lbxbt",
-      "address": "BstPQF5JCjkrY9o7oVLCxtfsXbZaa8hr3XqbR6QeQEp4",
-      "mint": "E2UDuLzdiLD4D5Mo5CpUtzJgWXgeqDJjcaMQBgN2RYgX",
-      "recipe": "BD1fknDjWqBctGujTa2p6NcxhE2RZcPee2TexyPaTpJC"
-    },
-    "OOB": {
-      "name": "Brown",
-      "symbol": "OOB",
-      "craft_time": 19,
-      "lvl_req": 39,
-      "xp": 354,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "SLO": 1,
-        "GLO": 5
-      },
-      "uri": "https://gateway.irys.xyz/8h6CrVq8AEZnfxQLkKD6GNRjUp5q7F2R2ty9CqTciqSb",
-      "address": "GkYrWy6WRr8rQgfPka1UQUMNRxtCGUXUYzvVm3NzUmD5",
-      "mint": "8QcRmZixS96fb5PwLoYeZMPtXiYbuiJuMULePYxVAbm3",
-      "recipe": "4nvMhGzfjiRcEGpExS3oduh1FZkghEbhYwjJKDPzBxgp"
-    },
-    "ENG": {
-      "name": "Renegade",
-      "symbol": "ENG",
-      "craft_time": 55,
-      "lvl_req": 11,
-      "xp": 783,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "STB": 4,
-        "CPO": 2,
-        "CLO": 3
-      },
-      "uri": "https://gateway.irys.xyz/5wUWNLUbzSurC4sPs9UtfzgML4ut3ZJ3fLPBcuDsoM2z",
-      "address": "ANvjpExTSthiFXiDEb3NzMHfjpza6QeNB6ANTb1YShXT",
-      "mint": "3hxXUdkKUNQhcZtHnivtGcqcvce3Yc3XqpCoovJpbBum",
-      "recipe": "CjVno3brhdtjGErbTpwh7mNbhhC7Z3u2yxtrP2QNksc7"
-    },
-    "YAM": {
-      "name": "Assymetrical Eye Wear",
-      "symbol": "YAM",
-      "craft_time": 30,
-      "lvl_req": 26,
-      "xp": 106,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "GLB": 6,
-        "SLB": 5
-      },
-      "uri": "https://gateway.irys.xyz/D3NnFwvuhsDtnuNgmx9vraeR7JKRf8y4QHTsfuvYt32J",
-      "address": "GrmSYjXaQeWEpcbTjZPmKgPb8t3o2uL6HLVTB27G1SVm",
-      "mint": "4ywKivGDxNQg7cKvpke4SW1S3T3wRHBftoEfUHVTeB1J",
-      "recipe": "Cq6xpsq4xnTbuusTke2zJ7ZsKFoU3GX8iNfq98PkGaoN"
-    },
-    "AAS": {
-      "name": "Space Mask",
-      "symbol": "AAS",
-      "craft_time": 48,
-      "lvl_req": 1,
-      "xp": 373,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "TNO": 1
-      },
-      "uri": "https://gateway.irys.xyz/7TTug95q5DWNnCyTX8fw2pAKkdAacyoYnbJNSBoXNnkk",
-      "address": "g6odsLu98QLw9qwM84GLJqUYdkfEQ4aiHuDdwx71gDV",
-      "mint": "oHTeBLz4xJHNawQs9FyQDsVGBAo31hwHex6sv6ghm13",
-      "recipe": "Bs8ocJbMReNFtu7nHhRsBjDhmaF9gDVYeFy9J7uK9fXR"
-    },
-    "LTE": {
-      "name": "Metal Stache",
-      "symbol": "LTE",
-      "craft_time": 21,
-      "lvl_req": 5,
-      "xp": 812,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "TNO": 3,
-        "SLO": 4
-      },
-      "uri": "https://gateway.irys.xyz/DYqjgirGAmfiHFSGQWzSNwq3f9vxczUhGtvnnWPUSMaH",
-      "address": "FoiJfny1VZwnBeFzFR8V6f6kYoWrmV7fC75VKyoJStrD",
-      "mint": "CnQHNNGY88DBZii6QEFSXGAgpUQYdv4k2AUMomnjsN4m",
-      "recipe": "2Ypg35wAoKTrMECCg8LFAjwk34xQe6dQTwoD2Cf8k6MQ"
-    },
-    "BRD": {
-      "name": "Red Bandana",
-      "symbol": "BRD",
-      "craft_time": 53,
-      "lvl_req": 20,
-      "xp": 616,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "BRB": 6,
-        "CLO": 1
-      },
-      "uri": "https://gateway.irys.xyz/8ahZmPzUQtNm8tEu2x4uqSxLieKXrch3g6i2XS5DEuCz",
-      "address": "GquYAZWonZ2tgJEAQCPwQnMJYWd55MvX8rhwweGyF1gu",
-      "mint": "7epmUgLAaLd2Rr5sLH7mXovHmTvk9kbW8MhsPEHN2Lhp",
-      "recipe": "5LVyREwrKKgzJbf7KNo46ij6EWFCSAp87KGZM3dnPkyy"
-    },
-    "SNU": {
-      "name": "Kitsune",
-      "symbol": "SNU",
-      "craft_time": 26,
-      "lvl_req": 16,
-      "xp": 906,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "SLB": 1,
-        "CPO": 4
-      },
-      "uri": "https://gateway.irys.xyz/3iUgGngsZX4f7uWyLAU9eFPpPf2u5dNruGYC85QRKHVQ",
-      "address": "F5K9tHU7y59UMc9Ni3FcCNRDRy5QUfSpkzT3nydCTsma",
-      "mint": "HHkedjTgzjjgPvEFaF3TyLT2xrVPN7oZY44pzTa1ocd5",
-      "recipe": "6T5UN6ZAsHfygLRmf4wBrcux8j8PLFeT2tq9CKnuUTKx"
-    },
-    "OOE": {
-      "name": "Roadioactive",
-      "symbol": "OOE",
-      "craft_time": 19,
-      "lvl_req": 13,
-      "xp": 317,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "MTB": 2,
-        "SLO": 4
-      },
-      "uri": "https://gateway.irys.xyz/DxpzQEViqpyJPbQmZSUmrvHD21yumhq7apasQ5dETMbw",
-      "address": "7EXRph5ffqoDbRUGy1bP64mp5m3L8u3BfNPzfQAbEpW1",
-      "mint": "AmyLJoscahsy6ivSKoEDvS1c2zyHrsAGMk8jXTmcQeVi",
-      "recipe": "9Q43CC67YfEum5XEpE5WymdMSSPkWHB29J73ybz38jkq"
-    },
-    "INP": {
-      "name": "Pink",
-      "symbol": "INP",
-      "craft_time": 57,
-      "lvl_req": 14,
-      "xp": 822,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "GLO": 4,
-        "TNO": 3
-      },
-      "uri": "https://gateway.irys.xyz/DwZRF6RtB55aCYTVDHsYgJGb4bPH6KsxPyrjSRpP5Am5",
-      "address": "6kgXb1prqrXavfJqXE6c6fgEZJZXKB2tnT3KZcZP2jBX",
-      "mint": "9zk3gxnG3qp6bz4u2ovau1V18nKzqoqmShzLDqZoYnQ7",
-      "recipe": "7c5fzWzujT8S9Ui5V5sWDbChnZJSs14qaKTS9PVcSRXD"
-    },
-    "RRD": {
-      "name": "Red",
-      "symbol": "RRD",
-      "craft_time": 52,
-      "lvl_req": 3,
-      "xp": 283,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "SLO": 6
-      },
-      "uri": "https://gateway.irys.xyz/9H9e4mimnFbP8UZ263PXEq8NQWidbYCZNBaNCksgbupx",
-      "address": "6N2qBvY3q5dXx8ikd4wZsBK4WmsteftJHs7iNvoGXMxk",
-      "mint": "H6mtms8Mg2c2Kr3fcRYZx4wcmuYdVMtt5ppYy1b31Dx7",
-      "recipe": "5SiMH4tvDiLG5T5TjkfKFJVxEFXr8uMCbTnmZft6UiTh"
-    },
-    "BAC": {
-      "name": "Black",
-      "symbol": "BAC",
-      "craft_time": 36,
-      "lvl_req": 47,
-      "xp": 657,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "GLB": 5,
-        "SLO": 5
-      },
-      "uri": "https://gateway.irys.xyz/2KVCgyvVUMGM7AukWWEw39C51yVoqx2WcmaGLe1Cgp3w",
-      "address": "EzrAjYHWYcEq5ohA4eSkiWqDCNTvzU4fU1pjVsCBT11w",
-      "mint": "821hCbbeFS8bNtpTXuzE3hegKAEVQEWtUjzsunbTgMc",
-      "recipe": "tuFaZrLPuctxP5K8xkPKcxtBBjeMGGr2qtW75SWG3ag"
-    },
-    "SMO": {
-      "name": "Moss",
-      "symbol": "SMO",
-      "craft_time": 61,
-      "lvl_req": 46,
-      "xp": 575,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "CLO": 5
-      },
-      "uri": "https://gateway.irys.xyz/FeA5988a1Q7NG87sPofPwHD3SuXzYqeEq85ed2VfeE5H",
-      "address": "DMey1oq9Kz2A535QgDb5EAYVBonG9J6BTi4GErhpKU4H",
-      "mint": "GFKfNKNh36Jvzqt263ztjF3GPM4V4RTXv7Q31BzzPbrY",
-      "recipe": "BYfowMkBacHTe1qRjz1uaV8qhhck83EmFuKz3itZvgan"
-    },
-    "BBL": {
-      "name": "Bubblegum",
-      "symbol": "BBL",
-      "craft_time": 22,
-      "lvl_req": 29,
-      "xp": 967,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "BRB": 2
-      },
-      "uri": "https://gateway.irys.xyz/5aLNrqqSFsSU1AN7DGe7fk4Gb7JFtva3gJT7c5jV4ZUD",
-      "address": "44APkvsgMmu6tvKtGDhjVt9oshvweRpxk8NbebG72JrT",
-      "mint": "CWP96LWBmuGS2EQvkHbxPj9oACR4HYuAYySJxgFFCfRd",
-      "recipe": "HuQdCPg2A22rbd3JY2JbuEUbkdBMJB7kM8fSmmvSppi1"
-    },
-    "TTN": {
-      "name": "2 Tone",
-      "symbol": "TTN",
-      "craft_time": 56,
-      "lvl_req": 1,
-      "xp": 483,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "IRO": 5
-      },
-      "uri": "https://gateway.irys.xyz/4rcAaEixFmjsV5YfeZFu2mCHLrS3NduQSjY2YRSQe6Gx",
-      "address": "BAK7e2HiMSzWyDioTc9rJfrv9aNc8tgPihwMrMFdmK1c",
-      "mint": "hhWeuTAbiEB1AY8fPCWCe2CjMJE5ksuFna2vSs5zwiK",
-      "recipe": "AgLSKHGpuiwPCrP93iucBJwUpkMHoUamzuPujLa79qhR"
-    },
-    "AIE": {
-      "name": "Pirate",
-      "symbol": "AIE",
-      "craft_time": 21,
-      "lvl_req": 33,
-      "xp": 755,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "SLO": 1
-      },
-      "uri": "https://gateway.irys.xyz/6pJNEyDNvZ8ARqVDGbndGNCghdEdp3PKRXVcNr3qMPUq",
-      "address": "HnhfGEifhSega5WBbTTZGEsJNYumxj7KrmfV6mo8Qmpy",
-      "mint": "2GcXu2nAg7dJ8YJxwwHEvVtJEf56EFKY51NEJFkjT2E7",
-      "recipe": "7LXbht5WSWgna8zcpmwub67iuMVqj1RrBYyBQ6kut1Dq"
-    },
-    "YLB": {
-      "name": "Blue Eyes",
-      "symbol": "YLB",
-      "craft_time": 29,
-      "lvl_req": 46,
-      "xp": 185,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "GLO": 4
-      },
-      "uri": "https://gateway.irys.xyz/AoH9TnPCao14CwgN2jx1oQqdUrp9ZAeN9jbSZyS8989U",
-      "address": "7eJpmQv8kaKaRg7U55LG624QHSWPh3cMuMB4Btr456pm",
-      "mint": "qTu3PeDy33KgLU33m5mCvJWQcXLxgBh7jw5tw8ihWrp",
-      "recipe": "7JAdUnQALEXk3WSRANmKJe1bCKM9WFATC8g3d2fgKuor"
-    },
-    "CNT": {
-      "name": "Contented",
-      "symbol": "CNT",
-      "craft_time": 58,
-      "lvl_req": 13,
-      "xp": 794,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "SLB": 2,
-        "BRB": 2,
-        "TNO": 3
-      },
-      "uri": "https://gateway.irys.xyz/5jm9szYfx5mVug5FPC9ggkbZWHj5B7DfMsURBP2QGtaY",
-      "address": "GgxVn1cWmiyedBubC3J6gkZAoYJcCGkwMZx9Nufh77QP",
-      "mint": "6VMej6PPwhzdfo65PMmSuHCGQ6odivZWk6hQN1cW6zAF",
-      "recipe": "HU87gpq8EydCiSb6a3NRdrCGWVm4p9taWab1rGR76Vo2"
-    },
-    "SIR": {
-      "name": "Sci Fi Visor",
-      "symbol": "SIR",
-      "craft_time": 25,
-      "lvl_req": 2,
-      "xp": 288,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "IRB": 3
-      },
-      "uri": "https://gateway.irys.xyz/9DSufArzoaVcBtsqQPK9nUzmpLaYbKupVJUbKQsaVn7m",
-      "address": "Adf3gtjgm1WEKBvJdmkDaeFBHkheGgzofHQdVeS7P5p9",
-      "mint": "DfCWP7XfTMgjUCKrVUv1ddWD1rugsFPdi1ynA7ZU4jFW",
-      "recipe": "6uj9w6VRKThGnFhjUeM89phd4mCNZcfNvEwjDB6fU7nM"
+      "uri": "https://gateway.irys.xyz/2pEh22qtBqSkWBK8kteFTKVCCwareSzXfYExYjaApFj3",
+      "address": "HawYEpiC9iJZnGtgJGGWQZu4P2QMNnR53ZrueUdeaHvR",
+      "mint": "7HxmpVHAqHM1pVaGtpFk9BXMRb4m9ra5cBoPdqhSt92X",
+      "recipe": "5N8SBvrdW5RHHfxx3dW6WWA4g6EvUeP1iVf7ijQKGexZ"
     },
     "ETO": {
       "name": "Octane Goggles",
@@ -503,132 +38,9 @@
         "GLB": 1
       },
       "uri": "https://gateway.irys.xyz/DpJ2tCLa5Mu2vVop59coDbNji5Z68aDrwgowQ4AXXDri",
-      "address": "6dixsdjHtQRQuDcdR5FjuPnTdDVBmeQH5K2Pabm49jVg",
-      "mint": "3s1KufcBkSbbMZEJ4u7AhrHjSF2JkDTFsrp5oomiayWY",
-      "recipe": "AfMFVTaZ15625PXLfVENUF1BvP1xmQYfHxJabumgnMPR"
-    },
-    "GGO": {
-      "name": "Orange",
-      "symbol": "GGO",
-      "craft_time": 15,
-      "lvl_req": 39,
-      "xp": 621,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "GLB": 2,
-        "GLO": 2,
-        "CPO": 1
-      },
-      "uri": "https://gateway.irys.xyz/BKMBP1q5djnZZ8HsBVi7GzvvqPDDp9uCPxrXN1D7AbJJ",
-      "address": "FDC94nSLvtZB4EpKaJxGTWouu2g3LWFHngMtmrChj47Y",
-      "mint": "89dLK8Tzf44L94G1QyCyQzFguAM2nVHk3k7aYjbPFpUZ",
-      "recipe": "GcS2D1nD8Ykf4aXyNeuDDeEEqLYwaktqnHzmKhURXraW"
-    },
-    "REG": {
-      "name": "Grey",
-      "symbol": "REG",
-      "craft_time": 28,
-      "lvl_req": 48,
-      "xp": 704,
-      "tags": [
-        "Fur"
-      ],
-      "ingredients": {
-        "IRO": 4
-      },
-      "uri": "https://gateway.irys.xyz/6k7ChFYAkQNdYemRqkqkztKUkcw7Z9ZbAuikAivGR3XN",
-      "address": "AZLUaLGbqQjXGGhvvYf361YG3XTishpqqop8dJknYfSx",
-      "mint": "G5EjLfTQsuak3rFPp549owZT3rGHsLghbzewPnc9aW66",
-      "recipe": "7rdwL5vn9ZMCkiTkimhnVxWUbiqzEWTZ6md1AQSsjQRM"
-    },
-    "ATA": {
-      "name": "Cigarette",
-      "symbol": "ATA",
-      "craft_time": 49,
-      "lvl_req": 45,
-      "xp": 847,
-      "tags": [
-        "Mouth"
-      ],
-      "ingredients": {
-        "IRB": 2,
-        "SLB": 3,
-        "GLO": 4
-      },
-      "uri": "https://gateway.irys.xyz/JXJ1RaZgsySgbQUJooey5s8cgQCZU8djWj7Mhc9Lg4F",
-      "address": "13UPMHfeZjezMoeC9sSi2B88bQGUQMoDk7QyPvGyMeCy",
-      "mint": "CyNAZmxNWqhTosFu5iXgNhRa6teFoLekGnCpJ9WEN8XS",
-      "recipe": "7N45ZuTNAhB9cn7wE1G6Qsn1uoNqzC7X9FWLxhGjn86D"
-    },
-    "EEL": {
-      "name": "Evil",
-      "symbol": "EEL",
-      "craft_time": 61,
-      "lvl_req": 7,
-      "xp": 585,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "GLB": 1
-      },
-      "uri": "https://gateway.irys.xyz/JAFAWKhwEzAiBwPNqSKWAAiRN4FAefE88ynpwZjut13m",
-      "address": "9werdPiZtvtwQ84Jk49PV5wpgzPByHhRW6cyVPHjYKNx",
-      "mint": "BovGqbprjjFKVJzuwsK1HoocTgwpLpGrWCe2mmNqBqmm",
-      "recipe": "DzBPhyj8SSAtPQQCHocWxtyazG1R2CwxvG8q9QnyXmE8"
-    },
-    "PSA": {
-      "name": "Sharp",
-      "symbol": "PSA",
-      "craft_time": 30,
-      "lvl_req": 41,
-      "xp": 698,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "SLB": 3
-      },
-      "uri": "https://gateway.irys.xyz/5vic5U7QP9qc96wd5jyia337mBkHuQodB4QwGv4tH1vf",
-      "address": "DZctopg5mxgjc4pszYh8KzNCUXW9QEkomVzApMEXaTqn",
-      "mint": "7Hcu7muufcvsvrEhUttvf6rF2BH19dEyS1g3m6ysWAzd",
-      "recipe": "BG5HtPAg5NVMLUybYX9GiHWHHLmTC47Fhu1yLyYVwhxF"
-    },
-    "FSS": {
-      "name": "Sci Fi Glasses",
-      "symbol": "FSS",
-      "craft_time": 41,
-      "lvl_req": 32,
-      "xp": 434,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "CPO": 4
-      },
-      "uri": "https://gateway.irys.xyz/63g43u53W4a9U2t3kkM1Q93WLQsupJpRhpQKJJZPizTN",
-      "address": "97i6qEmCJwd4ChKtXTUShjBrsEzquirZjLg4tcV1i1oP",
-      "mint": "DrqBzPWE8o8hUyLhv21LrHcWJouingGtZofWZ5aL89Pd",
-      "recipe": "6Ftm5tyWNdisBBgXe1RYszwX7CU1GfvJoSgLNXoAFaX3"
-    },
-    "KLK": {
-      "name": "Black Aviators",
-      "symbol": "KLK",
-      "craft_time": 41,
-      "lvl_req": 4,
-      "xp": 136,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "TNO": 4
-      },
-      "uri": "https://gateway.irys.xyz/6T9vmFy5cdYoTZH7Lezie7DvywRcp5vaBLTZeKpnDXMK",
-      "address": "7Mi2gYGG8uGiCsy42WjskR5o3u1imcEa4FiFy81uktBK",
-      "mint": "BMqH9Z5RcjiV7ZYg85DXnUxgz4ZLXsVpPmChocV57jTi",
-      "recipe": "8RyTCkvUNvhEhrfABCmHDHJsPbK4VrNFg4jgNLwdxTmE"
+      "address": "GEAwWmFXkv3nYtUC19hUxuf8RuuxFCZ2TfsFyZWM2ef9",
+      "mint": "EDXvNkBC8pjfFJScKBgTtHja5bLVNEC9duZxUqjUT7xt",
+      "recipe": "BaA2e47MkdyLdFW2dDNDB7hiEDKptx3hsuoWWHcsR85D"
     },
     "KAK": {
       "name": "Dark Grey",
@@ -645,26 +57,80 @@
         "STB": 6
       },
       "uri": "https://gateway.irys.xyz/EmGdadX1tL5zRs6aH38FRRyHRCc7DKeU5X7VkpTjSEKe",
-      "address": "A2nfqh5WD86856WzgPVifS5doB1BvYNMMdDPjGkpJpzL",
-      "mint": "HWYQY6CJgdD9Ab6a6jYQD56bBWjkC74HprxdVZDdVgjJ",
-      "recipe": "59XZ341U8pgJX2THV18GTCCRtBuhEHhT9cEc6DtgcP65"
+      "address": "5iKDVjgG6YkXRCQXuagPrmvrzAhJBsQFiEnrZad7hXH9",
+      "mint": "A5N6EVqvJR4AWPHxPBMowEXrXt7SgkxRnP9twprvaMNX",
+      "recipe": "37hERQYGhCXgVMveWvJWzgJLEZRqspRvwAQafDgEHLv1"
     },
-    "MMD": {
-      "name": "Mad",
-      "symbol": "MMD",
-      "craft_time": 49,
-      "lvl_req": 28,
-      "xp": 850,
+    "TTT": {
+      "name": "Tan",
+      "symbol": "TTT",
+      "craft_time": 12,
+      "lvl_req": 29,
+      "xp": 210,
       "tags": [
-        "Mouth"
+        "Fur"
       ],
       "ingredients": {
-        "CLO": 4
+        "IRB": 4
       },
-      "uri": "https://gateway.irys.xyz/7JAqaJHNFsLDNHeHhzovKeu2MPtDwXFDCSPELZoKe8EV",
-      "address": "62sdc1jGoHR1vrW6bxQKA1AhpXx8dUDnBQqDXH84qQJv",
-      "mint": "Rv4NCgmTMmSs9o2F4zDm1FDJrczLAqb5Ea5ciHZfH9M",
-      "recipe": "Br2jzzPxQGbubsP5xeUXp75YFzRx1Ka9GPEFHRiMJrth"
+      "uri": "https://gateway.irys.xyz/3pBUxJG3Xdzr315kuTV5bxiaHiLovmLvy4iDmM1Q1Qvr",
+      "address": "aN57QpEADZZkgdL6X4dPxNbV6mcNq1fkMqVBMUzVujg",
+      "mint": "J9N8EgKVKPPHG4yjohQ2zRKqLMxwmaT8eYCfkNQyKPDP",
+      "recipe": "CRmhWSvBBZYR26YErZ76yGi65BUE5XCcEgUZ9EFJx1s3"
+    },
+    "ENG": {
+      "name": "Renegade",
+      "symbol": "ENG",
+      "craft_time": 55,
+      "lvl_req": 11,
+      "xp": 783,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "STB": 4,
+        "CPO": 2,
+        "CLO": 3
+      },
+      "uri": "https://gateway.irys.xyz/5wUWNLUbzSurC4sPs9UtfzgML4ut3ZJ3fLPBcuDsoM2z",
+      "address": "2LhLNY6H8kVXZUSztDrArX3uHHrPK8SBiVCgfyRLdyYp",
+      "mint": "FVzFrx4smhvpEnNR7jZDYaagrch8FLEHCRaFLxC7omc2",
+      "recipe": "57oe8sPDs6p79PYvBx2zyCP9Bzo9BL2ZC2BDdfcPWiPi"
+    },
+    "HOO": {
+      "name": "Hololens",
+      "symbol": "HOO",
+      "craft_time": 44,
+      "lvl_req": 43,
+      "xp": 937,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "GLB": 4,
+        "CPO": 2
+      },
+      "uri": "https://gateway.irys.xyz/9j1rXpzMxqbDF4N7qPpEuytSUG7yKHw4MkQM6uUaEgyo",
+      "address": "5zgwLeex8dkCiBzJqFVDRMofp7Pj3ux6Ym4iXYpMcJg8",
+      "mint": "Czryh2hGKq17ywokayTRpV9F9NsekPskXjAcCNEvPUMS",
+      "recipe": "GHsNp7nn2k3B2NSYiV8nbU67zYMkyPPK8DzxS2VXyUnJ"
+    },
+    "AIE": {
+      "name": "Pirate",
+      "symbol": "AIE",
+      "craft_time": 21,
+      "lvl_req": 33,
+      "xp": 755,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "SLO": 1
+      },
+      "uri": "https://gateway.irys.xyz/6pJNEyDNvZ8ARqVDGbndGNCghdEdp3PKRXVcNr3qMPUq",
+      "address": "BVfrhDBDLYHoaKveMaVMpSnJcHiRywHkFWZGncxXREHt",
+      "mint": "3trk5gAAVzYFfHW817xGdRjxGH2Z4Xu49KGcRtFB9BCu",
+      "recipe": "GCpE9D5XS1BH9i6BrymPuzBmufoFKhLwypaioN91zt5R"
     },
     "GSG": {
       "name": "Ghost",
@@ -680,61 +146,340 @@
         "BRB": 6
       },
       "uri": "https://gateway.irys.xyz/AkxwcREr4s7pq2MUBi1Nmp1eafAY67SjKbid7vcUbDv1",
-      "address": "BmT8QZJ2CmSCYRLuoG1rr9bpTv5bb8SE8S6jqqtgHAXM",
-      "mint": "7bgFJ8uXEXPLRJqzJ8reiAkLAgU9Fp69hN55sE6ePfGL",
-      "recipe": "ATnvuUsawc7FH1F4ezgjVKZKYsCBneGnwufytH4ZBfS1"
+      "address": "C3QoYtcmuMRUbfnZqUtKMpEgX3tS43Qth1CC1DKv8hrG",
+      "mint": "8tPc511k5kFP9n17F2sMB4NK8t3Ciuuiy1PHT2UvSWSo",
+      "recipe": "HH2UTyrvf7s6s1yzHYtx9dDMs61s6wohk9BXwz2JPB1U"
     },
-    "CMC": {
-      "name": "Monocle",
-      "symbol": "CMC",
-      "craft_time": 40,
-      "lvl_req": 26,
-      "xp": 515,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "IRB": 6
-      },
-      "uri": "https://gateway.irys.xyz/7x1TJnQtLjyzWLmbbraoZgC8fFRf2oJXoJ9JveKc3KDd",
-      "address": "FGd4mTW1QoaDbDnSPtgYDcDRsApVtJgQrktWy88D8r9M",
-      "mint": "B3HRZbjTTY18R4So9fbQ2dnFbndhsV6Xrkmnpc6imTgf",
-      "recipe": "DZpg2Q2kzYYPcRvELDH5whCrLkAGg4WfdQzotHvh3aHc"
-    },
-    "LBA": {
-      "name": "Cobalt",
-      "symbol": "LBA",
-      "craft_time": 20,
-      "lvl_req": 40,
-      "xp": 405,
+    "SMO": {
+      "name": "Moss",
+      "symbol": "SMO",
+      "craft_time": 61,
+      "lvl_req": 46,
+      "xp": 575,
       "tags": [
         "Fur"
       ],
       "ingredients": {
-        "GLB": 4,
-        "CLO": 6
+        "CLO": 5
       },
-      "uri": "https://gateway.irys.xyz/Ag3yaDpoZ3CjqWGsfaDLQRmrsVqRinY4gRvUF3LjeWcr",
-      "address": "5HH9M2s83cLBP6C9A6G5pMt6giaGYEUZPwSftRa5EXB5",
-      "mint": "2J8TzB8zJD2dYbGEKKxHt8xMsD1CknzzDSFdLH3qPBe4",
-      "recipe": "HSLWikrrRi3Mw3v6qUNk1tusrAJJg24oSYpAv5Rw2QHv"
+      "uri": "https://gateway.irys.xyz/FeA5988a1Q7NG87sPofPwHD3SuXzYqeEq85ed2VfeE5H",
+      "address": "96kfSqTpAV6S3cwTqoakYyccT2YDzbXomH3PdL3XMFkD",
+      "mint": "3iNiUcn5A5mqGdpYsKyiRsw64rH4Mhoqh1gL4F7mEgKD",
+      "recipe": "F7EJiZs6nFeG5PXh3fuKEnqzYGtNc3F3ptexu7tSPuTM"
     },
-    "LIA": {
-      "name": "Reading Glasses",
-      "symbol": "LIA",
-      "craft_time": 15,
-      "lvl_req": 18,
-      "xp": 877,
+    "OLO": {
+      "name": "Gold",
+      "symbol": "OLO",
+      "craft_time": 14,
+      "lvl_req": 17,
+      "xp": 539,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "GLB": 1
+      },
+      "uri": "https://gateway.irys.xyz/HkCL8fDQN4QW5XZCen9HejQuMLvELQMwRVE3u8dHbGW",
+      "address": "3YdnAqXmsYrWHc5UJmJEBSEuFNXTj3ZJorkB3SAYA5EN",
+      "mint": "4HSfdN7puWSXvHZuCCVx255dcNPCCBBiJxYvo8i4sShs",
+      "recipe": "2gdtjN4YGykxt9ZEWuYaKiwmddpmWKWZyFciSWtzDN6h"
+    },
+    "PSA": {
+      "name": "Sharp",
+      "symbol": "PSA",
+      "craft_time": 30,
+      "lvl_req": 41,
+      "xp": 698,
       "tags": [
         "Eyes"
       ],
       "ingredients": {
-        "SLO": 3
+        "SLB": 3
       },
-      "uri": "https://gateway.irys.xyz/2pEh22qtBqSkWBK8kteFTKVCCwareSzXfYExYjaApFj3",
-      "address": "CmbNZwdffFuWyZGodGhk4yjwbWGuDY6ERr5RC9Cs23Cc",
-      "mint": "3GQaeBp9Gz1CZhZLNuZ7M3LBjPUZp3XmWMfvMYKeZoi7",
-      "recipe": "9ZzcaE5ATF8GFibWCVGq7U1VARHqz2PAEarXKy3MtPp4"
+      "uri": "https://gateway.irys.xyz/5vic5U7QP9qc96wd5jyia337mBkHuQodB4QwGv4tH1vf",
+      "address": "HJhKunWne8DMx7CL5gVeRuaz8NfzVJbPZSRy18hGefm3",
+      "mint": "A8qNohj4j9pJzXfWqae2Y5bRXuwpLZuET8cNFPmR2Puu",
+      "recipe": "8rcVYzjLtmTqwVSnZc1S9FapYYVGAHzUxiBaaz3BSW2X"
+    },
+    "FSS": {
+      "name": "Sci Fi Glasses",
+      "symbol": "FSS",
+      "craft_time": 41,
+      "lvl_req": 32,
+      "xp": 434,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "CPO": 4
+      },
+      "uri": "https://gateway.irys.xyz/63g43u53W4a9U2t3kkM1Q93WLQsupJpRhpQKJJZPizTN",
+      "address": "47tdrKFEXPpDcNjC9NYSqikhoKV1Q7Y8LamFcBRAnoGb",
+      "mint": "6NmnPPwKfBSHbJRBGEUafeFcnZViPD4rQD8tzVAnwjev",
+      "recipe": "6aBmAy4BqTQMv9vvPaTiXWeKsc9u9fvGyB1y7YNHMd7c"
+    },
+    "SNU": {
+      "name": "Kitsune",
+      "symbol": "SNU",
+      "craft_time": 26,
+      "lvl_req": 16,
+      "xp": 906,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "SLB": 1,
+        "CPO": 4
+      },
+      "uri": "https://gateway.irys.xyz/3iUgGngsZX4f7uWyLAU9eFPpPf2u5dNruGYC85QRKHVQ",
+      "address": "BSosXqSz9Pj53t7J1r1QiDPyugkS35TAGTcVdCx1x86U",
+      "mint": "EBhGfumrNqET7KA8Hm3p73rVQCRoxK23FyTtXMVjZA9g",
+      "recipe": "5Jr1RT8sWcJqhoF6TBY2YwrzkYX19mij1rJRVLwEvq9k"
+    },
+    "EEL": {
+      "name": "Evil",
+      "symbol": "EEL",
+      "craft_time": 61,
+      "lvl_req": 7,
+      "xp": 585,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "GLB": 1
+      },
+      "uri": "https://gateway.irys.xyz/JAFAWKhwEzAiBwPNqSKWAAiRN4FAefE88ynpwZjut13m",
+      "address": "AhbDn1ayepXNrw1QtTQ41nuDDEv5CJbCXiGU2N57HG3q",
+      "mint": "GjWYd8iVJdKWgPsjEYvDobdxk5jk5EURHXuJZr8KCNZa",
+      "recipe": "CVy2oYEJw2WjYVL4PaBC7LN85s3WoU6Mj5XSfB2WRRku"
+    },
+    "OOE": {
+      "name": "Roadioactive",
+      "symbol": "OOE",
+      "craft_time": 19,
+      "lvl_req": 13,
+      "xp": 317,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "MTB": 2,
+        "SLO": 4
+      },
+      "uri": "https://gateway.irys.xyz/DxpzQEViqpyJPbQmZSUmrvHD21yumhq7apasQ5dETMbw",
+      "address": "YkoAr4SvtCpjMPPfok1q4ghhkhrs2t8zEGxsrBjyEXK",
+      "mint": "E9vhKQdk7TkvFnkzh3U1s1YrJ66F96gdwnGPe9Ww22JP",
+      "recipe": "E23rcp6ii2jMny84yxTgqaopSHGuQnQfsV6Pka6pugA6"
+    },
+    "ATA": {
+      "name": "Cigarette",
+      "symbol": "ATA",
+      "craft_time": 49,
+      "lvl_req": 45,
+      "xp": 847,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "IRB": 2,
+        "SLB": 3,
+        "GLO": 4
+      },
+      "uri": "https://gateway.irys.xyz/JXJ1RaZgsySgbQUJooey5s8cgQCZU8djWj7Mhc9Lg4F",
+      "address": "4u9yFQp2UC8wjcmqD3jRvTPrRFJggcxFknJqnVpFLpj4",
+      "mint": "5bp4RSmQBELR2Epp5NFgpCdvAHutP4RFqx8SPSbYg8Rk",
+      "recipe": "FpPuZdg3yFz2bm7AZDRvVdvZHHsXQG5KC37QaZirhdif"
+    },
+    "VDA": {
+      "name": "Red Aviator",
+      "symbol": "VDA",
+      "craft_time": 61,
+      "lvl_req": 38,
+      "xp": 454,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "CLO": 5
+      },
+      "uri": "https://gateway.irys.xyz/Bc7NZEXzKxKxFueGtyp9onyHdrecRw7QcozBzfHrRfCT",
+      "address": "FFLziHBo8w2v6M41CbCPprmuHS1Ntu8Gyutz6ZJ88rXS",
+      "mint": "24qLqGgTM1oCWu792xDWXC8uyuq9QnK2LAXHQkS5fD7H",
+      "recipe": "E4R37uFG4rrGwTzSrrgUU53nVhJK7obBrWoxcvdppJ5e"
+    },
+    "SIR": {
+      "name": "Sci Fi Visor",
+      "symbol": "SIR",
+      "craft_time": 25,
+      "lvl_req": 2,
+      "xp": 288,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "IRB": 3
+      },
+      "uri": "https://gateway.irys.xyz/9DSufArzoaVcBtsqQPK9nUzmpLaYbKupVJUbKQsaVn7m",
+      "address": "Gfua9cQ1z3QcjK41AJi6stCZQiN3RrX3VpEGTnPXSAH3",
+      "mint": "Htnvq9du5tzmeHNUkT6FMyn2W8GQ5ugJp6wB568pxwd6",
+      "recipe": "6hpXWcxhXNFdK8sYa8UGXvDif3mJPmB9BVEpo1uBb4L9"
+    },
+    "REG": {
+      "name": "Grey",
+      "symbol": "REG",
+      "craft_time": 28,
+      "lvl_req": 48,
+      "xp": 704,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "IRO": 4
+      },
+      "uri": "https://gateway.irys.xyz/6k7ChFYAkQNdYemRqkqkztKUkcw7Z9ZbAuikAivGR3XN",
+      "address": "Hq4WBpJ9i5FtY3N2YRGKMC7bDo3qHRywNWTEgGkhyvuM",
+      "mint": "EBDc8cxxhUJ6edkY4mBDqocM2nwtG7Sroy3ErMrpQuNi",
+      "recipe": "2rEPUuSrBTi2rJN3zywisZky8UzMQjLsvMKaB27sgu5J"
+    },
+    "OIA": {
+      "name": "Pinhole Glasses",
+      "symbol": "OIA",
+      "craft_time": 26,
+      "lvl_req": 13,
+      "xp": 160,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "SLB": 6
+      },
+      "uri": "https://gateway.irys.xyz/Cz3ELCz5azN9fvowjVrxsFtcuj3prAX2X7o4wUMKPiPk",
+      "address": "DV3ViNS91o7WBEEmp6928ipGj6YvCDxQCeXJHWDhxEHD",
+      "mint": "413nSu7XpbAGANWvJv8YvfsrJc1PSQxPaZfj22S1xbrf",
+      "recipe": "9CV5s599v1SEBFmoAw5BgkSCwutgemDEUkH61epYrzeT"
+    },
+    "ORO": {
+      "name": "Robot",
+      "symbol": "ORO",
+      "craft_time": 48,
+      "lvl_req": 35,
+      "xp": 540,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "BRB": 5
+      },
+      "uri": "https://gateway.irys.xyz/JArDW8oDkxtqwSZEvN98K4LyaQWJ9bT3UsdagUCc8qmL",
+      "address": "AvwhAtaoNQBVSpMtYmDG1wDndiA3tv4AfRXtodeeopnX",
+      "mint": "5jVLjtqztTfyEkv4GoXoUiB8Xqv2L45oWdjcdLZ6eU2a",
+      "recipe": "FCh1KemNRkSq3NVzcqT4Jnc9GC5ktSXJkEZryfL8hW1k"
+    },
+    "KLK": {
+      "name": "Black Aviators",
+      "symbol": "KLK",
+      "craft_time": 41,
+      "lvl_req": 4,
+      "xp": 136,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "TNO": 4
+      },
+      "uri": "https://gateway.irys.xyz/6T9vmFy5cdYoTZH7Lezie7DvywRcp5vaBLTZeKpnDXMK",
+      "address": "BmuRJAmpS2rbFvGXEC93B9ZUdSyjdqr9nWCpTUn7FpkZ",
+      "mint": "Asb3jkdqhJX1uXm413Ka7u1oqxxaiUP4NS5HPK54KRat",
+      "recipe": "5CZMfSgpaU5MD74qp8ftD2C2EjpyP625fw8sqXQKm59"
+    },
+    "RHE": {
+      "name": "Cheerful",
+      "symbol": "RHE",
+      "craft_time": 23,
+      "lvl_req": 15,
+      "xp": 263,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "MTO": 1,
+        "IRB": 1,
+        "RUO": 2
+      },
+      "uri": "https://gateway.irys.xyz/7JWYou7GRrCRCUfMi9bsbo7rfDgroAqd2hvE2iKrBsEA",
+      "address": "HFZxqPzPUiVJpaPGY5U8n9yzvfzz5n7BQUDF7AR9x8e",
+      "mint": "CE2gHUsLWmkfax6DPSaXsv5A39NkSdp8pqzhYNgcrdr8",
+      "recipe": "Bfwu6k33EqNceom68CK1N8SzTxmcsja8dw3np6H7WvuM"
+    },
+    "AAS": {
+      "name": "Space Mask",
+      "symbol": "AAS",
+      "craft_time": 48,
+      "lvl_req": 1,
+      "xp": 373,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "TNO": 1
+      },
+      "uri": "https://gateway.irys.xyz/7TTug95q5DWNnCyTX8fw2pAKkdAacyoYnbJNSBoXNnkk",
+      "address": "Bh4y7w92DFVegSQc4F6aodVHJQuFGsaNc5XZ9AewChNw",
+      "mint": "4r4Pr46Yb3EqGpy16bx3ZUmk9aKBc2JwLugPcsjYzkZY",
+      "recipe": "Dy4L4yLMi54nTv5NJt2mttKF8o8jr7TLvsVT2NJPiTtH"
+    },
+    "RGR": {
+      "name": "Enranged",
+      "symbol": "RGR",
+      "craft_time": 21,
+      "lvl_req": 7,
+      "xp": 980,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "ADO": 1,
+        "GLB": 4
+      },
+      "uri": "https://gateway.irys.xyz/G4PfvVAZU1RZ7WiVmXDopPooF7rojA1Qf1GVvh1zEUH8",
+      "address": "CmykNo7vX77KV2xUM5y65hamwgNUX8GdyWDDyPr6DJgu",
+      "mint": "AT5auR784vNUa72Egytf1QBiij94TpHZQDSqEk74gE7w",
+      "recipe": "GDvaw3M7dpQ5xAkN4Kj95ftTypv4oigGL9VTyzkrD6RD"
+    },
+    "INP": {
+      "name": "Pink",
+      "symbol": "INP",
+      "craft_time": 57,
+      "lvl_req": 14,
+      "xp": 822,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "GLO": 4,
+        "TNO": 3
+      },
+      "uri": "https://gateway.irys.xyz/DwZRF6RtB55aCYTVDHsYgJGb4bPH6KsxPyrjSRpP5Am5",
+      "address": "6VbHmvmkrFgjJfYwaBrw5E63piPASNYnjeHDBKZbxzFi",
+      "mint": "GL9oVHcyyRH9yew2yNBCmQHnoKY3GJAj9kvEwCzfjumz",
+      "recipe": "76m8D5qHBtEmadvJK7ES5DYGGCqcvXMmv5RcBZkwLX1i"
+    },
+    "YLB": {
+      "name": "Blue Eyes",
+      "symbol": "YLB",
+      "craft_time": 29,
+      "lvl_req": 46,
+      "xp": 185,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "GLO": 4
+      },
+      "uri": "https://gateway.irys.xyz/AoH9TnPCao14CwgN2jx1oQqdUrp9ZAeN9jbSZyS8989U",
+      "address": "Ff7CjVQHa61JJCiFhHDD8GEntTkuU5x4F5yQj8d2TygB",
+      "mint": "H8AjjFsTqrdUDZpjdK5rUfJWKgCe9GLzE6CyMeiyys22",
+      "recipe": "2WGithajtEdZzRmwH8pTy89R59junqThk51XNHXjfa5j"
     },
     "YEE": {
       "name": "Green Eyes",
@@ -749,9 +494,97 @@
         "IRB": 2
       },
       "uri": "https://gateway.irys.xyz/9iKAcQku536J3ckYULBJ7iiAEAq3Ei6SsuDSfv37MyHi",
-      "address": "7znmZRU4J5yyiv18JxY84E51VS1ydtWy5XSsE63RfzBv",
-      "mint": "DwDCH2c5xMbsaZ9hdaJXut1nUeyirsveUiszEFs5bMbq",
-      "recipe": "ErM4baRAQFSy5ekAn52a1ebfrvKMGvUWSfA3oebhFued"
+      "address": "CXVAno9PH5p4vZQ8mXdqFgSo4KFL2zdz1yJKnNx8oF1w",
+      "mint": "FEE5RtFK452qb1pA2SBb3aDsehN1by1ihU15VAPvgVth",
+      "recipe": "7c9P6e4v5M2ifg8Ce2gkRREe4aCtFq6TJ4WxEHRy4L5K"
+    },
+    "YAM": {
+      "name": "Assymetrical Eye Wear",
+      "symbol": "YAM",
+      "craft_time": 30,
+      "lvl_req": 26,
+      "xp": 106,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "GLB": 6,
+        "SLB": 5
+      },
+      "uri": "https://gateway.irys.xyz/D3NnFwvuhsDtnuNgmx9vraeR7JKRf8y4QHTsfuvYt32J",
+      "address": "5BZ7zEPa5oY9oVsoJzn5hSom8tPp2UaFz3spzsN7vxhX",
+      "mint": "DLy2D6Ya9ARrD5b4MPQhcaKpkkVRexPuAAwBsJoSQwE",
+      "recipe": "7JgDp7NMHAxGyELZLsjNYu6CZc56YVZGmaQYyj7xQxeK"
+    },
+    "TTN": {
+      "name": "2 Tone",
+      "symbol": "TTN",
+      "craft_time": 56,
+      "lvl_req": 1,
+      "xp": 483,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "IRO": 5
+      },
+      "uri": "https://gateway.irys.xyz/4rcAaEixFmjsV5YfeZFu2mCHLrS3NduQSjY2YRSQe6Gx",
+      "address": "HdSYcKDgT2LPE4oSo8q5ECH2jShEmGfJgqxYJidaharf",
+      "mint": "2FmTktyqXmLVraeAs1mUNBVHZKwUQxzs3dX8LJYqgf3Z",
+      "recipe": "FkAFXrDZFB1JZoTLR1e7xkug5DdgtC4oYNsbmr5RxNum"
+    },
+    "RRD": {
+      "name": "Red",
+      "symbol": "RRD",
+      "craft_time": 52,
+      "lvl_req": 3,
+      "xp": 283,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "SLO": 6
+      },
+      "uri": "https://gateway.irys.xyz/9H9e4mimnFbP8UZ263PXEq8NQWidbYCZNBaNCksgbupx",
+      "address": "BVfeU8tXHaDK92Enx5JwoXcn7J5vFSeQcgVVTihVpPFw",
+      "mint": "B5TZUJqRQbytYjN4xeJREkXTbaoTy1rawx5d4wuNuzM2",
+      "recipe": "658BkYb2qYAuJXkVeyPYk7vjZvz9FkDM5X8zakX3fhu2"
+    },
+    "CMC": {
+      "name": "Monocle",
+      "symbol": "CMC",
+      "craft_time": 40,
+      "lvl_req": 26,
+      "xp": 515,
+      "tags": [
+        "Eyes"
+      ],
+      "ingredients": {
+        "IRB": 6
+      },
+      "uri": "https://gateway.irys.xyz/7x1TJnQtLjyzWLmbbraoZgC8fFRf2oJXoJ9JveKc3KDd",
+      "address": "CFjzKZ7PsT5FqVEdCu6VP4fuiA73wYbahkwYJgs1Ndo",
+      "mint": "4BYToGBaZfRsjKHHPLvK5Tpo8sbA1tQgo2jLnagCScb1",
+      "recipe": "7AkuwZZvUwncBdYe1ezNnJZkwNkkZvquFdotxnEsgJGX"
+    },
+    "GID": {
+      "name": "Agitated",
+      "symbol": "GID",
+      "craft_time": 24,
+      "lvl_req": 3,
+      "xp": 844,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "IRO": 5,
+        "SLO": 6,
+        "TNO": 1
+      },
+      "uri": "https://gateway.irys.xyz/8LTsCPEGEGC1eQjNF5rwgttp1kb3EqS1cQ8rsht8tCDC",
+      "address": "2T61aGRDrA2fSD3HGW5gxBckQ9aEZMEkfJJkvhk3Brdx",
+      "mint": "CbyxujtFEFCp4PosSvbtRc9qeGTqc4b2wEY3ScoUUHqE",
+      "recipe": "2TGBksigZFKwANdkX9ANWktZFSwYEsqHPNd6x1RaFXkB"
     },
     "RPP": {
       "name": "Purple",
@@ -768,458 +601,231 @@
         "IRO": 2
       },
       "uri": "https://gateway.irys.xyz/HAvWaj2ANvLiJD4G9cMWMHMebnBJzF7q1V7dmaFHoZzF",
-      "address": "B98kFJNqmUeDHBKAi3i5J9ex7wMdWMV1mbsNDUDACNzE",
-      "mint": "936ceAnmTo5v5JXgvdE3mPthGVDwD6nDEhD5TyhtikYr",
-      "recipe": "66692QE4ro93nva4bgZK5bSq66XVAeLv9xuLPH369XHi"
+      "address": "41tRkRs7T1UweXvrBuZhM3YYbaAzQSi31pMztqcpHbZj",
+      "mint": "zFqLDeN1cFGVoyQPj2JB32gVimC6eJkGp99kPeumXj7",
+      "recipe": "7ngLq8DJHHVw1pWycn4Es6uMt36YKW9mwwmQx7P8WmfU"
     },
-    "HOO": {
-      "name": "Hololens",
-      "symbol": "HOO",
-      "craft_time": 44,
-      "lvl_req": 43,
-      "xp": 937,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "GLB": 4,
-        "CPO": 2
-      },
-      "uri": "https://gateway.irys.xyz/9j1rXpzMxqbDF4N7qPpEuytSUG7yKHw4MkQM6uUaEgyo",
-      "address": "8gCDAoUd9NpPVS8v8oa4gpZCruWjUiHDEf617gndto8N",
-      "mint": "47BN6z3kY8rQ9CHg5Df2BY3z9GKPJqXN7tYGEjQSvCxs",
-      "recipe": "9T9BYmTs3o9E7X3r5jTPWnspHvffivF7JTC7VSawoygB"
-    },
-    "OIA": {
-      "name": "Pinhole Glasses",
-      "symbol": "OIA",
-      "craft_time": 26,
-      "lvl_req": 13,
-      "xp": 160,
-      "tags": [
-        "Eyes"
-      ],
-      "ingredients": {
-        "SLB": 6
-      },
-      "uri": "https://gateway.irys.xyz/Cz3ELCz5azN9fvowjVrxsFtcuj3prAX2X7o4wUMKPiPk",
-      "address": "8hWYtK83HGm6oPAAkJFGwwzThsZKHL7mZie4RTzPzMW4",
-      "mint": "2uLVWcohoCsKfV6DqdBKEwFecgbhe9rpfFtFiMZXSjVu",
-      "recipe": "4a5fXydeKJfZ2JBcpqdtzrViCtECJLfiJZsGsYtquQPh"
-    },
-    "OLO": {
-      "name": "Gold",
-      "symbol": "OLO",
-      "craft_time": 14,
-      "lvl_req": 17,
-      "xp": 539,
+    "ETN": {
+      "name": "Blue Exoskeleton",
+      "symbol": "ETN",
+      "craft_time": 47,
+      "lvl_req": 6,
+      "xp": 724,
       "tags": [
         "Fur"
       ],
       "ingredients": {
-        "GLB": 1
+        "BRB": 5,
+        "IRB": 1,
+        "TNO": 4
       },
-      "uri": "https://gateway.irys.xyz/HkCL8fDQN4QW5XZCen9HejQuMLvELQMwRVE3u8dHbGW",
-      "address": "8G9J9Lgw7WSK8B3VviaANJWpb7JxS6uXnzNyq9fxNPzF",
-      "mint": "38qFuJjtMpG7jsyutskaY5SMxvdQhiVPUsGFcHkkWemL",
-      "recipe": "FzCTvSiKkhsodFAPsWCG1tKHUg6FhRub3XvyNGFrwU7J"
+      "uri": "https://gateway.irys.xyz/FCrTFiFCLvkQKV4EnpkAxd8nx4Vm6GnY7z8rkhvUBi5M",
+      "address": "8MJVe9kQySP2U8sRznbFX1vPAESqtudM1LnFT6vW9Arw",
+      "mint": "H2Ev4LjqVu8TU2mnbgbvxVxMb2ULnDwqLMz3C7P1hn2w",
+      "recipe": "67RuoZrdqjxcMK3DBUJAf5ZYFbWrn2FLXHuPL4kXAZA"
+    },
+    "GGO": {
+      "name": "Orange",
+      "symbol": "GGO",
+      "craft_time": 15,
+      "lvl_req": 39,
+      "xp": 621,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "GLB": 2,
+        "GLO": 2,
+        "CPO": 1
+      },
+      "uri": "https://gateway.irys.xyz/BKMBP1q5djnZZ8HsBVi7GzvvqPDDp9uCPxrXN1D7AbJJ",
+      "address": "2NisSHkz8PdUoCW5LYouLeaLBcNJAxUhL3DRm6EkijMX",
+      "mint": "9veYRtGkBWXCYK6yAMTEwidbBtv6KN3ZrYN4ydQsZbKR",
+      "recipe": "BER3VALKGDFJDDWHY673ENSvJH2HE7hmHNWqFRiTVLAV"
+    },
+    "LBA": {
+      "name": "Cobalt",
+      "symbol": "LBA",
+      "craft_time": 20,
+      "lvl_req": 40,
+      "xp": 405,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "GLB": 4,
+        "CLO": 6
+      },
+      "uri": "https://gateway.irys.xyz/Ag3yaDpoZ3CjqWGsfaDLQRmrsVqRinY4gRvUF3LjeWcr",
+      "address": "9Yu4XeYSDSgA87NyC4Tjx8vTtYYxZurUi9AxncYd6Zb5",
+      "mint": "DDjr3xzXAuyA6wy1LSfhmzX9cZJK4DKmbcGEeKVv4EzC",
+      "recipe": "ANqufmndyQFDM1vrxasDazMWgvPmMLgidpUQiDpAFymr"
+    },
+    "OOB": {
+      "name": "Brown",
+      "symbol": "OOB",
+      "craft_time": 19,
+      "lvl_req": 39,
+      "xp": 354,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "SLO": 1,
+        "GLO": 5
+      },
+      "uri": "https://gateway.irys.xyz/8h6CrVq8AEZnfxQLkKD6GNRjUp5q7F2R2ty9CqTciqSb",
+      "address": "6i2qg6X9KJ1Q35PiiEpNKRyX4JpCNCEyVdZzT1xXCEF8",
+      "mint": "6DhSnruEagwpFGTHPtY4rPEkUhwUSq44mb7waQ7rJeoH",
+      "recipe": "9GkLA2FqgGy4DKAYrVVjddweGpU98iAXBD3cMrWbQ7iy"
+    },
+    "CAC": {
+      "name": "Black Bandana",
+      "symbol": "CAC",
+      "craft_time": 17,
+      "lvl_req": 47,
+      "xp": 789,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "GLB": 6,
+        "CLO": 3,
+        "IRO": 4
+      },
+      "uri": "https://gateway.irys.xyz/39XQcMsHqxi1h5A1wgmovcpKLxRXmswBc4rmPmByWYaV",
+      "address": "BRVmvecedDEW1zWuAFfYmuncURWmoa7UXrgAmPAXDJZf",
+      "mint": "2v8rovYWx5bALSG4SwsAKxmquvhxhVUFQBNAh3JKiPQD",
+      "recipe": "FWxVShpJzSNzFEBap6WeAzBF1kRP3t97uB5MZ35QLEJZ"
+    },
+    "IOM": {
+      "name": "Zombie",
+      "symbol": "IOM",
+      "craft_time": 19,
+      "lvl_req": 19,
+      "xp": 941,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "GLB": 1,
+        "CPO": 2,
+        "IRB": 5
+      },
+      "uri": "https://gateway.irys.xyz/8i8jn2nqcBZTCYke2iVLznU7ptV98visQH2Zvv4Lbxbt",
+      "address": "9GtUVDKZ4DQoZT6DNeDy7ji8A5XRW9FmzRSabayxYBmf",
+      "mint": "2QgfvgEXgnGLUohWAc7PY6LusisPq3G7HTtBV6bHJGEc",
+      "recipe": "7iphiZHwNkbnTmpV42zSR6T39JzUwBdkgGMZkZo1Ffsz"
+    },
+    "BAC": {
+      "name": "Black",
+      "symbol": "BAC",
+      "craft_time": 36,
+      "lvl_req": 47,
+      "xp": 657,
+      "tags": [
+        "Fur"
+      ],
+      "ingredients": {
+        "GLB": 5,
+        "SLO": 5
+      },
+      "uri": "https://gateway.irys.xyz/2KVCgyvVUMGM7AukWWEw39C51yVoqx2WcmaGLe1Cgp3w",
+      "address": "Fg8g92YBJFmCYDJRRMiaAeECRYbPnzVeZ5YBkrWUCih5",
+      "mint": "6mYEWPfzshbSF2oXjxsGN1XNkaxxBNQRN6Jm13sn3is6",
+      "recipe": "2Cb41vqsxZ2XZLWtReq3eVK7bPgbirs4mY8R749sdt1W"
+    },
+    "CNT": {
+      "name": "Contented",
+      "symbol": "CNT",
+      "craft_time": 58,
+      "lvl_req": 13,
+      "xp": 794,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "SLB": 2,
+        "BRB": 2,
+        "TNO": 3
+      },
+      "uri": "https://gateway.irys.xyz/5jm9szYfx5mVug5FPC9ggkbZWHj5B7DfMsURBP2QGtaY",
+      "address": "8AhoAcqMGjP1Je5tAdRtH6HD9D66GgRxWH6t1wsQCXCN",
+      "mint": "Gk1DPuGUXDr9XJqsT99DojhDkqt1KKTPyWmpEE66M3f8",
+      "recipe": "FjR1Fi3SmzsUqhop4vwpfghPs7sVoa7xRv6aU2dndDeN"
+    },
+    "BBL": {
+      "name": "Bubblegum",
+      "symbol": "BBL",
+      "craft_time": 22,
+      "lvl_req": 29,
+      "xp": 967,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "BRB": 2
+      },
+      "uri": "https://gateway.irys.xyz/5aLNrqqSFsSU1AN7DGe7fk4Gb7JFtva3gJT7c5jV4ZUD",
+      "address": "HQPqA683wLTd6tUaJfdqy1r86UjnDw8JZ5em9BTPK28R",
+      "mint": "8UQWbeETxPqkEpdknakVV41usmQTTEGzpKZvotho6eyx",
+      "recipe": "FVvW7umuKnjU9b1uYwjQKNemtMQuyoV7rrgDcJrrbaHe"
+    },
+    "BRD": {
+      "name": "Red Bandana",
+      "symbol": "BRD",
+      "craft_time": 53,
+      "lvl_req": 20,
+      "xp": 616,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "BRB": 6,
+        "CLO": 1
+      },
+      "uri": "https://gateway.irys.xyz/8ahZmPzUQtNm8tEu2x4uqSxLieKXrch3g6i2XS5DEuCz",
+      "address": "EdADABaRMyeQ8XNhH2xNsAxZ9jsuwmsv77gN9XBQTRBy",
+      "mint": "EL7GTEpyp5n1D6N3AR2xXyjHwi5xuQiSJp1UDokdQ3kr",
+      "recipe": "5t4h6m1fnoYVGhxXUzCv1keph1vnT7fh5XZ9FirSURGP"
+    },
+    "MMD": {
+      "name": "Mad",
+      "symbol": "MMD",
+      "craft_time": 49,
+      "lvl_req": 28,
+      "xp": 850,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "CLO": 4
+      },
+      "uri": "https://gateway.irys.xyz/7JAqaJHNFsLDNHeHhzovKeu2MPtDwXFDCSPELZoKe8EV",
+      "address": "6jxPRqBKgJnvuPd6VBabEC8hq1K5v4k14joWKSv3xmNe",
+      "mint": "8g2VQkTZx4gZVZQoQGEiEr9WDzXP5wQF3j4qxGDXNreo",
+      "recipe": "L7C9b7Kx8btDYVSar4wCRRpLwvSdkL3hsf3cGwqLZB9"
+    },
+    "LTE": {
+      "name": "Metal Stache",
+      "symbol": "LTE",
+      "craft_time": 21,
+      "lvl_req": 5,
+      "xp": 812,
+      "tags": [
+        "Mouth"
+      ],
+      "ingredients": {
+        "TNO": 3,
+        "SLO": 4
+      },
+      "uri": "https://gateway.irys.xyz/DYqjgirGAmfiHFSGQWzSNwq3f9vxczUhGtvnnWPUSMaH",
+      "address": "Bfni1dae4HcW1wqb3z9kE7QE9114x5Qj7rmv4qizsK3q",
+      "mint": "8hE9Zyw7Tt2DtWeHCq1tUkgfSMocFpp1meX2k6dvy46o",
+      "recipe": "BShm7DUDsyMidKdsCnGL8cE8AxLbJTUc7zuddci3rJAC"
     }
   },
   "resources": {
-    "TNO": {
-      "name": "Tin Ore",
-      "symbol": "TNO",
-      "uri": "https://arweave.net/mtQ6rD4bt4lKEzojTQsYXmMfa43y1BifRcIZXN2WMjI?ext=png",
-      "lvl_req": 1,
-      "mine_time": 30,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "BoEjWkYpNCFJ93sSBK9qzw6jFRdtcAqVTMhDV4N5YU5m",
-      "mint": "ECb7JQWWZs4p82JBPMksCG6akcpQUeKqdjNCBHEdWBi6",
-      "recipe": null
-    },
-    "EGU": {
-      "name": "Ogre Club",
-      "symbol": "EGU",
-      "craft_time": 30,
-      "lvl_req": 27,
-      "xp": 581,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "CPO": 3
-      },
-      "uri": "https://gateway.irys.xyz/HmvErrjjQNdbPEVmNTMpJUSZ6RQcuwujQdBH3NJut6qF",
-      "address": "HYhU4RsJCoUGETPJKWgmMhU7msMEXKrceooatx4PvPPa",
-      "mint": "61Dem7F9N9K2khdBrQap5SdYDuwZM28fitfZhqzWGM67",
-      "recipe": "89GV1SUBB37BvwsDWzJw8wMHnwwR2s66syMnJrDoTj8S"
-    },
-    "UUI": {
-      "name": "Quiver",
-      "symbol": "UUI",
-      "craft_time": 40,
-      "lvl_req": 41,
-      "xp": 958,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "BRB": 1,
-        "SLO": 3,
-        "GLB": 1
-      },
-      "uri": "https://gateway.irys.xyz/9Qxiuht1RoWij7q6zCesgeARkLQMAG2hF37PyUV6jcmw",
-      "address": "2GpzB4Cem37TUrv8kd4B9yPw5yTk9D83vq14N8jebxQj",
-      "mint": "4oADM4uPKcmTYxrNK9nQ5TqUGqqM1umYWVAPqBZiMV6r",
-      "recipe": "9jio64Z6RUQbD1r6eCkGHzo8tEcKzuP3Hhj2pCw9uXY9"
-    },
-    "TAT": {
-      "name": "Pirate Gang",
-      "symbol": "TAT",
-      "craft_time": 56,
-      "lvl_req": 48,
-      "xp": 719,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "STB": 4
-      },
-      "uri": "https://gateway.irys.xyz/8whHYcZvp4PWCDQSntXW3dqJrJrw5fQfit7o9MZiNsCT",
-      "address": "GAqo35KCv6691UuTA81PmhkBAzXRA7gLnJYhQYE9dLau",
-      "mint": "C12e79fRKD82qvqS2qfBPXEuTe1xAY5SioBL1Z8iF7ge",
-      "recipe": "EPEq7ciG6PMbtedpw6QbZVSTN9WRmVQj9LQB1tNWExG1"
-    },
-    "GAA": {
-      "name": "Space Gang",
-      "symbol": "GAA",
-      "craft_time": 52,
-      "lvl_req": 10,
-      "xp": 466,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "TNO": 4,
-        "ADB": 3,
-        "GLB": 4
-      },
-      "uri": "https://gateway.irys.xyz/Aj74rvyWkf8UDqSq4kUCXRomReuJc7eKufB8uze2xKZE",
-      "address": "2sHhrv31andeAyuJH44zXXctnj4ydqyEYg3Rk5dEhygZ",
-      "mint": "VDd9T48iJDmupwzHH6P1X2hQFk1GkmTz29NE2NMw78W",
-      "recipe": "5EKvxrsZEDXYAHZcPL6vTXmZ5NuQnoYKkK7rHYeN8Fbo"
-    },
-    "HLA": {
-      "name": "Gold Watch",
-      "symbol": "HLA",
-      "craft_time": 15,
-      "lvl_req": 29,
-      "xp": 726,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "IRB": 2,
-        "GLO": 4,
-        "IRO": 1
-      },
-      "uri": "https://gateway.irys.xyz/6yzpz9wZx3oDTdTSqdrdabQHsjGteYA6a6bPeyeVW8aJ",
-      "address": "DknRRwG9D6ZRxueWeFuBDD22u9sByxc8XcXuWJ9bV8hh",
-      "mint": "DY9QQ7STDKYRjNtyHxQknQSCTNuZFwdCVwWxKGWcxBCx",
-      "recipe": "892e8DeQh6p4r9RBhDX2y8yPpKQv6WbDdqDCiQHRN35d"
-    },
-    "IRP": {
-      "name": "Iron Pickaxe",
-      "symbol": "IRP",
-      "uri": "https://arweave.net/3zHftMbUKuDq--5teRS5HIr52WExPxnlWHy3dlU_tzM?ext=png",
-      "lvl_req": 5,
-      "tags": [
-        "Pickaxe"
-      ],
-      "time_reduced": 15,
-      "address": "BQyV89HjcDqEanXHg1yaZVfY8eekLBGvXcytWafsCa5c",
-      "mint": "Ef92eh4xqmb7EpUEUFcDhBJgU1EDH971N4YPdLKvF4jF",
-      "recipe": null
-    },
-    "MTO": {
-      "name": "Mithril Ore",
-      "symbol": "MTO",
-      "uri": "https://arweave.net/ttbeYSGAU8Yhx5H0aaHWHIvUCZMLlAWiKEi62ABnzDQ?ext=png",
-      "lvl_req": 10,
-      "mine_time": 160,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "GpafGXxFsoRqpBg4gCrTDxMiYAGdno4zqPNrxv71CfeY",
-      "mint": "ByUJ8tbL1pcJqUVXJJ4R9nEg9cadwyY6yTPT75dV8fYx",
-      "recipe": null
-    },
-    "RSE": {
-      "name": "Desert Rags",
-      "symbol": "RSE",
-      "craft_time": 43,
-      "lvl_req": 24,
-      "xp": 888,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "IRO": 2,
-        "CPO": 2,
-        "CLO": 4
-      },
-      "uri": "https://gateway.irys.xyz/EiSBmFm6wYf3SMFZeR1szPCg7a5dRdkG7EHPmoMwuLLT",
-      "address": "5LkaLDj33wNpdhTQfHiZRFvtMoHjNw8kJhgGZuYQ7JWh",
-      "mint": "FP53EjFLup1CjdrvxWsxD7H66MTfHRqH2XWP3NYuBpwJ",
-      "recipe": "GfDXe7mh6niuCMnZWn9Au4ZnWf5s7Bcf8AGx8MA1YjPn"
-    },
-    "STH": {
-      "name": "Silver Watch ",
-      "symbol": "STH",
-      "craft_time": 34,
-      "lvl_req": 10,
-      "xp": 571,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "STB": 6,
-        "CLO": 2,
-        "BRB": 4
-      },
-      "uri": "https://gateway.irys.xyz/C1Jxox7ZGLK92kdeVmaU6NiUHFH5bssWz4Zxu3ixCEm7",
-      "address": "4s7EmXKUjrh1k8KLcZuxAegxzLrmh5y89JsHmUi7cWRZ",
-      "mint": "AKjAJKWdhmYvkwzyeGhbBdVpaZAJmhcgCCR6sddMWLpR",
-      "recipe": "CHF9JvwwvPUSXNkizCrseqsQo6zWFpT7H96m1FixnLxc"
-    },
-    "OAC": {
-      "name": "Cowboy Hat",
-      "symbol": "OAC",
-      "craft_time": 36,
-      "lvl_req": 8,
-      "xp": 905,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "GLO": 5,
-        "IRB": 2,
-        "SLB": 5
-      },
-      "uri": "https://gateway.irys.xyz/Dgd9qSHsLSpWNFk6aDvpdUAS47LtXGWxh2k71q9HXoHF",
-      "address": "9ZwYjiDi6yPLhqFSPQXwuVKyzUyhDNHT9zS2xtm5ZDcx",
-      "mint": "E6cTDuKiEpRLwo9it4Nb1FA3nDPdmbcrSzN3hCxfafeK",
-      "recipe": "8AZKGBj7gR66GBx4jRbL94AuVTKttjBKBL4CopmpF7bR"
-    },
-    "AVV": {
-      "name": "Visor Cap",
-      "symbol": "AVV",
-      "craft_time": 46,
-      "lvl_req": 42,
-      "xp": 653,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "GLB": 3
-      },
-      "uri": "https://gateway.irys.xyz/5Q7Vq5q199KmhC7JNpY76TFPTmMbvZXPnaWpMEX7uQk9",
-      "address": "96UaVgtE45J6zRYnxuqE8cuLfGjf1peVtcZ9py3wES44",
-      "mint": "2q3dFgEU6tqoaaZudpk9bAdrqPs2tdzL6LJ859oYNxP1",
-      "recipe": "PB3va4rieQUXFaNXdfUJZGH3gFDUVseWstrG3GR9MSy"
-    },
-    "BRP": {
-      "name": "Bronze Pickaxe",
-      "symbol": "BRP",
-      "uri": "https://arweave.net/tMjm681N3a1cWoD4fLfvbUORwIPAKrjcMCSpmm1LKvg?ext=png",
-      "lvl_req": 1,
-      "tags": [
-        "Pickaxe"
-      ],
-      "time_reduced": 0,
-      "address": "Ed3qg24MB4suRHXoofbSELSNmqMk8icT1RTNaAr5ae4R",
-      "mint": "GsaEMYtzVU7cEuuyoeWaSRtHKCUNtFByxbpVmv22Ar3C",
-      "recipe": null
-    },
-    "LXT": {
-      "name": "Battle Axe",
-      "symbol": "LXT",
-      "craft_time": 45,
-      "lvl_req": 41,
-      "xp": 783,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "STB": 4,
-        "IRO": 4
-      },
-      "uri": "https://gateway.irys.xyz/3JxmCt2TuSKFnejJiUMFRsM9nLHfL125cZSUXGneqTgT",
-      "address": "31foUHmp3y3QKsvFy8RGvixPZBUi7gMB47WUNMGhgbdJ",
-      "mint": "9ddaQSQfMGztFQUUkjpK8VF7sMMa5sDbcgEbr7ggKYgq",
-      "recipe": "GZNjp8puTBoYMT4KLwBS2UcuCx3JxfZK8XRadhLMQXvD"
-    },
-    "TRI": {
-      "name": "Powersuit Magenta",
-      "symbol": "TRI",
-      "craft_time": 40,
-      "lvl_req": 45,
-      "xp": 586,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "SLO": 1
-      },
-      "uri": "https://gateway.irys.xyz/4KVxJo1dWMTEF1z9iisgZSSSZg7y5XqmqddSfrHwNzNJ",
-      "address": "FPy2KZqeDsjn9oRWP2Ke8XvyVGSKPH567xzndcG9H6eW",
-      "mint": "247hWHMkGYsv9zKHsMGneFUEh5H2aM1BQX72yUJxttG3",
-      "recipe": "2QmuNAetAe9pgz6pAqo1q4kFjrQBscTjoQgaCc2iRMeD"
-    },
-    "AHH": {
-      "name": "Half Machine",
-      "symbol": "AHH",
-      "craft_time": 46,
-      "lvl_req": 17,
-      "xp": 270,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "TNO": 3,
-        "CPO": 2
-      },
-      "uri": "https://gateway.irys.xyz/MpiGsSwHWBC1L629mydkivyfyoyCHBjEq2o9xUt3xEc",
-      "address": "79WKhfkL6LgGJX1M5pyzWLXPDD3Vy6tvav18bCe1S5t8",
-      "mint": "BQfcHxRAukcsuGj4iUjCoaFXCALALfxbqvPRbD8txsvT",
-      "recipe": "3t4A2wYWtQLNKmLyW3SYShrSkFuopWjkp6EgUHFJsrHg"
-    },
-    "TTT": {
-      "name": "Astronaut Helmet",
-      "symbol": "TTT",
-      "craft_time": 20,
-      "lvl_req": 49,
-      "xp": 634,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "SLB": 5,
-        "GLB": 4
-      },
-      "uri": "https://gateway.irys.xyz/FDQQhXemJvN6mZxv2d66txBq8BRLNSSJQWDvi6dpg6ru",
-      "address": "2b3zTjbC4rsvy5ThmUfVqCxAZX64QwGcLtNE1TGNrxxu",
-      "mint": "GGrq7PVkXGUM3xkzzsJSBbuEw9dbungu18iUuTgRDWS2",
-      "recipe": "FVr4xYKJvp21oe5NAwsf1TaswV1tyuqaMWfXDsZ4JMjp"
-    },
-    "NNC": {
-      "name": "Black Beanie",
-      "symbol": "NNC",
-      "craft_time": 58,
-      "lvl_req": 11,
-      "xp": 781,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "CLO": 2
-      },
-      "uri": "https://gateway.irys.xyz/DSWSn1uCwAEBMxhzCxGi7x5jfWwWC4Cv9vFGfEuzqxaT",
-      "address": "jxr1RoqrMx5kvKDeQWFNQnbXApdJ1gsgkfbKFg4wMiN",
-      "mint": "EZhcATafPPihk1TaRJhxksNUe8EhDzYqrqgoquyHKonf",
-      "recipe": "EZBx94ng8QYAehqtxBxGx4C3KhKRng25ESup6zabnBiu"
-    },
-    "CLO": {
-      "name": "Coal Ore",
-      "symbol": "CLO",
-      "uri": "https://arweave.net/rBPxJbtvPGdRDlFBMksOYRNWCduv48vG3zyWF_igd0c?ext=png",
-      "lvl_req": 1,
-      "mine_time": 30,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "8VijGGppzeJqbYesHcjJFUZ2iHekqXR16cHPYHTx3UcM",
-      "mint": "FnnBQk9Xn2LVULALk2DS5YnwGnfwNiEwXhQ2dAHNvCKK",
-      "recipe": null
-    },
-    "RUB": {
-      "name": "Runite Bar",
-      "symbol": "RUB",
-      "uri": "https://arweave.net/F8eEoalEEudjm7GvrqSV4BspVtQ5sWnXZ4HVgh1R4WY?ext=png",
-      "lvl_req": 20,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "RUO": 5,
-        "CLO": 10
-      },
-      "address": "53gNYLgwptqfsUG4V5KSwbNzSngSSLvfSnwjQGZxB3Dz",
-      "mint": "FEWbBu5qdMHAuGdP1ooKUi1JrrimEsigiES8bxpZ3qwZ",
-      "recipe": "4bTMUs4V4HidXew4iRAWe6HDAsKf1PPorJQ6BrxyC5ZZ"
-    },
-    "BOT": {
-      "name": "Baton",
-      "symbol": "BOT",
-      "craft_time": 61,
-      "lvl_req": 8,
-      "xp": 460,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "SLB": 1,
-        "TNO": 3,
-        "GLB": 3
-      },
-      "uri": "https://gateway.irys.xyz/7MaCVFruEhSA3DzsJdiWwbucoP3SEdjStGnEHgoB6YPQ",
-      "address": "5cPHn3sXFfaAvcbTdmVvF9dhCbdzrJp7RCfXRUkfJcYn",
-      "mint": "H7ZPjzYJ881FxtwBN2Cu5J8JYGkBaixi8GoEJQEqJ8mF",
-      "recipe": "DEto5KbjWZS6JeYiNrk3eirZXreyaatGZTMWQxZFha4J"
-    },
-    "POW": {
-      "name": "Powersuit Yellow",
-      "symbol": "POW",
-      "craft_time": 26,
-      "lvl_req": 12,
-      "xp": 102,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "TNO": 4
-      },
-      "uri": "https://gateway.irys.xyz/2Woi2qHqQNjyeQ9nTe3cRaXnFc6Ch3viS9HLvJ3GD2Xf",
-      "address": "DpPiNt8vPb1nZdU6JJ4KrULhg5XwCUr2YkPsHSVigKRV",
-      "mint": "3sF6PL5yqzcAs5Q9LzB5w8Gq33nwLBu8Wbe3JM9cyqxa",
-      "recipe": "9DjPJ7qGthL3Q7D4ShR6dmkF7EBwbAsezaGuSGosrXbm"
-    },
-    "PKK": {
-      "name": "Tusk TopHat",
-      "symbol": "PKK",
-      "craft_time": 17,
-      "lvl_req": 10,
-      "xp": 405,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "CPO": 2,
-        "IRO": 3,
-        "SLO": 3
-      },
-      "uri": "https://gateway.irys.xyz/9jYaoQh7KMZ3Ath1QkkJ6nK4rfNAvZsC94r4P74ojdF8",
-      "address": "4XYK4cz8WTGaQGEA359Qu3vfi1jm66akzeMFt88DB43M",
-      "mint": "69QbTcXqvnoHrKJBTkauZVjA5E6iymfkPQqpfrtq4Xp",
-      "recipe": "AgpS8D69zARzbZQKjCJ1F4G1gsG24ZM1RipZTspzxAjA"
-    },
     "IRB": {
       "name": "Iron Bar",
       "symbol": "IRB",
@@ -1233,876 +839,9 @@
       "ingredients": {
         "IRO": 2
       },
-      "address": "7vmQLG3bkQHyv47o9hLtyja12Fw8tHCCRJ6579Ud259g",
-      "mint": "cuijZdVGNYnxY59qW7iAVPriLwfLD5qRQmUsrA7gSLh",
-      "recipe": "GseEi2NqThmoeDsYKTjB5ZCUG4TBXnuWqjZNf94S3pu3"
-    },
-    "BRB": {
-      "name": "Bronze Bar",
-      "symbol": "BRB",
-      "uri": "https://arweave.net/wHfT8qt-ebxj06EvALgu604pJV1KKJj2nbN-6z4lQlY?ext=png",
-      "lvl_req": 1,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "CPO": 1,
-        "TNO": 1
-      },
-      "address": "CCwzhZfZRgvVQBetkgwBwgZaSfsHXkee39UEJqx3qLPY",
-      "mint": "8wEUrDNnh9UGJWdWDZgxb6f6FcZtRPffpozZkXWodPCV",
-      "recipe": "GczRyP3MWB71VRz2xaFj5EymsZwa5hfinCxFPUBYbHdC"
-    },
-    "ADB": {
-      "name": "Adamantium Bar",
-      "symbol": "ADB",
-      "uri": "https://arweave.net/MU24dYiU4JdnxmewAmoYVZ7tuH43hfOdgDRSyZONr6o?ext=png",
-      "lvl_req": 30,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "ADO": 5,
-        "CLO": 10
-      },
-      "address": "GuqwED4thJUcv247xK7cAmcrJwTZvMrgjtYpKnAkoYfU",
-      "mint": "9qqnJbxXKu32zTbQVLMJZX5hvsvdw7FoiSkkN8bicibp",
-      "recipe": "4HsDdsYeNMQPfnZsoPrY5SS8i99sJR1xNK3USg8dshCt"
-    },
-    "KBJ": {
-      "name": "Bomber Jacket",
-      "symbol": "KBJ",
-      "craft_time": 17,
-      "lvl_req": 22,
-      "xp": 274,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "SLB": 4
-      },
-      "uri": "https://gateway.irys.xyz/5rbR9x2HSQsGc4U5t7kkuPU4dVzDhK1AwwzeHPvVogXk",
-      "address": "4dd6tQYq7JzxDZrcsK4ZnVRzWBAZLfzp6msqSATVUyrV",
-      "mint": "6fJoB2jFZuRYpadcfqMu5B981b6wwF8Z4Xje3CxcBuEE",
-      "recipe": "8MRZtx6HBC6pzbmSTBQ4WvE2qNUGWH2ugpDrxc457jWA"
-    },
-    "CMA": {
-      "name": "Kevar Camo",
-      "symbol": "CMA",
-      "craft_time": 32,
-      "lvl_req": 28,
-      "xp": 245,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "SLO": 1,
-        "BRB": 4
-      },
-      "uri": "https://gateway.irys.xyz/H8cdFsSaVAYZ6zYpN76mC1cttfLHZANjSWQzrSYA15xx",
-      "address": "2WWdpmp99iLQQRBuiQTAVPu5F67RP3123hH6kmN61R6a",
-      "mint": "5zzcqi8E3r3K9yMmhFo6TeBGwXW7Tm8zrg7tE21C4D1d",
-      "recipe": "4WKKZ8Dbtp4RUZBUF2iLx1WkFBLdxQ7V7hYWHZwuSf1C"
-    },
-    "GIN": {
-      "name": "Riot Gang",
-      "symbol": "GIN",
-      "craft_time": 11,
-      "lvl_req": 23,
-      "xp": 324,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "RUB": 1,
-        "SLO": 2,
-        "IRO": 6
-      },
-      "uri": "https://gateway.irys.xyz/5erzQ2XXjSJiT5ihAuceQ4coZ1NU4MPticHXmuCFhWH9",
-      "address": "88p4DxmoeD1zsVxg5SnBGVLohF34jL1QZjr4HD7jeLVg",
-      "mint": "6CniQ73N1cBLpFCY8s2w8X7VNuGURUqdubL5Vnt4jC4Q",
-      "recipe": "5BEnYC9VmkowymP1BJGnnQqWFZPHcHv4DCnh1v1mwH7t"
-    },
-    "KLK": {
-      "name": "Bullet Mohawk",
-      "symbol": "KLK",
-      "craft_time": 37,
-      "lvl_req": 7,
-      "xp": 936,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "SLB": 2,
-        "BRB": 2
-      },
-      "uri": "https://gateway.irys.xyz/DyiN1pyZ5j83xCB6LcUa539n5hS9iZE5UghuEtQB9fvx",
-      "address": "8MQjqVk4k3Me2eAB9Poouve5xa8hLC85EqcDttziKyGU",
-      "mint": "FSHWj3C6hTsN5AWjr5wKZHsd1Sczc7CvyxowoiUTa7eq",
-      "recipe": "2H8MW4F7zZpTACav8d47YsnGLrLdVVrBqULmp2zhiKz3"
-    },
-    "YNE": {
-      "name": "Syndicate",
-      "symbol": "YNE",
-      "craft_time": 37,
-      "lvl_req": 30,
-      "xp": 635,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "GLB": 6,
-        "IRB": 3,
-        "IRO": 1
-      },
-      "uri": "https://gateway.irys.xyz/7Rwn68SNX6EKEYywqTDYvkzhsb1xMWDBSzriZ2NPuzCk",
-      "address": "BXoHyZgosYgDqFZ8QfX55FTgYnqZXWBGiE2tgCqFvqrm",
-      "mint": "BgGbPE84cbnLkdcQWshjNVNiMmfAiaRU9VBdfYJ288yK",
-      "recipe": "6uarRN7RYpHK8L3rVuMNbsd43hrUmnswcqPZXcBp7hxF"
-    },
-    "SLB": {
-      "name": "Silver Bar",
-      "symbol": "SLB",
-      "uri": "https://arweave.net/FgV2YgA81fD44VWnQZr7sEhZtoXxggE8Ed2B1u_RBds?ext=png",
-      "lvl_req": 3,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "SLO": 5
-      },
-      "address": "Bq5DeCiz6AWDyRrbwjfcUDjvhcabAXwjKrkvYAbUvm1q",
-      "mint": "3ovu5nB7rYb6ua4ixrZ94f1daEVcAbN7p58135cdWpHf",
-      "recipe": "AAGvxaHbDWah6WwPA53sE1GfSQ2Pm5LW9QKZk3fJarnK"
-    },
-    "RGN": {
-      "name": "Ranger Hat",
-      "symbol": "RGN",
-      "craft_time": 44,
-      "lvl_req": 32,
-      "xp": 204,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "CLO": 3,
-        "CPO": 5,
-        "GLO": 6
-      },
-      "uri": "https://gateway.irys.xyz/5a6hPVWxY3PzkJWZowRRjU2Kviu4VRpbTojJ3WFQpcXQ",
-      "address": "2unKpirucPuGFi8sts7VkQp2LAmLtTKYmyNRn7vVmTp6",
-      "mint": "RoNxMHvRq9qC4nBWLKymMm7Lh1vWhDKp4KcMo4v2WPB",
-      "recipe": "FXgHgHJd8ystyhnxYZu5spqmHTfQ5prE4Gw7FF3RnyZi"
-    },
-    "GLB": {
-      "name": "Gold Bar",
-      "symbol": "GLB",
-      "uri": "https://arweave.net/ILoOuplufEu4eGg3kgShuVA7DIisPvOCyV0awtZyRQ4?ext=png",
-      "lvl_req": 10,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "GLO": 5
-      },
-      "address": "CJSzVPFJGQo2hb1Ak8b5VZmBdD1rqr5DCxQCyGVGsHX6",
-      "mint": "EFRYxLct9EQj7jZ83cnmnhjuM733jnsFj8idRJ6xD6mN",
-      "recipe": "wKcup9NEoKBSFbBDKWXYSk3s2qsshWPGdxXTsqSJUHp"
-    },
-    "MTB": {
-      "name": "Mithril Bar",
-      "symbol": "MTB",
-      "uri": "https://arweave.net/I6hisRYJQCt68dfagkz_QxTRNDaNeRInv9_Cck-329M?ext=png",
-      "lvl_req": 10,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "MTO": 5,
-        "CLO": 10
-      },
-      "address": "AyKjaTgyRWXXGXH99wnpFhV5XrmUEBJkswTRm4AkZe9W",
-      "mint": "ACWTNHAAesitkJTg7t56wbjrFTrtSi51fY9b5txLX2JP",
-      "recipe": "MFbtwFs3vBfrGQ2q6YrJFG9X5FQMGouFeHQgNFLFS4P"
-    },
-    "SLO": {
-      "name": "Silver Ore",
-      "symbol": "SLO",
-      "uri": "https://arweave.net/cAKrq9cuJ2VVE5ZfN-DmLv-zJO-6hs0Q7SIiNZoKiEg?ext=png",
-      "lvl_req": 5,
-      "mine_time": 120,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "6KnHE9cD1Pbs2FNPbFT9jgYtg3J95ewJgXnB2TD5rove",
-      "mint": "6WURR6KygTVkCai25SLf6Y3adu59KMA63TFSDE42Bkv5",
-      "recipe": null
-    },
-    "IRO": {
-      "name": "Iron Ore",
-      "symbol": "IRO",
-      "uri": "https://arweave.net/nQPHw1hAjWtyDZqQraAmUhOZ9dQJ3YgNFBFGZrjPRWM?ext=png",
-      "lvl_req": 1,
-      "mine_time": 60,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "5N8qwXKdQZA7KWp7T4R1uJxiZqxyAvqSWpMVpkbKNBmt",
-      "mint": "GJ6ok133gUo5QwSvXr1B62T4FCV2xiPgK4k6Z1jhkpNv",
-      "recipe": null
-    },
-    "FRA": {
-      "name": "Future Gang",
-      "symbol": "FRA",
-      "craft_time": 41,
-      "lvl_req": 5,
-      "xp": 708,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "BRB": 2,
-        "GLB": 5
-      },
-      "uri": "https://gateway.irys.xyz/BdLDQSwYLsYT9J3hGy495FZmAxNbofFz9fdoVbTGwgaX",
-      "address": "CYFPHnXLNvSwufNwfFHjGqrPwcMKrWyLmExtkVD1qWjy",
-      "mint": "FNiV2NFDfoNNckWvtRVKAWY8orB2QU2LLEcnnsPEG2Dx",
-      "recipe": "tQkAkm67XSrRAyQ4968fr56gjvppGXXxsu6sUbujGYb"
-    },
-    "EIO": {
-      "name": "Evil Halo",
-      "symbol": "EIO",
-      "craft_time": 45,
-      "lvl_req": 7,
-      "xp": 450,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "IRB": 6,
-        "IRO": 5
-      },
-      "uri": "https://gateway.irys.xyz/FdS8Rb55xYxhKCRbZYhEchXYkPWjDLNTh4Pp82CJhtWh",
-      "address": "HYmP9K4hbeMJjDxDNHvxp2uEM2PqZwgTwH2KtZV8tEvN",
-      "mint": "4ms7PYeaHZHEZ9JD5sMGs2XYcAFP3wfWdSAaFSSoGQRK",
-      "recipe": "Ai9Y38PKWJgCoW7LngMdAZhEADAkCYDRRzpeLwK7k25B"
-    },
-    "AHB": {
-      "name": "White Headband",
-      "symbol": "AHB",
-      "craft_time": 25,
-      "lvl_req": 41,
-      "xp": 166,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "GLO": 1
-      },
-      "uri": "https://gateway.irys.xyz/5y1TdcQsaHHZpnV3QR2tVAUp4piZhKtc4EcBLwaneMTQ",
-      "address": "4JfBYJVhbsx2dtZ4KbC3uMUYieLwqze8sK86T8wLLpNL",
-      "mint": "9cvRftkCfgpSTyLgdRLroun2cV3CyqDCoisVtVa7UFhf",
-      "recipe": "5e7efsRf2kVK3WTY2pB59SqChR88yTLbos3i8LTRYxn"
-    },
-    "STB": {
-      "name": "Steel Bar",
-      "symbol": "STB",
-      "uri": "https://arweave.net/1PA3uluVZ9giza_3bWD4fITuQQUxHszDFJW-DVnERWc?ext=png",
-      "lvl_req": 1,
-      "refine_time": 0,
-      "xp": 0,
-      "tags": [
-        "BARS"
-      ],
-      "ingredients": {
-        "CLO": 1,
-        "IRO": 5
-      },
-      "address": "Dri8yaXj3FgS1XACpdibbyPrheKmjxBnS3fs67cFvjPc",
-      "mint": "6LfkuWpihkphbvYhPUPT9A4dEVeogGBYrFHnY5cNLPhG",
-      "recipe": "G9f6qdCzhf9qBUmcR8RLMZEh6npcYKxn5aSoCPrGmdRM"
-    },
-    "OOI": {
-      "name": "Ronin",
-      "symbol": "OOI",
-      "craft_time": 13,
-      "lvl_req": 36,
-      "xp": 517,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "BRB": 3,
-        "IRO": 6
-      },
-      "uri": "https://gateway.irys.xyz/GR1wQfUwqbct6VuMq5RhLXgoL9mW4u1T6CCoS5QoSgF4",
-      "address": "G8Q9hf8tR58LttMNhG97qJp9aZdPsHotzkKBAARuo3UN",
-      "mint": "H6WFqHJVN6fJ1kNB7pE72sdhKrLGoCXoMuga9LYqsAC1",
-      "recipe": "BRC4V3N1oj4kDdd1Xyd7zonQfUib9tTNboSDNo6NNiZN"
-    },
-    "URR": {
-      "name": "Iron Guard",
-      "symbol": "URR",
-      "craft_time": 31,
-      "lvl_req": 35,
-      "xp": 445,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "IRB": 1,
-        "SLO": 3
-      },
-      "uri": "https://gateway.irys.xyz/DpVed1Sgzc6imTHDYHuTMYg7ptJasss7vPfGvbPWZL2j",
-      "address": "5QtB8zhthmFxY88GLsPq1YyX68Cq5pKwboDqknUasxJr",
-      "mint": "BzG14SaF5iw7rpt6VQ5qPtZVrottSmugA3hxZdSSk1he",
-      "recipe": "9SpeNBkqc29zwNe88rQJBXndC4k6Eq2CUZPgxc2zRLjN"
-    },
-    "HHA": {
-      "name": "Halo",
-      "symbol": "HHA",
-      "craft_time": 49,
-      "lvl_req": 42,
-      "xp": 437,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "CPO": 2
-      },
-      "uri": "https://gateway.irys.xyz/F3V2XiHT39pHGunRC8ZiJrxZn2uKovzg5Qhxby7x7Kb5",
-      "address": "3UxYHSxSyEs8aAPD51HKYTqaeGJTmwXceD3T5zDfb6rA",
-      "mint": "NAG6sL36UYVxG933EjoEcrdYZK4xJ7Q6icFpKHEp169",
-      "recipe": "J43XapmTL1oN95SzaZuCx4zugtpgb5X16bQER5p84D8H"
-    },
-    "ADO": {
-      "name": "Adamantium Ore",
-      "symbol": "ADO",
-      "uri": "https://arweave.net/9UjhZNyzIbcopO31o29UYg7YHD3cbPQUmRERIXs5A7o?ext=png",
-      "lvl_req": 10,
-      "mine_time": 500,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "5Zcc1bG5kgigpx7qvjAxB13kHWbA73bWdcRnqfWGCGet",
-      "mint": "GYuxDAJ1x3pH4FEuvx3AKUbvSSCwAMd37EjvgXhRxWSw",
-      "recipe": null
-    },
-    "PAA": {
-      "name": "Map",
-      "symbol": "PAA",
-      "craft_time": 19,
-      "lvl_req": 22,
-      "xp": 873,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "SLB": 4,
-        "BRB": 3
-      },
-      "uri": "https://gateway.irys.xyz/EA6CJUuJrp9MeVsQUPq3KAySSsb6W4CDeheCH5X8re7j",
-      "address": "3BkSN9d2u5iorVEo1x79fwH4bY6qXhiawJTrmL34bhf1",
-      "mint": "26XMYxUtbaCENuZg9yDuP5mL17fiqBRx8mdTzxBWoo1B",
-      "recipe": "5twUhtBNJwMMDVLomLcbKvycThKXnbTFy8Qxn3D6he1T"
-    },
-    "GGI": {
-      "name": "Raider Gang",
-      "symbol": "GGI",
-      "craft_time": 38,
-      "lvl_req": 39,
-      "xp": 943,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "TNO": 1,
-        "SLO": 4,
-        "IRO": 5
-      },
-      "uri": "https://gateway.irys.xyz/yGNoq1UqYCBt4JzKv8oJhHyyWGPJXRuAbDcZkRR4yZj",
-      "address": "6uBseTWguBxZxcbwFTC3Uj9Q1eaywEmZbPKC6ueDFyxo",
-      "mint": "KZNtnm18izq9x1bqHRxMyWBxWsfMGLYsyWRBjm2NYjL",
-      "recipe": "7yhGgoRzPdYU89g3U747GivY9pxW4TPhH4EjA6mqmnS7"
-    },
-    "YED": {
-      "name": "Energy Hand",
-      "symbol": "YED",
-      "craft_time": 36,
-      "lvl_req": 32,
-      "xp": 553,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "SLB": 3,
-        "IRB": 4,
-        "BRB": 1
-      },
-      "uri": "https://gateway.irys.xyz/7RdfwRVuBvD3N6uYPZktr1fEGkPZ7nboukG6wdMnUTgS",
-      "address": "AqSufK9bJHUwhGf2nJh8w9NQmYryiiMdjmTDFRebZVS",
-      "mint": "AqbvHTUNQswBVuEhu6Jh4AYCVUXquxejhYiPG1uNVxuL",
-      "recipe": "4XaM4grqVhu3W7Aw7R48XrHQL7e14fNg86HHUsnDSrbA"
-    },
-    "IAI": {
-      "name": "Flat Brim Cap",
-      "symbol": "IAI",
-      "craft_time": 12,
-      "lvl_req": 4,
-      "xp": 741,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "BRB": 1
-      },
-      "uri": "https://gateway.irys.xyz/Dch7HaHQDcPwXgTze4VDia3icnBnpd323XcpTaUie3GY",
-      "address": "4ZUiQLkedNLNrVTfTMkyk3aaETSiPfg4YZ8fbn3uNsqA",
-      "mint": "3nr3N6JKWLiGcKRjx7fpjGa7QsscwD9dkkue7F5kWXkC",
-      "recipe": "86mVUQCiydieGos9YAXEdv3k7c5BHJFYkv8pj8vCeor6"
-    },
-    "EWA": {
-      "name": "Jeweled Bandana",
-      "symbol": "EWA",
-      "craft_time": 24,
-      "lvl_req": 35,
-      "xp": 144,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "BRB": 1,
-        "GLB": 2
-      },
-      "uri": "https://gateway.irys.xyz/EKmQeyLffbqwe1cdBbx4F7UrJGppxP4bFd3LoiceFdnV",
-      "address": "CrJpqEaH1dAQowucub8HJyE6DtcZYJ3AeP6yQQM2LnEC",
-      "mint": "9KcVMUe1g7ChxZ5WVnK38xRjxNxS28Ptd7wMi6NmfZio",
-      "recipe": "DxW3LWxBYNHAPRURMC2PUvta8tj6BC6CtFGP7n6xGW3E"
-    },
-    "MTP": {
-      "name": "Mithril Pickaxe",
-      "symbol": "MTP",
-      "uri": "https://arweave.net/vKfx4aUqeIw7jdqo0ykgI4TF6LD8qdHzAzhPFjvzWjM?ext=png",
-      "lvl_req": 20,
-      "tags": [
-        "Pickaxe"
-      ],
-      "time_reduced": 35,
-      "address": "4Y5YbAjyhNkoyk4nX8yWfCXyrcYeECD5ubZAjxiTdj7K",
-      "mint": "Eo1yktCtFMWUnRUPKMEy99ajWoisW4wbVDr3u1yAEn4P",
-      "recipe": null
-    },
-    "CPO": {
-      "name": "Copper Ore",
-      "symbol": "CPO",
-      "uri": "https://arweave.net/bxmnG1Eu6vTfa3TD8obMrnmom9HYw8KIa2fic50r91I?ext=png",
-      "lvl_req": 1,
-      "mine_time": 40,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "CNLZ39LiFzGtcJLd6JrsWEbpkkhfzQb4YqcU1FxDXcmZ",
-      "mint": "AxSn1yPdYEYccibxhDZRuvKvFqMYD8tdcTE7Mvkmai28",
-      "recipe": null
-    },
-    "OCN": {
-      "name": "Poncho",
-      "symbol": "OCN",
-      "craft_time": 47,
-      "lvl_req": 43,
-      "xp": 787,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "TNO": 1
-      },
-      "uri": "https://gateway.irys.xyz/3cAohv2U3agALU3mfGEe9zbSmNmsKR2LLpks4Ho9az6k",
-      "address": "HyK4tQD7DcVQ6QFZi83Y74nzTbnNzjez5P8hDoVCsRRm",
-      "mint": "AXtqrjSaeNVcYi1pJULcwRXMAmdMDpQ836d99eC2bGVj",
-      "recipe": "AMLhUa2xHmATNkb9GxszjDjPG6PDTSX8QELpUCD2eE2H"
-    },
-    "NGE": {
-      "name": "Elemental Gang",
-      "symbol": "NGE",
-      "craft_time": 47,
-      "lvl_req": 44,
-      "xp": 903,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "IRO": 1
-      },
-      "uri": "https://gateway.irys.xyz/CsyL7CueQbpj988kLchSvEjzS4W7APqCeSxM7tkXX1gH",
-      "address": "HSCkgHSEJwmrvbXGRNpLrfKMq7PWrDcpzbvkujXaYWMK",
-      "mint": "BZiQgiHLFsqk8k5aTYWWUoRt4zw5r93qk2enTk2rm2c3",
-      "recipe": "FUHi7w75KvAycHiZFkURxbQp1sqkHppymAKQcwBX6isi"
-    },
-    "ONO": {
-      "name": "Wooden Gauntlet",
-      "symbol": "ONO",
-      "craft_time": 14,
-      "lvl_req": 38,
-      "xp": 272,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "SLO": 1
-      },
-      "uri": "https://gateway.irys.xyz/5eGiV8KyGRctTU3YNmdG5qc5CCGzNSNNCAh3rDdQfeZR",
-      "address": "88U3Pa54iMSPb4UBJcVR9jrUBZhS1HPgAixYrBYZCMm8",
-      "mint": "DUhXNxYV8PURcttqDR6uLCg3x8iiq4pQqMDSBzeZ5wo4",
-      "recipe": "2V3iw8hxjECZg3prMNWebMkvxqqQnqJK8YD4ka5sUKHv"
-    },
-    "GLO": {
-      "name": "Gold Ore",
-      "symbol": "GLO",
-      "uri": "https://arweave.net/bd6EJ2tlZESBrp4-a5K_aAA4EJyTCzqSM4xix-JOGgs?ext=png",
-      "lvl_req": 6,
-      "mine_time": 400,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "J9ghQeXb4hqg659DXGX58VTZEYaQRr1h2sEY5TvfFtTD",
-      "mint": "4jbh4Yu424bgESmzAaC5sihJMUvDyZXcLLuWyc743Hfj",
-      "recipe": null
-    },
-    "FWM": {
-      "name": "Sci Fi Mohawk",
-      "symbol": "FWM",
-      "craft_time": 29,
-      "lvl_req": 45,
-      "xp": 356,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "CPO": 4,
-        "STB": 4,
-        "BRB": 6
-      },
-      "uri": "https://gateway.irys.xyz/CpNWiXTMvjRyRuzUpxgGJvVSv3T4kc1heMCuMCxsDeEq",
-      "address": "AePWnXk8DeA5GPii5w59LVgEFmnRiefGCbYUysMzY7cK",
-      "mint": "Dr2otT9BmVYDwyF6ZYTEktC7Sc1b6VMpi84Het4V2zCd",
-      "recipe": "4rBnorfucHuA91S1q1GUy6x9dKsoovhVVk1BCtwLQQqg"
-    },
-    "RUO": {
-      "name": "Runite Ore",
-      "symbol": "RUO",
-      "uri": "https://arweave.net/QzQKqUt0K_RmQkHpx15H73Xwzrhk8Vd16G3nulz-e4c?ext=png",
-      "lvl_req": 9,
-      "mine_time": 180,
-      "tags": [
-        "ORES"
-      ],
-      "xp": 0,
-      "address": "CE1uKaxZmFHarV9NJTUdCnkydsNQBUSCFNuMvNvd1vF7",
-      "mint": "4GtsGQSyA2er4D4EtaNaPBSxUKXyzdHMhgGGmxnqa5W8",
-      "recipe": null
-    },
-    "NSR": {
-      "name": "Astronaut",
-      "symbol": "NSR",
-      "craft_time": 28,
-      "lvl_req": 19,
-      "xp": 222,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "IRB": 2,
-        "BRB": 1,
-        "CPO": 1
-      },
-      "uri": "https://gateway.irys.xyz/2DoznLsoAUHnRkksfA6mdirj2WphL7DoQeFZG3L8a1Zw",
-      "address": "8Mca8FcHDjVajxZH2EKaMZLkQVMvJK8A3j2cr6hfNLgu",
-      "mint": "D92zquqpdTxfNYegQ9bhCEuZHCEJQx5MneGPV78VjA9i",
-      "recipe": "GZUhHzLT8Rkmks8gu5mcQTSAikdJvQre7MuASe8YY2wv"
-    },
-    "TBB": {
-      "name": "Bandit",
-      "symbol": "TBB",
-      "craft_time": 19,
-      "lvl_req": 29,
-      "xp": 495,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "SLO": 5
-      },
-      "uri": "https://gateway.irys.xyz/H7Yygtxibxp4hgRpBQhTZF6bv81AExeEkAABJFPnEUGw",
-      "address": "BMqQEihrn2UtV1ZezLxe66mp4PMonUVsYq6XvJr5Zi4p",
-      "mint": "GqProikMYtueefQAhZBrrWw9BCDm4rGyvnzVMZsCJ7D7",
-      "recipe": "jf4z6B5nnDygYA6vZDL7QpbPH8qGW6k182qvZsWHvuN"
-    },
-    "ANT": {
-      "name": "Scientist Coat",
-      "symbol": "ANT",
-      "craft_time": 25,
-      "lvl_req": 39,
-      "xp": 860,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "SLB": 5
-      },
-      "uri": "https://gateway.irys.xyz/G79mWUtSgVC2xoUkxPaQyGQmqa1DvM7iY19L7gziCSUJ",
-      "address": "98knkjFCWw4xGRyYwgj9bn2P2TvGQyUGXCQchfsVVa6B",
-      "mint": "7cM9QBpw3yaQwRpcLwy3egkgmUM7pB4jSsbhpCyHRwJ1",
-      "recipe": "HbvnhU2kgrZCLmpAHSPaSH1a9t4VwSy1HHPUKXg22EoV"
-    },
-    "FIO": {
-      "name": "TIFA Glove",
-      "symbol": "FIO",
-      "craft_time": 38,
-      "lvl_req": 24,
-      "xp": 367,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "SLO": 4,
-        "IRB": 5
-      },
-      "uri": "https://gateway.irys.xyz/5mka65x3rE3jCCus7M6YTFExCoDsnen7soqTxcGNA4vL",
-      "address": "9jBsF4omCnLtGxDmtmLeuMTz5euDGGqEY59kBaNoghnn",
-      "mint": "89LfRv3gnNX76N5WTkArrF16gJJdkBKXCRzy192MNGGb",
-      "recipe": "HkZohDJtH1Xky4ai3nJiE2J7GFFptqk4c8WprDSwhV1"
-    },
-    "DDB": {
-      "name": "Red Headband",
-      "symbol": "DDB",
-      "craft_time": 36,
-      "lvl_req": 30,
-      "xp": 293,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "CPO": 3,
-        "SLO": 6
-      },
-      "uri": "https://gateway.irys.xyz/CrQ7t35rSogfNYsd1HcnmAQciB1xJWpAKTZTMDHQK8Bp",
-      "address": "2Ywofb1PoCcWffL1s1bwvHN1bfU9io3CBgtVmvH2zjAh",
-      "mint": "27vLZepWMMEQvLqW11A8bJAVpaExNfq2JwyuJnbqnK9L",
-      "recipe": "7q9k82Xyo6koHSNt7BmDB5xjhN1PWkzLMoQSoWqhSvX3"
-    },
-    "TSE": {
-      "name": "Greatsword",
-      "symbol": "TSE",
-      "craft_time": 46,
-      "lvl_req": 25,
-      "xp": 796,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "RUB": 3,
-        "ADO": 3
-      },
-      "uri": "https://gateway.irys.xyz/D3qrupZwnaWNEDgviy4D2qqJPiMNEMypzspwkm9GceX5",
-      "address": "BBKkJwJQoZ46QqDuSdnrjtYfhL48ZoWxbku86gph9xr7",
-      "mint": "HSusQWukjPRbpeNwsLGGHh4SmEZxGabpmNVtYPZtaQVC",
-      "recipe": "G6jP4m4vAzsRM21zUSDMPE4ibtqT4htq7xCsAVWTm5rC"
-    },
-    "HDD": {
-      "name": "One Handed Sword",
-      "symbol": "HDD",
-      "craft_time": 12,
-      "lvl_req": 44,
-      "xp": 404,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "BRB": 2,
-        "GLO": 4,
-        "CPO": 1
-      },
-      "uri": "https://gateway.irys.xyz/AKvt78Z36tiJDFzg8AMwgXQNDcVhQQk7oGE4CthjzEHr",
-      "address": "AoRqjuSnN6Wh3SSFEM9hX7Xmf2bmatue1FCv1y2FpHZ1",
-      "mint": "7FNijkprpNFJrauMJ5GMHyEFGwxNkxxekcfG1mgdXeti",
-      "recipe": "CaXudmSdmCobgrhcUZjidaEXeGgsRBjSpRpAtek1MGnX"
-    },
-    "NAC": {
-      "name": "Captain Jacket",
-      "symbol": "NAC",
-      "craft_time": 54,
-      "lvl_req": 16,
-      "xp": 107,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "BRB": 2,
-        "CPO": 3
-      },
-      "uri": "https://gateway.irys.xyz/4q6jWxJcXkh5hthLESQn3dbzAGKZXEmjsBEgUSUuyx8H",
-      "address": "FXkR8Ma9HisFz76tbMkfEXMhJ7zQAxUCX4g5esHEArU1",
-      "mint": "5USPCZHyKEqRv7WcBAogY48guBMiVsPEdhtsvgXHe6SA",
-      "recipe": "9EvhgFe2HVB9sExYpqPpqhNTcWBtqU47E1kGmEgimauK"
-    },
-    "NCH": {
-      "name": "Trench Coat",
-      "symbol": "NCH",
-      "craft_time": 35,
-      "lvl_req": 33,
-      "xp": 590,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "IRO": 5,
-        "CLO": 5,
-        "GLO": 6
-      },
-      "uri": "https://gateway.irys.xyz/EKpvhKJmEEiKqdh6jWpJADEnFL3ghBdA2jBMTukZ6v4C",
-      "address": "8JyKX3UE4ZtR3aCuGHd8fVAZ8AQ14cNTwdnu5BgxciBA",
-      "mint": "GywkwdYD3NTMG6PfYYNLvSLYm7rHxvVRtsTVKyt5b3oC",
-      "recipe": "7YCAZahspB9A8LqYjzvjyCHTm3zKoL8fir8jrv26re8D"
-    },
-    "PRE": {
-      "name": "Trapper Hat",
-      "symbol": "PRE",
-      "craft_time": 34,
-      "lvl_req": 33,
-      "xp": 736,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "STB": 2,
-        "BRB": 6,
-        "CPO": 5
-      },
-      "uri": "https://gateway.irys.xyz/C8dB5vVVTPdL4TcZBdh3zFYzmFPUW34YMV7p1HuB9LjE",
-      "address": "8dQ7AWGd6HrVUqTmynYsQdjCtDy5a6UkyFvpADFkz3hj",
-      "mint": "82Txie9rrbpGtKc5FCD1LsWChXE9i9TfMvgnziG9Tu8U",
-      "recipe": "FCYcK9V2P5CE1Xrdwcxem9gwbiHt5GXYtWoNDKXnNKPA"
-    },
-    "MAR": {
-      "name": "Warhammer",
-      "symbol": "MAR",
-      "craft_time": 23,
-      "lvl_req": 47,
-      "xp": 717,
-      "tags": [
-        "BackWeapons"
-      ],
-      "ingredients": {
-        "CLO": 6,
-        "TNO": 4,
-        "CPO": 5
-      },
-      "uri": "https://gateway.irys.xyz/3VLbtNV3NpH1YhziLBEUPUKdYPBx9sWFgzh2V3dEamN7",
-      "address": "4Mp1tgjzG2dz69M38uY9MCZV9uVBfcKt2j3kJPy4tCWB",
-      "mint": "PeUqy7ZLyBf7mjLGXVFLcBN48MXece3sbbarcypMAXF",
-      "recipe": "3jnRN4CDCejpbZ7isCyxrsUjpGSHKHsTMa9VLGNSRqij"
-    },
-    "NKP": {
-      "name": "Tank Top",
-      "symbol": "NKP",
-      "craft_time": 26,
-      "lvl_req": 47,
-      "xp": 627,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "CLO": 4,
-        "CPO": 3
-      },
-      "uri": "https://gateway.irys.xyz/Gio8JY16hH62DYpzJbaeHDaQ3GyXJU8ko2mHACsUrZaN",
-      "address": "bQxX6sLRqWzfwT5jyKLNUHmkV781KW2VdK2dkyxnd3Y",
-      "mint": "9LuXcUCUNiVsPLUf1Pd6kzZRXDVMGs3r3w7dPAvVk3KE",
-      "recipe": "4HbdDuSzNRvj3rxaqjqcwV46kKkJzpJzY8N4nFMmYxQ2"
-    },
-    "TJO": {
-      "name": "Johnny Jackpot",
-      "symbol": "TJO",
-      "craft_time": 19,
-      "lvl_req": 23,
-      "xp": 371,
-      "tags": [
-        "Clothes"
-      ],
-      "ingredients": {
-        "TNO": 2
-      },
-      "uri": "https://gateway.irys.xyz/C8QAzogTaDiaf5WzfZUxuoNJ1nSAi3gAaNTAe5YyrUqS",
-      "address": "7Wpbqyvy6VpRD7sHgbWujxHeMgTswd5ouKVpk1hUGc4r",
-      "mint": "CREZHFigr4grhs6SdsU53Sa4NJ72HAnATmFjmQLZUW5t",
-      "recipe": "7bY21fXRKTWQjefjGDdzS3ZDCHixahGUqFF6b7AaSbdw"
-    },
-    "DEH": {
-      "name": "Black Headband",
-      "symbol": "DEH",
-      "craft_time": 57,
-      "lvl_req": 10,
-      "xp": 822,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "GLB": 1
-      },
-      "uri": "https://gateway.irys.xyz/9zHmzD1yecDkNAfRN6anFHaFtye1Wy6JSqw8TqcfQGD9",
-      "address": "4ribgNrTeB3MtmAgkSv9yADfsg7ng47sPP11hbbajZc7",
-      "mint": "9HbK5GxwAqY4SZ3LTrWcaqwBppzE9r3P6msnHLXSTuZ9",
-      "recipe": "3EZ9KHu2Cjp4Y1r9Qp9ECLeHXdvYLxHs1y8Rgu4dVN1Z"
-    },
-    "DNE": {
-      "name": "Silver Hand",
-      "symbol": "DNE",
-      "craft_time": 59,
-      "lvl_req": 31,
-      "xp": 419,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "GLO": 3
-      },
-      "uri": "https://gateway.irys.xyz/Fd4fkFFXdwme9Lb6cDG6XYTBPAaRvWuW2YtLtnxPFGP1",
-      "address": "gUWpzmiceCLrukXdqmGFLxmHeGVN1vcLKMdfyQdZ9Bw",
-      "mint": "5TM7bupU4zEJWN6SMCATZTVhyUkVWWRhueCvQcu4JEFa",
-      "recipe": "A1p54avHTMnSvjJrcvx6SgWdkxc3pnRvrSnZn4s7tNr6"
-    },
-    "AGG": {
-      "name": "Golden Guard",
-      "symbol": "AGG",
-      "craft_time": 32,
-      "lvl_req": 7,
-      "xp": 837,
-      "tags": [
-        "Gauntlets"
-      ],
-      "ingredients": {
-        "IRB": 4
-      },
-      "uri": "https://gateway.irys.xyz/5VdwWcj3XWHwKEUuZeZ7K8MDiTr9FrmX3FWKd3MbfmCb",
-      "address": "6v9xx3fGgiNM2dwm2R8bjJMzRUQQ1UQRxLdc5ZV9STzk",
-      "mint": "6ocX9sxm9r9QQ8DrYo1GD8TAGBtNHQk6NPfD1aPgJNzi",
-      "recipe": "3j7Xzz5PZiVa11eDGe8TKBV5PWm13krZKTyjcSdCdFhA"
+      "address": "98pDgp6S1z2qjssnRbPpo39j9VREnqFFsmoMhovHVjYS",
+      "mint": "3LS3J3VwdPYdGftr42bfHF4eVBb53xFYPwWQ4i9dSK98",
+      "recipe": "2QbHHHFFb1mvHRULEWMhWUdgSDcpiZ4e71xP5VeNJppo"
     },
     "EAE": {
       "name": "Mace",
@@ -2119,28 +858,747 @@
         "GLO": 2
       },
       "uri": "https://gateway.irys.xyz/AmCiHr4YXXJa6USyNipPNrsFAyUmpweEB3BV8WcPMLKm",
-      "address": "65HNpKZPTqscJCTvxExuq1jGkejtNzoSzbeEDvcoYZBV",
-      "mint": "6v7Nh6XBXwzVxreiFmEU3twLTvG5AnoHs2Mv7AMwvuCw",
-      "recipe": "GF8mkY5zNfWWGRtRxHsppZ6r7B7cbEgPCBdUiPULUyAv"
+      "address": "5iqeqoYaE9nqvLFjD3WLTgFyY4QYudesDHSFGV4U1aRv",
+      "mint": "EfUwsPNoZhUZtB9DGvFNVtTbMLsD1epBzTR4g9wxhvG",
+      "recipe": "C6kUsXZn5s6fgJw7cRVCkqJ1XfLjMfdEzNsXgDFPkRvq"
     },
-    "DGY": {
-      "name": "Cyborg Red",
-      "symbol": "DGY",
-      "craft_time": 43,
-      "lvl_req": 2,
-      "xp": 177,
+    "GAA": {
+      "name": "Space Gang",
+      "symbol": "GAA",
+      "craft_time": 52,
+      "lvl_req": 10,
+      "xp": 466,
       "tags": [
-        "Gauntlets"
+        "Clothes"
       ],
       "ingredients": {
-        "CPO": 4,
-        "IRO": 6,
+        "TNO": 4,
+        "ADB": 3,
+        "GLB": 4
+      },
+      "uri": "https://gateway.irys.xyz/Aj74rvyWkf8UDqSq4kUCXRomReuJc7eKufB8uze2xKZE",
+      "address": "AKLZ1RcPxjwZE7WqikDo5AtK9NkaW3BGCtnim9RURdb",
+      "mint": "FixtAHtCJM8yjHX1R9umvWg6TNLznesLJ2uwEcxxYgfK",
+      "recipe": "CezSihwmMVQjvy9zKnkmsN4UgrLieUzjW5JNrtXHjFsh"
+    },
+    "ADO": {
+      "name": "Adamantium Ore",
+      "symbol": "ADO",
+      "uri": "https://arweave.net/9UjhZNyzIbcopO31o29UYg7YHD3cbPQUmRERIXs5A7o?ext=png",
+      "lvl_req": 10,
+      "mine_time": 500,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "CaqNRMr9RBRc4uDJ7K91Jeaj3nEXDmsxCcGLxrcY5QbH",
+      "mint": "ENPR2Xf2F5UUs3R66UQPTKuuWi4RBi8VgBSXtaXBitdU",
+      "recipe": null
+    },
+    "GLB": {
+      "name": "Gold Bar",
+      "symbol": "GLB",
+      "uri": "https://arweave.net/ILoOuplufEu4eGg3kgShuVA7DIisPvOCyV0awtZyRQ4?ext=png",
+      "lvl_req": 10,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
         "GLO": 5
       },
-      "uri": "https://gateway.irys.xyz/E9fZPECNRygxzRMUrTezi1sA8SCugiV65uFnwMGQEyEZ",
-      "address": "2nXSsT29LA2WJyTHUofwM81jgr2XUydzzm1qoDDchq4x",
-      "mint": "7cT2ARcM2wJK5Y1MLqbbGJyaPwM72hihK9x3QpdVz9Mz",
-      "recipe": "DqZX5KgTBiKjrrAv3Y3yc1qEfo5uzEBPQLT1y832rdiX"
+      "address": "ESDqfDDFcQyFfjfZS8Vk6kZ7dijhcRRRxGzA8pHJ88nA",
+      "mint": "8a6Hrj4AJAfZSczeiWAeWp92GxBLFDWAk12Ut1fQZHo4",
+      "recipe": "yrFVZSGa1nK7yZzuknqoUYtsTkxgkBsdB6Ga2fHLYBP"
+    },
+    "MTB": {
+      "name": "Mithril Bar",
+      "symbol": "MTB",
+      "uri": "https://arweave.net/I6hisRYJQCt68dfagkz_QxTRNDaNeRInv9_Cck-329M?ext=png",
+      "lvl_req": 10,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
+        "MTO": 5,
+        "CLO": 10
+      },
+      "address": "CzKgNFanFig1kpaxajzUD2stAM4CtvkVVBANgcqhXokd",
+      "mint": "5pMB9mUSoiPgwLqaogRUwrGiUQDc9oZNyKTwg11c7kz5",
+      "recipe": "52R4rmhgxw8zgwmhca7Y7rkatjMF7cCojJKsdUNaWjiQ"
+    },
+    "MTP": {
+      "name": "Mithril Pickaxe",
+      "symbol": "MTP",
+      "uri": "https://arweave.net/vKfx4aUqeIw7jdqo0ykgI4TF6LD8qdHzAzhPFjvzWjM?ext=png",
+      "lvl_req": 20,
+      "tags": [
+        "Pickaxe"
+      ],
+      "time_reduced": 35,
+      "address": "5zQcdPnvhXy3zL7Dx8UKg3PbBo959xizJXYUUiscPxnv",
+      "mint": "78btTvDPtKG2wtUdfCnwGn6fZbtLuVbbYRL1p4VKncME",
+      "recipe": null
+    },
+    "CLO": {
+      "name": "Coal Ore",
+      "symbol": "CLO",
+      "uri": "https://arweave.net/rBPxJbtvPGdRDlFBMksOYRNWCduv48vG3zyWF_igd0c?ext=png",
+      "lvl_req": 1,
+      "mine_time": 30,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "Fp9NxrUSgnaQXTzLUk1XfFUX9cUM3cmbarrZeJKM7sML",
+      "mint": "6P65Cy3XDfmsTRL4q5g17mU67pzPBP2Mi4AC9k2fx5WL",
+      "recipe": null
+    },
+    "BRP": {
+      "name": "Bronze Pickaxe",
+      "symbol": "BRP",
+      "uri": "https://arweave.net/tMjm681N3a1cWoD4fLfvbUORwIPAKrjcMCSpmm1LKvg?ext=png",
+      "lvl_req": 1,
+      "tags": [
+        "Pickaxe"
+      ],
+      "time_reduced": 0,
+      "address": "4ZbmQtnWcxCJC7jC9Nair47kVRqanH3SGWQ3DpQhD9tg",
+      "mint": "4G28BkMbzhHMdjJmSqY4cT9jQvYvay2VssrQDwbzbEKW",
+      "recipe": null
+    },
+    "IRO": {
+      "name": "Iron Ore",
+      "symbol": "IRO",
+      "uri": "https://arweave.net/nQPHw1hAjWtyDZqQraAmUhOZ9dQJ3YgNFBFGZrjPRWM?ext=png",
+      "lvl_req": 1,
+      "mine_time": 60,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "3eWPQqXagVt9mvoQshvVGhey79qLqcPD2UN8YGGC6bNN",
+      "mint": "3SGZhXbMCi4stKi42paWhcMM7Fzrz4NbV1Ep9LbuCvpC",
+      "recipe": null
+    },
+    "MTO": {
+      "name": "Mithril Ore",
+      "symbol": "MTO",
+      "uri": "https://arweave.net/ttbeYSGAU8Yhx5H0aaHWHIvUCZMLlAWiKEi62ABnzDQ?ext=png",
+      "lvl_req": 10,
+      "mine_time": 160,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "9FmWxuuyTK81G7vwurdWeH6sfNkKMMrqXsvcVFfkZxBY",
+      "mint": "7aYVkcFcZHyQBDa9nEtwxe5igu7J8FWnA3PRQXCZrUg",
+      "recipe": null
+    },
+    "EGU": {
+      "name": "Ogre Club",
+      "symbol": "EGU",
+      "craft_time": 30,
+      "lvl_req": 27,
+      "xp": 581,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "CPO": 3
+      },
+      "uri": "https://gateway.irys.xyz/HmvErrjjQNdbPEVmNTMpJUSZ6RQcuwujQdBH3NJut6qF",
+      "address": "7s7N6TRCU3gS3jrjAcGexzbZW2qMGejNcYddNYsDiNAu",
+      "mint": "Hr2WGcR9VZinN3FXP4h5aJxuNxfRgepMwU1zxfcwfGXz",
+      "recipe": "9Rovz5dJ9Fm4cYzrS8oE42aJd3jMyAmd97SzSs6BD6vj"
+    },
+    "IRP": {
+      "name": "Iron Pickaxe",
+      "symbol": "IRP",
+      "uri": "https://arweave.net/3zHftMbUKuDq--5teRS5HIr52WExPxnlWHy3dlU_tzM?ext=png",
+      "lvl_req": 5,
+      "tags": [
+        "Pickaxe"
+      ],
+      "time_reduced": 15,
+      "address": "7JJKrABXRxAr7VK4vKBmTsybKuv83ghAiZyCfTkHeJxn",
+      "mint": "CFPisXGFVu42Y991oprfGzykoh2CGJdRqjdSYq1ZuaFR",
+      "recipe": null
+    },
+    "SLO": {
+      "name": "Silver Ore",
+      "symbol": "SLO",
+      "uri": "https://arweave.net/cAKrq9cuJ2VVE5ZfN-DmLv-zJO-6hs0Q7SIiNZoKiEg?ext=png",
+      "lvl_req": 5,
+      "mine_time": 120,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "Dh5o4x5GNTMq3VHdkRaDkCfRfczmsqzm6JtgJwstYyZs",
+      "mint": "BybHGkMzurbX4b1uLD2fj47gvdBNrLo2ywQbHRxZW7nh",
+      "recipe": null
+    },
+    "TNO": {
+      "name": "Tin Ore",
+      "symbol": "TNO",
+      "uri": "https://arweave.net/mtQ6rD4bt4lKEzojTQsYXmMfa43y1BifRcIZXN2WMjI?ext=png",
+      "lvl_req": 1,
+      "mine_time": 30,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "CwhTzxJ5dksv9jXSvksUZuFWtML53xpwyo85TVSciHC8",
+      "mint": "778cHY8GU784apR36fRpQ944vBNTLf7tq6yHsyNMXLsh",
+      "recipe": null
+    },
+    "CPO": {
+      "name": "Copper Ore",
+      "symbol": "CPO",
+      "uri": "https://arweave.net/bxmnG1Eu6vTfa3TD8obMrnmom9HYw8KIa2fic50r91I?ext=png",
+      "lvl_req": 1,
+      "mine_time": 40,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "5m1cQddRyaU48PgXE26xSgwFLy6P4Kg7yLfb8EFkMmyC",
+      "mint": "9LP6UzLKewWH7zb1LrSHrbLAWk925pLMRmSH1RxUF6G2",
+      "recipe": null
+    },
+    "BRB": {
+      "name": "Bronze Bar",
+      "symbol": "BRB",
+      "uri": "https://arweave.net/wHfT8qt-ebxj06EvALgu604pJV1KKJj2nbN-6z4lQlY?ext=png",
+      "lvl_req": 1,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
+        "CPO": 1,
+        "TNO": 1
+      },
+      "address": "CdjoWFUgD9MnF4YPh1RoXGghuTKv83S9AAfTdpnZxnt3",
+      "mint": "FS3DSANw3MY2M6aq36sMcQe4g3rEpKi6vEzLL5WSDnj3",
+      "recipe": "MjFL2zPZdGHAd79QjnLEcCBu7ksZRrLUmVBnB4y4GE8"
+    },
+    "SLB": {
+      "name": "Silver Bar",
+      "symbol": "SLB",
+      "uri": "https://arweave.net/FgV2YgA81fD44VWnQZr7sEhZtoXxggE8Ed2B1u_RBds?ext=png",
+      "lvl_req": 3,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
+        "SLO": 5
+      },
+      "address": "BJ46quhB6EPFHxPYCVQPPsLsJjBfx9gBauZwyJwsLQt9",
+      "mint": "3kJw3anNP14ezVKM6fgib174EQigce3WcC9Fwv5U3Bzy",
+      "recipe": "35mRwJgCnHtbJhMFuLJPkB8TKzrXJS2zSUmeKYcaspVr"
+    },
+    "STB": {
+      "name": "Steel Bar",
+      "symbol": "STB",
+      "uri": "https://arweave.net/1PA3uluVZ9giza_3bWD4fITuQQUxHszDFJW-DVnERWc?ext=png",
+      "lvl_req": 1,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
+        "CLO": 1,
+        "IRO": 5
+      },
+      "address": "FsW3rBd3xDLkhZ9aH2SEPxu1YXkf3iPFCZ8tbjxSsXYX",
+      "mint": "Gsh3ayrJtTSW8iA6khLwWYAxiCeAqHW2GL7jifDvQYX",
+      "recipe": "5iDHXm6NkY9DvGBY8K1K8mMk39onhfQmRQrj4VAsQBZ3"
+    },
+    "RUO": {
+      "name": "Runite Ore",
+      "symbol": "RUO",
+      "uri": "https://arweave.net/QzQKqUt0K_RmQkHpx15H73Xwzrhk8Vd16G3nulz-e4c?ext=png",
+      "lvl_req": 9,
+      "mine_time": 180,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "5fUBxaw1pDHUpAQCsVVJL8rCnaFfFsd6J96D24HdcJaa",
+      "mint": "4ToHf2FjmEWepf34E8cBS9rVokw3ACnKqjJiarWx3YYD",
+      "recipe": null
+    },
+    "LXT": {
+      "name": "Battle Axe",
+      "symbol": "LXT",
+      "craft_time": 45,
+      "lvl_req": 41,
+      "xp": 783,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "STB": 4,
+        "IRO": 4
+      },
+      "uri": "https://gateway.irys.xyz/3JxmCt2TuSKFnejJiUMFRsM9nLHfL125cZSUXGneqTgT",
+      "address": "WG1YZiaLXQEPBQuxEx1sPj9MifSXV3jRUh8U4uurjpL",
+      "mint": "F6X6Kz55fYwfyhjQddpQfttmi6ycfawf4AFFtcoTzAvC",
+      "recipe": "5pThXysknc7NMFmn8YVM2F3NboQyYoXN94rWmcL5j9c1"
+    },
+    "RUB": {
+      "name": "Runite Bar",
+      "symbol": "RUB",
+      "uri": "https://arweave.net/F8eEoalEEudjm7GvrqSV4BspVtQ5sWnXZ4HVgh1R4WY?ext=png",
+      "lvl_req": 20,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
+        "RUO": 5,
+        "CLO": 10
+      },
+      "address": "FK4Y78hc2N2SFwwZWzKd3cTAa3j9mrXv62d89jUUVsfb",
+      "mint": "DaCzemKNK4SWybE4uTJPW995ziKkXW6wseFdo7SyKWCn",
+      "recipe": "2TUp6uCifPsuRnPfs5yLwY7fxXt9LJERFg9obsHfmn7g"
+    },
+    "GLO": {
+      "name": "Gold Ore",
+      "symbol": "GLO",
+      "uri": "https://arweave.net/bd6EJ2tlZESBrp4-a5K_aAA4EJyTCzqSM4xix-JOGgs?ext=png",
+      "lvl_req": 6,
+      "mine_time": 400,
+      "tags": [
+        "ORES"
+      ],
+      "xp": 0,
+      "address": "9yTn1qw5QYsnHdhamqxWEo9ngg1EyFGiC3yLX9cU73D5",
+      "mint": "fSPvkWKzR5K3QZFiPvFjqwknESxtQbd9ohB16jvhB3f",
+      "recipe": null
+    },
+    "TJO": {
+      "name": "Johnny Jackpot",
+      "symbol": "TJO",
+      "craft_time": 19,
+      "lvl_req": 23,
+      "xp": 371,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "TNO": 2
+      },
+      "uri": "https://gateway.irys.xyz/C8QAzogTaDiaf5WzfZUxuoNJ1nSAi3gAaNTAe5YyrUqS",
+      "address": "E2s9EpkMKPH5Q6WxWK1hYGyFYubxpzJDGzqWkzB6nEDC",
+      "mint": "Cy3NU1WucLm1trmoqgDP1yjtv81MM7mRa4eDBgQ5wNMg",
+      "recipe": "B7KxA6guDeeFVHHbg56A3Kj1sLSc3eStv57QpXZy1Nno"
+    },
+    "EIO": {
+      "name": "Evil Halo",
+      "symbol": "EIO",
+      "craft_time": 45,
+      "lvl_req": 7,
+      "xp": 450,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "IRB": 6,
+        "IRO": 5
+      },
+      "uri": "https://gateway.irys.xyz/FdS8Rb55xYxhKCRbZYhEchXYkPWjDLNTh4Pp82CJhtWh",
+      "address": "J1k9C7b1YAZaGZvLWG4PY1UNd5sfkoRjUvzB2Lww8QTd",
+      "mint": "FevTFRr7BsC5DfUXRLsRFQi4CnDTyLeiyYsfu6ugzUB5",
+      "recipe": "2Pufvy7jPvXSdsTTH4L2dbuzdk7rRv8FAAefxzmEaLMD"
+    },
+    "ADB": {
+      "name": "Adamantium Bar",
+      "symbol": "ADB",
+      "uri": "https://arweave.net/MU24dYiU4JdnxmewAmoYVZ7tuH43hfOdgDRSyZONr6o?ext=png",
+      "lvl_req": 30,
+      "refine_time": 0,
+      "xp": 0,
+      "tags": [
+        "BARS"
+      ],
+      "ingredients": {
+        "ADO": 5,
+        "CLO": 10
+      },
+      "address": "Bpfh7szgwSk9UVwtnj3J6m5hSyxqamySawSABjoBgKtc",
+      "mint": "AgrmsKdphUvrL1tDLZF2z4VMzPpS7WXsZr4P2RXahA9c",
+      "recipe": "5DjXevfgpf57cFJ9nag2Nj8yj9s1tMTpRRttCbEAQ3z1"
+    },
+    "GGI": {
+      "name": "Raider Gang",
+      "symbol": "GGI",
+      "craft_time": 38,
+      "lvl_req": 39,
+      "xp": 943,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "TNO": 1,
+        "SLO": 4,
+        "IRO": 5
+      },
+      "uri": "https://gateway.irys.xyz/yGNoq1UqYCBt4JzKv8oJhHyyWGPJXRuAbDcZkRR4yZj",
+      "address": "EE4SmxVZVWNyzowFd2nwFaFFRhK9fU27yCRtc3bBLpw8",
+      "mint": "9rugatk2Fh5PydmqqED7JycCbs1HgQYnoZtL6tUxBwQa",
+      "recipe": "AZXcNrt9h2tp7ZJ18fdwL2ye97DHuAf1r7MU6X4cb68m"
+    },
+    "KLK": {
+      "name": "Bullet Mohawk",
+      "symbol": "KLK",
+      "craft_time": 37,
+      "lvl_req": 7,
+      "xp": 936,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "SLB": 2,
+        "BRB": 2
+      },
+      "uri": "https://gateway.irys.xyz/DyiN1pyZ5j83xCB6LcUa539n5hS9iZE5UghuEtQB9fvx",
+      "address": "9KHTLHGoHJNqqATct5D77AfTXGAy8RiyNcimf7Cwtvwa",
+      "mint": "97hSc17omsN5sX1kNtm87SkZeaoxmrPannJs63niZq4J",
+      "recipe": "7Wi5dUFSu9gnbJTEP4SEtkArrG7Mv7tXesr8Pkd6tmnQ"
+    },
+    "UUI": {
+      "name": "Quiver",
+      "symbol": "UUI",
+      "craft_time": 40,
+      "lvl_req": 41,
+      "xp": 958,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "BRB": 1,
+        "SLO": 3,
+        "GLB": 1
+      },
+      "uri": "https://gateway.irys.xyz/9Qxiuht1RoWij7q6zCesgeARkLQMAG2hF37PyUV6jcmw",
+      "address": "8EoTyZhtBi3TnWSfDUDXgXw3hsijTmZLa1CamkrRntLV",
+      "mint": "81aURTw8obn7715AbVUaur8wMZzECPSfKYk3iKNac9o8",
+      "recipe": "3jNSssmwuPii6TDa8eo9B4PGyxmzSD5SkseFZgPfxt6o"
+    },
+    "NAH": {
+      "name": "Johnny Tank",
+      "symbol": "NAH",
+      "craft_time": 15,
+      "lvl_req": 4,
+      "xp": 216,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "GLB": 6,
+        "IRB": 5
+      },
+      "uri": "https://gateway.irys.xyz/8Qdf5U2q7geiMmTRiCvXYE6vfxfYR7fiSjovBo3ajdkE",
+      "address": "GFPSqSM9js23zLLdMR477EaYZB4DTfw2XXDtKxHJ8Gx8",
+      "mint": "AVRdfpLmjpU7EkAYQapHuZUZA1itoHcPGY4vEpwe1GPP",
+      "recipe": "EFwU6UT2vZKYw3Mw5HdU9vEGVCvxsAn1iRMAp7wH8mEc"
+    },
+    "MAR": {
+      "name": "Warhammer",
+      "symbol": "MAR",
+      "craft_time": 23,
+      "lvl_req": 47,
+      "xp": 717,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "CLO": 6,
+        "TNO": 4,
+        "CPO": 5
+      },
+      "uri": "https://gateway.irys.xyz/3VLbtNV3NpH1YhziLBEUPUKdYPBx9sWFgzh2V3dEamN7",
+      "address": "3NXKdY4ZyDaNCmaBfcLhFz3wiBkWriboeY8gPGFqbeR2",
+      "mint": "DUMBNosnR34av6rEWBDbPpmJCLKFHu1BxDS9cZjFV6Rk",
+      "recipe": "6uQetMuM5idryPqZB3xH8ZVLuxBGyCBwoZVFXNUmPNw"
+    },
+    "TBB": {
+      "name": "Bandit",
+      "symbol": "TBB",
+      "craft_time": 19,
+      "lvl_req": 29,
+      "xp": 495,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "SLO": 5
+      },
+      "uri": "https://gateway.irys.xyz/H7Yygtxibxp4hgRpBQhTZF6bv81AExeEkAABJFPnEUGw",
+      "address": "9mxTjBcmWi588UkirqF2HxYN3g4PdkfmvndFojBvFsm2",
+      "mint": "8CEGjmSEni6BPrcnW1aR91v8FF5VM4SAYf3f6gAZWUEG",
+      "recipe": "EdvZLw9Qp9uSJcL4iyXamUmuhgwgKgL6i1FTMiVxJUtB"
+    },
+    "POW": {
+      "name": "Powersuit Yellow",
+      "symbol": "POW",
+      "craft_time": 26,
+      "lvl_req": 12,
+      "xp": 102,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "TNO": 4
+      },
+      "uri": "https://gateway.irys.xyz/2Woi2qHqQNjyeQ9nTe3cRaXnFc6Ch3viS9HLvJ3GD2Xf",
+      "address": "7mzs4nMUDRHFDRCXdiLcn5LKiWaQQL1niVfEJbkkKPgx",
+      "mint": "AUreLcuTXgEz1oFwhgqhzQGFcmae3Tz23UEJDLSXcsWk",
+      "recipe": "8tzCHJeKaJmvNfnTyuHhSismQoX51uYuDGmiwVSh6BXr"
+    },
+    "NAC": {
+      "name": "Captain Jacket",
+      "symbol": "NAC",
+      "craft_time": 54,
+      "lvl_req": 16,
+      "xp": 107,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "BRB": 2,
+        "CPO": 3
+      },
+      "uri": "https://gateway.irys.xyz/4q6jWxJcXkh5hthLESQn3dbzAGKZXEmjsBEgUSUuyx8H",
+      "address": "GdMR9DTpFxcGNunZM1XXvdpQBKCHJLm5bEgTxC8CnWpg",
+      "mint": "ANENkFagmc5d5Krd79iCJnYkaR1jBH7ktTArL2Mi2nhL",
+      "recipe": "ADNfUMu3Fi49kRQLKbvWwr2y8gTvsDRa4CoYrm1r88rZ"
+    },
+    "OCN": {
+      "name": "Poncho",
+      "symbol": "OCN",
+      "craft_time": 47,
+      "lvl_req": 43,
+      "xp": 787,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "TNO": 1
+      },
+      "uri": "https://gateway.irys.xyz/3cAohv2U3agALU3mfGEe9zbSmNmsKR2LLpks4Ho9az6k",
+      "address": "9Cw6ksduy4yXdtjjE6pskuLoXMdtJDh1r5nxhgE7kexx",
+      "mint": "4WYkFRkJe1UAx4Qoq6aRGjjpFfzDKQht8spz26JWiJAw",
+      "recipe": "67xc77P56Uanf46kcboM56SbNuotAt3naSSPbJic69Mu"
+    },
+    "OOI": {
+      "name": "Ronin",
+      "symbol": "OOI",
+      "craft_time": 13,
+      "lvl_req": 36,
+      "xp": 517,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "BRB": 3,
+        "IRO": 6
+      },
+      "uri": "https://gateway.irys.xyz/GR1wQfUwqbct6VuMq5RhLXgoL9mW4u1T6CCoS5QoSgF4",
+      "address": "BfWbTTuP2SCkxm5zbeTz3KP353qqvj8aZiA3GSJSURWb",
+      "mint": "9cbeU9HNXJDJnTaa9aAD3HgfTCPopgNqyUFzPLbrKP3L",
+      "recipe": "CnMMyaJqQx78HdZoy7ZEkRg1krEBTagnjYGwvRvJ6dWo"
+    },
+    "RAR": {
+      "name": "Kevlar Tactical",
+      "symbol": "RAR",
+      "craft_time": 38,
+      "lvl_req": 15,
+      "xp": 975,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "SLB": 3
+      },
+      "uri": "https://gateway.irys.xyz/4QxFteTu9PGWidVGhfArsGWstqYfDu4dtekpDxQVnq7z",
+      "address": "2FD816gGKrw43w2cMnRVtDbdcP7swi3sbNMtQaawBCAM",
+      "mint": "76kAhy72Z3eLzmk4rvY8Qr8uZUDtgQMcJmZeJRcjWWyF",
+      "recipe": "A7x86okLDpRE7hgReH5uiA2dhM3bXy4zU4uGrk6JHhog"
+    },
+    "NSR": {
+      "name": "Astronaut",
+      "symbol": "NSR",
+      "craft_time": 28,
+      "lvl_req": 19,
+      "xp": 222,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "IRB": 2,
+        "BRB": 1,
+        "CPO": 1
+      },
+      "uri": "https://gateway.irys.xyz/2DoznLsoAUHnRkksfA6mdirj2WphL7DoQeFZG3L8a1Zw",
+      "address": "FB7537chduWqzSX8hyeqJS18as2RieEfazwpcxycrAGe",
+      "mint": "3rvJgkSFKuN35vU64uZEaGyLGrmMSqzrPxE9hwtT4Pyy",
+      "recipe": "J8xEyUAgcFYZCywg386NDvEYLVeHdZryJ746wQYH9igB"
+    },
+    "TAF": {
+      "name": "Mafia Hat",
+      "symbol": "TAF",
+      "craft_time": 41,
+      "lvl_req": 15,
+      "xp": 615,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "IRO": 2,
+        "IRB": 2
+      },
+      "uri": "https://gateway.irys.xyz/BuUBdVYmpv32rWrMinHCwnY1aZpc3cmiVd6s5dB8Bo3L",
+      "address": "2ffYPcUi6u5UQHHxw746EPgHphsMMVMT1yv3hZiBcxLv",
+      "mint": "79Frt2q2shWTfDcf9z5f6phVn1eN4ykWoywvmPMyfVPn",
+      "recipe": "ExUMZcCTgkHw8CiGSqxkxgjBNzCRMoJmAAd3VanqSgB4"
+    },
+    "PAA": {
+      "name": "Map",
+      "symbol": "PAA",
+      "craft_time": 19,
+      "lvl_req": 22,
+      "xp": 873,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "SLB": 4,
+        "BRB": 3
+      },
+      "uri": "https://gateway.irys.xyz/EA6CJUuJrp9MeVsQUPq3KAySSsb6W4CDeheCH5X8re7j",
+      "address": "7WaHVaqaJTdcJJzuMg5YdS1gJGpU773JU2SmnUeWXbEh",
+      "mint": "C1auzHzpZbad9KJ2j47NNNk3yTzSzjMXeqXCn8xnnhgs",
+      "recipe": "4LrFDdDpdd1JMgiFFzRRHdfAsmijLwJfZ9ARaEzFTSm7"
+    },
+    "HDD": {
+      "name": "One Handed Sword",
+      "symbol": "HDD",
+      "craft_time": 12,
+      "lvl_req": 44,
+      "xp": 404,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "BRB": 2,
+        "GLO": 4,
+        "CPO": 1
+      },
+      "uri": "https://gateway.irys.xyz/AKvt78Z36tiJDFzg8AMwgXQNDcVhQQk7oGE4CthjzEHr",
+      "address": "7C1C7qm7BUiKHr5TtdqDUV2JGV3Rnmg9ds1qThQ66Hk1",
+      "mint": "62DTmWob8jDP7ecfzvVRf91SUZa1XRYn74MjRTNk3P5Z",
+      "recipe": "HpsSZbp6ofkH5TMLP7n9Acrh9ZpBxvvJueU65jty2Qjt"
+    },
+    "BOT": {
+      "name": "Baton",
+      "symbol": "BOT",
+      "craft_time": 61,
+      "lvl_req": 8,
+      "xp": 460,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "SLB": 1,
+        "TNO": 3,
+        "GLB": 3
+      },
+      "uri": "https://gateway.irys.xyz/7MaCVFruEhSA3DzsJdiWwbucoP3SEdjStGnEHgoB6YPQ",
+      "address": "GagjUCLcMA7wAm4GZ21t7qhwefTYGZeZFn5HFigy7rgv",
+      "mint": "FKSyCNUaZtSdcpWtpFrP7jKcUcsNTLfx59b1U1CBV2mH",
+      "recipe": "8r6ouhiJGTJAcdUHzTS5n8Lex1vvPNSkTVXgNgFm3gqA"
+    },
+    "TSE": {
+      "name": "Greatsword",
+      "symbol": "TSE",
+      "craft_time": 46,
+      "lvl_req": 25,
+      "xp": 796,
+      "tags": [
+        "BackWeapons"
+      ],
+      "ingredients": {
+        "RUB": 3,
+        "ADO": 3
+      },
+      "uri": "https://gateway.irys.xyz/D3qrupZwnaWNEDgviy4D2qqJPiMNEMypzspwkm9GceX5",
+      "address": "GVNaPteWkLbEbMJpRcYznivEvBG3qtZpGmKHYzWEfhvz",
+      "mint": "HiRnNLd84WVRgd9LVnbJtesyGY2pbkrPsPMdAAYA27s4",
+      "recipe": "GnFuLZqfZgtKAHTVhbuMZitgDUkMtDdp6r3KqoLbjmHM"
+    },
+    "ANT": {
+      "name": "Scientist Coat",
+      "symbol": "ANT",
+      "craft_time": 25,
+      "lvl_req": 39,
+      "xp": 860,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "SLB": 5
+      },
+      "uri": "https://gateway.irys.xyz/G79mWUtSgVC2xoUkxPaQyGQmqa1DvM7iY19L7gziCSUJ",
+      "address": "BHheY7gMzzGxLgqHW5JqYvhgkabMZFjKFtzG6ZfJzRPJ",
+      "mint": "3f4R3pn8oQV2Po5WWwd435FUBCiXHRsbCxihEfvgXhHP",
+      "recipe": "8XyTB7KRYzF5stHH3D1YzETJPYCLGcADUGcRKcY3N7SE"
+    },
+    "DDB": {
+      "name": "Red Headband",
+      "symbol": "DDB",
+      "craft_time": 36,
+      "lvl_req": 30,
+      "xp": 293,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "CPO": 3,
+        "SLO": 6
+      },
+      "uri": "https://gateway.irys.xyz/CrQ7t35rSogfNYsd1HcnmAQciB1xJWpAKTZTMDHQK8Bp",
+      "address": "Eye68YfheAE5ggstTYKJH4V1PyXWhLFTbHfJ7cryrnFA",
+      "mint": "79w548Mg4zJ6S7kJUJgV1dHn3DGb3zbK4suiGZMukrKN",
+      "recipe": "FVJscZFtpUHxBMvmaLA68aS7EoiMKYyYw9EhZK7tULTk"
+    },
+    "TRI": {
+      "name": "Powersuit Magenta",
+      "symbol": "TRI",
+      "craft_time": 40,
+      "lvl_req": 45,
+      "xp": 586,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "SLO": 1
+      },
+      "uri": "https://gateway.irys.xyz/4KVxJo1dWMTEF1z9iisgZSSSZg7y5XqmqddSfrHwNzNJ",
+      "address": "CuQzVcGaQKJQJLWdfvDvPjYe6wkpLJ8nv4RY2P6YtTbu",
+      "mint": "J3EaMQkLYE6xZsti9S5Z4U45LVhWREK2KEanb3TvTDwj",
+      "recipe": "GJz5mZbvJNHpTnhGuwMvDhDVmAM2jtjVaqpjNyDAWi5E"
     },
     "OAI": {
       "name": "Diamond Ears",
@@ -2155,46 +1613,44 @@
         "GLO": 5
       },
       "uri": "https://gateway.irys.xyz/GVNCYDFiUwDaqN7dDUBs66r8RB8Y8Aw4wtq9FrTGtC96",
-      "address": "5T3pdb3hGBHg44BirNM3LMMMGr8Qog4ukfy7FXsP4NES",
-      "mint": "GqarsqdnZSdewewNiA8TVGdai6u7cgM7QgbpwMUQNv9P",
-      "recipe": "63Y7q3sRVpwkHPk8S4DreA6qcfGV8SbQp9beQ7UZE1uf"
+      "address": "4VaWzAJAeGAL6Fqffn8pUNmYWfewMUgM2YcdckLAJ6iU",
+      "mint": "HFL5S2GARzZSeSAsXBMs1BXyUgkN6mw8yGnsytrpG2du",
+      "recipe": "3DspahHEbkRsKffh4m4ssojNfKbKwhUKgyx1obv1S1ua"
     },
-    "AAK": {
-      "name": "Rick Hair",
-      "symbol": "AAK",
-      "craft_time": 33,
-      "lvl_req": 19,
-      "xp": 677,
-      "tags": [
-        "Hats"
-      ],
-      "ingredients": {
-        "MTB": 2,
-        "GLO": 4,
-        "STB": 3
-      },
-      "uri": "https://gateway.irys.xyz/Cz25VFb6fqneMJPq1W5djk5h4ceNYndQD4QUSrMsqXtG",
-      "address": "EDCywikq1YnjwQ7pkXQLRPf2cm6LaZdyibmYkiaqXNBV",
-      "mint": "EBAmninuk3EFnnhS2dSQTi68MxgqrF9wstAF9VStP5wK",
-      "recipe": "C7FXeqvxkDFwLUYKCPZGAvJBhxK8Ps2ffoeTupcB6TsH"
-    },
-    "EIE": {
-      "name": "Jedi Robe",
-      "symbol": "EIE",
-      "craft_time": 27,
-      "lvl_req": 45,
-      "xp": 158,
+    "KBJ": {
+      "name": "Bomber Jacket",
+      "symbol": "KBJ",
+      "craft_time": 17,
+      "lvl_req": 22,
+      "xp": 274,
       "tags": [
         "Clothes"
       ],
       "ingredients": {
-        "GLO": 5,
-        "CLO": 6
+        "SLB": 4
       },
-      "uri": "https://gateway.irys.xyz/AxDNJSMRXfuQ6Ye6PeKCpcWXp1QU8TCXvsCzx5uo8ezd",
-      "address": "3Kj49edHVVVaMR2HPVwPhnB2zVQdq9FSLpLbMqSNxwSQ",
-      "mint": "84B73bqYsJxRsHG516kMog3KHfnSfLtDXvmqjzsyPaRX",
-      "recipe": "5FosHNAGi47caBPWoDr2nsu7G1j6tMqiJFjF4e2swotZ"
+      "uri": "https://gateway.irys.xyz/5rbR9x2HSQsGc4U5t7kkuPU4dVzDhK1AwwzeHPvVogXk",
+      "address": "EDeJHWb4gQgFMWbAm6Qr6igKygnZUUVrFLcQYhhpDRTF",
+      "mint": "7Bxm8XMRwsA4J5FJQXpWu1Wv8CNYfUic3ZcgBP1V33eD",
+      "recipe": "GhdibBEYtnP1cr8s9UHs8yLKBJaJ1bCsEBETVEb2MJZJ"
+    },
+    "NKP": {
+      "name": "Tank Top",
+      "symbol": "NKP",
+      "craft_time": 26,
+      "lvl_req": 47,
+      "xp": 627,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "CLO": 4,
+        "CPO": 3
+      },
+      "uri": "https://gateway.irys.xyz/Gio8JY16hH62DYpzJbaeHDaQ3GyXJU8ko2mHACsUrZaN",
+      "address": "EhXcxHU7QUgkkc2xxYmQ6qVDchLHTVeVNU5j6AEx8ZQ4",
+      "mint": "ACfMn7yXRdH1Gi4KQkpQv6xmnFxeUV995sYNzjWgtjrY",
+      "recipe": "A33pGcoVqj52EFELWFRALBGkLb2FtpjNJm9hX3gWczEW"
     },
     "WAS": {
       "name": "Powersuit Cyan",
@@ -2211,9 +1667,153 @@
         "SLB": 3
       },
       "uri": "https://gateway.irys.xyz/Dxr4StfTU42FsTS1T6XmaQHYryViV3nRfLs5HF2DHHya",
-      "address": "EktqpCP8cCF3QAXK4FUZSnS8s9F5Sc9HP641Wmmbgecp",
-      "mint": "HH4pgnhvjPkByjvzePLsNTLCdSkBqDCBj7gkePeyLumV",
-      "recipe": "6DbtJkFFiTZHMJSnhsjQ4ijeVUSeVDw3SUwyogWY77Zn"
+      "address": "7k4pHkt2pWi422GUdzD3DWo2fveFu943ZbH86JBmxWbE",
+      "mint": "A9k1M9LX27cvRDmvt52KqYd4sEkMsy3UZ8ycFr59LcLi",
+      "recipe": "7gN1F7bPf2APSREMgJ1nJnzZhbD3Z9jhnypCByyEEZx5"
+    },
+    "FRA": {
+      "name": "Future Gang",
+      "symbol": "FRA",
+      "craft_time": 41,
+      "lvl_req": 5,
+      "xp": 708,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "BRB": 2,
+        "GLB": 5
+      },
+      "uri": "https://gateway.irys.xyz/BdLDQSwYLsYT9J3hGy495FZmAxNbofFz9fdoVbTGwgaX",
+      "address": "5X8ZKoqV2WaNqazB6zYLRQq6DpZSZuqTsFycLy6kNBfW",
+      "mint": "fnARcGGS3xHTNMRVk8cLnf1PC1VXVsfWx6DLorhDAf6",
+      "recipe": "8MqWNL1BLC1Qb4yDVAX2gedaGY4p4snVMJpJXc6QcTjz"
+    },
+    "EWA": {
+      "name": "Jeweled Bandana",
+      "symbol": "EWA",
+      "craft_time": 24,
+      "lvl_req": 35,
+      "xp": 144,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "BRB": 1,
+        "GLB": 2
+      },
+      "uri": "https://gateway.irys.xyz/EKmQeyLffbqwe1cdBbx4F7UrJGppxP4bFd3LoiceFdnV",
+      "address": "GPBUbZucrH4UZwrJizZjLHthn3ZagGBUj9GB1hB65ZDK",
+      "mint": "DrHeZNc1yPtFKHr4QLPLPXegMYBhqhvLNBWDdZ7cwprQ",
+      "recipe": "DMpU7NwrWUCTs6bStCcEnwtLWKSkxccDrx1QHcuWEiXf"
+    },
+    "TAT": {
+      "name": "Pirate Gang",
+      "symbol": "TAT",
+      "craft_time": 56,
+      "lvl_req": 48,
+      "xp": 719,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "STB": 4
+      },
+      "uri": "https://gateway.irys.xyz/8whHYcZvp4PWCDQSntXW3dqJrJrw5fQfit7o9MZiNsCT",
+      "address": "9w81rDdu4pd1G8cfhj6wxBAFapsKckceC2R2ogpRFUnW",
+      "mint": "GWhob8V9rUJ3sPGQpjyWh1SDko2wwkMrd4ofNWUaWRZv",
+      "recipe": "5oLEDpNWjHRGMV72VkTWxkhYSByAfAnoLg9mwkzdfDrf"
+    },
+    "RSE": {
+      "name": "Desert Rags",
+      "symbol": "RSE",
+      "craft_time": 43,
+      "lvl_req": 24,
+      "xp": 888,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "IRO": 2,
+        "CPO": 2,
+        "CLO": 4
+      },
+      "uri": "https://gateway.irys.xyz/EiSBmFm6wYf3SMFZeR1szPCg7a5dRdkG7EHPmoMwuLLT",
+      "address": "HE8BFX2W1mCHu4RriR46S98eEP99xo4mqHXzEhzLTgT1",
+      "mint": "HfHuxJ23XEGBVV5GAYxraJB5LC1wndxCrfcydyphNgTX",
+      "recipe": "9HF5Dnn7nqmjxa5TpT7gtY6qS45cgtqLt5JDQ46HYxsQ"
+    },
+    "CMA": {
+      "name": "Kevar Camo",
+      "symbol": "CMA",
+      "craft_time": 32,
+      "lvl_req": 28,
+      "xp": 245,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "SLO": 1,
+        "BRB": 4
+      },
+      "uri": "https://gateway.irys.xyz/H8cdFsSaVAYZ6zYpN76mC1cttfLHZANjSWQzrSYA15xx",
+      "address": "4DGUHnGNaufmXvSPdw1sb4VdgaurnpvT1TJwZL7DUgnN",
+      "mint": "HvyQSG5aLxkmZqXxRFs11mdTJMrBJuMFrjUrMz88Xxtm",
+      "recipe": "Gvx1CzGi9k3S6rQ4mad7yZRaM9TPNCFiVi9Komnf69Gg"
+    },
+    "EIE": {
+      "name": "Jedi Robe",
+      "symbol": "EIE",
+      "craft_time": 27,
+      "lvl_req": 45,
+      "xp": 158,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "GLO": 5,
+        "CLO": 6
+      },
+      "uri": "https://gateway.irys.xyz/AxDNJSMRXfuQ6Ye6PeKCpcWXp1QU8TCXvsCzx5uo8ezd",
+      "address": "3kCB3KNGyCRc6homXhCdrnkCa9gSCaHiYWxVrdjx8JAu",
+      "mint": "DTpE3XcAaZ7VTq5yE4aew3PkWkb942CNXNgVjxNLot8R",
+      "recipe": "FauGUHHj7AQ5m28aKRkksns9CmZ2HRDa9rnogZaYZYQc"
+    },
+    "NGE": {
+      "name": "Elemental Gang",
+      "symbol": "NGE",
+      "craft_time": 47,
+      "lvl_req": 44,
+      "xp": 903,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "IRO": 1
+      },
+      "uri": "https://gateway.irys.xyz/CsyL7CueQbpj988kLchSvEjzS4W7APqCeSxM7tkXX1gH",
+      "address": "DVwva52qEkaBaX5hKu1AsWwFeKkcUydwd1hoPkbZLTzD",
+      "mint": "9NEMHgdqnEskrXriLDE1vzgKd9qHB5QiZSh4Tnvp1S7V",
+      "recipe": "5ZWyy1AUUeu3zDsxoHP9VqGmAd6eYs1LfzKtSburcJc6"
+    },
+    "GIN": {
+      "name": "Riot Gang",
+      "symbol": "GIN",
+      "craft_time": 11,
+      "lvl_req": 23,
+      "xp": 324,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "RUB": 1,
+        "SLO": 2,
+        "IRO": 6
+      },
+      "uri": "https://gateway.irys.xyz/5erzQ2XXjSJiT5ihAuceQ4coZ1NU4MPticHXmuCFhWH9",
+      "address": "GPjJQCiQzi8sLskMuDda9NmuyKk2sCrcqiQ7ykJr7tK6",
+      "mint": "BiwzevbQFJeHYSxBC1nUPWJZ6uGodzqWFVGjR8MLYxf4",
+      "recipe": "749WYXgmqTfVBqyK1HD4GbUXSWNzf8Zw4uv25FKvcG6z"
     },
     "TZW": {
       "name": "Bronze Watch",
@@ -2230,9 +1830,172 @@
         "GLB": 5
       },
       "uri": "https://gateway.irys.xyz/ABnnTLKRC727mQtejM86Z3u4hJcToyHde265d4neJeUc",
-      "address": "AphvWKQ33fQDV5NVsBsTUu7NdbpPxXDKuVHjzpusu7kj",
-      "mint": "EQnJXGLLtTSN5iBT5C9SZrVNLTzHwV9CRFX8Nj1QszuU",
-      "recipe": "EzRxE4Ge5wgej9T79hdanz33EdMPPLziSySM8WEUVKFL"
+      "address": "8CwrsL9QSN5gNZdJqCHFywyQzr3R3XVjPsnsQQsQ7JeM",
+      "mint": "C3ejDMp5wAKZb5Fh8qnT7uNZ4rgPqAZV7JtJCAGha4vZ",
+      "recipe": "D5vGBEbrMEtJPFnCrQCnsPyqpyngRYsu4uux2KZwKAmD"
+    },
+    "DEH": {
+      "name": "Black Headband",
+      "symbol": "DEH",
+      "craft_time": 57,
+      "lvl_req": 10,
+      "xp": 822,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "GLB": 1
+      },
+      "uri": "https://gateway.irys.xyz/9zHmzD1yecDkNAfRN6anFHaFtye1Wy6JSqw8TqcfQGD9",
+      "address": "9C8FMoAVxDasgMQvjeQrgBkjfo8zADztkJuiog57i12Y",
+      "mint": "4MR1jMZrKgohP3o6yKDJnFUgSXEgHkmWrLtRnpmHFTsH",
+      "recipe": "6fDa5SdsjTVDb3CUoQP1XYcnNbzoreTMQYXCgdfrjSGL"
+    },
+    "NCH": {
+      "name": "Trench Coat",
+      "symbol": "NCH",
+      "craft_time": 35,
+      "lvl_req": 33,
+      "xp": 590,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "IRO": 5,
+        "CLO": 5,
+        "GLO": 6
+      },
+      "uri": "https://gateway.irys.xyz/EKpvhKJmEEiKqdh6jWpJADEnFL3ghBdA2jBMTukZ6v4C",
+      "address": "EkfqpTzySP6FJHc2DRySGE76EJBa9ssqbW9xS59RWt2d",
+      "mint": "E49KAPhP9S2m3UGuSQGnHQ78FmxFMrJtHQdQnP1Riqp1",
+      "recipe": "G4XgcvML6TG1B5FDPcsJkfqUBtdwiEHUiLP9reVDyWPs"
+    },
+    "AHH": {
+      "name": "Half Machine",
+      "symbol": "AHH",
+      "craft_time": 46,
+      "lvl_req": 17,
+      "xp": 270,
+      "tags": [
+        "Clothes"
+      ],
+      "ingredients": {
+        "TNO": 3,
+        "CPO": 2
+      },
+      "uri": "https://gateway.irys.xyz/MpiGsSwHWBC1L629mydkivyfyoyCHBjEq2o9xUt3xEc",
+      "address": "8RRkFf3yFMZTZRFwdVZKn7ZuvUUfTifhfwneUvStoawm",
+      "mint": "HxcFThFTdFAV5ePmjFM1BTx3BM9rYGU4JwM2WW34anVW",
+      "recipe": "3F3eijtgQz2hKtRfBFpG8xCnJjFxskN19RJhY4djuhvf"
+    },
+    "NNC": {
+      "name": "Black Beanie",
+      "symbol": "NNC",
+      "craft_time": 58,
+      "lvl_req": 11,
+      "xp": 781,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "CLO": 2
+      },
+      "uri": "https://gateway.irys.xyz/DSWSn1uCwAEBMxhzCxGi7x5jfWwWC4Cv9vFGfEuzqxaT",
+      "address": "xu4t4JpKkJj1wCWYVEUvXnzmQtjR4ndy5zNDfCfmEyt",
+      "mint": "EWd7e2o3f2e6qagArgWCqMBfVod9ukYgn6TKgWCzdstu",
+      "recipe": "hSDkLGwpURnZN7KbXL86UevN7LCGoy98Uce81dUM3cT"
+    },
+    "FIO": {
+      "name": "TIFA Glove",
+      "symbol": "FIO",
+      "craft_time": 38,
+      "lvl_req": 24,
+      "xp": 367,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "SLO": 4,
+        "IRB": 5
+      },
+      "uri": "https://gateway.irys.xyz/5mka65x3rE3jCCus7M6YTFExCoDsnen7soqTxcGNA4vL",
+      "address": "8zt79R9h7zXyeHzdQsW34yjgstjtgpXtRrNc4kX8Ljp6",
+      "mint": "6mSvERMj1zmm2egCSdRnabwFq3jngiuCHtJ8QcJVN883",
+      "recipe": "B9ww6Qb5BXSeCQWMD11pymn6y8yAybrpm8an7MhSd1oj"
+    },
+    "HLA": {
+      "name": "Gold Watch",
+      "symbol": "HLA",
+      "craft_time": 15,
+      "lvl_req": 29,
+      "xp": 726,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "IRB": 2,
+        "GLO": 4,
+        "IRO": 1
+      },
+      "uri": "https://gateway.irys.xyz/6yzpz9wZx3oDTdTSqdrdabQHsjGteYA6a6bPeyeVW8aJ",
+      "address": "9rhEJvc7YDszCD7f9tQrbVczVT9ucEGBSd1sjU7sUk2o",
+      "mint": "DH83y22Mo4mPVPpfbnQxw4MoyBHr3nbwi78FyZAQgskk",
+      "recipe": "9aKjqTp9zvtyffJ16d8ZKi1CwyBc2CnE18eX2QyAp4Sf"
+    },
+    "OAC": {
+      "name": "Cowboy Hat",
+      "symbol": "OAC",
+      "craft_time": 36,
+      "lvl_req": 8,
+      "xp": 905,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "GLO": 5,
+        "IRB": 2,
+        "SLB": 5
+      },
+      "uri": "https://gateway.irys.xyz/Dgd9qSHsLSpWNFk6aDvpdUAS47LtXGWxh2k71q9HXoHF",
+      "address": "3czynwSg8JKDZoUn8nmcAjE8MQ8bajh2dETL7P5X4cmv",
+      "mint": "8k8PggZmTEdbr8TPJ57wRAQ4Q5jjMieQzLaTfxqDwnzv",
+      "recipe": "3eCW4SEVh9e6VZfHAqPgFvgDiq4x87Gx614JKnU9h6Lw"
+    },
+    "PKK": {
+      "name": "Tusk TopHat",
+      "symbol": "PKK",
+      "craft_time": 17,
+      "lvl_req": 10,
+      "xp": 405,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "CPO": 2,
+        "IRO": 3,
+        "SLO": 3
+      },
+      "uri": "https://gateway.irys.xyz/9jYaoQh7KMZ3Ath1QkkJ6nK4rfNAvZsC94r4P74ojdF8",
+      "address": "GqWJu7pvMCBWTtQ3MQghugVg1Xsn4qkzjwW9W8ePjZp7",
+      "mint": "3hpoocTLRJVwPAjaqMUs8Sre7y1SqovqvNwyzw1zUHAY",
+      "recipe": "7rReDcJr2xyHCV3ybPG81UPc9jWqj3AGA7msGtkiDjfk"
+    },
+    "ONO": {
+      "name": "Wooden Gauntlet",
+      "symbol": "ONO",
+      "craft_time": 14,
+      "lvl_req": 38,
+      "xp": 272,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "SLO": 1
+      },
+      "uri": "https://gateway.irys.xyz/5eGiV8KyGRctTU3YNmdG5qc5CCGzNSNNCAh3rDdQfeZR",
+      "address": "4YRovvA3qewFnRabwnhMw39PkssgzM7gRYB3pEw5CvfP",
+      "mint": "AC8zdwQNBKLDVsMguTwGxKyJJNX9jHey3VhRbyvAc4Qr",
+      "recipe": "2kzaQMJBPUrrZQhN5pHi77NfB1pRNwmj1UHWGBYowMLn"
     },
     "NJJ": {
       "name": "Cyberninja Ears",
@@ -2247,44 +2010,248 @@
         "RUB": 2
       },
       "uri": "https://gateway.irys.xyz/5xUvcp3gFVNRJpC2DRPd6BG4as4CiDqmgLdUeZNr9wak",
-      "address": "GCEPu45wAuxn5KMCRBASRRfVnzXoYGCf7CLMPw8JKFjo",
-      "mint": "6g9ckaWHfosg36cjtn5DcVhoXsJxiF6GMs8BmLBxgLzZ",
-      "recipe": "54z6sQFi2aaL73ZT88QC69erkTqpbbsWMLz7fggouyPe"
+      "address": "Ef6V1jUhcGAnYbkhESwfJJkNvFe1tSBwYUEDymX3zgRo",
+      "mint": "8JvmWWXzbcsshYfRG3qTKPJekRDqRtS3uZJBFEneLSMX",
+      "recipe": "C6nfVtXTAZug8B39hN4UdPdbrrBcGktyPdqs92MfQtTE"
     },
-    "RAR": {
-      "name": "Kevlar Tactical",
-      "symbol": "RAR",
-      "craft_time": 38,
-      "lvl_req": 15,
-      "xp": 975,
+    "DNE": {
+      "name": "Silver Hand",
+      "symbol": "DNE",
+      "craft_time": 59,
+      "lvl_req": 31,
+      "xp": 419,
       "tags": [
-        "Clothes"
+        "Gauntlets"
       ],
       "ingredients": {
-        "SLB": 3
+        "GLO": 3
       },
-      "uri": "https://gateway.irys.xyz/4QxFteTu9PGWidVGhfArsGWstqYfDu4dtekpDxQVnq7z",
-      "address": "53bKNcAz1tu22DC4peZ3Qg7MnLgE6c6o9ZPujkaDq8GR",
-      "mint": "4hmpg27oti2WyVergoxXKR7GDRVHGj6haA5wGRAu2zKc",
-      "recipe": "BGPfpefHAJmdsgzp6xeputMzEsmKVngVUXLKqKFyAuqq"
+      "uri": "https://gateway.irys.xyz/Fd4fkFFXdwme9Lb6cDG6XYTBPAaRvWuW2YtLtnxPFGP1",
+      "address": "H8EWfPiwHAnw1cy33Sv4xsYihA2pXhBHWRnESCtkVCSh",
+      "mint": "AN5ifbzhsEZeoRPZzcZjCM7pWSRvUnR4HAAQBPvgAoaY",
+      "recipe": "2up5iSJgZarVx12yCzJJqMzF4B9u2UoFPiKC4Xf12Xfh"
     },
-    "NAH": {
-      "name": "Johnny Tank",
-      "symbol": "NAH",
-      "craft_time": 15,
+    "IAI": {
+      "name": "Flat Brim Cap",
+      "symbol": "IAI",
+      "craft_time": 12,
       "lvl_req": 4,
-      "xp": 216,
+      "xp": 741,
       "tags": [
-        "Clothes"
+        "Hats"
+      ],
+      "ingredients": {
+        "BRB": 1
+      },
+      "uri": "https://gateway.irys.xyz/Dch7HaHQDcPwXgTze4VDia3icnBnpd323XcpTaUie3GY",
+      "address": "7SkdHx2xV3biBEfphM36GkWLt1zzz2wjjcAbbxtWfbwb",
+      "mint": "GK7viXMv5Bpey26mgqpCMGwMAGeUa8UoLLMf3bDusSgx",
+      "recipe": "8MnygGH2UNGWW2hwH9HbCk454n857YkDEKoqPi3udPEc"
+    },
+    "STH": {
+      "name": "Silver Watch ",
+      "symbol": "STH",
+      "craft_time": 34,
+      "lvl_req": 10,
+      "xp": 571,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "STB": 6,
+        "CLO": 2,
+        "BRB": 4
+      },
+      "uri": "https://gateway.irys.xyz/C1Jxox7ZGLK92kdeVmaU6NiUHFH5bssWz4Zxu3ixCEm7",
+      "address": "43z2rZr7fodqPVmoVAD5MMGCuPCGwWuggpH5TLA8yN7t",
+      "mint": "7A4ieQbAMXT9BHgRwKG35jSotc4zb1LSGQTzSv2Ky6Ft",
+      "recipe": "4hCRAdEAaVafh1niFP1MUSbs6Dp7wG1NfX9oEux3aZME"
+    },
+    "URR": {
+      "name": "Iron Guard",
+      "symbol": "URR",
+      "craft_time": 31,
+      "lvl_req": 35,
+      "xp": 445,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "IRB": 1,
+        "SLO": 3
+      },
+      "uri": "https://gateway.irys.xyz/DpVed1Sgzc6imTHDYHuTMYg7ptJasss7vPfGvbPWZL2j",
+      "address": "ENpespGREs6K7CbxYiuit32Lp6u3S8njD3CUruWXJJXN",
+      "mint": "66mHZDNVh8GLeGZbh7kJkw6VjUMi8bDgXQtiCuVcG3Ec",
+      "recipe": "7MLMcN8NXC3XBFzsZe4Pdan3q9PqpeoXvZxJvYu3SRPB"
+    },
+    "AGG": {
+      "name": "Golden Guard",
+      "symbol": "AGG",
+      "craft_time": 32,
+      "lvl_req": 7,
+      "xp": 837,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "IRB": 4
+      },
+      "uri": "https://gateway.irys.xyz/5VdwWcj3XWHwKEUuZeZ7K8MDiTr9FrmX3FWKd3MbfmCb",
+      "address": "Fp51w6idayhX371mDxz8n1cQ4auwb61xNGvo9L4cWgTj",
+      "mint": "4LwKfUPC1C6n7QDNZpeAGDe6YMSHsSctUQNefaaDv72P",
+      "recipe": "Hpijyi8ck4CK62yywwsUQWeP1nTHDRL6gSRayGWUfJoA"
+    },
+    "DGY": {
+      "name": "Cyborg Red",
+      "symbol": "DGY",
+      "craft_time": 43,
+      "lvl_req": 2,
+      "xp": 177,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "CPO": 4,
+        "IRO": 6,
+        "GLO": 5
+      },
+      "uri": "https://gateway.irys.xyz/E9fZPECNRygxzRMUrTezi1sA8SCugiV65uFnwMGQEyEZ",
+      "address": "HrVB23jQWjDb1AwAhQJ8WgM8bxhjRF5w9aaKLdyHxTSH",
+      "mint": "4YDwv85EK4GoKmd3n6haBKzr3E5f7tfnxs6qBdPEUBiN",
+      "recipe": "cd2dQa7rfk8EecLH9b4NmyKvQqJkFKMvNQ2SUSuEJUc"
+    },
+    "RGN": {
+      "name": "Ranger Hat",
+      "symbol": "RGN",
+      "craft_time": 44,
+      "lvl_req": 32,
+      "xp": 204,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "CLO": 3,
+        "CPO": 5,
+        "GLO": 6
+      },
+      "uri": "https://gateway.irys.xyz/5a6hPVWxY3PzkJWZowRRjU2Kviu4VRpbTojJ3WFQpcXQ",
+      "address": "Gpf5nAJnmJTFp8cVG8rtbKh5ctiS7tiF7BYEgxvyURNU",
+      "mint": "55Es2cVqpJbFnKrsN2N33RTjuHdkjPzoTHAAcjLSk1JB",
+      "recipe": "Bpo5HxpUp2QLKaon9bKKNufQTpZLnEL7HYwvXFguCZEq"
+    },
+    "TTT": {
+      "name": "Astronaut Helmet",
+      "symbol": "TTT",
+      "craft_time": 20,
+      "lvl_req": 49,
+      "xp": 634,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "SLB": 5,
+        "GLB": 4
+      },
+      "uri": "https://gateway.irys.xyz/FDQQhXemJvN6mZxv2d66txBq8BRLNSSJQWDvi6dpg6ru",
+      "address": "6reVGUCedhcbNwEMkSpzYpPm3Ym7yyVRQunAUciH7i4S",
+      "mint": "7ycWeFiUS9zeBTa6NqgQp7ePW4ughbgjMwxPMhS843yP",
+      "recipe": "E5eoqo9jbvG8mPuqyvBCb512Dm9qUA2pggBHiMAJgsvL"
+    },
+    "YED": {
+      "name": "Energy Hand",
+      "symbol": "YED",
+      "craft_time": 36,
+      "lvl_req": 32,
+      "xp": 553,
+      "tags": [
+        "Gauntlets"
+      ],
+      "ingredients": {
+        "SLB": 3,
+        "IRB": 4,
+        "BRB": 1
+      },
+      "uri": "https://gateway.irys.xyz/7RdfwRVuBvD3N6uYPZktr1fEGkPZ7nboukG6wdMnUTgS",
+      "address": "4cKfHFxwbsf2x9pjK6S3tzcnmt8kon79fs1s6bYkmq2c",
+      "mint": "9nS6fXPJy5J3KdnDwoij87aA5eLMg3S6CXjU3si5m2cF",
+      "recipe": "5jAqhxfabcUQYyZkcWAADJeu3xwJMyC6wSQhzqG7cUKX"
+    },
+    "PRE": {
+      "name": "Trapper Hat",
+      "symbol": "PRE",
+      "craft_time": 34,
+      "lvl_req": 33,
+      "xp": 736,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "STB": 2,
+        "BRB": 6,
+        "CPO": 5
+      },
+      "uri": "https://gateway.irys.xyz/C8dB5vVVTPdL4TcZBdh3zFYzmFPUW34YMV7p1HuB9LjE",
+      "address": "7amuihdMyA1ukRK2yrDxkbb4nekKC2S8FNcTaiExNH4F",
+      "mint": "Awx7tiP2QcY64WebX8cQ6PcyTk2kynAmtbEQVmkTKDx8",
+      "recipe": "74tEPddh1ooqkh6VvowpeLA3Hz9LEvaXimV1GsMQFqbd"
+    },
+    "YNE": {
+      "name": "Syndicate",
+      "symbol": "YNE",
+      "craft_time": 37,
+      "lvl_req": 30,
+      "xp": 635,
+      "tags": [
+        "Hats"
       ],
       "ingredients": {
         "GLB": 6,
-        "IRB": 5
+        "IRB": 3,
+        "IRO": 1
       },
-      "uri": "https://gateway.irys.xyz/8Qdf5U2q7geiMmTRiCvXYE6vfxfYR7fiSjovBo3ajdkE",
-      "address": "3HtCnHSZ5vJgG6HMDS7bEHUDH6bFn1me57TymGytvtLQ",
-      "mint": "AkhaPWNebk9rgDsaWBf1VUpAb4zc5De4GBg6x2aUM5Dz",
-      "recipe": "6Baso9Anoe8Lhvhgu9FkTDFYrBJF2WBC1rV3rrWhMTeD"
+      "uri": "https://gateway.irys.xyz/7Rwn68SNX6EKEYywqTDYvkzhsb1xMWDBSzriZ2NPuzCk",
+      "address": "8geeDMDeorGK1LqKPeAnoBVE8Gkga4vpUMCpNE1yBmQj",
+      "mint": "GCv8fJc7iDnBzoBpxD33bTF1gCj2Rmnu63gZpCAEH1Wr",
+      "recipe": "8Ntg1AoVAoXQrDGbrZCkSUM5seXV2Mz1nNtt271xCM62"
+    },
+    "AAK": {
+      "name": "Rick Hair",
+      "symbol": "AAK",
+      "craft_time": 33,
+      "lvl_req": 19,
+      "xp": 677,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "MTB": 2,
+        "GLO": 4,
+        "STB": 3
+      },
+      "uri": "https://gateway.irys.xyz/Cz25VFb6fqneMJPq1W5djk5h4ceNYndQD4QUSrMsqXtG",
+      "address": "9n3aRTQKR3JvhQAbBsjUDYFti3tbzzmgzKCC2JT9rG5b",
+      "mint": "2oVVUVpJwNm8VPABP54tdGsV3QcyVVpCG9sGS8XXhk9c",
+      "recipe": "9A5N4oCAZm8jVRTrE66c126w7TWKcgsoBre8XrvhvnAm"
+    },
+    "FWM": {
+      "name": "Sci Fi Mohawk",
+      "symbol": "FWM",
+      "craft_time": 29,
+      "lvl_req": 45,
+      "xp": 356,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "CPO": 4,
+        "STB": 4,
+        "BRB": 6
+      },
+      "uri": "https://gateway.irys.xyz/CpNWiXTMvjRyRuzUpxgGJvVSv3T4kc1heMCuMCxsDeEq",
+      "address": "5Kf7Wv2cM4XuxXx9MMh9BmFADi4NEbdw6QMRkdUUgC8y",
+      "mint": "2Bt8ittP9gpW4PYVNFffuAJWXvqrXf2PRVgnKQQG2Pun",
+      "recipe": "2mHHUAeHeqvEHMdf4C5SfzBzf7Sh3ZZu7zDKtnFZQPD7"
     },
     "BBB": {
       "name": "Red Bandana",
@@ -2299,27 +2266,60 @@
         "SLB": 2
       },
       "uri": "https://gateway.irys.xyz/H9Qfv33zapY1uw8LVQC9XMiZhpdc4FyCFL7UvqR3a4PR",
-      "address": "J1Hv4jiDBxYm4LNmCeExQtbh6seLyQgzzfrHXcjpvkCQ",
-      "mint": "71mznALgaGbziwjNgTqGQMQvCYG3XDCL52QwaTksanDe",
-      "recipe": "5VZQTC55fp5aDbRtANaD4Tkm4hTy2NJqisPg1tFXFj4Q"
+      "address": "FecLjF75G8ZoPUtUihV4yyTq77roa3L92oajYVbfMYSN",
+      "mint": "Gn4mRQFVQqnzjivCq7tkF9fWVvPe4ZJTQPBng2Gbz3Kh",
+      "recipe": "3K6kCBYitovEmgjJ31acMzPgtVzw5fPk52hqxEFNpkL5"
     },
-    "TAF": {
-      "name": "Mafia Hat",
-      "symbol": "TAF",
-      "craft_time": 41,
-      "lvl_req": 15,
-      "xp": 615,
+    "AHB": {
+      "name": "White Headband",
+      "symbol": "AHB",
+      "craft_time": 25,
+      "lvl_req": 41,
+      "xp": 166,
       "tags": [
         "Hats"
       ],
       "ingredients": {
-        "IRO": 2,
-        "IRB": 2
+        "GLO": 1
       },
-      "uri": "https://gateway.irys.xyz/BuUBdVYmpv32rWrMinHCwnY1aZpc3cmiVd6s5dB8Bo3L",
-      "address": "6AyuWrPfwD3JKcKm7D2kaxVcm5ReMXXH1zoKzMjEFRzz",
-      "mint": "8pqdtXL5DwWjRi7qU9uRqNs2R6eABy1etovVf6rEfyHg",
-      "recipe": "42wuwnsaYmoctLDgGsnZJYCLLrUMkN5GPBwTTgitURei"
+      "uri": "https://gateway.irys.xyz/5y1TdcQsaHHZpnV3QR2tVAUp4piZhKtc4EcBLwaneMTQ",
+      "address": "BUz3R5f6eNrsx18xNwT8MaEnjrXbdTKwTs51K3STQWoH",
+      "mint": "12MfJ7MX8RjfrxjELfaE9xdfeiJDZVLUgoyFAU9d8VKh",
+      "recipe": "9NEwGLNF8dPa9AKYNP7tqcqkwG4NKP38bsQLLapUGXpu"
+    },
+    "AVV": {
+      "name": "Visor Cap",
+      "symbol": "AVV",
+      "craft_time": 46,
+      "lvl_req": 42,
+      "xp": 653,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "GLB": 3
+      },
+      "uri": "https://gateway.irys.xyz/5Q7Vq5q199KmhC7JNpY76TFPTmMbvZXPnaWpMEX7uQk9",
+      "address": "3cMZPpqGP5rjdSc5D7aVxi4HkT9FTUeohRjAFAm5t8n2",
+      "mint": "8ipktDhmYAxCZy3oVQYwZzTjMSFyFEiRKumjsrUZsZx5",
+      "recipe": "GMRAKFqzMtD3XbpF1xqJPE8qc3Fescix6VfFyXJJf2EL"
+    },
+    "HHA": {
+      "name": "Halo",
+      "symbol": "HHA",
+      "craft_time": 49,
+      "lvl_req": 42,
+      "xp": 437,
+      "tags": [
+        "Hats"
+      ],
+      "ingredients": {
+        "CPO": 2
+      },
+      "uri": "https://gateway.irys.xyz/F3V2XiHT39pHGunRC8ZiJrxZn2uKovzg5Qhxby7x7Kb5",
+      "address": "DgMJL36rXDhjVd1oKattZFpbNcYudGXE6abGMAp29qsa",
+      "mint": "3yLmUX3xmGZ6if5sJ3jhVs5c8uXi3jmsnVmpBWJFtw3G",
+      "recipe": "9LRWFt5Sqc7McYHEYveSEz5bhqokT48bqYa5x6ALn8p3"
     }
   }
 }

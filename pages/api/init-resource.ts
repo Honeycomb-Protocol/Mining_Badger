@@ -9,6 +9,7 @@ import {
   cachedTraits,
   characterModel,
   characterTree,
+  connection,
   project,
 } from "@/config/config";
 import { getEdgeClient } from "@/lib/edge-client";
@@ -82,6 +83,12 @@ export default async function handler(
         console.error("Error minting resource", signature);
         return res.status(500).json({ error: "Error minting resource" });
       }
+
+      // Wait for transaction confirmation
+      await connection.confirmTransaction(
+        signature?.sendBulkTransactions[0]?.signature,
+        "finalized"
+      );
 
       const {
         character: [characterRefetch],
