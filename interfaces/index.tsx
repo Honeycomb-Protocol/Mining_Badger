@@ -81,22 +81,6 @@ export interface ModalProps {
   setVisible: (visible: boolean) => void;
 }
 
-// export interface MineDataType {
-//   addresses: {
-//     mint: string;
-//     recipe: string | null;
-//     resource: string;
-//     tree: string;
-//   };
-//   amount: number | null;
-//   expire?: number;
-//   level_req: number;
-//   metadata: {
-//     name: string;
-//     symbol: string;
-//     uri: string;
-//   };
-// }
 export interface MineDataType {
   name: string;
   symbol: string;
@@ -253,3 +237,10 @@ export type ProxyAdapter = {
   signMessage?(message: Uint8Array, reason?: string): Promise<Uint8Array>;
   sendTransaction?(transaction: Transaction): Promise<string>;
 };
+
+export interface InventoryState {
+  refreshInventory: boolean;
+  cookingAddresses: {
+    [key: string]: string;
+  };
+}

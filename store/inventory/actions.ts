@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useHoneycombAuth } from "@honeycomb-protocol/profile-hooks";
 
 import { InventoryActionsWithoutThunk } from ".";
 import { AsyncActions } from "../actions/types";

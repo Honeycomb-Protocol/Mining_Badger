@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { InventoryState } from "@/interfaces";
 
-import type { InventoryState } from "../types";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: InventoryState = {
   refreshInventory: false,

@@ -20,7 +20,7 @@ const Faucet = () => {
     } catch (error) {
       console.error("Error while faucet claim", error);
       throw new Error(
-        error?.response?.data?.error || // Correct property from API
+        error?.response?.data?.error ||
           error?.message ||
           "Something went wrong"
       );

@@ -22,8 +22,6 @@ import HoneycombProfilesWrapper from "@/wrapper/HoneycombProfilesWrapper";
 import PrivyProviderWrapper from "@/components/privy-provider";
 import { MetakeepProvider } from "@/context/metakeep-context";
 
-// const k2d = K2D({ weight: "400", subsets: ["latin"] });
-
 const CivicGateWay = ({ children }) => {
   const { currentWallet } = useHoneycombInfo();
 
@@ -73,7 +71,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <HoneycombProfilesWrapper>
             <CivicGateWay>
               <Effects />
-              {/* <main className={k2d.className}> */}
               <main>
                 <NextUIProvider>
                   <Header />
