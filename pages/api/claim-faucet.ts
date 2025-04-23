@@ -76,7 +76,7 @@ export default async function handler(
     // Wait for transaction confirmation
     await connection.confirmTransaction(
       signature?.sendBulkTransactions[0]?.signature,
-      "finalized"
+      "confirmed"
     );
 
     const secondsToIncrement =

@@ -144,7 +144,7 @@ const BodyTab = () => {
         }
         await connection.confirmTransaction(
           signature?.sendBulkTransactions[0]?.signature,
-          "finalized"
+          "confirmed"
         );
       }
       const data = await fetchData(craftTags, true);
@@ -203,7 +203,7 @@ const BodyTab = () => {
       // Wait for transaction confirmation
       await connection.confirmTransaction(
         signature?.sendBulkTransactions[0]?.signature,
-        "finalized"
+        "confirmed"
       );
 
       setEquippedItems((prev) => ({ ...prev, [item?.tags[0]]: null }));
