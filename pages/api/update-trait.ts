@@ -65,7 +65,7 @@ const sendTransactions = async (
     try {
       await connection.confirmTransaction(
         sendBulkTransactions[0].signature,
-        "finalized"
+        "confirmed"
       );
     } catch (error) {
       console.error("Error confirming transaction:", error);
