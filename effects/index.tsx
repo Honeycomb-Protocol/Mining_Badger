@@ -57,7 +57,7 @@ export default function Effects() {
       ) {
         router.push("/home");
       }
-    } else if (!authToken && pathname !== "/") {
+    } else {
       router.push("/");
     }
   }, [
