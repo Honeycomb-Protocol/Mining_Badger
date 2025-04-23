@@ -265,7 +265,7 @@ const Utils = () => {
           successfulSignatures.map((signature) =>
             connection.confirmTransaction(
               signature?.sendBulkTransactions[0]?.signature,
-              "confirmed"
+              "finalized"
             )
           )
         );
@@ -429,7 +429,7 @@ const Utils = () => {
               successfulSignatures.map((signature) =>
                 connection.confirmTransaction(
                   signature?.sendBulkTransactions[0]?.signature,
-                  "confirmed"
+                  "finalized"
                 )
               )
             );

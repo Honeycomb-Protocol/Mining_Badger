@@ -57,7 +57,7 @@ const sendTransactions = async (
 
     await connection.confirmTransaction(
       sendBulkTransactions[0]?.signature,
-      "confirmed"
+      "finalized"
     );
 
     return sendBulkTransactions;
