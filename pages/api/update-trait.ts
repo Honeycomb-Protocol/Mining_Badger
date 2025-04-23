@@ -55,10 +55,22 @@ const sendTransactions = async (
       },
     });
 
-    await connection.confirmTransaction(
-      sendBulkTransactions[0]?.signature,
-      "finalized"
-    );
+    if (
+      sendBulkTransactions.length === 0 ||
+      !sendBulkTransactions[0]?.signature
+    ) {
+      throw new Error("No valid transaction signature found to confirm.");
+    }
+
+    try {
+      await connection.confirmTransaction(
+        sendBulkTransactions[0].signature,
+        "finalized"
+      );
+    } catch (error) {
+      console.error("Error confirming transaction:", error);
+      throw new Error("Transaction confirmation failed.");
+    }
 
     return sendBulkTransactions;
   } catch (e) {
